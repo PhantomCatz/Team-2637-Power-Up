@@ -7,9 +7,16 @@
 
 package org.usfirst.frc.team2637.robot;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /*
  * Just doing something to change the file.
@@ -43,6 +50,17 @@ public class Robot extends IterativeRobot {
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
+	
+	TalonSRX fright;
+	TalonSRX fleft;
+	TalonSRX rright;
+	TalonSRX rleft;
+	XboxController xbox;
+	
+	DifferentialDrive drive;
+
+	SpeedControllerGroup leftMotors;
+	SpeedControllerGroup rightMotors;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -53,6 +71,20 @@ public class Robot extends IterativeRobot {
 		m_chooser.addDefault("Default Auto", kDefaultAuto);
 		m_chooser.addObject("My Auto", kCustomAuto);
 		SmartDashboard.putData("Auto choices", m_chooser);
+		
+		
+		fleft = new TalonSRX(0);
+		fright = new TalonSRX(4);
+		rleft = new TalonSRX(1);
+		rright = new TalonSRX(5);
+		
+		
+		xbox = new XboxController(1);
+		
+		leftMotors = new SpeedControllerGroup((SpeedController)fleft, (SpeedController)rleft);
+		rightMotors = new SpeedControllerGroup((SpeedController)fright, (SpeedController)rright);
+		
+		drive = new DifferentialDrive(leftMotors, rightMotors);
 	}
 
 	/**
@@ -95,6 +127,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+				
+		drive.arcadeDrive(xbox.getX(Hand.kLeft), xbox.getY(Hand.kRight));
 	}
 
 	/**
