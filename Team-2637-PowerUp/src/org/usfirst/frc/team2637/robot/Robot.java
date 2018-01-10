@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /*
  * Just doing something to change the file.
@@ -55,10 +56,10 @@ public class Robot extends IterativeRobot {
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	
-	TalonSRX fright;
-	TalonSRX fleft;
-	TalonSRX rright;
-	TalonSRX rleft;
+	WPI_TalonSRX fright;
+	WPI_TalonSRX fleft;
+	WPI_TalonSRX rright;
+	WPI_TalonSRX rleft;
 	XboxController xbox;
 	
 	DifferentialDrive drive;
@@ -77,16 +78,16 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putData("Auto choices", m_chooser);
 		
 		
-		fleft = new TalonSRX(0);
-		fright = new TalonSRX(4);
-		rleft = new TalonSRX(1);
-		rright = new TalonSRX(5);
+		fleft = new WPI_TalonSRX(0);
+		fright = new WPI_TalonSRX(4);
+		rleft = new WPI_TalonSRX(1);
+		rright = new WPI_TalonSRX(5);
 		
 		
 		xbox = new XboxController(1);
 		
-		leftMotors = new SpeedControllerGroup((SpeedController)fleft, (SpeedController)rleft);
-		rightMotors = new SpeedControllerGroup((SpeedController)fright, (SpeedController)rright);
+		leftMotors = new SpeedControllerGroup(fleft, rleft);
+		rightMotors = new SpeedControllerGroup(fright, rright);
 		
 		drive = new DifferentialDrive(leftMotors, rightMotors);
 	}
