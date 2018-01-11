@@ -133,7 +133,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 				
-		drive.arcadeDrive(xbox.getX(Hand.kLeft), xbox.getY(Hand.kRight));
+		drive.arcadeDrive(xbox.getY(Hand.kLeft), xbox.getX(Hand.kRight));
 	}
 
 	/**
