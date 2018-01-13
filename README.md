@@ -1,2 +1,6 @@
-# Team-2637-Power-Up
-Robot Code for the FRC 2018 game: Power Up
+<body>
+<h1>Team 2637 Power Up Code</h1>
+
+<p>This is the repository for the Phantom Catz' 2018 Power Up code.</p>
+
+</body>
