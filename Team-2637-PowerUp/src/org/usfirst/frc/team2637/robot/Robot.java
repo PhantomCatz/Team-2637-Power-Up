@@ -7,14 +7,18 @@
 
 package org.usfirst.frc.team2637.robot;
 
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -27,6 +31,7 @@ import org.opencv.imgproc.Imgproc;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 
 /*
  * Just doing something to change the file.
@@ -65,6 +70,22 @@ public class Robot extends IterativeRobot {
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	
+	final int DIO_PORT0 = 0;
+    final int DIO_PORT1 = 1;
+    final int DIO_PORT2 = 2;
+    final int DIO_PORT3 = 3;
+    final int DIO_PORT4 = 4;
+    final int DIO_PORT5 = 5;
+    final int DIO_PORT6 = 6;
+    final int DIO_PORT7 = 7;
+    final int DIO_PORT8 = 8;
+    final int DIO_PORT9 = 9;
+
+	Timer functionTimer;
+	static final double straightkP = .18;
+	static final double straightkD = .23;  //ORIGINALLY .18
+	static int VAR_1_BUFFER_SIZE = 20;
+	
 	WPI_TalonSRX fright;
 	WPI_TalonSRX fleft;
 	WPI_TalonSRX rright;
@@ -77,7 +98,11 @@ public class Robot extends IterativeRobot {
 	SpeedControllerGroup rightMotors;
 	
 	Thread m_visionThread;
-
+	
+	AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
+	Encoder wheelEncoder = new Encoder(DIO_PORT6,DIO_PORT7,false,Encoder.EncodingType.k2X);
+	
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -88,6 +113,7 @@ public class Robot extends IterativeRobot {
 		//m_chooser.addObject("My Auto", kCustomAuto);
 		
 		m_visionThread = new Thread(() -> {
+				
 			// Get the UsbCamera from CameraServer
 			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 			// Set the resolution
@@ -138,6 +164,10 @@ public class Robot extends IterativeRobot {
 		rightMotors = new SpeedControllerGroup(fright, rright);
 		
 		drive = new DifferentialDrive(leftMotors, rightMotors);
+	
+		
+		functionTimer = new Timer();
+	
 	}
 
 	/**
@@ -151,6 +181,91 @@ public class Robot extends IterativeRobot {
 	 * the switch structure below with additional strings. If using the
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 */
+	
+	
+	void EncoderStraightDrive(double speed, double distance, double sampleTime,double timeout,boolean useGearButton)
+	{
+		int loopCount = 0;
+		double encoderIssues=0;
+		int dbgCount1=0;
+
+		boolean done=false;
+		boolean gearState=true;		//DATA CHECK VARIABLES
+
+		double previousAngle = 0.0;
+		double currentAngle;
+		double deltaAngle;			//FUNCTION VARIABLES
+		double derivative;
+		double deltaTime=sampleTime/1000;
+
+		double encoderCheckNumber;
+		double lastEncoderValue=0;
+
+
+
+		navx.reset();
+		wheelEncoder.reset();
+		wait((long) .2);
+		//wheelEncoder.Reset();
+
+		functionTimer.reset();
+		functionTimer.start();
+
+			currentAngle = Navx.GetAngle();
+
+			deltaAngle = currentAngle-previousAngle;
+
+			derivative = deltaAngle/deltaTime;
+
+			/*if((fabs(wheelEncoder.GetDistance()) - distance) < 10 && speed<0)
+				driver.TankDrive(.4, straightkP*currentAngle + straightkD*derivative);
+			else if((fabs(wheelEncoder.GetDistance()) - distance) < 10)
+				driver.TankDrive(.4, straightkP*currentAngle + straightkD*derivative);
+			else*/
+			drive.tankDrive(speed, straightkP*currentAngle + straightkD*derivative);
+
+			previousAngle = currentAngle;
+
+			if (functionTimer.get() > timeout)
+				done = true;
+
+
+			/***********************************************
+			*encoderCheckNumber = wheelEncoder.Get();
+			*if(lastEncoderValue==encoderCheckNumber)
+			*	encoderIssues++;
+			*lastEncoderValue=encoderCheckNumber;
+			*loopCount++;
+			*dbgCount1++;
+			************************************************/
+			
+
+
+			dbgCount1++;
+			if (dbgCount1== VAR_1_BUFFER_SIZE)
+				dbgCount1=0;
+
+		
+
+		if(speed<0)
+			drive.tankDrive(.43,0);
+		else
+			drive.tankDrive(-.43,0);
+
+		wait((long).3);
+		drive.tankDrive(0,0);
+
+		functionTimer.stop();
+
+
+		SmartDashboard.putNumber("Function timer value",functionTimer.get());
+		SmartDashboard.putBoolean("gearState",gearState);
+		SmartDashboard.putNumber("encoderCheck",encoderIssues);
+		SmartDashboard.putNumber("drive straight loop count",loopCount);
+		
+
+	}
+	
 	@Override
 	public void autonomousInit() {
 		m_autoSelected = m_chooser.getSelected();
@@ -171,6 +286,9 @@ public class Robot extends IterativeRobot {
 			case kDefaultAuto:
 			default:
 				// Put default auto code here
+				
+				
+				
 				break;
 		}
 	}
