@@ -1,0 +1,26 @@
+package org.usfirst.frc.team2637.robot;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+public class CatzCANTalon
+{
+	final String NAME;
+	WPI_TalonSRX cantalon;
+	CatzLogger log;
+	
+	public CatzCANTalon(int port)
+	{
+		log = CatzLogger.getInstance();
+		NAME = this.getClass().getSimpleName();
+		cantalon = new WPI_TalonSRX(port);
+	}
+	public double GetSpeed()
+	{
+		return cantalon.get();
+	}
+	public void SetSpeed(double speed)
+	{
+		log.add(NAME, "CANTalon speed set at " + speed + ".", 5, -1);
+		cantalon.set(speed);
+	}
+}
