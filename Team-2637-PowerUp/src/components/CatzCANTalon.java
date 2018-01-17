@@ -1,6 +1,8 @@
-package org.usfirst.frc.team2637.robot;
+package components;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import logger.CatzLogger;
 
 public class CatzCANTalon
 {

@@ -1,17 +1,18 @@
-package org.usfirst.frc.team2637.robot;
-import edu.wpi.first.wpilibj.RobotDrive;
+package components;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import logger.CatzLogger;
 public class CatzDrive
 {
 	
 	final String NAME;
 	CatzLogger log;
-	RobotDrive Drive;
+	DifferentialDrive Drive;
 	
 	public CatzDrive(int frontRightID, int frontLeftID, int backRightID, int backLeftID)
 	{
 		log = CatzLogger.getInstance();
 		NAME = this.getClass().getSimpleName();
-		Drive = new RobotDrive(frontRightID, frontLeftID, backRightID, backLeftID);
+		Drive = new DifferentialDrive(frontRightID, frontLeftID, backRightID, backLeftID);
 	}
 	public void setModeArcadeDriveRacing(CatzXboxController control)
 	{

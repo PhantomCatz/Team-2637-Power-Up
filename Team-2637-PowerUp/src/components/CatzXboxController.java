@@ -1,5 +1,6 @@
-package org.usfirst.frc.team2637.robot;
+package components;
 import edu.wpi.first.wpilibj.XboxController;
+import logger.CatzLogger;
 public class CatzXboxController
 {
 	final int A_BUTTON = 1;

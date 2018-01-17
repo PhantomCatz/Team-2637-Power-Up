@@ -1,6 +1,7 @@
-package org.usfirst.frc.team2637.robot;
+package components;
 
 import edu.wpi.first.wpilibj.Joystick;
+import logger.CatzLogger;
 
 public class CatzJoystick
 {
