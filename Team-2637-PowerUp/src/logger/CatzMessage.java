@@ -1,4 +1,4 @@
-package logger;
+package org.usfirst.frc.team2637.robot;
 
 public class CatzMessage {
 	
@@ -9,21 +9,21 @@ public class CatzMessage {
 	private final String  COMMA = ",";
 	
 	
-	public CatzMessage(String op, String ob, double t, int log) {
+	public CatzMessage(String ob, String op, int log, double t) {
 		operation = op;
 		object = ob;
 		t = time;
 		logLevel = log;
 	}
 	
+	
+
 	public String getObject() {
 		return object;
 	}
-
 	public void setObject(String object) {
 		this.object = object;
 	}
-
 	public String getOperation() {
 		return operation;
 	}
