@@ -1,9 +1,8 @@
-package org.usfirst.frc.team2637.robot;
+package logger;
 
 import java.io.*;
 import java.util.ArrayList;
-
-import logger.Message;
+import logger.CatzMessage;
 
 public class CatzLogger {
 

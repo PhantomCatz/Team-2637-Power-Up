@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2637.robot;
+package logger;
 
 public class CatzMessage {
 	

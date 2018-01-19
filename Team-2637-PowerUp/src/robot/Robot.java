@@ -203,15 +203,14 @@ public class Robot extends IterativeRobot {
 
 
 
-		navx.reset();
+		ahrs.reset();
 		wheelEncoder.reset();
-		wait((long) .2);
 		//wheelEncoder.Reset();
 
 		functionTimer.reset();
 		functionTimer.start();
 
-			currentAngle = Navx.GetAngle();
+			currentAngle = ahrs.getAngle();
 
 			deltaAngle = currentAngle-previousAngle;
 
@@ -252,7 +251,6 @@ public class Robot extends IterativeRobot {
 		else
 			drive.tankDrive(-.43,0);
 
-		wait((long).3);
 		drive.tankDrive(0,0);
 
 		functionTimer.stop();
