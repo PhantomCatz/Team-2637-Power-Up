@@ -1,71 +1,85 @@
 package autonomous;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import constants.Constants;
+import components.CatzTimer;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import components.CatzDrive;
 
 public class AutoTurn
 {
+	WPI_TalonSRX frontRight;
+	WPI_TalonSRX frontLeft;
+	WPI_TalonSRX backRight;
+	WPI_TalonSRX backLeft;
+	
+	Constants constants = new Constants();
 	AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
+	CatzTimer timer = new CatzTimer();
+	Timer PDTimer = new Timer();
 	Timer functionTimer = new Timer();
+	CatzDrive drive = new CatzDrive(frontRight, frontLeft, backRight, backLeft);
 	void PDTurn(double turnDegrees, int timeout)
 	{
-		
 		ahrs.reset();
-		//hardware->navx->Reset();
-		//Wait(.1);
-		wait(.1);
+		timer.wait(.1);
+
 
 		boolean done = false;
-		int PDTurnLoopcount=0;
-		//double TurnToDegrees = turnDegrees+hardware->navx->GetAngle();
-		double TurnToDegrees = turnDegrees+ahrs.getAngle();
+		int PDTurnLoopcount = 0;
+		double TurnToDegrees = turnDegrees + ahrs.getAngle();
 		double turnThreshold = .1;
 		//double kP = 0.039, kD = 0.0147;
-		double currentError,previousError = 0;
-		double deltaError,derivative,deltaT;
+		double currentError;
+		double previousError = 0;
+		double deltaError;
+		double derivative; 
+		double deltaT;
 		double power;
 
-		/*functionTimer->Reset();
-		functionTimer->Start();
-		PDTimer->Reset();*/
-		
 		functionTimer.reset();
 		functionTimer.start();
+		PDTimer.reset();
+
 		//while((fabs(hardware->navx->GetAngle()) < fabs(TurnToDegrees)-turnThreshold ||
 			//	fabs(hardware->navx->GetAngle()) > fabs(TurnToDegrees)+turnThreshold) && done!=true)
 		while(Math.abs(ahrs.getAngle()) < Math.abs(TurnToDegrees)-turnThreshold || 
 				Math.abs(ahrs.getAngle()) > Math.abs(TurnToDegrees)+turnThreshold && done!= true)
 		{
 			// make data array for deltaT,currentError; loop of about 100 + counter for how many loops
-			PDTimer->Stop();
-			deltaT = PDTimer->Get();
-			PDTimer->Reset();
-			PDTimer->Start();
+			PDTimer.stop();
+			deltaT = PDTimer.get();
+			PDTimer.reset();
+			PDTimer.start();
 
 
 
-			currentError = TurnToDegrees-hardware->navx->GetAngle();
+			currentError = TurnToDegrees-ahrs.getAngle();
 			deltaError = currentError-previousError;
 			derivative = deltaError/deltaT;
 
-			power = .6*((TurnkP*currentError)+(TurnkD*derivative));
-			driver->AutoDrive(power,-power);
+			power = .6*((constants.TurnkP*currentError)+(constants.TurnkD*derivative));
+			drive.tankDrive(power,-power);
 
 			previousError = currentError;
 
-			if (functionTimer->Get() > timeout)
+			if (functionTimer.get() > timeout)
 				done = true;
 
-			SmartDashboard::PutNumber("PDTurn:NavxReading",hardware->navx->GetAngle());
-			SmartDashboard::PutNumber("PDTurn:TimerReading",functionTimer->Get());
-			SmartDashboard::PutNumber("PDTurn:LoopCount",PDTurnLoopcount);
+			SmartDashboard.putNumber("PDTurn:NavxReading",ahrs.getAngle());
+			SmartDashboard.putNumber("PDTurn:TimerReading",functionTimer.get());
+			SmartDashboard.putNumber("PDTurn:LoopCount",PDTurnLoopcount); 
 		}
 
-		driver->AutoDrive(0,0);
-		functionTimer->Start();
-		functionTimer->Reset();
-		PDTimer->Stop();
-		PDTimer->Reset();
+		drive.tankDrive(0,0);
+		functionTimer.start();
+		functionTimer.reset();
+		PDTimer.stop();
+		PDTimer.reset();
 	}
+	
 }
+	

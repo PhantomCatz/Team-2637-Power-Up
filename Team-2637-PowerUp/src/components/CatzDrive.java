@@ -6,11 +6,11 @@ import logger.CatzLogger;
 public class CatzDrive
 {
 	
-	final String NAME;
-	CatzLogger log;
-	DifferentialDrive Drive;
-	SpeedControllerGroup leftMotors;
-	SpeedControllerGroup rightMotors;
+	private final String NAME;
+	private CatzLogger log;
+	private DifferentialDrive Drive;
+	private SpeedControllerGroup leftMotors;
+	private SpeedControllerGroup rightMotors;
 	
 	public CatzDrive(WPI_TalonSRX frontRight, WPI_TalonSRX frontLeft, WPI_TalonSRX backRight, WPI_TalonSRX backLeft)
 	{
@@ -29,5 +29,9 @@ public class CatzDrive
 	{
 		log.add(NAME, "Arcade Drive set to Flash.", 5, -1);
 		Drive.arcadeDrive(control.GetLeftStickY(), control.GetRightStickX());
+	}
+	public void tankDrive(double lPower, double rPower)
+	{
+		Drive.tankDrive(lPower, rPower);
 	}
 }

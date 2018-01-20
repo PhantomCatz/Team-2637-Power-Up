@@ -7,10 +7,9 @@ public class CatzJoystick
 {
 	Constants constants = new Constants();
 	
-	final String NAME;
-	Joystick joy;
-	CatzLogger log;
-	
+	private final String NAME;
+	private Joystick joy;
+	private CatzLogger log;
 	
 	public CatzJoystick(int port)
 	{

@@ -6,7 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package robot;
-
+import constants.Constants;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -51,6 +51,8 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 /*
  * Do you know de way?
+ * 
+ * Bruddahs I know de wae
  */
 
 /*
@@ -65,12 +67,13 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
  * project.
  */
 public class Robot extends IterativeRobot {
+	Constants constants = new Constants();
 	private static final String kDefaultAuto = "Default";
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 	
-	final int DIO_PORT0 = 0;
+	/*final int DIO_PORT0 = 0;
     final int DIO_PORT1 = 1;
     final int DIO_PORT2 = 2;
     final int DIO_PORT3 = 3;
@@ -79,12 +82,12 @@ public class Robot extends IterativeRobot {
     final int DIO_PORT6 = 6;
     final int DIO_PORT7 = 7;
     final int DIO_PORT8 = 8;
-    final int DIO_PORT9 = 9;
+    final int DIO_PORT9 = 9;*/
 
 	Timer functionTimer;
-	static final double straightkP = .18;
+	/*static final double straightkP = .18;
 	static final double straightkD = .23;  //ORIGINALLY .18
-	static int VAR_1_BUFFER_SIZE = 20;
+	static int VAR_1_BUFFER_SIZE = 20;*/
 	
 	WPI_TalonSRX fright;
 	WPI_TalonSRX fleft;
@@ -165,7 +168,7 @@ public class Robot extends IterativeRobot {
 		drive = new DifferentialDrive(leftMotors, rightMotors);
 		
 		ahrs = new AHRS(SerialPort.Port.kMXP);
-		wheelEncoder = new Encoder(DIO_PORT6,DIO_PORT7,false,Encoder.EncodingType.k2X);
+		wheelEncoder = new Encoder(constants.DIO_PORT6,constants.DIO_PORT7,false,Encoder.EncodingType.k2X);
 		 
 		functionTimer = new Timer();
 		

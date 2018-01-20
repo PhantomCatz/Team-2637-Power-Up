@@ -15,10 +15,11 @@ public class CatzXboxController
 	final private int RIGHT_TRIGGER = 3;
 	final private int RIGHT_STICK_X = 4;
 	final private int RIGHT_STICK_Y = 5;
-	final String NAME;
-	XboxController xbox;
-	CatzLogger log;
 	
+	final private String NAME;
+	
+	private XboxController xbox;
+	private CatzLogger log;
 	
 	public CatzXboxController(int port)
 	{

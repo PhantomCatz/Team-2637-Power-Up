@@ -39,4 +39,7 @@ public class Constants
 	final public int level3 = 3;
 	final public int level4 = 4;
 	final public int level5 = 5;
+	
+	final public double TurnkP = 0.118;
+	final public double TurnkD = 0.174;
 }

@@ -5,9 +5,9 @@ import logger.CatzLogger;
 
 public class CatzCANTalonSRX
 {
-	final String NAME;
-	WPI_TalonSRX cantalon;
-	CatzLogger log;
+	private final String NAME;
+	private WPI_TalonSRX cantalon;
+	private CatzLogger log;
 	
 	public CatzCANTalonSRX(int port)
 	{

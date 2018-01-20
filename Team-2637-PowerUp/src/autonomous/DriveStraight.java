@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Timer;
-public class AutoMethods
+public class DriveStraight
 {
 	/*CatzCANTalonSRX frontRight;
 	CatzCANTalonSRX frontLeft;
@@ -22,56 +22,52 @@ public class AutoMethods
 	WPI_TalonSRX backLeft;
 	
 	Constants constants = new Constants();
-	CatzDrive Drive = new CatzDrive(frontRight, frontLeft, backRight, backLeft);
-	RobotDrive drive = new RobotDrive();
+	CatzDrive drive = new CatzDrive(frontRight, frontLeft, backRight, backLeft);
 	Timer functionTimer = new Timer();
 	AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
 	Encoder wheelEncoder = new Encoder(constants.DIO_PORT6,constants.DIO_PORT7,false,Encoder.EncodingType.k2X);
 	
 	void EncoderStraightDrive(double speed, double distance, double sampleTime,double timeout,boolean useGearButton)
 	{
-		int loopCount = 0;
-		double encoderIssues=0;
-		int dbgCount1=0;
+		int loopCount        = 0;
+		double encoderIssues = 0;
+		int dbgCount1        = 0;
 
-		boolean done=false;
-		boolean gearState=true;		//DATA CHECK VARIABLES
+		boolean done     = false;
+		boolean gearState = true;		//DATA CHECK VARIABLES
 
 		double previousAngle = 0.0;
 		double currentAngle;
 		double deltaAngle;			//FUNCTION VARIABLES
 		double derivative;
-		double deltaTime=sampleTime/1000;
+		double deltaTime = sampleTime/1000;
 
 		double encoderCheckNumber;
-		double lastEncoderValue=0;
-
-
+		double lastEncoderValue = 0;
 
 		ahrs.reset();
 		wheelEncoder.reset();
-		//wheelEncoder.Reset();
 
 		functionTimer.reset();
 		functionTimer.start();
 
-			currentAngle = ahrs.getAngle();
+		currentAngle = ahrs.getAngle();
 
-			deltaAngle = currentAngle-previousAngle;
+		deltaAngle = currentAngle-previousAngle;
 
-			derivative = deltaAngle/deltaTime;
+		derivative = deltaAngle/deltaTime;
 
 			/*if((fabs(wheelEncoder.GetDistance()) - distance) < 10 && speed<0)
 				driver.TankDrive(.4, straightkP*currentAngle + straightkD*derivative);
 			else if((fabs(wheelEncoder.GetDistance()) - distance) < 10)
 				driver.TankDrive(.4, straightkP*currentAngle + straightkD*derivative);
 			else*/
-			drive.tankDrive(speed, constants.straightkP*currentAngle + constants.straightkD*derivative);
+		drive.tankDrive(speed, constants.straightkP*currentAngle + constants.straightkD*derivative);
 
-			previousAngle = currentAngle;
+		previousAngle = currentAngle;
 
-			if (functionTimer.get() > timeout)
-				done = true;
+		if (functionTimer.get() > timeout)
+			done = true;
 
 
 			/***********************************************
@@ -85,11 +81,9 @@ public class AutoMethods
 			
 
 
-			dbgCount1++;
-			if (dbgCount1== constants.VAR_1_BUFFER_SIZE)
-				dbgCount1=0;
-
-		
+		dbgCount1++;
+		if (dbgCount1== constants.VAR_1_BUFFER_SIZE)
+			dbgCount1=0;
 
 		if(speed<0)
 			drive.tankDrive(.43,0);
@@ -100,13 +94,9 @@ public class AutoMethods
 
 		functionTimer.stop();
 
-
 		SmartDashboard.putNumber("Function timer value",functionTimer.get());
 		SmartDashboard.putBoolean("gearState",gearState);
 		SmartDashboard.putNumber("encoderCheck",encoderIssues);
 		SmartDashboard.putNumber("drive straight loop count",loopCount);
-		
-
-	}
-	
+	}	
 }

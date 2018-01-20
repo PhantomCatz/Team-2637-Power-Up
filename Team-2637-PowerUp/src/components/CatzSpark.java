@@ -5,9 +5,9 @@ import logger.CatzLogger;
 
 public class CatzSpark 
 {
-	final String NAME;
-	Spark spark;
-	CatzLogger log;
+	private final String NAME;
+	private Spark spark;
+	private CatzLogger log;
 	
 	public CatzSpark(int port)
 	{
