@@ -9,16 +9,16 @@ public class CatzMessage {
 	private final String  COMMA = ",";
 	
 	
-	public CatzMessage(String ob, String op, int log, double t) {
+	public CatzMessage(String ob, String op, int log, double t)
+	{
 		operation = op;
 		object = ob;
 		t = time;
 		logLevel = log;
 	}
-	
-	
 
-	public String getObject() {
+	public String getObject()
+	{
 		return object;
 	}
 	public void setObject(String object) {

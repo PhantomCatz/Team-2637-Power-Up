@@ -37,11 +37,12 @@ public class CatzLogger {
 	///////////////////////////////////////////////////////////////////////////
 
 	// checks if a logger has already been created
-	public static CatzLogger getInstance() {
-		if (instance == null) {
+	public static CatzLogger getInstance()
+	{
+		if (instance == null) 
+		{
 			instance = new CatzLogger();
 		}
-
 		return instance;
 	}
 

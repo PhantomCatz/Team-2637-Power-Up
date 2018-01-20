@@ -72,23 +72,9 @@ public class Robot extends IterativeRobot {
 	private static final String kCustomAuto = "My Auto";
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
-	
-	/*final int DIO_PORT0 = 0;
-    final int DIO_PORT1 = 1;
-    final int DIO_PORT2 = 2;
-    final int DIO_PORT3 = 3;
-    final int DIO_PORT4 = 4;
-    final int DIO_PORT5 = 5;
-    final int DIO_PORT6 = 6;
-    final int DIO_PORT7 = 7;
-    final int DIO_PORT8 = 8;
-    final int DIO_PORT9 = 9;*/
 
 	Timer functionTimer;
-	/*static final double straightkP = .18;
-	static final double straightkD = .23;  //ORIGINALLY .18
-	static int VAR_1_BUFFER_SIZE = 20;*/
-	
+
 	WPI_TalonSRX fright;
 	WPI_TalonSRX fleft;
 	WPI_TalonSRX rright;
@@ -110,7 +96,8 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	@Override
-	public void robotInit() {
+	public void robotInit()
+	{
 		//m_chooser.addDefault("Default Auto", kDefaultAuto);
 		//m_chooser.addObject("My Auto", kCustomAuto);
 		
@@ -189,7 +176,8 @@ public class Robot extends IterativeRobot {
 	
 	
 	@Override
-	public void autonomousInit() {
+	public void autonomousInit() 
+	{
 		m_autoSelected = m_chooser.getSelected();
 		// autoSelected = SmartDashboard.getString("Auto Selector",
 		// defaultAuto);
@@ -200,8 +188,10 @@ public class Robot extends IterativeRobot {
 	 * This function is called periodically during autonomous.
 	 */
 	@Override
-	public void autonomousPeriodic() {
-		switch (m_autoSelected) {
+	public void autonomousPeriodic()
+	{
+		switch (m_autoSelected)
+		{
 			case kCustomAuto:
 				// Put custom auto code here
 				break;
@@ -210,24 +200,23 @@ public class Robot extends IterativeRobot {
 				// Put default auto code here
 				
 				
-				
 				break;
 		}
 	}
-
 	/**
 	 * This function is called periodically during operator control.
 	 */
 	@Override
-	public void teleopPeriodic() {
-				
+	public void teleopPeriodic()
+	{			
 		drive.arcadeDrive(xbox.getY(Hand.kLeft), xbox.getX(Hand.kRight));
 	}
-
 	/**
 	 * This function is called periodically during test mode.
 	 */
 	@Override
-	public void testPeriodic() {
+	public void testPeriodic()
+	{
+		
 	}
 }

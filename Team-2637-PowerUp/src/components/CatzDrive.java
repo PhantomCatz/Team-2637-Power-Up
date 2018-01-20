@@ -5,7 +5,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import logger.CatzLogger;
 public class CatzDrive
 {
-	
 	private final String NAME;
 	private CatzLogger log;
 	private DifferentialDrive Drive;
