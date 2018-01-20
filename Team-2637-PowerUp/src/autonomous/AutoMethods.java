@@ -1,24 +1,33 @@
 package autonomous;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import components.CatzCANTalonSRX;
 import components.CatzDrive;
 import constants.Constants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Timer;
 public class AutoMethods
 {
-	CatzCANTalonSRX frontRight;
+	/*CatzCANTalonSRX frontRight;
 	CatzCANTalonSRX frontLeft;
 	CatzCANTalonSRX backRight;
-	CatzCANTalonSRX backLeft;
+	CatzCANTalonSRX backLeft;*/
+	WPI_TalonSRX frontRight;
+	WPI_TalonSRX frontLeft;
+	WPI_TalonSRX backRight;
+	WPI_TalonSRX backLeft;
+	
 	Constants constants = new Constants();
-	CatzDrive drive = new CatzDrive(frontRight, frontLeft, backRight, backLeft)
+	CatzDrive Drive = new CatzDrive(frontRight, frontLeft, backRight, backLeft);
+	RobotDrive drive = new RobotDrive();
 	Timer functionTimer = new Timer();
 	AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
 	Encoder wheelEncoder = new Encoder(constants.DIO_PORT6,constants.DIO_PORT7,false,Encoder.EncodingType.k2X);
+	
 	void EncoderStraightDrive(double speed, double distance, double sampleTime,double timeout,boolean useGearButton)
 	{
 		int loopCount = 0;
@@ -57,7 +66,7 @@ public class AutoMethods
 			else if((fabs(wheelEncoder.GetDistance()) - distance) < 10)
 				driver.TankDrive(.4, straightkP*currentAngle + straightkD*derivative);
 			else*/
-			drive.tankDrive(speed, constants.straightkP*currentAngle + straightkD*derivative);
+			drive.tankDrive(speed, constants.straightkP*currentAngle + constants.straightkD*derivative);
 
 			previousAngle = currentAngle;
 
