@@ -1,16 +1,15 @@
 package components;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import logger.CatzLogger;
 
-public class CatzCANTalon
+public class CatzCANTalonSRX
 {
 	final String NAME;
 	WPI_TalonSRX cantalon;
 	CatzLogger log;
 	
-	public CatzCANTalon(int port)
+	public CatzCANTalonSRX(int port)
 	{
 		log = CatzLogger.getInstance();
 		NAME = this.getClass().getSimpleName();

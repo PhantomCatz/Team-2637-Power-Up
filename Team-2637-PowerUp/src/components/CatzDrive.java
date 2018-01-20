@@ -19,7 +19,6 @@ public class CatzDrive
 		leftMotors = new SpeedControllerGroup(frontLeft, backLeft);
 		rightMotors = new SpeedControllerGroup(frontRight, backRight);
 		Drive = new DifferentialDrive(leftMotors, rightMotors);
-		//Drive = new DifferentialDrive(frontRightID, frontLeftID, backRightID, backLeftID);
 	}
 	public void setModeArcadeDriveRacing(CatzXboxController control)
 	{
