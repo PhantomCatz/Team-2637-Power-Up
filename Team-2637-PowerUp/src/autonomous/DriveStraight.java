@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import components.CatzCANTalonSRX;
 import components.CatzDrive;
-import constants.Constants;
+import constants.CatzConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -21,13 +21,13 @@ public class DriveStraight
 	WPI_TalonSRX backRight;
 	WPI_TalonSRX backLeft;
 	
-	Constants constants = new Constants();
+	CatzConstants constants = new CatzConstants();
 	CatzDrive drive = new CatzDrive(frontRight, frontLeft, backRight, backLeft);
 	Timer functionTimer = new Timer();
 	AHRS ahrs = new AHRS(SerialPort.Port.kMXP);
 	Encoder wheelEncoder = new Encoder(constants.DIO_PORT6,constants.DIO_PORT7,false,Encoder.EncodingType.k2X);
 	
-	void EncoderStraightDrive(double speed, double distance, double sampleTime,double timeout,boolean useGearButton)
+	void EncoderStraightDrive(double speed, double distance, double sampleTime,double timeout)
 	{
 		int loopCount        = 0;
 		double encoderIssues = 0;
@@ -57,18 +57,12 @@ public class DriveStraight
 
 		derivative = deltaAngle/deltaTime;
 
-			/*if((fabs(wheelEncoder.GetDistance()) - distance) < 10 && speed<0)
-				driver.TankDrive(.4, straightkP*currentAngle + straightkD*derivative);
-			else if((fabs(wheelEncoder.GetDistance()) - distance) < 10)
-				driver.TankDrive(.4, straightkP*currentAngle + straightkD*derivative);
-			else*/
 		drive.tankDrive(speed, constants.straightkP*currentAngle + constants.straightkD*derivative);
 
 		previousAngle = currentAngle;
 
 		if (functionTimer.get() > timeout)
 			done = true;
-
 
 			/***********************************************
 			*encoderCheckNumber = wheelEncoder.Get();
@@ -78,8 +72,6 @@ public class DriveStraight
 			*loopCount++;
 			*dbgCount1++;
 			************************************************/
-			
-
 
 		dbgCount1++;
 		if (dbgCount1== constants.VAR_1_BUFFER_SIZE)
@@ -89,14 +81,12 @@ public class DriveStraight
 			drive.tankDrive(.43,0);
 		else
 			drive.tankDrive(-.43,0);
-
 		drive.tankDrive(0,0);
-
 		functionTimer.stop();
 
-		SmartDashboard.putNumber("Function timer value",functionTimer.get());
-		SmartDashboard.putBoolean("gearState",gearState);
-		SmartDashboard.putNumber("encoderCheck",encoderIssues);
-		SmartDashboard.putNumber("drive straight loop count",loopCount);
+		SmartDashboard.putNumber("Function timer value", functionTimer.get());
+		SmartDashboard.putBoolean("gearState", gearState);
+		SmartDashboard.putNumber("encoderCheck", encoderIssues);
+		SmartDashboard.putNumber("drive straight loop count", loopCount);
 	}	
 }

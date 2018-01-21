@@ -3,7 +3,7 @@ package components;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import logger.CatzLogger;
 
-public class CatzCANTalonSRX
+public class CatzCANTalonSRX extends WPI_TalonSRX
 {
 	private final String NAME;
 	private WPI_TalonSRX cantalon;
@@ -11,9 +11,10 @@ public class CatzCANTalonSRX
 	
 	public CatzCANTalonSRX(int port)
 	{
+		super(port);
 		log = CatzLogger.getInstance();
 		NAME = this.getClass().getSimpleName();
-		cantalon = new WPI_TalonSRX(port);
+
 	}
 	public double GetSpeed()
 	{

@@ -8,7 +8,6 @@ public class CatzMessage {
 	private int logLevel;
 	private final String  COMMA = ",";
 	
-	
 	public CatzMessage(String ob, String op, int log, double t)
 	{
 		operation = op;
