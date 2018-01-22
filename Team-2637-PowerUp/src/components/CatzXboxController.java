@@ -1,76 +1,93 @@
 package components;
+import constants.CatzConstants;
 import edu.wpi.first.wpilibj.XboxController;
-import robot.CatzRobotMap;
-public class CatzXboxController
-{
-	
+import logger.CatzLogger;
+public class CatzXboxController extends XboxController
+{	
 	final private String NAME;
 	private XboxController xbox;
-	CatzRobotMap robotmap;
+	private CatzTimerMap timer;
+	private CatzLogger logger;
+	
+	final static public int A_BUTTON = 1;
+	final static public int B_BUTTON = 2;
+	final static public int X_BUTTON = 3;
+	final static public int Y_BUTTON = 4;
+	final static public int LEFT_BUMPER = 5;
+	final static public int RIGHT_BUMPER = 6;
+	final static public int LEFT_STICK_X = 0;
+	final static public int LEFT_STICK_Y = 1;
+	final static public int LEFT_TRIGGER = 2;
+	final static public int RIGHT_TRIGGER = 3;
+	final static public int RIGHT_STICK_X = 4;
+	final static public int RIGHT_STICK_Y = 5;
+	
 	public CatzXboxController(int port)
 	{
+		super(port);
+		logger = CatzLogger.getInstance();
 		NAME = this.getClass().getSimpleName();
 		xbox = new XboxController(port);
-		robotmap = CatzRobotMap.getInstance();
+		timer = CatzTimerMap.getInstance();
 	}
 	public boolean GetAButton()
 	{
-		robotmap.logger.add(NAME, "'A' button pressed.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawButton(robotmap.constants.A_BUTTON);
+		logger.add(NAME, "'A' button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawButton(A_BUTTON);
 	}
 	public boolean GetBButton()
 	{
-		robotmap.logger.add(NAME, "'B' button pressed.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawButton(robotmap.constants.B_BUTTON);
+		logger.add(NAME, "'B' button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawButton(B_BUTTON);
 	}
 	public boolean GetXButton()
 	{
-		robotmap.logger.add(NAME, "'X' button pressed.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawButton(robotmap.constants.X_BUTTON);
+		logger.add(NAME, "'X' button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawButton(X_BUTTON);
 	}
 	public boolean GetYButton()
 	{
-		robotmap.logger.add(NAME, "'Y' button pressed.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawButton(robotmap.constants.Y_BUTTON);
+		logger.add(NAME, "'Y' button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawButton(Y_BUTTON);
 	}
 	public boolean GetLeftBumper()
 	{
-		robotmap.logger.add(NAME, "Left Bumper pressed.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawButton(robotmap.constants.LEFT_BUMPER);
+		logger.add(NAME, "Left Bumper pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawButton(LEFT_BUMPER);
 	}
 	public boolean GetRightBumper()
 	{
-		robotmap.logger.add(NAME, "Right Bumper pressed.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawButton(robotmap.constants.RIGHT_BUMPER);
+		logger.add(NAME, "Right Bumper pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawButton(RIGHT_BUMPER);
 	}
 	public double GetLeftStickX()
 	{
-		robotmap.logger.add(NAME, "Left Stick moved in X direction.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawAxis(robotmap.constants.LEFT_STICK_X);
+		logger.add(NAME, "Left Stick moved in X direction.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawAxis(LEFT_STICK_X);
 	}
 	public double GetLeftStickY()
 	{
-		robotmap.logger.add(NAME, "Left Stick moved in Y direction.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawAxis(robotmap.constants.LEFT_STICK_Y);
+		logger.add(NAME, "Left Stick moved in Y direction.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawAxis(LEFT_STICK_Y);
 	}
 	public double GetRightStickX()
 	{
-		robotmap.logger.add(NAME, "Right Stick moved in X direction.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawAxis(robotmap.constants.RIGHT_STICK_X);
+		logger.add(NAME, "Right Stick moved in X direction.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawAxis(RIGHT_STICK_X);
 	}
 	public double GetRightStickY()
 	{
-		robotmap.logger.add(NAME, "Right Stick moved in Y direction.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawAxis(robotmap.constants.RIGHT_STICK_Y);
+		logger.add(NAME, "Right Stick moved in Y direction.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawAxis(RIGHT_STICK_Y);
 	}
 	public double GetRightTrigger()
 	{
-		robotmap.logger.add(NAME, "Right Trigger moved.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawAxis(robotmap.constants.RIGHT_TRIGGER);
+		logger.add(NAME, "Right Trigger moved.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawAxis(RIGHT_TRIGGER);
 	}
 	public double GetLeftTrigger()
 	{
-		robotmap.logger.add(NAME, "Left Trigger moved.", robotmap.constants.LEVEL5, robotmap.timer.get(robotmap.constants.LOGGERTIMER));
-		return xbox.getRawAxis(robotmap.constants.LEFT_TRIGGER);
+		logger.add(NAME, "Left Trigger moved.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return xbox.getRawAxis(LEFT_TRIGGER);
 	}
 }

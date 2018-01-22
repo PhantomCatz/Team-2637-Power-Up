@@ -6,52 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package robot;
-import constants.CatzConstants;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import components.CatzTimer;
-/*
- * Just doing something to change the file.
- */
-
-/*
- * Changing the file again.
- */
-
-/*
- * Changing the file once more.
- */
-
-/*
- * Changes for days. 
- */
-
-/*
- * Do you know de way?
- * 
- * Bruddahs I know de wae
- */
-
-/*
- * Make some meaningful changes to the code
- */
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -65,12 +20,12 @@ public class CatzRobot extends IterativeRobot
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
-	CatzRobotMap robotmap;
+	CatzRobotMap robotMap;
 	
 	@Override
 	public void robotInit()
 	{
-		robotmap = CatzRobotMap.getInstance();
+		robotMap.init.run();
 	}
 
 	/**
@@ -85,15 +40,10 @@ public class CatzRobot extends IterativeRobot
 	 * SendableChooser make sure to add them to the chooser code above as well.
 	 */
 	
-	
-	
 	@Override
 	public void autonomousInit() 
 	{
-		robotmap.m_autoSelected = robotmap.m_chooser.getSelected();
-		// autoSelected = SmartDashboard.getString("Auto Selector",
-		// defaultAuto);
-		System.out.println("Auto selected: " + robotmap.m_autoSelected);
+		
 	}
 
 	/**
@@ -102,20 +52,7 @@ public class CatzRobot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic()
 	{
-		switch (robotmap.m_autoSelected)
-		{
-			case robotmap.constants.kCustomAuto:
-				// Put custom auto code here
-				break;
-			case robotmap.constants.kDefaultAuto:
-				
-				break;
-			default:
-				// Put default auto code here
-				
-				
-				break;
-		}
+		
 	}
 	/**
 	 * This function is called periodically during operator control.
@@ -123,7 +60,7 @@ public class CatzRobot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{			
-		robotmap.drive.arcadeDrive(robotmap.xbox.getYButton(Hand.kLeft), robotmap.xbox.getXButton(Hand.kRight));
+		
 	}
 	/**
 	 * This function is called periodically during test mode.

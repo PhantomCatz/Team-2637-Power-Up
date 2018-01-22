@@ -1,99 +1,116 @@
 package components;
+import components.CatzTimerMap;
 import constants.CatzConstants;
-import components.CatzTimer;
 import edu.wpi.first.wpilibj.Joystick;
-import robot.CatzRobotMap;
+import logger.CatzLogger;
 public class CatzJoystick
 {
-	CatzConstants constants = new CatzConstants();
-	private CatzTimer timer;
+	private CatzTimerMap timer;
 	private final String NAME;
 	private Joystick joy;
-	CatzRobotMap robotmap;
+	private CatzLogger logger;
+	final static private int TRIGGER = 1;
+	final static private int THUMB_BUTTON = 2;
+	final static private int BUTTON_THREE = 3;
+	final static private int BUTTON_FOUR = 4;
+	final static private int BUTTON_FIVE = 5;
+	final static private int BUTTON_SIX = 6;
+	final static private int BUTTON_SEVEN = 7;
+	final static private int BUTTON_EIGHT = 8;
+	final static private int BUTTON_NINE = 9;
+	final static private int BUTTON_TEN = 10;
+	final static private int BUTTON_ELEVEN = 11;
+	final static private int BUTTON_TWELVE = 12;
+	final static private int STICK_X_AXIS = 0;
+	final static private int STICK_Y_AXIS = 1;
+	final static private int STICK_Z_AXIS = 2;
+	final static private int SLIDER = 3;
+	
+	
 	public CatzJoystick(int port)
 	{
-		robotmap = CatzRobotMap.getInstance();
 		NAME = this.getClass().getSimpleName();
 		joy = new Joystick(port);
+		logger = CatzLogger.getInstance();
 	}
 	public boolean GetTrigger()
 	{
-		robotmap.logger.add(NAME, "Trigger button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.TRIGGER);
+		logger.add(NAME, "Trigger button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(TRIGGER);
 	}
 	public boolean GetThumbButton()
 	{
-		robotmap.logger.add(NAME, "Thumb button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.THUMB_BUTTON);
+		logger.add(NAME, "Thumb button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(THUMB_BUTTON);
 	}
 	public boolean GetButtonThree()
 	{
-		robotmap.logger.add(NAME, "Three button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_THREE);
+		logger.add(NAME, "Three button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_THREE);
 	}
 	public boolean GetButtonFour()
 	{
-		robotmap.logger.add(NAME, "Four button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_FOUR);
+		logger.add(NAME, "Four button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_FOUR);
 	}
 	public boolean GetButtonFive()
 	{
-		robotmap.logger.add(NAME, "Five button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_FIVE);
+		logger.add(NAME, "Five button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_FIVE);
 	}
 	public boolean GetButtonSix()
 	{
-		robotmap.logger.add(NAME, "Six button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_SIX);
+		logger.add(NAME, "Six button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_SIX);
 	}
 	public boolean GetButtonSeven()
 	{
-		robotmap.logger.add(NAME, "Seven button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_SEVEN);
+		logger.add(NAME, "Seven button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_SEVEN);
 	}
 	public boolean GetButtonEight()
 	{
-		robotmap.logger.add(NAME, "Eight button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_EIGHT);
+		logger.add(NAME, "Eight button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_EIGHT);
 	}
 	public boolean GetButtonNine()
 	{
-		robotmap.logger.add(NAME, "Nine button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_NINE);
+		logger.add(NAME, "Nine button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_NINE);
 	}
 	public boolean GetButtonTen()
 	{
-		robotmap.logger.add(NAME, "Ten button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_TEN);
+		logger.add(NAME, "Ten button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_TEN);
 	}
 	public boolean GetButtonEleven()
 	{
-		robotmap.logger.add(NAME, "Eleven button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_ELEVEN);
+		logger.add(NAME, "Eleven button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_ELEVEN);
 	}
 	public boolean GetButtonTwelve()
 	{
-		robotmap.logger.add(NAME, "Twelve button pressed.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawButton(constants.BUTTON_TWELVE);
+		logger.add(NAME, "Twelve button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawButton(BUTTON_TWELVE);
 	}
 	public double GetXAxis()
 	{
-		robotmap.logger.add(NAME, "Moved in the X direction.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawAxis(constants.STICK_X_AXIS);
+		logger.add(NAME, "Moved in the X direction.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawAxis(STICK_X_AXIS);
 	}
 	public double GetYAxis()
 	{
-		robotmap.logger.add(NAME, "Moved in the Y direction.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawAxis(constants.STICK_Y_AXIS);
+		logger.add(NAME, "Moved in the Y direction.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawAxis(STICK_Y_AXIS);
 	}
 	public double GetZAxis()
 	{
-		robotmap.logger.add(NAME, "Moved in the Z direction.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawAxis(constants.STICK_Z_AXIS);
+		logger.add(NAME, "Moved in the Z direction.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawAxis(STICK_Z_AXIS);
 	}
 	public double GetSlider()
 	{
-		robotmap.logger.add(NAME, "Slider moved.", constants.LEVEL5, timer.get(robotmap.constants.LOGGERTIMER));
-		return joy.getRawAxis(constants.SLIDER);
+		logger.add(NAME, "Slider moved.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		return joy.getRawAxis(SLIDER);
 	}
 }

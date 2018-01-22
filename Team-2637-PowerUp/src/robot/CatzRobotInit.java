@@ -4,15 +4,13 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
-
 import com.kauailabs.navx.frc.AHRS;
-import components.CatzTimer;
+import components.CatzTimerMap;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 public class CatzRobotInit 
@@ -21,13 +19,18 @@ public class CatzRobotInit
 	String m_autoSelected;
 	SendableChooser<String> m_chooser = new SendableChooser<>();
 
-	CatzTimer timer;
+	CatzTimerMap timer;
 	
 	Thread m_visionThread;
 	
 	AHRS ahrs;
 	Encoder wheelEncoder;
-	private void init()
+	
+	public void run() 
+	{
+		initializeCameraStream();
+	}
+	private void initializeCameraStream()
 	{
 		//m_chooser.addDefault("Default Auto", kDefaultAuto);
 		//m_chooser.addObject("My Auto", kCustomAuto);
@@ -71,13 +74,5 @@ public class CatzRobotInit
 		m_visionThread.start();
 		//SmartDashboard.putData("Auto choices", m_chooser);
 		
-		ahrs = new AHRS(SerialPort.Port.kMXP);
-		wheelEncoder = new Encoder(robotmap.constants.DIO_PORT6,robotmap.constants.DIO_PORT7,false,Encoder.EncodingType.k2X);
-		 
-		timer = new CatzTimer();
-	}
-	public void run() 
-	{
-		init();
 	}
 }
