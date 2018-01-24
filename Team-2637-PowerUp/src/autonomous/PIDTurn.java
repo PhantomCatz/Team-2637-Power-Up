@@ -5,15 +5,14 @@ import robot.CatzRobotMap;
 
 public class PIDTurn
 {
-	CatzRobotMap robotMap;
 	void PIDturn(double turnDegrees, int timeoutSeconds)
 	{
-		robotMap.navx.reset();
-		robotMap.timer.wait(.1);
+		CatzRobotMap.navx.reset();
+		CatzRobotMap.timer.wait(.1);
 
 		boolean done = false;
 		int PDTurnLoopcount = 0;
-		double turnToDegrees = turnDegrees + robotMap.navx.getAngle();
+		double turnToDegrees = turnDegrees + CatzRobotMap.navx.getAngle();
 		double turnThreshold = .1;
 		double currentError;
 		double previousError = 0;
@@ -25,33 +24,33 @@ public class PIDTurn
 		
 		double totalError = 0;
 		
-		robotMap.timer.reset(CatzConstants.FUNCTION_TIMER);
-		robotMap.timer.start(CatzConstants.FUNCTION_TIMER);
+		CatzRobotMap.timer.reset(CatzConstants.FUNCTION_TIMER);
+		CatzRobotMap.timer.start(CatzConstants.FUNCTION_TIMER);
 		
-		robotMap.timer.reset(CatzConstants.PD_TIMER);
+		CatzRobotMap.timer.reset(CatzConstants.PD_TIMER);
 		
-		while(Math.abs(robotMap.navx.getAngle()) < Math.abs(turnToDegrees)-turnThreshold ||
-				Math.abs(robotMap.navx.getAngle()) > Math.abs(turnToDegrees)+turnThreshold && done!= true)
+		while(Math.abs(CatzRobotMap.navx.getAngle()) < Math.abs(turnToDegrees)-turnThreshold ||
+				Math.abs(CatzRobotMap.navx.getAngle()) > Math.abs(turnToDegrees)+turnThreshold && done!= true)
 		{
 			// make data array for deltaT,currentError; loop of about 100 + counter for how many loops
-			robotMap.timer.stop(CatzConstants.PD_TIMER); // empty function
+			CatzRobotMap.timer.stop(CatzConstants.PD_TIMER); // empty function
 			
-			deltaT = robotMap.timer.get(CatzConstants.PD_TIMER);
-			robotMap.timer.reset(CatzConstants.PD_TIMER);
-			robotMap.timer.start(CatzConstants.PD_TIMER);
+			deltaT = CatzRobotMap.timer.get(CatzConstants.PD_TIMER);
+			CatzRobotMap.timer.reset(CatzConstants.PD_TIMER);
+			CatzRobotMap.timer.start(CatzConstants.PD_TIMER);
 
-			currentError = turnToDegrees-robotMap.navx.getAngle();
+			currentError = turnToDegrees-CatzRobotMap.navx.getAngle();
 			deltaError = currentError-previousError;
 			totalError += deltaError;
 			derivative = deltaError/deltaT;
 
 			power = .6*((CatzConstants.TURN_KP*currentError)+(CatzConstants.TURN_KD*derivative)+(CatzConstants.TURN_KI * (totalError)));
 			
-			robotMap.drive.tankDrive(power,-power);
+			CatzRobotMap.drive.tankDrive(power,-power);
 
 			previousError = currentError;
 
-			if (robotMap.timer.get(CatzConstants.FUNCTION_TIMER) > timeoutSeconds)
+			if (CatzRobotMap.timer.get(CatzConstants.FUNCTION_TIMER) > timeoutSeconds)
 				done = true;
 			
 			if(totalError >= CatzConstants.POS_MAX)    // saturation
@@ -60,17 +59,17 @@ public class PIDTurn
 			if(totalError <= CatzConstants.NEG_MAX)
 				totalError = CatzConstants.NEG_MAX;
 			
-			SmartDashboard.putNumber("PDTurn:NavxReading",robotMap.navx.getAngle());
-			SmartDashboard.putNumber("PDTurn:TimerReading",robotMap.timer.get(CatzConstants.FUNCTION_TIMER));
+			SmartDashboard.putNumber("PDTurn:NavxReading",CatzRobotMap.navx.getAngle());
+			SmartDashboard.putNumber("PDTurn:TimerReading",CatzRobotMap.timer.get(CatzConstants.FUNCTION_TIMER));
 			SmartDashboard.putNumber("PDTurn:LoopCount",PDTurnLoopcount); 
 		}
 
-		robotMap.drive.tankDrive(0,0);
-		robotMap.timer.stop(CatzConstants.FUNCTION_TIMER);
-		robotMap.timer.reset(CatzConstants.FUNCTION_TIMER);
+		CatzRobotMap.drive.tankDrive(0,0);
+		CatzRobotMap.timer.stop(CatzConstants.FUNCTION_TIMER);
+		CatzRobotMap.timer.reset(CatzConstants.FUNCTION_TIMER);
 		
-		robotMap.timer.stop(CatzConstants.PD_TIMER);
-		robotMap.timer.reset(CatzConstants.PD_TIMER);
+		CatzRobotMap.timer.stop(CatzConstants.PD_TIMER);
+		CatzRobotMap.timer.reset(CatzConstants.PD_TIMER);
 	}
 	
 }

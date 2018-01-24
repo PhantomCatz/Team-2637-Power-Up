@@ -16,33 +16,33 @@ import logger.CatzMessage;
 
 public class CatzRobotMap 
 {
-	public CatzRobotInit init;
+	public static CatzRobotInit init;
 	
 	public static CatzRobotMap instance;
 	
-	public SendableChooser<String> m_chooser;
-	public String m_autoSelected;	
+	public static SendableChooser<String> m_chooser;
+	public static String m_autoSelected;	
 	
-	public CatzCANTalonSRX fRight;
-	public CatzCANTalonSRX rRight;
-	public CatzCANTalonSRX fLeft;
-	public CatzCANTalonSRX rLeft;
+	public static CatzCANTalonSRX fRight;
+	public static CatzCANTalonSRX rRight;
+	public static CatzCANTalonSRX fLeft;
+	public static CatzCANTalonSRX rLeft;
 	
-	public Encoder wheelEncoder;
-	public AHRS navx;
+	public static Encoder wheelEncoder;
+	public static AHRS navx;
 	
-	public CatzTimerMap timer;
-	public CatzXboxController xbox;
-	public CatzJoystick joy;
+	public static CatzTimerMap timer;
+	public static CatzXboxController xbox;
+	public static CatzJoystick joy;
 	
-	public CatzDrive drive;
-	public SpeedControllerGroup leftMotors;
-	public SpeedControllerGroup rightMotors;
+	public static CatzDrive drive;
+	public static SpeedControllerGroup leftMotors;
+	public static SpeedControllerGroup rightMotors;
 	
-	public Thread m_visionThread;
+	public static Thread m_visionThread;
 	
-	public CatzLogger logger;
-	public CatzMessage message;
+	public static CatzLogger logger;
+	public static CatzMessage message;
 	
 	//public  Encoder rightWheelEncoder;
 	//public  Encoder leftWheelEncoder;
@@ -60,7 +60,7 @@ public class CatzRobotMap
 		
 		navx = new AHRS(SerialPort.Port.kMXP);
 		
-		wheelEncoder = new Encoder(CatzConstants.DIO_PORT6, CatzConstants.DIO_PORT7,false,Encoder.EncodingType.k2X);
+		wheelEncoder = new Encoder(CatzConstants.DIO_PORT6, CatzConstants.DIO_PORT7, false, Encoder.EncodingType.k2X);
 		
 		timer = new CatzTimerMap();
 		

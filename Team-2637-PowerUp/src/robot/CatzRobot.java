@@ -20,12 +20,11 @@ public class CatzRobot extends IterativeRobot
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
-	CatzRobotMap robotMap;
 	
 	@Override
 	public void robotInit()
 	{
-		robotMap.init.run();
+		CatzRobotMap.init.run();
 	}
 
 	/**

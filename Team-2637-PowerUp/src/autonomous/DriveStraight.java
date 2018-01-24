@@ -4,10 +4,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.CatzRobotMap;
 public class DriveStraight
 {
-	CatzRobotMap robotMap;
 	void EncoderStraightDrive(double speed, double distance, double sampleTime,double timeout)
 	{
-		robotMap = CatzRobotMap.getInstance();
 		int loopCount        = 0;
 		double encoderIssues = 0;
 		int dbgCount1        = 0;
@@ -23,24 +21,24 @@ public class DriveStraight
 		double encoderCheckNumber;
 		double lastEncoderValue = 0;
 
-		robotMap.navx.reset();
-		robotMap.wheelEncoder.reset();
+		CatzRobotMap.navx.reset();
+		CatzRobotMap.wheelEncoder.reset();
 
-		robotMap.timer.reset(CatzConstants.FUNCTION_TIMER);
-		robotMap.timer.start(CatzConstants.FUNCTION_TIMER);
-		while(Math.abs(robotMap.wheelEncoder.getDistance()) < distance && done != true)
+		CatzRobotMap.timer.reset(CatzConstants.FUNCTION_TIMER);
+		CatzRobotMap.timer.start(CatzConstants.FUNCTION_TIMER);
+		while(Math.abs(CatzRobotMap.wheelEncoder.getDistance()) < distance && done != true)
 		{
-			currentAngle = robotMap.navx.getAngle();
+			currentAngle = CatzRobotMap.navx.getAngle();
 	
 			deltaAngle = currentAngle-previousAngle;
 	
 			derivative = deltaAngle/deltaTime;
 	
-			robotMap.drive.tankDrive(speed, CatzConstants.straightkP*currentAngle + CatzConstants.straightkD*derivative);
+			CatzRobotMap.drive.tankDrive(speed, CatzConstants.straightkP*currentAngle + CatzConstants.straightkD*derivative);
 	
 			previousAngle = currentAngle;
 	
-			if (robotMap.timer.get(CatzConstants.FUNCTION_TIMER) > timeout)
+			if (CatzRobotMap.timer.get(CatzConstants.FUNCTION_TIMER) > timeout)
 				done = true;
 	
 				/***********************************************
@@ -57,13 +55,13 @@ public class DriveStraight
 				dbgCount1=0;
 		}
 		if(speed<0)
-			robotMap.drive.tankDrive(.43,0);
+			CatzRobotMap.drive.tankDrive(.43,0);
 		else
-			robotMap.drive.tankDrive(-.43,0);
-		robotMap.drive.tankDrive(0,0);
-		robotMap.timer.stop(CatzConstants.FUNCTION_TIMER);
+			CatzRobotMap.drive.tankDrive(-.43,0);
+		CatzRobotMap.drive.tankDrive(0,0);
+		CatzRobotMap.timer.stop(CatzConstants.FUNCTION_TIMER);
 
-		SmartDashboard.putNumber("Function timer value", robotMap.timer.get(CatzConstants.FUNCTION_TIMER));
+		SmartDashboard.putNumber("Function timer value", CatzRobotMap.timer.get(CatzConstants.FUNCTION_TIMER));
 		SmartDashboard.putNumber("encoderCheck", encoderIssues);
 		SmartDashboard.putNumber("drive straight loop count", loopCount);
 	}	
