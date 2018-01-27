@@ -47,7 +47,13 @@ public class CatzConstants
 	final static public String kDefaultAuto = "Default";
 	final static public String kCustomAuto = "My Auto";
 	
-	final static public double DIST_36IN = 36.0;
+	
+	/**********************************************
+	 * All variable values are subject below this comment are subject to change
+	 * 
+	 ********************************************/
+	
+	final static public double DIST_36IN = 36.0;                                 
 	final static public double DIST_72IN = 72.0;
 	final static public double DIST_55_2IN = 55.2;
 	final static public double DIST_5IN = 5.0;
@@ -66,4 +72,7 @@ public class CatzConstants
 	final static public int TIMEOUT_2int = 2;
 	
 	final static public double SAMPLE_TIME = 0.0;
+	
+	final static public double ROBOT_W = 28.0;
+	final static public double ROBOT_L = 31.0;                       
 }
