@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.CatzRobotMap;
 public class DriveStraight
 {
-	void EncoderStraightDrive(double speed, double distance, double sampleTime,double timeout)
+	static void EncoderStraightDrive(double speed, double distance, double sampleTimeSec,double timeout)
 	{
 		int loopCount        = 0;
 		double encoderIssues = 0;
@@ -16,7 +16,7 @@ public class DriveStraight
 		double currentAngle;
 		double deltaAngle;			//FUNCTION VARIABLES
 		double derivative;
-		double deltaTime = sampleTime/1000;
+		double deltaTime = sampleTimeSec/1000;
 
 		double encoderCheckNumber;
 		double lastEncoderValue = 0;

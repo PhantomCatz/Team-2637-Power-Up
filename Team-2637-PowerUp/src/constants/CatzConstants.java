@@ -46,4 +46,24 @@ public class CatzConstants
 	
 	final static public String kDefaultAuto = "Default";
 	final static public String kCustomAuto = "My Auto";
+	
+	final static public double DIST_36IN = 36.0;
+	final static public double DIST_72IN = 72.0;
+	final static public double DIST_55_2IN = 55.2;
+	final static public double DIST_5IN = 5.0;
+	final static public double DIST_43_2IN = 43.2;
+	final static public double DIST_84IN = 84.0;
+	final static public double DIST_24IN = 24.0;
+	final static public double DIST_48IN = 48.0;
+	final static public double DIST_20IN = 20.0;
+	
+	final static public int TURN_DEG_45 = 45;
+	final static public int TURN_DEG_90 = 90;
+	
+	final static public double HALF_SPEED = 0.5;
+	
+	final static public double TIMEOUT_2 = 2.0;
+	final static public int TIMEOUT_2int = 2;
+	
+	final static public double SAMPLE_TIME = 0.0;
 }

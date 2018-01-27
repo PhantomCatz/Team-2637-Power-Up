@@ -5,7 +5,7 @@ import robot.CatzRobotMap;
 
 public class PIDTurn
 {
-	void PIDturn(double turnDegrees, int timeoutSeconds)
+	static void PIDturn(double turnDegrees, int timeoutSeconds)
 	{
 		CatzRobotMap.navx.reset();
 		CatzRobotMap.timer.wait(.1);
