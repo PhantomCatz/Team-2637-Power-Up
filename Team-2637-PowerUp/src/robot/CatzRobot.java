@@ -6,7 +6,10 @@
 /*----------------------------------------------------------------------------*/
 
 package robot;
+import autonomous.CatzAutonomousInit;
+import autonomous.CatzAutonomousPeriodic;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import teleop.CatzTeleopMethods;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -42,7 +45,7 @@ public class CatzRobot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
-		
+		CatzAutonomousInit.runAutnomousInit();
 	}
 
 	/**
@@ -51,7 +54,7 @@ public class CatzRobot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic()
 	{
-		
+		CatzAutonomousPeriodic.runAutonomousPeriodic();
 	}
 	/**
 	 * This function is called periodically during operator control.
@@ -59,7 +62,7 @@ public class CatzRobot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{			
-		
+		CatzTeleopMethods.runTeleopPeriodic();
 	}
 	/**
 	 * This function is called periodically during test mode.

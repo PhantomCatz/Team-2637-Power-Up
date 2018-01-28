@@ -7,6 +7,7 @@ public class CatzTeleopMethods
 	public static void runTeleopPeriodic()
 	{
 		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xbox);
-		
+		//    
+			//runs motor
 	}
 }

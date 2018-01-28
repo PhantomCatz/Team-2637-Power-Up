@@ -87,4 +87,10 @@ public class CatzConstants
 	final static public double DIST_41_88IN = 41.88;
 	final static public double DIST_112_8IN = 112.8;
 	final static public double DIST_12IN = 12;
+	
+	final static public double ZERO_DOUBLE = 0;
+	final static public int ZERO_INT = 0;
+	
+	final static public double WAIT_0_1_SECONDS = 0.1;
+	final static public double TURN_THRESHOLD_0_1 = 0.1;
 }

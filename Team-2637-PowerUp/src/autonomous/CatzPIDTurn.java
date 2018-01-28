@@ -13,7 +13,7 @@ public class CatzPIDTurn
 		boolean done = false;
 		int PDTurnLoopcount = CatzConstants.ZERO_INT;
 		double turnToDegrees = turnDegrees + CatzRobotMap.navx.getAngle();
-		double turnThreshold = .1;
+		double turnThreshold = CatzConstants.TURN_THRESHOLD_0_1;
 		double currentError;
 		double previousError = CatzConstants.ZERO_DOUBLE;
 		
@@ -41,7 +41,7 @@ public class CatzPIDTurn
 
 			currentError = turnToDegrees-CatzRobotMap.navx.getAngle();
 			deltaError = currentError-previousError;
-			totalError += currentError * deltaT;           // need to multiply by deltaT by current error
+			totalError += currentError * deltaT;           
 			derivative = deltaError/deltaT;
 
 			power = .6*((CatzConstants.TURN_KP*currentError)+(CatzConstants.TURN_KD*derivative)+(CatzConstants.TURN_KI * (totalError)));
