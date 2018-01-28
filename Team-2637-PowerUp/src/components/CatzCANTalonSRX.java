@@ -23,7 +23,7 @@ public class CatzCANTalonSRX extends WPI_TalonSRX
 	}
 	public void SetSpeed(double speed)
 	{
-		logger.add(NAME, "CANTalon speed set at " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		logger.add(NAME, "CANTalon speed set at " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
 		cantalon.set(speed);
 	}
 }

@@ -24,9 +24,9 @@ public class CatzConstants
 	final static public int PORT_8 = 8;
 	final static public int PORT_9 = 9;
 	
-	final static public int LOGGER_TIMER = 0;
-	final static public int FUNCTION_TIMER = 1;
-	final static public int PD_TIMER = 2;
+	final static public int LOGGER_TIMER_INDEX = 0;
+	final static public int FUNCTION_TIMER_INDEX = 1;
+	final static public int PD_TIMER_INDEX = 2;
 	
 	final static public double straightkP = .18;
 	final static public double straightkD = .23;  //ORIGINALLY .18
@@ -40,17 +40,18 @@ public class CatzConstants
 	
 	final static public double TURN_KP = 0.118;
 	final static public double TURN_KD = 0.174;
-	final static public double TURN_KI = 0;  //
-	final static public double POS_MAX = 0;  //need values
-	final static public double NEG_MAX = 0;  //
+	final static public double TURN_KI = 0.2;  //
+	final static public double POS_MAX = 0.5;  //need values
+	final static public double NEG_MAX = 0.5;  //
 	
 	final static public String kDefaultAuto = "Default";
 	final static public String kCustomAuto = "My Auto";
 	
 	
 	/**********************************************
-	 * All variable values are subject below this comment are subject to change
-	 * 
+	 * All variable values are subject below this 
+	 * block comment are subject to change 
+	 * THIS IS FOR THE MIDDLE PATHS
 	 ********************************************/
 	
 	final static public double DIST_36IN = 36.0;                                 
@@ -74,5 +75,16 @@ public class CatzConstants
 	final static public double SAMPLE_TIME = 0.0;
 	
 	final static public double ROBOT_W = 28.0;
-	final static public double ROBOT_L = 31.0;                       
+	final static public double ROBOT_L = 31.0;      
+	
+	/**********************************************
+	 * All variable values are subject below this 
+	 * block comment are subject to change 
+	 * THIS IS FOR THE LEFT AND RIGHT PATHS
+	 ********************************************/
+	
+	final static public double DIST_335_65IN = 335.65;
+	final static public double DIST_41_88IN = 41.88;
+	final static public double DIST_112_8IN = 112.8;
+	final static public double DIST_12IN = 12;
 }

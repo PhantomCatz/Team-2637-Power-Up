@@ -23,6 +23,6 @@ public class CatzSpark
 	public void SetSpeed(double speed)
 	{
 		spark.set(speed);
-		logger.add(NAME, "Spark speed set to " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER));
+		logger.add(NAME, "Spark speed set to " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
 	}
 }
