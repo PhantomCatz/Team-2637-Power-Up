@@ -73,12 +73,36 @@ public class Periodic
 		
 		PIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2int);
 		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_112_8IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);
+		PIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2int);
+		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_12IN, CatzConstants.SAMPLE_TIME , CatzConstants.TIMEOUT_2);
 		
 		/******************************************************
 		 * Write cube pick up code here
 		 * 
 		 ******************************************************/
 		
+	}
+	
+	public void rightPath()
+	{
+		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_335_65IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);
+		PIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2int);
+		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_41_88IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);
+		
+		/******************************************************
+		 * Write cube placing code here
+		 * 
+		 ******************************************************/
+		
+		PIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2int);
+		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_112_8IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);
+		PIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2int);
+		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_12IN, CatzConstants.SAMPLE_TIME , CatzConstants.TIMEOUT_2);
+		
+		/******************************************************
+		 * Write cube pick up code here
+		 * 
+		 ******************************************************/
 		
 	}
 }
