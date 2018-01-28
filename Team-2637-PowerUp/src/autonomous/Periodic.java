@@ -25,6 +25,11 @@ public class Periodic
 		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_84IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);
 		PIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2int);   
 		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_24IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);         //48in can be used here for the further cube
+		
+		/******************************************************
+		 * Write cube pick up code here
+		 * 
+		 ******************************************************/
 	}
 	
 	public void middlePathL()
@@ -48,5 +53,32 @@ public class Periodic
 		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_84IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);
 		PIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2int);    
 		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_24IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);         //48in can be used here for the further cube
+		
+		/******************************************************
+		 * Write cube pick up code here
+		 * 
+		 ******************************************************/
+	}
+	
+	public void leftPath()
+	{
+		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_335_65IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);
+		PIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2int);
+		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_41_88IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);
+		
+		/******************************************************
+		 * Write cube placing code here
+		 * 
+		 ******************************************************/
+		
+		PIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2int);
+		DriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, CatzConstants.DIST_112_8IN - CatzConstants.ROBOT_L, CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2);
+		
+		/******************************************************
+		 * Write cube pick up code here
+		 * 
+		 ******************************************************/
+		
+		
 	}
 }
