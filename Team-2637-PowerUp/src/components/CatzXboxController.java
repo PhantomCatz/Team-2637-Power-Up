@@ -90,36 +90,4 @@ public class CatzXboxController extends XboxController
 		logger.add(NAME, "Left Trigger moved.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
 		return xbox.getRawAxis(LEFT_TRIGGER);
 	}
-	/*
-	public int getAButton()
-	{
-		logger.add(NAME, "'A' button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return xbox.getRawButton(A_BUTTON);
-	}
-	public int getBButton()
-	{
-		logger.add(NAME, "'B' button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return xbox.getRawButton(B_BUTTON);
-	}
-	public int getXButton()
-	{
-		logger.add(NAME, "'X' button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return xbox.getRawButton(X_BUTTON);
-	}
-	public int getYButton()
-	{
-		logger.add(NAME, "'Y' button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return xbox.getRawButton(Y_BUTTON);
-	}
-	public int getLeftBumper()
-	{
-		logger.add(NAME, "Left Bumper pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return xbox.getRawButton(LEFT_BUMPER);
-	}
-	public int getRightBumper()
-	{
-		logger.add(NAME, "Right Bumper pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return xbox.getRawButton(RIGHT_BUMPER);
-	}
-	*/
 }
