@@ -18,8 +18,8 @@ public class CatzDriveStraight
 		double derivative;
 		double deltaTime = sampleTimeSec/1000;
 
-		double encoderCheckNumber;
-		double lastEncoderValue = 0;
+		//double encoderCheckNumber;
+		//double lastEncoderValue = 0;
 
 		CatzRobotMap.navx.reset();
 		CatzRobotMap.wheelEncoder.reset();

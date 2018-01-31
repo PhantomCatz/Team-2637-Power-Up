@@ -16,11 +16,11 @@ public class CatzSpark
 		spark = new Spark(port);
 		NAME = this.getClass().getSimpleName();
 	}
-	public double GetSpeed()
+	public double getSpeed()
 	{
 		return spark.get();
 	}
-	public void SetSpeed(double speed)
+	public void setSpeed(double speed)
 	{
 		spark.set(speed);
 		logger.add(NAME, "Spark speed set to " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));

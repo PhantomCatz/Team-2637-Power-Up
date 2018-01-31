@@ -2,7 +2,13 @@ package autonomous;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.CatzRobotMap;
-
+/*
+ *  Author : Derek Duenas
+ *  Last Revised : 1-28-2018 DD
+ *  Translated from C++ and added integral term
+ *  Methods : PIDturn
+ *  Functionality : Accurately turn
+ */
 public class CatzPIDTurn
 {
 	static void PIDturn(double turnDegrees, int timeoutSeconds)

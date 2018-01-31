@@ -19,12 +19,12 @@ public class CatzDrive
 	public void setModeArcadeDriveRacing(CatzXboxController control)
 	{
 		logger.add(NAME, "Arcade Drive set to Racing.", CatzConstants.LEVEL5, timer.get());
-		Drive.arcadeDrive(control.GetRightTrigger()-control.GetLeftTrigger(), control.GetRightStickX());
+		Drive.arcadeDrive(control.getRightTrigger()-control.getLeftTrigger(), control.getRightStickX());
 	}
 	public void setModeArcadeDriveFlash(CatzXboxController control)
 	{
 		logger.add(NAME, "Arcade Drive set to Flash.", CatzConstants.LEVEL5, timer.get());
-		Drive.arcadeDrive(control.GetLeftStickY(), control.GetRightStickX());
+		Drive.arcadeDrive(control.getLeftStickY(), control.getRightStickX());
 	}
 	public void tankDrive(double lPower, double rPower)
 	{

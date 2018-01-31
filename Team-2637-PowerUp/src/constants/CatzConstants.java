@@ -47,13 +47,6 @@ public class CatzConstants
 	final static public String kDefaultAuto = "Default";
 	final static public String kCustomAuto = "My Auto";
 	
-	
-	/**********************************************
-	 * All variable values are subject below this 
-	 * block comment are subject to change 
-	 * THIS IS FOR THE MIDDLE PATHS
-	 ********************************************/
-	
 	final static public double DIST_36IN = 36.0;                                 
 	final static public double DIST_72IN = 72.0;
 	final static public double DIST_55_2IN = 55.2;
@@ -75,13 +68,7 @@ public class CatzConstants
 	final static public double SAMPLE_TIME = 0.0;
 	
 	final static public double ROBOT_W = 28.0;
-	final static public double ROBOT_L = 31.0;      
-	
-	/**********************************************
-	 * All variable values are subject below this 
-	 * block comment are subject to change 
-	 * THIS IS FOR THE LEFT AND RIGHT PATHS
-	 ********************************************/
+	final static public double ROBOT_L = 31.0;   
 	
 	final static public double DIST_335_65IN = 335.65;
 	final static public double DIST_41_88IN = 41.88;

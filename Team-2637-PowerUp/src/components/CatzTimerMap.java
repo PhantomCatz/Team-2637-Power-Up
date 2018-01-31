@@ -35,7 +35,7 @@ public class CatzTimerMap extends Timer
 	
 	public double getMilliseconds(int arrayIndex) 
 	{	
-		return list.get(arrayIndex).get()*1000; 	
+		return list.get(arrayIndex).get()*1000;  //changes to milliseconds	
 	}	
 	
 	public void wait(double t)

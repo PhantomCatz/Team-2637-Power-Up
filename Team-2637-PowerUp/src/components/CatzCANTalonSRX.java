@@ -17,11 +17,11 @@ public class CatzCANTalonSRX extends WPI_TalonSRX
 		logger = CatzLogger.getInstance();
 		NAME = this.getClass().getSimpleName();
 	}
-	public double GetSpeed()
+	public double getSpeed()
 	{
-		return cantalon.get();
+		return cantalon.getMotorOutputPercent();
 	}
-	public void SetSpeed(double speed)
+	public void setSpeed(double speed)
 	{
 		logger.add(NAME, "CANTalon speed set at " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
 		cantalon.set(speed);
