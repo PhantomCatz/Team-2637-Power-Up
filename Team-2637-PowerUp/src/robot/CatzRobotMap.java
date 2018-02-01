@@ -83,5 +83,4 @@ public class CatzRobotMap
 			instance = new CatzRobotMap();
 		return instance;
 	}
-	
 }

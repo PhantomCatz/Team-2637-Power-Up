@@ -16,6 +16,7 @@ public class CatzCANTalonSRX extends WPI_TalonSRX
 		timer = CatzTimerMap.getInstance();
 		logger = CatzLogger.getInstance();
 		NAME = this.getClass().getSimpleName();
+		cantalon = new WPI_TalonSRX(port);
 	}
 	public double getSpeed()
 	{

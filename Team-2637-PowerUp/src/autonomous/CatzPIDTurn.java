@@ -7,7 +7,7 @@ import robot.CatzRobotMap;
  *  Last Revised : 1-28-2018 DD
  *  Translated from C++ and added integral term
  *  Methods : PIDturn
- *  Functionality : Accurately turn
+ *  Functionality : Accurately turn autonomously
  */
 public class CatzPIDTurn
 {
