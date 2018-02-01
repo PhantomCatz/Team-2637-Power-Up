@@ -40,9 +40,9 @@ public class CatzConstants
 	
 	final static public double TURN_KP = 0.118;
 	final static public double TURN_KD = 0.174;
-	final static public double TURN_KI = 0.2;  //
-	final static public double POS_MAX = 0.5;  //need values
-	final static public double NEG_MAX = 0.5;  //
+	final static public double TURN_KI = 0.0;  //
+	final static public double POS_MAX = 0.0;  //need values
+	final static public double NEG_MAX = 0.0;  //
 	
 	final static public String kDefaultAuto = "Default";
 	final static public String kCustomAuto = "My Auto";

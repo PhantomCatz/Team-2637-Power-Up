@@ -1,7 +1,8 @@
 package autonomous;
+import org.usfirst.frc.team2637.robot.CatzRobotMap;
+
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import robot.CatzRobotMap;
 public class CatzDriveStraight
 {
 	static void EncoderStraightDrive(double speed, double distance, double sampleTimeSec,double timeout)
