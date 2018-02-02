@@ -1,7 +1,5 @@
 package components;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import constants.CatzConstants;
-import logger.CatzLogger;
 public class CatzCANTalonSRX extends WPI_TalonSRX
 {
 	//private final String NAME;

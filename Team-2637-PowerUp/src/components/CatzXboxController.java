@@ -1,5 +1,4 @@
 package components;
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.XboxController;
 //import logger.CatzLogger;
 public class CatzXboxController extends XboxController

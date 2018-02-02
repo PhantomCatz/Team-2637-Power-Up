@@ -6,8 +6,6 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team2637.robot;
-import autonomous.CatzAutonomousInit;
-import autonomous.CatzAutonomousPeriodic;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import teleop.CatzTeleopMethods;
 /**

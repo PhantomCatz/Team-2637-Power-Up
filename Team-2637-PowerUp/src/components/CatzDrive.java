@@ -1,9 +1,6 @@
 package components;
-
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import logger.CatzLogger;
 public class CatzDrive
 {
 	//private final String NAME;

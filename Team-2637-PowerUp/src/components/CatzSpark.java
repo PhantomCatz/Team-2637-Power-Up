@@ -1,8 +1,5 @@
 package components;
-
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Spark;
-import logger.CatzLogger;
 public class CatzSpark 
 {
 	//private final String NAME;

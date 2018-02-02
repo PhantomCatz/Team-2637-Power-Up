@@ -11,31 +11,30 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import logger.CatzLogger;
 
 public class CatzRobotMap 
 {
 	public static CatzRobotMap instance;
 	
-	public static SendableChooser<String> m_chooser;
+	public SendableChooser<String> m_chooser;
 	
-	public static CatzCANTalonSRX fRight;
-	public static CatzCANTalonSRX rRight;
-	public static CatzCANTalonSRX fLeft;
-	public static CatzCANTalonSRX rLeft;
+	public CatzCANTalonSRX fRight;
+	public CatzCANTalonSRX rRight;
+	public CatzCANTalonSRX fLeft;
+	public CatzCANTalonSRX rLeft;
 	
-	public static Encoder wheelEncoder;
-	public static AHRS navx;
+	public Encoder wheelEncoder;
+	public AHRS navx;
 	
-	public static CatzTimerMap timer;
-	public static CatzXboxController xbox;
-	public static CatzJoystick joy;
+	//public CatzTimerMap timer;
+	public CatzXboxController xbox;
+	public CatzJoystick joy;
 	
-	public static CatzDrive drive;
-	public static SpeedControllerGroup leftMotors;
-	public static SpeedControllerGroup rightMotors;
+	public CatzDrive drive;
+	public SpeedControllerGroup leftMotors;
+	public SpeedControllerGroup rightMotors;
 	
-	public static Thread m_visionThread;
+	public Thread m_visionThread;
 	
 	//public static CatzLogger logger;
 	
@@ -56,7 +55,7 @@ public class CatzRobotMap
 		
 		wheelEncoder = new Encoder(CatzConstants.DIO_PORT6, CatzConstants.DIO_PORT7, false, Encoder.EncodingType.k2X);
 		
-		timer = new CatzTimerMap();
+		//timer = new CatzTimerMap();
 		
 		xbox = new CatzXboxController(CatzConstants.PORT_0);
 		joy = new CatzJoystick(CatzConstants.PORT_1);

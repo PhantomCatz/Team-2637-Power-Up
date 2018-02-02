@@ -1,6 +1,4 @@
 package components;
-import components.CatzTimerMap;
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Joystick;
 //import logger.CatzLogger;
 public class CatzJoystick

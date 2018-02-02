@@ -2,6 +2,7 @@ package autonomous;
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
 
 import constants.CatzConstants;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /*
  *  Author : Derek Duenas
@@ -12,14 +13,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class CatzPIDTurn
 {
+	static CatzRobotMap instance;
 	static void PIDturn(double turnDegrees, int timeoutSeconds)
 	{
-		CatzRobotMap.navx.reset();
-		CatzRobotMap.timer.wait(CatzConstants.WAIT_0_1_SECONDS);
-
+		Timer functionTimer = new Timer();
+		Timer pdTimer = new Timer();
+		
+		instance = CatzRobotMap.getInstance();
+		instance.navx.reset();
+		functionTimer.delay(CatzConstants.WAIT_0_1_SECONDS);
 		boolean done = false;
 		int PDTurnLoopcount = CatzConstants.ZERO_INT;
-		double turnToDegrees = turnDegrees + CatzRobotMap.navx.getAngle();
+		double turnToDegrees = turnDegrees + instance.navx.getAngle();
 		double turnThreshold = CatzConstants.TURN_THRESHOLD_0_1;
 		double currentError;
 		double previousError = CatzConstants.ZERO_DOUBLE;
@@ -31,33 +36,33 @@ public class CatzPIDTurn
 		
 		double totalError = CatzConstants.ZERO_DOUBLE;
 		
-		CatzRobotMap.timer.reset(CatzConstants.FUNCTION_TIMER_INDEX);
-		CatzRobotMap.timer.start(CatzConstants.FUNCTION_TIMER_INDEX);
+		functionTimer.reset();
+		functionTimer.start();
 		
-		CatzRobotMap.timer.reset(CatzConstants.PD_TIMER_INDEX);
+		pdTimer.reset();
 		
-		while(Math.abs(CatzRobotMap.navx.getAngle()) < Math.abs(turnToDegrees)-turnThreshold ||
-				Math.abs(CatzRobotMap.navx.getAngle()) > Math.abs(turnToDegrees)+turnThreshold && done!= true)
+		while(Math.abs(instance.navx.getAngle()) < Math.abs(turnToDegrees)-turnThreshold ||
+				Math.abs(instance.navx.getAngle()) > Math.abs(turnToDegrees)+turnThreshold && done!= true)
 		{
 			// make data array for deltaT,currentError; loop of about 100 + counter for how many loops
-			CatzRobotMap.timer.stop(CatzConstants.PD_TIMER_INDEX); // empty function
+			pdTimer.stop(); // empty function
 			
-			deltaT = CatzRobotMap.timer.get(CatzConstants.PD_TIMER_INDEX);
-			CatzRobotMap.timer.reset(CatzConstants.PD_TIMER_INDEX);
-			CatzRobotMap.timer.start(CatzConstants.PD_TIMER_INDEX);
+			deltaT = pdTimer.get();
+			pdTimer.reset();
+			pdTimer.start();
 
-			currentError = turnToDegrees-CatzRobotMap.navx.getAngle();
+			currentError = turnToDegrees-instance.navx.getAngle();
 			deltaError = currentError-previousError;
 			totalError += currentError * deltaT;           
 			derivative = deltaError/deltaT;
 
 			power = .6*((CatzConstants.TURN_KP*currentError)+(CatzConstants.TURN_KD*derivative)+(CatzConstants.TURN_KI * (totalError)));
 			
-			CatzRobotMap.drive.tankDrive(power,-power);
+			instance.drive.tankDrive(power,-power);
 
 			previousError = currentError;
 
-			if (CatzRobotMap.timer.get(CatzConstants.FUNCTION_TIMER_INDEX) > timeoutSeconds)
+			if (functionTimer.get() > timeoutSeconds)
 				done = true;
 			
 			if(totalError >= CatzConstants.POS_MAX)    // saturation
@@ -66,17 +71,17 @@ public class CatzPIDTurn
 			if(totalError <= CatzConstants.NEG_MAX)
 				totalError = CatzConstants.NEG_MAX;
 			
-			SmartDashboard.putNumber("PDTurn:NavxReading",CatzRobotMap.navx.getAngle());
-			SmartDashboard.putNumber("PDTurn:TimerReading",CatzRobotMap.timer.get(CatzConstants.FUNCTION_TIMER_INDEX));
+			SmartDashboard.putNumber("PDTurn:NavxReading",instance.navx.getAngle());
+			SmartDashboard.putNumber("PDTurn:TimerReading",functionTimer.get());
 			SmartDashboard.putNumber("PDTurn:LoopCount",PDTurnLoopcount); 
 		}
 
-		CatzRobotMap.drive.tankDrive(0,0);
-		CatzRobotMap.timer.stop(CatzConstants.FUNCTION_TIMER_INDEX);
-		CatzRobotMap.timer.reset(CatzConstants.FUNCTION_TIMER_INDEX);
+		instance.drive.tankDrive(0,0);
+		functionTimer.stop();
+		functionTimer.reset();
 		
-		CatzRobotMap.timer.stop(CatzConstants.PD_TIMER_INDEX);
-		CatzRobotMap.timer.reset(CatzConstants.PD_TIMER_INDEX);
+		pdTimer.stop();
+		pdTimer.reset();
 	}
 	
 }
