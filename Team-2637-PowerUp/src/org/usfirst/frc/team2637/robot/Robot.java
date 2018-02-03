@@ -6,7 +6,9 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team2637.robot;
+import autonomous.CatzAutonomousPeriodic;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import teleop.CatzTeleopMethods;
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,12 +23,19 @@ public class Robot extends IterativeRobot
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
+	CatzRobotMap instance;
 	@Override
 	public void robotInit()
 	{
+
+		instance = CatzRobotMap.getInstance();
 		//CatzRobotMap.init.run();
 	}
-
+	
+	public void robotPeriodic()
+	{
+		SmartDashboard.putNumber("navx reading 2", instance.navx.getAngle());
+	}
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
 	 * between different autonomous modes using the dashboard. The sendable
@@ -51,11 +60,16 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic()
 	{
-		//CatzAutonomousPeriodic.runAutonomousPeriodic();
+		CatzAutonomousPeriodic.runAutonomousPeriodic();
 	}
 	/**
 	 * This function is called periodically during operator control.
 	 */
+	@Override
+	public void teleopInit()
+	{
+		CatzTeleopMethods.runTeleopInit();
+	}
 	@Override
 	public void teleopPeriodic()
 	{			

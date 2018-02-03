@@ -14,14 +14,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CatzPIDTurn
 {
 	static CatzRobotMap instance;
-	static void PIDturn(double turnDegrees, int timeoutSeconds)
+	public static void PIDturn(double turnDegrees, int timeoutSeconds)
 	{
 		Timer functionTimer = new Timer();
 		Timer pdTimer = new Timer();
 		
 		instance = CatzRobotMap.getInstance();
 		instance.navx.reset();
-		functionTimer.delay(CatzConstants.WAIT_0_1_SECONDS);
+		Timer.delay(CatzConstants.WAIT_0_1_SECONDS);
 		boolean done = false;
 		int PDTurnLoopcount = CatzConstants.ZERO_INT;
 		double turnToDegrees = turnDegrees + instance.navx.getAngle();
