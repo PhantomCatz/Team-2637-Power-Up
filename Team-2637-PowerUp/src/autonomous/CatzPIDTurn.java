@@ -45,9 +45,9 @@ public class CatzPIDTurn
 				Math.abs(instance.navx.getAngle()) > Math.abs(turnToDegrees)+turnThreshold && done!= true)
 		{
 			// make data array for deltaT,currentError; loop of about 100 + counter for how many loops
-			pdTimer.stop(); // empty function
+			pdTimer.stop();
 			
-			deltaT = pdTimer.get();
+			deltaT = pdTimer.get()-previousError;
 			pdTimer.reset();
 			pdTimer.start();
 
@@ -56,7 +56,13 @@ public class CatzPIDTurn
 			totalError += currentError * deltaT;           
 			derivative = deltaError/deltaT;
 
-			power = .6*((CatzConstants.TURN_KP*currentError)+(CatzConstants.TURN_KD*derivative)+(CatzConstants.TURN_KI * (totalError)));
+			if(totalError >= CatzConstants.POS_MAX)    // saturation
+				totalError = CatzConstants.POS_MAX;
+			
+			if(totalError <= CatzConstants.NEG_MAX)
+				totalError = CatzConstants.NEG_MAX;
+			
+			power = CatzConstants.DRIVE_POWER_SCALE*((CatzConstants.TURN_KP*currentError)+(CatzConstants.TURN_KD*derivative)+(CatzConstants.TURN_KI * (totalError)));
 			
 			instance.drive.tankDrive(power,-power);
 
@@ -65,18 +71,13 @@ public class CatzPIDTurn
 			if (functionTimer.get() > timeoutSeconds)
 				done = true;
 			
-			if(totalError >= CatzConstants.POS_MAX)    // saturation
-				totalError = CatzConstants.POS_MAX;
-			
-			if(totalError <= CatzConstants.NEG_MAX)
-				totalError = CatzConstants.NEG_MAX;
 			
 			SmartDashboard.putNumber("PDTurn:NavxReading",instance.navx.getAngle());
 			SmartDashboard.putNumber("PDTurn:TimerReading",functionTimer.get());
 			SmartDashboard.putNumber("PDTurn:LoopCount",PDTurnLoopcount); 
 		}
 
-		instance.drive.tankDrive(0,0);
+		instance.drive.tankDrive(CatzConstants.ZERO_DOUBLE, CatzConstants.ZERO_DOUBLE);
 		functionTimer.stop();
 		functionTimer.reset();
 		
