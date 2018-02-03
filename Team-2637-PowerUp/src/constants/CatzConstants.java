@@ -62,13 +62,13 @@ public class CatzConstants
 	
 	final static public double HALF_SPEED = 0.5;
 	
-	final static public double TIMEOUT_2 = 2.0;
-	final static public int TIMEOUT_2int = 2;
+	final static public double TIMEOUT_2_DOUBLE = 2.0;
+	final static public int TIMEOUT_2_INT = 2;
 	
 	final static public double SAMPLE_TIME = 0.0;
 	
-	final static public double ROBOT_W = 28.0;
-	final static public double ROBOT_L = 31.0;   
+	final static public double ROBOT_WIDTH = 28.0;
+	final static public double ROBOT_LENGTH = 31.0;   
 	
 	final static public double DIST_335_65IN = 335.65;
 	final static public double DIST_41_88IN = 41.88;
