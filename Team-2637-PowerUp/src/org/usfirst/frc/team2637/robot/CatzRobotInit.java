@@ -5,7 +5,6 @@ import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 import com.kauailabs.navx.frc.AHRS;
-import components.CatzTimerMap;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
@@ -18,8 +17,6 @@ public class CatzRobotInit
 	CatzRobotMap robotmap;
 	String m_autoSelected;
 	SendableChooser<String> m_chooser = new SendableChooser<>();
-
-	CatzTimerMap timer;
 	
 	Thread m_visionThread;
 	

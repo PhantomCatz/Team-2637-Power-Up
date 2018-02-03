@@ -4,12 +4,12 @@ import com.kauailabs.navx.frc.AHRS;
 import components.CatzCANTalonSRX;
 import components.CatzDrive;
 import components.CatzJoystick;
-import components.CatzTimerMap;
 import components.CatzXboxController;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 public class CatzRobotMap 
@@ -26,7 +26,7 @@ public class CatzRobotMap
 	public Encoder wheelEncoder;
 	public AHRS navx;
 	
-	//public CatzTimerMap timer;
+	public Timer timer;
 	public CatzXboxController xbox;
 	public CatzJoystick joy;
 	
@@ -55,7 +55,7 @@ public class CatzRobotMap
 		
 		wheelEncoder = new Encoder(CatzConstants.DIO_PORT6, CatzConstants.DIO_PORT7, false, Encoder.EncodingType.k2X);
 		
-		//timer = new CatzTimerMap();
+		timer = new Timer();
 		
 		xbox = new CatzXboxController(CatzConstants.PORT_0);
 		joy = new CatzJoystick(CatzConstants.PORT_1);
