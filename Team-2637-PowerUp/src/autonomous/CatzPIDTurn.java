@@ -21,14 +21,18 @@ public class CatzPIDTurn
 		
 		instance = CatzRobotMap.getInstance();
 		instance.navx.reset();
+		
 		Timer.delay(CatzConstants.WAIT_0_1_SECONDS);
+		
 		boolean done = false;
 		int PDTurnLoopcount = CatzConstants.ZERO_INT;
+		
 		double turnToDegrees = turnDegrees + instance.navx.getAngle();
+		
 		double turnThreshold = CatzConstants.TURN_THRESHOLD_0_1;
-		double currentError;
 		double previousError = CatzConstants.ZERO_DOUBLE;
 		
+		double currentError;
 		double deltaError;
 		double derivative; 
 		double deltaT;
@@ -41,8 +45,11 @@ public class CatzPIDTurn
 		
 		pdTimer.reset();
 		
-		while(Math.abs(instance.navx.getAngle()) < Math.abs(turnToDegrees)-turnThreshold ||
-				Math.abs(instance.navx.getAngle()) > Math.abs(turnToDegrees)+turnThreshold && done!= true)
+		double currentAngle = Math.abs(instance.navx.getAngle());
+		double targetUnder = Math.abs(turnToDegrees)-turnThreshold;
+		double targetOver = Math.abs(turnToDegrees)+turnThreshold;
+		
+		while(currentAngle < targetUnder || currentAngle > targetOver && done!= true)
 		{
 			// make data array for deltaT,currentError; loop of about 100 + counter for how many loops
 			pdTimer.stop();
@@ -51,7 +58,7 @@ public class CatzPIDTurn
 			pdTimer.reset();
 			pdTimer.start();
 
-			currentError = turnToDegrees-instance.navx.getAngle();
+			currentError = turnToDegrees - instance.navx.getAngle();
 			deltaError = currentError-previousError;
 			totalError += currentError * deltaT;           
 			derivative = deltaError/deltaT;
