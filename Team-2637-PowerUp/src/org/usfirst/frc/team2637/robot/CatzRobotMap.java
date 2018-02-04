@@ -25,6 +25,9 @@ public class CatzRobotMap
 	public CatzCANTalonSRX fLeft;
 	public CatzCANTalonSRX rLeft;
 	
+	public CatzCANTalonSRX climber;
+	public CatzCANTalonSRX climber2;
+	
 	public Encoder wheelEncoderR;
 	public Encoder wheelEncoderL;
 	
@@ -63,6 +66,9 @@ public class CatzRobotMap
 		rRight = new CatzCANTalonSRX(CatzConstants.PORT_5);
 		fLeft = new CatzCANTalonSRX(CatzConstants.PORT_1);
 		rLeft = new CatzCANTalonSRX(CatzConstants.PORT_2);
+		
+		climber = new CatzCANTalonSRX(CatzConstants.PORT_3);
+		climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
 		navx = new AHRS(SerialPort.Port.kMXP);
 		
