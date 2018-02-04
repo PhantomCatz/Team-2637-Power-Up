@@ -44,27 +44,27 @@ public class CatzPIDTurn
 		functionTimer.start();
 		
 		pdTimer.reset();
+		pdTimer.start();
 		
 		double currentAngle = Math.abs(instance.navx.getAngle());
 		double targetUnder = Math.abs(turnToDegrees)-turnThreshold;
 		double targetOver = Math.abs(turnToDegrees)+turnThreshold;
 		
-		while(currentAngle < targetUnder || currentAngle > targetOver && done!= true)
+		while(currentAngle < targetUnder || currentAngle > targetOver && done == false)
 		{
-			// make data array for deltaT,currentError; loop of about 100 + counter for how many loops
 			pdTimer.stop();
 			
-			deltaT = pdTimer.get()-previousError;
+			deltaT = pdTimer.get();
 			pdTimer.reset();
 			pdTimer.start();
 
-			currentError = turnToDegrees - instance.navx.getAngle();
+			currentError = turnToDegrees - currentAngle;
 			deltaError = currentError-previousError;
 			totalError += currentError * deltaT;           
 			derivative = deltaError/deltaT;
 
-			if(totalError >= CatzConstants.POS_MAX)    // saturation
-				totalError = CatzConstants.POS_MAX;
+			if(totalError >= CatzConstants.POS_MAX)     // saturation
+				totalError = CatzConstants.POS_MAX;		// makes sure the integral term doesn't get too big or small
 			
 			if(totalError <= CatzConstants.NEG_MAX)
 				totalError = CatzConstants.NEG_MAX;
@@ -86,10 +86,8 @@ public class CatzPIDTurn
 
 		instance.drive.tankDrive(CatzConstants.ZERO_DOUBLE, CatzConstants.ZERO_DOUBLE);
 		functionTimer.stop();
-		functionTimer.reset();
 		
 		pdTimer.stop();
-		pdTimer.reset();
 	}
 	
 }
