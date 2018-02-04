@@ -1,6 +1,14 @@
 package components;
 import edu.wpi.first.wpilibj.Joystick;
-//import logger.CatzLogger;
+
+/*
+*  Author : Derek Duenas
+*  Last Revised : 2-1-2018 DD
+*  Removed timer and logger form class
+*  Methods : get value from all buttons on the joystick
+*  Functionality : gets the value from the buttons on the joystick
+*/
+
 public class CatzJoystick
 {
 	//private CatzTimerMap timer;

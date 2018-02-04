@@ -1,5 +1,10 @@
 package constants;
-
+/*
+ *  Author : Derek Duenas
+ *  Last Revised : 2-4-2018 DD
+ *  Added climber speed and lift speed
+ *  Functionality : stores all final values
+ */
 public class CatzConstants
 {
 	final static public int DIO_PORT0 = 0;

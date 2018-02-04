@@ -1,6 +1,15 @@
 package components;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+/*
+*  Author : Derek Duenas
+*  Last Revised : 2-1-2018 DD
+*  Removed timer and logger form class
+*  Methods : setModeArcadeDriveRacing, setModeArcadeDriveFlash
+*  Functionality : sets the drive mode to racing or flash
+*/
+
 public class CatzDrive
 {
 	//private final String NAME;

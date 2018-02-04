@@ -1,5 +1,14 @@
 package components;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+/*
+ *  Author : Derek Duenas
+ *  Last Revised : 2-1-2018 DD
+ *  Removed timer and logger form class
+ *  Methods : getSpeed , setSpeed
+ *  Functionality : Can set and read speed from a cantalon
+ */
+
 public class CatzCANTalonSRX extends WPI_TalonSRX
 {
 	//private final String NAME;

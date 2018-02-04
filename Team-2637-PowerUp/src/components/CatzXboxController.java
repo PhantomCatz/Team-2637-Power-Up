@@ -1,6 +1,14 @@
 package components;
 import edu.wpi.first.wpilibj.XboxController;
-//import logger.CatzLogger;
+
+/*
+ *  Author : Derek Duenas
+ *  Last Revised : 2-1-2018 DD
+ *  Removed timer and logger form class
+ *  Methods : get value from all buttons on the controller
+ *  Functionality : gets the value from the buttons on the controller
+ */
+
 public class CatzXboxController extends XboxController
 {	
 	//final private String NAME;
@@ -67,7 +75,7 @@ public class CatzXboxController extends XboxController
 	public double getLeftStickY()
 	{
 		//logger.add(NAME, "Left Stick moved in Y direction.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return xbox.getRawAxis(LEFT_STICK_Y);
+		return -xbox.getRawAxis(LEFT_STICK_Y);
 	}
 	public double getRightStickX()
 	{

@@ -1,5 +1,14 @@
 package components;
 import edu.wpi.first.wpilibj.Spark;
+
+/*
+ *  Author : Derek Duenas
+ *  Last Revised : 2-1-2018 DD
+ *  Removed timer and logger form class
+ *  Methods : getSpeed , setSpeed
+ *  Functionality : Can set and read speed from a spark
+ */
+
 public class CatzSpark 
 {
 	//private final String NAME;
