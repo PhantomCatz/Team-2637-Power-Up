@@ -27,10 +27,10 @@ public class CatzDriveStraight
 		double lastEncoderValue = 0;
 		/**/
 		instance.navx.reset();
-		instance.wheelEncoder.reset();
+		instance.wheelEncoderL.reset();
 		functionTimer.reset();
 		functionTimer.start();
-		while(Math.abs(instance.wheelEncoder.getDistance()) < distance && done != true)
+		while(Math.abs(instance.wheelEncoderL.getDistance()) < distance && done != true)
 		{
 			currentAngle = instance.navx.getAngle();
 	
@@ -46,7 +46,7 @@ public class CatzDriveStraight
 				done = true;
 	
 				/***********************************************/
-				encoderCheckNumber = instance.wheelEncoder.get();
+				encoderCheckNumber = instance.wheelEncoderL.get();
 				if(lastEncoderValue==encoderCheckNumber)
 					encoderIssues++;
 				lastEncoderValue=encoderCheckNumber;
@@ -64,7 +64,7 @@ public class CatzDriveStraight
 			instance.drive.tankDrive(-.43,-0.43);
 		instance.drive.tankDrive(0,0);
 		functionTimer.stop();
-		instance.wheelEncoder.reset();
+		instance.wheelEncoderL.reset();
 		SmartDashboard.putNumber("Function timer value", functionTimer.get());
 		SmartDashboard.putNumber("encoderCheck", encoderIssues);
 		SmartDashboard.putNumber("drive straight loop count", loopCount);
