@@ -88,6 +88,7 @@ public class CatzConstants
 	final static public int TURN_DEG_90 = 90;
 	
 	final static public double HALF_SPEED = 0.5;
+	final static public double STOP = 0.0;
 	
 	final static public double TIMEOUT_2_0 = 2.0;
 	final static public int TIMEOUT_2 = 2;
@@ -112,4 +113,5 @@ public class CatzConstants
 	
 	final static public double CLIMB_SPEED = 0;
 	final static public double LIFT_SPEED = 0;
+	final static public double INTAKE_SPEED_0_7 = 0.7;
 }
