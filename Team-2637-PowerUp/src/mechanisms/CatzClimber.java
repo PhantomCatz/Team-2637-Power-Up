@@ -24,8 +24,8 @@ public class CatzClimber
 		}
 		else
 		{
-			instance.climber.set(CatzConstants.ZERO_DOUBLE);
-			instance.climber2.set(CatzConstants.ZERO_DOUBLE);
+			instance.climber.set(CatzConstants.ZERO);
+			instance.climber2.set(CatzConstants.ZERO);
 		}
 		if(instance.joy.getButtonFour())
 		{
@@ -34,8 +34,8 @@ public class CatzClimber
 		}
 		else
 		{
-			instance.climber.set(CatzConstants.ZERO_DOUBLE);
-			instance.climber2.set(CatzConstants.ZERO_DOUBLE);
+			instance.climber.set(CatzConstants.ZERO);
+			instance.climber2.set(CatzConstants.ZERO);
 		}
 	}
 }

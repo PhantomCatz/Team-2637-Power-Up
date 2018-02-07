@@ -24,8 +24,8 @@ public class CatzLift
 		}
 		else
 		{
-			instance.lifterL.setSpeed(CatzConstants.ZERO_DOUBLE);
-			instance.lifterR.setSpeed(CatzConstants.ZERO_DOUBLE);
+			instance.lifterL.setSpeed(CatzConstants.ZERO);
+			instance.lifterR.setSpeed(CatzConstants.ZERO);
 		}
 		if(instance.joy.getThumbButton())
 		{
@@ -34,8 +34,8 @@ public class CatzLift
 		}
 		else
 		{
-			instance.lifterL.setSpeed(CatzConstants.ZERO_DOUBLE);
-			instance.lifterR.setSpeed(CatzConstants.ZERO_DOUBLE);
+			instance.lifterL.setSpeed(CatzConstants.ZERO);
+			instance.lifterR.setSpeed(CatzConstants.ZERO);
 		}
 	}
 }

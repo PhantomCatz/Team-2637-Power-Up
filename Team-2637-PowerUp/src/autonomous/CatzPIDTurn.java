@@ -1,13 +1,13 @@
 package autonomous;
-import org.usfirst.frc.team2637.robot.CatzRobotMap;
-
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import constants.CatzConstants;
+import org.usfirst.frc.team2637.robot.CatzRobotMap;
 /*
  *  Author : Derek Duenas
- *  Last Revised : 1-28-2018 DD
- *  Translated from C++ and added integral term
+ *  Revision History : 
+ *  	1-28-2018 D. Duenas Translated from C++ and added integral term
+ *  	2-4-2018 D. Duenas Revising code
+ *  
  *  Methods : PIDturn
  *  Functionality : Accurately turn autonomously
  */
@@ -22,15 +22,14 @@ public class CatzPIDTurn
 		instance = CatzRobotMap.getInstance();
 		instance.navx.reset();
 		
-		Timer.delay(CatzConstants.WAIT_0_1_SECONDS);
+		Timer.delay(CatzConstants.NAVX_WAIT_TIME);
 		
 		boolean done = false;
-		int PDTurnLoopcount = CatzConstants.ZERO_INT;
 		
 		double turnToDegrees = turnDegrees + instance.navx.getAngle();
 		
-		double turnThreshold = CatzConstants.TURN_THRESHOLD_0_1;
-		double previousError = CatzConstants.ZERO_DOUBLE;
+		double turnThreshold = CatzConstants.PID_TURN_THRESHOLD;
+		double previousError = CatzConstants.ZERO;
 		
 		double currentError;
 		double deltaError;
@@ -38,7 +37,7 @@ public class CatzPIDTurn
 		double deltaT;
 		double power;
 		
-		double totalError = CatzConstants.ZERO_DOUBLE;
+		double totalError = CatzConstants.ZERO;
 		
 		functionTimer.reset();
 		functionTimer.start();
@@ -78,13 +77,9 @@ public class CatzPIDTurn
 			if (functionTimer.get() > timeoutSeconds)
 				done = true;
 			
-			
-			SmartDashboard.putNumber("PDTurn:NavxReading",instance.navx.getAngle());
-			SmartDashboard.putNumber("PDTurn:TimerReading",functionTimer.get());
-			SmartDashboard.putNumber("PDTurn:LoopCount",PDTurnLoopcount); 
 		}
 
-		instance.drive.tankDrive(CatzConstants.ZERO_DOUBLE, CatzConstants.ZERO_DOUBLE);
+		instance.drive.tankDrive(CatzConstants.ZERO, CatzConstants.ZERO);
 		functionTimer.stop();
 		
 		pdTimer.stop();

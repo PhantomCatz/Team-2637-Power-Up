@@ -51,10 +51,6 @@ public class CatzConstants
 	final static public int PCM_PORT_8 = 8;
 	final static public int PCM_PORT_9 = 9;
 	
-	final static public int LOGGER_TIMER_INDEX = 0;
-	final static public int FUNCTION_TIMER_INDEX = 1;
-	final static public int PD_TIMER_INDEX = 2;
-	
 	static public double straightkP = .18;
 	static public double straightkD = .23;  //ORIGINALLY .18
 	final static public int VAR_1_BUFFER_SIZE = 20;
@@ -104,11 +100,10 @@ public class CatzConstants
 	final static public double DIST_12IN = 12;
 	final static public double DIST_251_73IN = 251.73;
 	
-	final static public double ZERO_DOUBLE = 0;
-	final static public int ZERO_INT = 0;
+	final static public double ZERO = 0;
 	
-	final static public double WAIT_0_1_SECONDS = 0.1;
-	final static public double TURN_THRESHOLD_0_1 = 0.1;
+	final static public double PID_TURN_THRESHOLD = 0.1;
+	final static public double NAVX_WAIT_TIME = 0.1;
 	
 	final static public double DRIVE_POWER_SCALE = 0.6;
 	

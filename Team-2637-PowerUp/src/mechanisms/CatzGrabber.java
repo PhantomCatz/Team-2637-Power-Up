@@ -1,8 +1,6 @@
 package mechanisms;
 
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
-
-import components.CatzXboxController;
 import constants.CatzConstants;
 
 public class CatzGrabber {
