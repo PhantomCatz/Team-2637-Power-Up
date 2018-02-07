@@ -175,4 +175,57 @@ public class CatzAutonomousPaths
 		 ******************************************************/
 		
 	}
+	
+	public static void leftSideNoScale()
+	{
+		CatzDriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, Math.abs(CatzConstants.DIST_251_73IN - CatzConstants.ROBOT_LENGTH), 
+				CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2_0);
+		
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2);
+		
+		CatzDriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, Math.abs(CatzConstants.DIST_251_73IN - CatzConstants.ROBOT_LENGTH), 
+				CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2_0);
+		
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2);
+		
+		CatzDriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, Math.abs(CatzConstants.DIST_84IN - CatzConstants.ROBOT_LENGTH), 
+				CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2_0);
+		
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2);
+		
+		CatzDriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, Math.abs(CatzConstants.DIST_24IN - CatzConstants.ROBOT_LENGTH), 
+				CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2_0);
+		
+		/******************************************************
+		 * Write scale cube placing code here
+		 * 
+		 ******************************************************/
+	}
+	
+	public static void rightSideNoScale()
+	{
+		CatzDriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, Math.abs(CatzConstants.DIST_251_73IN - CatzConstants.ROBOT_LENGTH), 
+				CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2_0);
+		
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2);
+		
+		CatzDriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, Math.abs(CatzConstants.DIST_251_73IN - CatzConstants.ROBOT_LENGTH), 
+				CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2_0);
+		
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2);
+		
+		CatzDriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, Math.abs(CatzConstants.DIST_84IN - CatzConstants.ROBOT_LENGTH), 
+				CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2_0);
+		
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.TIMEOUT_2);
+		
+		CatzDriveStraight.EncoderStraightDrive(CatzConstants.HALF_SPEED, Math.abs(CatzConstants.DIST_24IN - CatzConstants.ROBOT_LENGTH), 
+				CatzConstants.SAMPLE_TIME, CatzConstants.TIMEOUT_2_0);
+
+		/******************************************************
+		 * Write scale cube placing code here
+		 * 
+		 ******************************************************/
+		
+	}
 }

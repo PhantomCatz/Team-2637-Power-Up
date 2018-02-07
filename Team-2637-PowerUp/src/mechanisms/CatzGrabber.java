@@ -3,6 +3,7 @@ package mechanisms;
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
 
 import components.CatzXboxController;
+import constants.CatzConstants;
 
 public class CatzGrabber {
 
@@ -32,13 +33,13 @@ public class CatzGrabber {
 		
 		if(instance.xbox.getRightBumper() == true)
 		{
-			instance.intake.setSpeed(0.7);
-			instance.intake2.setSpeed(0.7);
+			instance.intake.setSpeed(CatzConstants.INTAKE_SPEED_0_7);
+			instance.intake2.setSpeed(CatzConstants.INTAKE_SPEED_0_7);
 		}
 		else
 		{
-			instance.intake.setSpeed(0);
-			instance.intake2.setSpeed(0);
+			instance.intake.setSpeed(CatzConstants.STOP);
+			instance.intake2.setSpeed(CatzConstants.STOP);
 		}	
 	} 
 	
