@@ -55,20 +55,17 @@ public class CatzConstants
 	static public double straightkD = .23;  //ORIGINALLY .18
 	final static public int VAR_1_BUFFER_SIZE = 20;
 	
-	final static public int LEVEL1 = 1;
-	final static public int LEVEL2 = 2;
-	final static public int LEVEL3 = 3;
-	final static public int LEVEL4 = 4;
-	final static public int LEVEL5 = 5;
+	final static public int LOGGER_LEVEL1 = 1;
+	final static public int LOGGER_LEVEL2 = 2;
+	final static public int LOGGER_LEVEL3 = 3;
+	final static public int LOGGER_LEVEL4 = 4;
+	final static public int LOGGER_LEVEL5 = 5;
 	
 	static public double TURN_KP = 0.118;
 	static public double TURN_KD = 0.174;
 	static public double TURN_KI = 0.0;  //
 	static public double POS_MAX = 0.0;  //need values
 	static public double NEG_MAX = 0.0;  //
-	
-	final static public String kDefaultAuto = "Default";
-	final static public String kCustomAuto = "My Auto";
 	
 	final static public double DIST_36IN = 36.0;                                 
 	final static public double DIST_72IN = 72.0;

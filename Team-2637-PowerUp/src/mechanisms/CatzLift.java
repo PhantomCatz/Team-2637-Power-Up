@@ -14,28 +14,19 @@ import constants.CatzConstants;
 public class CatzLift 
 {
 	CatzRobotMap instance;
-	public void lift()
+	public void liftUp()
 	{
-		instance = CatzRobotMap.getInstance();
-		if(instance.joy.getTrigger())
-		{
-			instance.lifterL.setSpeed(CatzConstants.LIFT_SPEED);
-			instance.lifterR.setSpeed(CatzConstants.LIFT_SPEED);
-		}
-		else
-		{
-			instance.lifterL.setSpeed(CatzConstants.ZERO);
-			instance.lifterR.setSpeed(CatzConstants.ZERO);
-		}
-		if(instance.joy.getThumbButton())
-		{
-			instance.lifterL.setSpeed(-CatzConstants.LIFT_SPEED);
-			instance.lifterR.setSpeed(-CatzConstants.LIFT_SPEED);
-		}
-		else
-		{
-			instance.lifterL.setSpeed(CatzConstants.ZERO);
-			instance.lifterR.setSpeed(CatzConstants.ZERO);
-		}
+		instance.lifterL.setSpeed(CatzConstants.LIFT_SPEED);
+		instance.lifterR.setSpeed(CatzConstants.LIFT_SPEED);
+	}
+	public void liftDown()
+	{
+		instance.lifterL.setSpeed(-CatzConstants.LIFT_SPEED);
+		instance.lifterR.setSpeed(-CatzConstants.LIFT_SPEED);
+	}
+	public void noLift()
+	{
+		instance.lifterL.setSpeed(CatzConstants.ZERO);
+		instance.lifterR.setSpeed(CatzConstants.ZERO);
 	}
 }

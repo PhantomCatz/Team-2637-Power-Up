@@ -12,20 +12,17 @@ import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 public class CatzRobotMap 
 {
 	public static CatzRobotMap instance;
-	
-	public SendableChooser<String> m_chooser;
 	
 	public CatzCANTalonSRX fRight;
 	public CatzCANTalonSRX rRight;
 	public CatzCANTalonSRX fLeft;
 	public CatzCANTalonSRX rLeft;
 	
-	public CatzCANTalonSRX climber;
+	public CatzCANTalonSRX climber;   // unknown which one is left and right
 	public CatzCANTalonSRX climber2;
 	
 	public Encoder wheelEncoderR;
@@ -47,15 +44,10 @@ public class CatzRobotMap
 	public SpeedControllerGroup leftMotors;
 	public SpeedControllerGroup rightMotors;
 	
-	public Thread m_visionThread;
-	
 	public Solenoid intakeOpen;
 	public Solenoid intakeDeploy;
 	
 	//public static CatzLogger logger;
-	
-	//public  Encoder rightWheelEncoder
-	//public  Encoder leftWheelEncoder;
 	
 	//public  Lidar lidar;
 	
@@ -80,13 +72,9 @@ public class CatzRobotMap
 		xbox = new CatzXboxController(CatzConstants.PORT_0);
 		joy = new CatzJoystick(CatzConstants.PORT_1);
 		
-		m_visionThread = new Thread();
-		
 		leftMotors = new SpeedControllerGroup(fLeft, rLeft);
 		rightMotors = new SpeedControllerGroup(fRight, rRight);
 		drive = new CatzDrive(leftMotors, rightMotors);
-		
-		m_chooser = new SendableChooser<>();
 		
 		lifterR = new CatzSpark(CatzConstants.PWM_PORT_1);
 		lifterL = new CatzSpark(CatzConstants.PWM_PORT_0);

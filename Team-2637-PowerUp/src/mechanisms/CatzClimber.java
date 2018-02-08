@@ -14,28 +14,19 @@ import constants.CatzConstants;
 public class CatzClimber 
 {
 	CatzRobotMap instance;
-	public void climb()
+	public void climbUp()
 	{
-		instance = CatzRobotMap.getInstance();
-		if(instance.joy.getButtonThree())
-		{
-			instance.climber.set(CatzConstants.CLIMB_SPEED);
-			instance.climber2.set(CatzConstants.CLIMB_SPEED);
-		}
-		else
-		{
-			instance.climber.set(CatzConstants.ZERO);
-			instance.climber2.set(CatzConstants.ZERO);
-		}
-		if(instance.joy.getButtonFour())
-		{
-			instance.climber.set(-CatzConstants.CLIMB_SPEED);
-			instance.climber2.set(-CatzConstants.CLIMB_SPEED);
-		}
-		else
-		{
-			instance.climber.set(CatzConstants.ZERO);
-			instance.climber2.set(CatzConstants.ZERO);
-		}
+		instance.climber.set(CatzConstants.CLIMB_SPEED);
+		instance.climber2.set(CatzConstants.CLIMB_SPEED);
+	}
+	public void climbDown()
+	{
+		instance.climber.set(-CatzConstants.CLIMB_SPEED);
+		instance.climber2.set(-CatzConstants.CLIMB_SPEED);
+	}
+	public void noClimb()
+	{
+		instance.climber.set(CatzConstants.ZERO);
+		instance.climber2.set(CatzConstants.ZERO);
 	}
 }

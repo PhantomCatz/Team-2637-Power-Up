@@ -22,10 +22,10 @@ public class CatzDriveStraight
 		double deltaAngle;			//FUNCTION VARIABLES
 		double derivative;
 		double deltaTime = sampleTimeSec/1000;
-		/**/
+		/*
 		double encoderCheckNumber;
 		double lastEncoderValue = 0;
-		/**/
+		*/
 		instance.navx.reset();
 		instance.wheelEncoderL.reset();
 		functionTimer.reset();
@@ -45,14 +45,14 @@ public class CatzDriveStraight
 			if (functionTimer.get() > timeout)
 				done = true;
 	
-				/***********************************************/
+				/*
 				encoderCheckNumber = instance.wheelEncoderL.get();
 				if(lastEncoderValue==encoderCheckNumber)
 					encoderIssues++;
 				lastEncoderValue=encoderCheckNumber;
 				loopCount++;
 				dbgCount1++;
-				/************************************************/
+				*/
 	
 			dbgCount1++;
 			if (dbgCount1== CatzConstants.VAR_1_BUFFER_SIZE)

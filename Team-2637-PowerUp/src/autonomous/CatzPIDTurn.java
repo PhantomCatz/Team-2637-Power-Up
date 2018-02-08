@@ -46,11 +46,12 @@ public class CatzPIDTurn
 		pdTimer.start();
 		
 		double currentAngle = Math.abs(instance.navx.getAngle());
-		double targetUnder = Math.abs(turnToDegrees)-turnThreshold;
-		double targetOver = Math.abs(turnToDegrees)+turnThreshold;
+		double targetUpperLimit = Math.abs(turnToDegrees)-turnThreshold;
+		double targetLowerLimit = Math.abs(turnToDegrees)+turnThreshold;
 		
-		while(currentAngle < targetUnder || currentAngle > targetOver && done == false)
+		while(currentAngle < targetLowerLimit || currentAngle > targetUpperLimit && done == false)
 		{
+			currentAngle = Math.abs(instance.navx.getAngle());
 			pdTimer.stop();
 			
 			deltaT = pdTimer.get();
@@ -76,9 +77,7 @@ public class CatzPIDTurn
 
 			if (functionTimer.get() > timeoutSeconds)
 				done = true;
-			
 		}
-
 		instance.drive.tankDrive(CatzConstants.ZERO, CatzConstants.ZERO);
 		functionTimer.stop();
 		
