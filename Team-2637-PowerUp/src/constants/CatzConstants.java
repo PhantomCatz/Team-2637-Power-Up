@@ -7,16 +7,16 @@ package constants;
  */
 public class CatzConstants
 {
-	final static public int DIO_PORT0 = 0;
-	final static public int DIO_PORT1 = 1;
-	final static public int DIO_PORT2 = 2;
-	final static public int DIO_PORT3 = 3;
-	final static public int DIO_PORT4 = 4;
-	final static public int DIO_PORT5 = 5;
-	final static public int DIO_PORT6 = 6;
-	final static public int DIO_PORT7 = 7;
-	final static public int DIO_PORT8 = 8;
-	final static public int DIO_PORT9 = 9;
+	final static public int DIO_PORT_0 = 0;
+	final static public int DIO_PORT_1 = 1;
+	final static public int DIO_PORT_2 = 2;
+	final static public int DIO_PORT_3 = 3;
+	final static public int DIO_PORT_4 = 4;
+	final static public int DIO_PORT_5 = 5;
+	final static public int DIO_PORT_6 = 6;
+	final static public int DIO_PORT_7 = 7;
+	final static public int DIO_PORT_8 = 8;
+	final static public int DIO_PORT_9 = 9;
 	
 	final static public int PORT_0 = 0;
 	final static public int PORT_1 = 1;
@@ -61,11 +61,11 @@ public class CatzConstants
 	final static public int LOGGER_LEVEL4 = 4;
 	final static public int LOGGER_LEVEL5 = 5;
 	
-	static public double TURN_KP = 0.118;
-	static public double TURN_KD = 0.174;
+	static public double TURN_KP = 0.0708;
+	static public double TURN_KD = 0.1044;
 	static public double TURN_KI = 0.0;  //
-	static public double POS_MAX = 0.0;  //need values
-	static public double NEG_MAX = 0.0;  //
+	static public double PID_INTEGRAL_MAX = 0.0;  //need values
+	static public double PID_INTEGRAL_MIN = 0.0;  //
 	
 	final static public double DIST_36IN = 36.0;                                 
 	final static public double DIST_72IN = 72.0;
@@ -96,12 +96,10 @@ public class CatzConstants
 	final static public double DIST_12IN = 12;
 	final static public double DIST_251_73IN = 251.73;
 	
-	final static public double ZERO = 0;
+	final static public double ZERO = 0.0;
 	
 	final static public double PID_TURN_THRESHOLD = 0.1;
-	final static public double NAVX_WAIT_TIME = 0.1;
-	
-	final static public double DRIVE_POWER_SCALE = 0.6;
+	final static public double NAVX_RESET_WAIT_TIME = 0.1;
 	
 	final static public double CLIMB_SPEED = 0;
 	final static public double LIFT_SPEED = 0;
