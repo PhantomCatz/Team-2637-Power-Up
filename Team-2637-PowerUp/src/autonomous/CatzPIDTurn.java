@@ -11,7 +11,7 @@ import org.usfirst.frc.team2637.robot.CatzRobotMap;
  *  Methods : PIDturn
  *  Functionality : Accurately turn autonomously
  */
-public class CatzPIDTurn
+public static class CatzPIDTurn
 {
 	static CatzRobotMap instance;
 	public static void PIDturn(double turnDegrees, int timeoutSeconds)
@@ -28,8 +28,7 @@ public class CatzPIDTurn
 		
 		double turnToDegrees = turnDegrees + instance.navx.getAngle();
 		
-		double turnThreshold = CatzConstants.PID_TURN_THRESHOLD;
-		double previousError = CatzConstants.ZERO;
+		double previousError = 0;
 		
 		double currentError;
 		double deltaError;
@@ -37,7 +36,7 @@ public class CatzPIDTurn
 		double deltaT;
 		double power;
 		
-		double totalError = CatzConstants.ZERO;
+		double totalError = 0;
 		
 		functionTimer.reset();
 		functionTimer.start();
@@ -46,10 +45,10 @@ public class CatzPIDTurn
 		pdTimer.start();
 		
 		double currentAngle = Math.abs(instance.navx.getAngle());
-		double targetUpperLimit = Math.abs(turnToDegrees)-turnThreshold;
-		double targetLowerLimit = Math.abs(turnToDegrees)+turnThreshold;
+		double targetUpperLimit = Math.abs(turnToDegrees)-CatzConstants.PID_TURN_THRESHOLD;
+		double targetLowerLimit = Math.abs(turnToDegrees)+CatzConstants.PID_TURN_THRESHOLD;
 		
-		while(currentAngle < targetLowerLimit || currentAngle > targetUpperLimit && done == false)
+		while((currentAngle < targetLowerLimit || currentAngle > targetUpperLimit) && done == false)
 		{
 			currentAngle = Math.abs(instance.navx.getAngle());
 			pdTimer.stop();
@@ -78,7 +77,7 @@ public class CatzPIDTurn
 			if (functionTimer.get() > timeoutSeconds)
 				done = true;
 		}
-		instance.drive.tankDrive(CatzConstants.ZERO, CatzConstants.ZERO);
+		instance.drive.tankDrive(0, 0);
 		functionTimer.stop();
 		
 		pdTimer.stop();

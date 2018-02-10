@@ -4,8 +4,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /*
 *  Author : Derek Duenas
-*  Last Revised : 2-1-2018 DD
-*  Removed timer and logger form class
+*  Last Revised : 2-9-2018 AL
+*  touchup
 *  Methods : setModeArcadeDriveRacing, setModeArcadeDriveFlash
 *  Functionality : sets the drive mode to racing or flash
 */
@@ -16,25 +16,28 @@ public class CatzDrive
 	private DifferentialDrive drive;
 	//private CatzLogger logger;
 	//private CatzTimerMap timer;
-	public CatzDrive(SpeedControllerGroup leftMotors, SpeedControllerGroup rightMotors)
-	{
+	public CatzDrive(SpeedControllerGroup leftMotors, SpeedControllerGroup rightMotors){
 		//timer = CatzTimerMap.getInstance();
 		//logger = CatzLogger.getInstance();
 		//NAME = this.getClass().getSimpleName();
 		drive = new DifferentialDrive(leftMotors, rightMotors);
 	}
-	public void setModeArcadeDriveRacing(CatzXboxController control)
-	{
+	
+	public void setModeArcadeDriveRacing(CatzXboxController control){
 		//logger.add(NAME, "Arcade Drive set to Racing.", CatzConstants.LEVEL5, timer.get());
 		drive.arcadeDrive(control.getRightTrigger()-control.getLeftTrigger(), control.getRightStickX());
 	}
-	public void setModeArcadeDriveFlash(CatzXboxController control)
-	{
+	
+	public void setModeArcadeDriveFlash(CatzXboxController control){
 		//logger.add(NAME, "Arcade Drive set to Flash.", CatzConstants.LEVEL5, timer.get());
 		drive.arcadeDrive(control.getLeftStickY(), control.getRightStickX());
 	}
-	public void tankDrive(double lPower, double rPower)
-	{
+	
+	public void tankDrive(double lPower, double rPower){
 		drive.tankDrive(lPower, rPower);
+	}
+	
+	public void arcadeDrive(double xSpeed, double zRotation) {
+		drive.arcadeDrive(xSpeed, zRotation);
 	}
 }
