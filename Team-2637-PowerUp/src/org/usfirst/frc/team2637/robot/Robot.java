@@ -6,9 +6,13 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team2637.robot;
+
+import autonomous.CatzAutonomousInit;
 import autonomous.CatzAutonomousPeriodic;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import teleop.CatzTeleopMethods;
+
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -16,6 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
+
 public class Robot extends IterativeRobot 
 {
 	/**
@@ -26,14 +31,16 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-
+		
 		instance = CatzRobotMap.getInstance();
-		//CatzRobotMap.init.run();
+		CatzRobotInit.run();
 	}
 	
 	public void robotPeriodic()
 	{
 		SmartDashboard.putNumber("navx reading 2", instance.navx.getAngle());
+		CatzRobotPeriodic.runRobotPeriodic();
+		
 	}
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
@@ -50,7 +57,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
-		//CatzAutonomousInit.runAutnomousInit();
+		CatzAutonomousInit.runAutnomousInit();
 	}
 
 	/**
@@ -67,10 +74,12 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopInit()
 	{
+		//CatzTeleopMethods.runTeleopInit();
 	}
 	@Override
 	public void teleopPeriodic()
 	{			
+		//CatzTeleopMethods.runTeleopPeriodic();
 	}
 	/**
 	 * This function is called periodically during test mode.
