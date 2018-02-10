@@ -1,9 +1,8 @@
 package autonomous;
+import java.util.concurrent.TimeUnit;
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
-
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CatzDriveStraight
 {
 	static CatzRobotMap instance;
@@ -82,4 +81,3 @@ public class CatzDriveStraight
 		SmartDashboard.putNumber("drive straight loop count", loopCount);*/
 	}	
 }	
-}

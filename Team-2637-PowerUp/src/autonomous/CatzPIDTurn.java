@@ -11,7 +11,7 @@ import org.usfirst.frc.team2637.robot.CatzRobotMap;
  *  Methods : PIDturn
  *  Functionality : Accurately turn autonomously
  */
-public static class CatzPIDTurn
+public class CatzPIDTurn
 {
 	static CatzRobotMap instance;
 	public static void PIDturn(double turnDegrees, int timeoutSeconds)
