@@ -17,16 +17,16 @@ public class CatzClimber
 	public void climbUp()
 	{
 		instance.climber.set(CatzConstants.CLIMB_SPEED);
-		instance.climber2.set(CatzConstants.CLIMB_SPEED);
+		//instance.climber2.set(CatzConstants.CLIMB_SPEED);
 	}
 	public void climbDown()
 	{
 		instance.climber.set(-CatzConstants.CLIMB_SPEED);
-		instance.climber2.set(-CatzConstants.CLIMB_SPEED);
+		//instance.climber2.set(-CatzConstants.CLIMB_SPEED);
 	}
-	public void noClimb()
+	public void stopClimb()
 	{
 		instance.climber.set(CatzConstants.ZERO);
-		instance.climber2.set(CatzConstants.ZERO);
+		//instance.climber2.set(CatzConstants.ZERO);
 	}
 }

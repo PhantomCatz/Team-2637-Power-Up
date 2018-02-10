@@ -24,8 +24,8 @@ public class CatzRobotMap
 	public CatzCANTalonSRX fLeft;
 	public CatzCANTalonSRX rLeft;
 	
-	public CatzCANTalonSRX climber;   // unknown which one is left and right
-	public CatzCANTalonSRX climber2;
+	public CatzCANTalonSRX climber;  
+	//public CatzCANTalonSRX climber2;  //robot does not yet have a second climber motor
 	
 	public Encoder wheelEncoderR;
 	public Encoder wheelEncoderL;
@@ -46,8 +46,8 @@ public class CatzRobotMap
 	public SpeedControllerGroup leftMotors;
 	public SpeedControllerGroup rightMotors;
 	
-	public Solenoid intakeOpen;
-	public Solenoid intakeDeploy;
+	public Solenoid intakeForearm;
+	public Solenoid intakeBicep;
 	
 	
 	//public static CatzLogger logger;
@@ -63,12 +63,12 @@ public class CatzRobotMap
 		rLeft = new CatzCANTalonSRX(CatzConstants.PORT_2);
 		
 		climber = new CatzCANTalonSRX(CatzConstants.PORT_3);
-		climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
+		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
 		navx = new AHRS(SPI.Port.kMXP);
 				
-		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT2,CatzConstants.DIO_PORT3, false, Encoder.EncodingType.k2X);
-		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT0,CatzConstants.DIO_PORT1,false,Encoder.EncodingType.k2X);
+		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT_2,CatzConstants.DIO_PORT_3, false, Encoder.EncodingType.k2X);
+		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT_0,CatzConstants.DIO_PORT_1,false,Encoder.EncodingType.k2X);
 		
 		timer = new Timer();
 		
@@ -85,8 +85,8 @@ public class CatzRobotMap
 		intakeRight = new CatzSpark(CatzConstants.PWM_PORT_2);
 		intakeLeft = new CatzSpark(CatzConstants.PWM_PORT_3);
 		
-		intakeOpen = new Solenoid(CatzConstants.PCM_PORT_0);
-		intakeDeploy = new Solenoid(CatzConstants.PCM_PORT_1);
+		intakeForearm = new Solenoid(CatzConstants.PCM_PORT_0);
+		intakeBicep = new Solenoid(CatzConstants.PCM_PORT_1);
 		//logger = new CatzLogger();
 	}
 	public static CatzRobotMap getInstance()

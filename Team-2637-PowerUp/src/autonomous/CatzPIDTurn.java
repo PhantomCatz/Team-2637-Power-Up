@@ -38,23 +38,23 @@ public class CatzPIDTurn
 	static boolean done;
 	static boolean debug;
 	
-	public static void pidDebug()
+/*	public static void pidDebug()
 	{
 		String name;
 		instance.logger.add("object", "PID Debug", 5, debugTimer.get());
-	}
+	}  */
 	
 	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
 	{
 		functionTimer = new Timer();
 		pdTimer = new Timer();
 		
-		if(debug == true)
+		/*if(debug == true)
 		{
 			debugTimer = new Timer();
 			debugTimer.start();
 			pidDebug();
-		}
+		} */
 		
 		instance = CatzRobotMap.getInstance();
 		instance.navx.reset();

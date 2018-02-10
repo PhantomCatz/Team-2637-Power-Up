@@ -105,8 +105,8 @@ public class CatzConstants
 	final static public double LIFT_SPEED = 0;
 	final static public double INTAKE_SPEED = 0.7;
 	
-	static public boolean grabberDeployed = false;
-	static public boolean flapOpen = false;
+	static public boolean bicepDeployed = false;
+	static public boolean forearmOpen = false;
 	
 	final static public String POSITION_SELECTORL = "Position Left";
 	final static public String POSITION_SELECTORM = "Position Mid";
