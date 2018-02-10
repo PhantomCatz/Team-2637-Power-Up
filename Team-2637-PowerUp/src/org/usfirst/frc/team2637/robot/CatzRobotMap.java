@@ -31,8 +31,8 @@ public class CatzRobotMap
 	public CatzSpark lifterR;
 	public CatzSpark lifterL;
 	
-	public CatzSpark intake;
-	public CatzSpark intake2;
+	public CatzSpark intakeRight;
+	public CatzSpark intakeLeft;
 	
 	public AHRS navx;
 	
@@ -46,6 +46,7 @@ public class CatzRobotMap
 	
 	public Solenoid intakeOpen;
 	public Solenoid intakeDeploy;
+	
 	
 	//public static CatzLogger logger;
 	
@@ -79,8 +80,8 @@ public class CatzRobotMap
 		lifterR = new CatzSpark(CatzConstants.PWM_PORT_1);
 		lifterL = new CatzSpark(CatzConstants.PWM_PORT_0);
 		
-		intake = new CatzSpark(CatzConstants.PWM_PORT_2);
-		intake2 = new CatzSpark(CatzConstants.PWM_PORT_3);
+		intakeRight = new CatzSpark(CatzConstants.PWM_PORT_2);
+		intakeLeft = new CatzSpark(CatzConstants.PWM_PORT_3);
 		
 		intakeOpen = new Solenoid(CatzConstants.PCM_PORT_0);
 		intakeDeploy = new Solenoid(CatzConstants.PCM_PORT_1);

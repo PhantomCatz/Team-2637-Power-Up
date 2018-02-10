@@ -1,3 +1,16 @@
+/************************************************
+ * Timothy Vu
+ * 
+ * Last Revised: 2/9/17 TV
+ * 
+ * Fixed bad logic within methods
+ * 
+ * Methods: openFlapToggle(), intakeCube(), launchCube(), 
+ * deployIntake(), retractIntake()
+ * 
+ * Functionality:
+ ***********************************************/
+
 package mechanisms;
 
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
@@ -5,58 +18,46 @@ import constants.CatzConstants;
 
 public class CatzGrabber {
 
-	CatzRobotMap instance;
+	CatzRobotMap instance = CatzRobotMap.getInstance();
 
-	public void openFlap() {
+	public void openFlapToggle() {          // meant to be used with A button
 
-		instance = CatzRobotMap.getInstance();
-		boolean toggleSol = false;
-
-		if (instance.xbox.getLeftBumper() == true) {
-			toggleSol = true;
-
-			if (toggleSol == true)
-				instance.intakeOpen.set(true);
-
-			else
-				instance.intakeOpen.set(false);
+		if (CatzConstants.flapOpen == true) {
+			CatzConstants.flapOpen = false;
+			instance.intakeOpen.set(CatzConstants.flapOpen);
+			
+		} 
+		else {               // flapOpen == false
+			CatzConstants.flapOpen = true;
+			instance.intakeOpen.set(CatzConstants.flapOpen);
 		}
+	}
+
+	public void intakeCube() // meant to be used with right trigger
+	{
+		instance.intakeRight.setSpeed(CatzConstants.INTAKE_SPEED);
+		instance.intakeLeft.setSpeed(-CatzConstants.INTAKE_SPEED);
 
 	}
-	
-	
-	public void intakeCube()
+
+	public void launchCube() // meant to be used with left trigger
 	{
-		instance = CatzRobotMap.getInstance();
-		
-		if(instance.xbox.getRightBumper() == true)
-		{
-			instance.intake.setSpeed(CatzConstants.INTAKE_SPEED_0_7);
-			instance.intake2.setSpeed(CatzConstants.INTAKE_SPEED_0_7);
-		}
-		else
-		{
-			instance.intake.setSpeed(CatzConstants.STOP);
-			instance.intake2.setSpeed(CatzConstants.STOP);
-		}	
-	} 
-	
-	public void retractIntake()
-	{
-	
-		instance = CatzRobotMap.getInstance();
-		
-		if(instance.xbox.getAButton() == true)
-			instance.intakeDeploy.set(false);
-		
+
+		instance.intakeRight.setSpeed(-CatzConstants.INTAKE_SPEED);
+		instance.intakeLeft.setSpeed(CatzConstants.INTAKE_SPEED);
+
 	}
-	
-	public void deployIntake()
+
+	public void retractIntake() // meant to be used with right bumper
 	{
-		
-		instance = CatzRobotMap.getInstance();
-		
-		if(instance.xbox.getBButton() == true)
-			instance.intakeDeploy.set(true);
+		CatzConstants.grabberDeployed = false;
+		instance.intakeDeploy.set(CatzConstants.grabberDeployed);
+
+	}
+
+	public void deployIntake() // meant to be used with left bumper
+	{
+		CatzConstants.grabberDeployed = true;
+		instance.intakeDeploy.set(CatzConstants.grabberDeployed);
 	}
 }
