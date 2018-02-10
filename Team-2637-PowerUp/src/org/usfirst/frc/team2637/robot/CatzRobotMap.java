@@ -8,10 +8,12 @@ import components.CatzSpark;
 import components.CatzXboxController;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class CatzRobotMap 
 {
@@ -63,8 +65,8 @@ public class CatzRobotMap
 		climber = new CatzCANTalonSRX(CatzConstants.PORT_3);
 		climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
-		navx = new AHRS(SerialPort.Port.kMXP);
-		
+		navx = new AHRS(SPI.Port.kMXP);
+				
 		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT2,CatzConstants.DIO_PORT3, false, Encoder.EncodingType.k2X);
 		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT0,CatzConstants.DIO_PORT1,false,Encoder.EncodingType.k2X);
 		

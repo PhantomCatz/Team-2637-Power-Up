@@ -109,4 +109,9 @@ public class CatzConstants
 	
 	static public boolean grabberDeployed = false;
 	static public boolean flapOpen = false;
+	
+	final static public String POSITION_SELECTORL = "Position Left";
+	final static public String POSITION_SELECTORM = "Position Mid";
+	final static public String POSITION_SELECTORR = "Position Right";
+
 }
