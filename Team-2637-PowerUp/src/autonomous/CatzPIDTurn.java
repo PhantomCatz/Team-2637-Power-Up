@@ -39,40 +39,29 @@ public class CatzPIDTurn
 	static boolean done;
 	static boolean debug;
 	
-<<<<<<< HEAD
 	/*public static void pidDebug()
 	{
 		String name;
 		instance.logger.add("object", "PID Debug", 5, debugTimer.get());
 	}*/
-=======
 /*	public static void pidDebug()
 	{
 		String name;
 		instance.logger.add("object", "PID Debug", 5, debugTimer.get());
 	}  */
->>>>>>> 8f1cbd27164926dd7c1b9dc4e4630fadb24cf360
 	
 	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
 	{
 		functionTimer = new Timer();
 		pdTimer = new Timer();
 		
-<<<<<<< HEAD
-	/*	if(debug == true)
-=======
 		/*if(debug == true)
->>>>>>> 8f1cbd27164926dd7c1b9dc4e4630fadb24cf360
 		{
 			debugTimer = new Timer();
 			debugTimer.start();
 			pidDebug();
-<<<<<<< HEAD
+
 		}  */
-=======
-		} */
->>>>>>> 8f1cbd27164926dd7c1b9dc4e4630fadb24cf360
-		
 		instance = CatzRobotMap.getInstance();
 		instance.navx.reset();
 		
