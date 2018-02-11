@@ -1,28 +1,34 @@
 package components;
-
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Spark;
-import logger.CatzLogger;
+
+/*
+ *  Author : Derek Duenas
+ *  Last Revised : 2-1-2018 DD
+ *  Removed timer and logger form class
+ *  Methods : getSpeed , setSpeed
+ *  Functionality : Can set and read speed from a spark
+ */
+
 public class CatzSpark 
 {
-	private final String NAME;
+	//private final String NAME;
 	private Spark spark;
-	private CatzLogger logger;
-	private CatzTimerMap timer;
+	//private CatzLogger logger;
+	//private CatzTimerMap timer;
 	public CatzSpark(int port)
 	{
-		timer = CatzTimerMap.getInstance();
-		logger = CatzLogger.getInstance();
+		//timer = CatzTimerMap.getInstance();
+		//logger = CatzLogger.getInstance();
 		spark = new Spark(port);
-		NAME = this.getClass().getSimpleName();
+		//NAME = this.getClass().getSimpleName();
 	}
-	public double GetSpeed()
+	public double getSpeed()
 	{
 		return spark.get();
 	}
-	public void SetSpeed(double speed)
+	public void setSpeed(double speed)
 	{
 		spark.set(speed);
-		logger.add(NAME, "Spark speed set to " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
+		//logger.add(NAME, "Spark speed set to " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
 	}
 }

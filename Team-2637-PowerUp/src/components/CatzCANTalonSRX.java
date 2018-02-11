@@ -1,29 +1,35 @@
 package components;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import constants.CatzConstants;
-import logger.CatzLogger;
+/*
+ *  Author : Derek Duenas
+ *  Last Revised : 2-1-2018 DD
+ *  Removed timer and logger form class
+ *  Methods : getSpeed , setSpeed
+ *  Functionality : Can set and read speed from a cantalon
+ */
+
 public class CatzCANTalonSRX extends WPI_TalonSRX
 {
-	private final String NAME;
+	//private final String NAME;
 	private WPI_TalonSRX cantalon;
-	private CatzLogger logger;
-	private CatzTimerMap timer;
+	//private CatzLogger logger;
+	//private CatzTimerMap timer;
 	public CatzCANTalonSRX(int port)
 	{
 		super(port);
-		timer = CatzTimerMap.getInstance();
-		logger = CatzLogger.getInstance();
-		NAME = this.getClass().getSimpleName();
+		//timer = CatzTimerMap.getInstance();
+		//logger = CatzLogger.getInstance();
+		//NAME = this.getClass().getSimpleName();
+		cantalon = new WPI_TalonSRX(port);
 	}
-	public double GetSpeed()
+	public double getSpeed()
 	{
-		return cantalon.get();
+		return cantalon.getMotorOutputPercent();
 	}
-	public void SetSpeed(double speed)
+	public void setSpeed(double speed)
 	{
-		logger.add(NAME, "CANTalon speed set at " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
+		//logger.add(NAME, "CANTalon speed set at " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
 		cantalon.set(speed);
 	}
 }

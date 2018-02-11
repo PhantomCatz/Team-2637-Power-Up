@@ -1,68 +1,101 @@
 package autonomous;
+import java.text.DecimalFormat;
+import java.util.concurrent.TimeUnit;
+import org.usfirst.frc.team2637.robot.CatzRobotMap;
 import constants.CatzConstants;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import robot.CatzRobotMap;
+import edu.wpi.first.wpilibj.Timer;
 public class CatzDriveStraight
 {
-	static void EncoderStraightDrive(double speed, double distance, double sampleTimeSec,double timeout)
+	static CatzRobotMap instance;
+	
+	static boolean debugMode = false;
+	static DecimalFormat format = new DecimalFormat("###.#####");
+	public static void setDebugModeEnabled(boolean enabled) {
+		debugMode = enabled;
+	}
+	
+	public static void encoderStraightDrive(double speed, double distance, double timeout)
 	{
-		int loopCount        = 0;
+		instance = CatzRobotMap.getInstance();
+		Timer functionTimer = new Timer();
+		Timer loopTimer = new Timer();
+		
+		
+		if(debugMode == true) {
+			System.out.print("encoderStraightDrive debug data/n");
+			System.out.print("timestamp,deltaTimeMillis,currentAngleDegrees,currentErrorDegrees,derivative/n");
+		}
+		
+		/*int loopCount        = 0;
 		double encoderIssues = 0;
-		int dbgCount1        = 0;
+		int dbgCount1        = 0;*/
 
 		boolean done     = false;
 
-		double previousAngle = 0.0;
-		double currentAngle;
-		double deltaAngle;			//FUNCTION VARIABLES
+		double previousAngleDegrees = 0.0;
+		double currentAngleDegrees;
+		double deltaAngleDegrees;			//FUNCTION VARIABLES
 		double derivative;
-		double deltaTime = sampleTimeSec/1000;
-
+		double deltaTimeMillisec;
+		/*
 		double encoderCheckNumber;
 		double lastEncoderValue = 0;
-
-		CatzRobotMap.navx.reset();
-		CatzRobotMap.wheelEncoder.reset();
-
-		CatzRobotMap.timer.reset(CatzConstants.FUNCTION_TIMER_INDEX);
-		CatzRobotMap.timer.start(CatzConstants.FUNCTION_TIMER_INDEX);
-		while(Math.abs(CatzRobotMap.wheelEncoder.getDistance()) < distance && done != true)
+		*/
+		instance.navx.reset();
+		//instance.wheelEncoderL.reset();
+		
+		
+		functionTimer.start();
+		loopTimer.start();
+		
+		
+		while(Math.abs(instance.wheelEncoderL.getDistance()) < distance && done == false)
 		{
-			currentAngle = CatzRobotMap.navx.getAngle();
+			loopTimer.stop();
+			deltaTimeMillisec = TimeUnit.SECONDS.toMillis((long)loopTimer.get());
+			loopTimer.reset();
+			loopTimer.start();
+			
+			currentAngleDegrees = instance.navx.getAngle();
 	
-			deltaAngle = currentAngle-previousAngle;
+			deltaAngleDegrees = currentAngleDegrees-previousAngleDegrees;
 	
-			derivative = deltaAngle/deltaTime;
+			derivative = deltaAngleDegrees/deltaTimeMillisec;
 	
-			CatzRobotMap.drive.tankDrive(speed, CatzConstants.straightkP*currentAngle + CatzConstants.straightkD*derivative);
+			if(debugMode == true) {
+				String data = format.format(functionTimer.get())+","+deltaTimeMillisec+","+currentAngleDegrees+","+deltaAngleDegrees+","+derivative+"/n";
+				System.out.print(data);
+			}
+			
+			instance.drive.arcadeDrive(speed, CatzConstants.straightkP*currentAngleDegrees + CatzConstants.straightkD*derivative);
 	
-			previousAngle = currentAngle;
+			previousAngleDegrees = currentAngleDegrees;
 	
-			if (CatzRobotMap.timer.get(CatzConstants.FUNCTION_TIMER_INDEX) > timeout)
+			if (functionTimer.get() > timeout)
 				done = true;
 	
-				/***********************************************
-				*encoderCheckNumber = wheelEncoder.Get();
-				*if(lastEncoderValue==encoderCheckNumber)
-				*	encoderIssues++;
-				*lastEncoderValue=encoderCheckNumber;
-				*loopCount++;
-				*dbgCount1++;
-				************************************************/
+				/*
+				encoderCheckNumber = instance.wheelEncoderL.get();
+				if(lastEncoderValue==encoderCheckNumber)
+					encoderIssues++;
+				lastEncoderValue=encoderCheckNumber;
+				loopCount++;
+				dbgCount1++;
+				*/
 	
-			dbgCount1++;
+			/*dbgCount1++;
 			if (dbgCount1== CatzConstants.VAR_1_BUFFER_SIZE)
-				dbgCount1=0;
+				dbgCount1=0;*/
 		}
 		if(speed<0)
-			CatzRobotMap.drive.tankDrive(.43,0);
+			instance.drive.tankDrive(.43,.43);
 		else
-			CatzRobotMap.drive.tankDrive(-.43,0);
-		CatzRobotMap.drive.tankDrive(0,0);
-		CatzRobotMap.timer.stop(CatzConstants.FUNCTION_TIMER_INDEX);
-
-		SmartDashboard.putNumber("Function timer value", CatzRobotMap.timer.get(CatzConstants.FUNCTION_TIMER_INDEX));
+			instance.drive.tankDrive(-.43,-.43);
+		instance.drive.tankDrive(0,0);
+		functionTimer.stop();
+		//instance.wheelEncoderL.reset();
+		/*SmartDashboard.putNumber("Function timer value", functionTimer.get());
 		SmartDashboard.putNumber("encoderCheck", encoderIssues);
-		SmartDashboard.putNumber("drive straight loop count", loopCount);
+		SmartDashboard.putNumber("drive straight loop count", loopCount);*/
 	}	
-}
+}	
