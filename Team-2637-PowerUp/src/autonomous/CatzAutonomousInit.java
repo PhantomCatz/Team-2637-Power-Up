@@ -9,8 +9,8 @@ public class CatzAutonomousInit
 	
 	public static void runAutnomousInit()
 	{
-		choosePath();
-	
+		//choosePath();
+		CatzPIDTurn.PIDturn(90, 3);
 	}
 	
 	public static void choosePath() {

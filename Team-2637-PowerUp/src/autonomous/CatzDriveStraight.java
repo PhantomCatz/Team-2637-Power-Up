@@ -8,35 +8,50 @@ public class CatzDriveStraight
 {
 	static CatzRobotMap instance;
 	
+	static boolean done     = false;
+
+	static double previousAngleDegrees = 0.0;
+	static double currentAngleDegrees;
+	static double deltaAngleDegrees;			//FUNCTION VARIABLES
+	static double derivative;
+	static double deltaTimeMillisec;
+	
+	static Timer functionTimer;
+	static Timer loopTimer;
+	
 	static boolean debugMode = false;
 	static DecimalFormat format = new DecimalFormat("###.#####");
 	public static void setDebugModeEnabled(boolean enabled) {
 		debugMode = enabled;
 	}
 	
-	public static void encoderStraightDrive(double speed, double distance, double timeout)
-	{
-		instance = CatzRobotMap.getInstance();
-		Timer functionTimer = new Timer();
-		Timer loopTimer = new Timer();
-		
-		
-		if(debugMode == true) {
+	public static void printDebugHeader() {
+		if (debugMode == true) {
 			System.out.print("encoderStraightDrive debug data/n");
 			System.out.print("timestamp,deltaTimeMillis,currentAngleDegrees,currentErrorDegrees,derivative/n");
 		}
+	}
+	
+	public static void printDebugData() {
+		if(debugMode == true) {
+			String data = format.format(functionTimer.get())+","+deltaTimeMillisec+","+currentAngleDegrees+","+deltaAngleDegrees+","+derivative+"/n";
+			System.out.print(data);
+		}
+	}
+	
+	public static void encoderStraightDrive(double speed, double distance, double timeout)
+	{
+		instance = CatzRobotMap.getInstance();
+		functionTimer = new Timer();
+		loopTimer = new Timer();
+		
+		printDebugHeader();
 		
 		/*int loopCount        = 0;
 		double encoderIssues = 0;
 		int dbgCount1        = 0;*/
 
-		boolean done     = false;
 
-		double previousAngleDegrees = 0.0;
-		double currentAngleDegrees;
-		double deltaAngleDegrees;			//FUNCTION VARIABLES
-		double derivative;
-		double deltaTimeMillisec;
 		/*
 		double encoderCheckNumber;
 		double lastEncoderValue = 0;
@@ -62,15 +77,14 @@ public class CatzDriveStraight
 	
 			derivative = deltaAngleDegrees/deltaTimeMillisec;
 	
-			if(debugMode == true) {
-				String data = format.format(functionTimer.get())+","+deltaTimeMillisec+","+currentAngleDegrees+","+deltaAngleDegrees+","+derivative+"/n";
-				System.out.print(data);
-			}
+
 			
 			instance.drive.arcadeDrive(speed, CatzConstants.straightkP*currentAngleDegrees + CatzConstants.straightkD*derivative);
 	
 			previousAngleDegrees = currentAngleDegrees;
 	
+			printDebugData();
+			
 			if (functionTimer.get() > timeout)
 				done = true;
 	

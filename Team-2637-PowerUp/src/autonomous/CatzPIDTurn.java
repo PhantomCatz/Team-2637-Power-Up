@@ -40,7 +40,7 @@ public class CatzPIDTurn
 	static double targetLowerLimit;
 
 	static boolean done;
-	static boolean debugMode= false;
+	static boolean debugMode = true;
 	static String debugData;
 	
 	static DecimalFormat format = new DecimalFormat("###.#####");
@@ -48,14 +48,38 @@ public class CatzPIDTurn
 	public static void setDebugModeEnabled(boolean enabled){
 		debugMode = enabled;
 	}
-
-	
-	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
+	public static void printDebugInit()
 	{
+		if(debugMode == true)
+		{
+			debugData = format.format("CurrentAngle,"   + currentAngle  + "\n" +
+					          		  "targetAngle,"    + targetAngle   + "\n" +
+					                  "targetAngleAbs," + targetAngleAbs + "\n" +
+					                  "tgtUpperLimit,"  + targetUpperLimit + "\n" +
+					                  "tgtLowerLimit,"  + targetLowerLimit + "\n" +
+					      			  "kP,"             + CatzConstants.TURN_KP + "\n" +
+					    			  "kI,"             + CatzConstants.TURN_KI + "\n" +
+					    			  "kD,"             + CatzConstants.TURN_KD + "\n" );
+			
+			System.out.print(debugData);
+		}
+	}
+	public static void printDebugHeader() {
 		if(debugMode == true) {
 			System.out.print("PIDTurn debug data/n");
 			System.out.print("timestamp,deltaT,currentAngle,currentError,derivative,totalError/n");
 		}
+	}
+	public static void printDebugData() {
+		if (debugMode == true) {
+			debugData = format.format(functionTimer.get()) +","+  deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError + "/n";
+			System.out.print(debugData);
+		}
+	}
+	
+	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
+	{
+		
 		
 		functionTimer = new Timer();
 		pdTimer = new Timer();
@@ -85,15 +109,15 @@ public class CatzPIDTurn
 		targetUpperLimit = targetAngleAbs-CatzConstants.PID_TURN_THRESHOLD;
 		targetLowerLimit = targetAngleAbs+CatzConstants.PID_TURN_THRESHOLD;
 		
+		printDebugInit();
 		while((currentAngleAbs < targetLowerLimit || currentAngleAbs > targetUpperLimit) && done == false)
 		{
 			currentAngle = instance.navx.getAngle();
+			deltaT = pdTimer.get();
+
 			currentAngleAbs = Math.abs(currentAngle);
 			
-			System.out.println(currentAngle);
 			pdTimer.stop();
-			
-			deltaT = pdTimer.get();
 			pdTimer.reset();
 			pdTimer.start();
 
@@ -115,16 +139,10 @@ public class CatzPIDTurn
 			if(totalError <= CatzConstants.PID_INTEGRAL_MIN)
 				totalError = CatzConstants.PID_INTEGRAL_MIN;
 			
-			double currentTime = functionTimer.get();
-			if (debugMode == true) {
-				debugData = format.format(currentTime) +","+  deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError + "/n";
-				System.out.print(debugData);
-			}
 			
-			power = ((CatzConstants.TURN_KP * currentError)      
-					+(CatzConstants.TURN_KD * derivative)
-					+(CatzConstants.TURN_KI * totalError));
-			
+			power = ((CatzConstants.TURN_KP * currentError)
+					+(CatzConstants.TURN_KI * totalError)
+					+(CatzConstants.TURN_KD * derivative));
 			
 			
 			if(currentError > 0)
@@ -133,15 +151,16 @@ public class CatzPIDTurn
 				instance.drive.tankDrive(-power, power);
 			
 			
-
-			if (currentTime > timeoutSeconds)
+			if (functionTimer.get() > timeoutSeconds)
 				done = true;
 			
-
+			printDebugData();
+			
+			Timer.delay(0.006);
 		}
 		instance.drive.tankDrive(0.0, 0.0); // makes robot stop
-		functionTimer.stop();
 		
+		functionTimer.stop();
 		pdTimer.stop();
 	}
 }

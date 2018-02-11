@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2637.robot;
 
+import autonomous.CatzPIDTurn;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -14,7 +15,7 @@ public class CatzRobotInit
 	public static void run() 
 	{
 		setSmartDashboard();
-		
+		CatzPIDTurn.setDebugModeEnabled(true);
 	}
 	
 	public static void setSmartDashboard() {
