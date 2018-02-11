@@ -1,6 +1,9 @@
 package autonomous;
 import edu.wpi.first.wpilibj.Timer;
 import constants.CatzConstants;
+
+import java.text.DecimalFormat;
+
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
 /*
  *  Author : Derek Duenas
@@ -37,31 +40,25 @@ public class CatzPIDTurn
 	static double targetLowerLimit;
 
 	static boolean done;
-	static boolean debug;
+	static boolean debugMode= false;
+	static String debugData;
 	
-	/*public static void pidDebug()
-	{
-		String name;
-		instance.logger.add("object", "PID Debug", 5, debugTimer.get());
-	}*/
-/*	public static void pidDebug()
-	{
-		String name;
-		instance.logger.add("object", "PID Debug", 5, debugTimer.get());
-	}  */
+	static DecimalFormat format = new DecimalFormat("###.#####");
+	
+	public static void setDebugModeEnabled(boolean enabled){
+		debugMode = enabled;
+	}
+
 	
 	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
 	{
+		if(debugMode == true) {
+			System.out.println("timestamp,deltaT,currentAngle,currentError,derivative,totalError/n");
+		}
+		
 		functionTimer = new Timer();
 		pdTimer = new Timer();
 		
-		/*if(debug == true)
-		{
-			debugTimer = new Timer();
-			debugTimer.start();
-			pidDebug();
-
-		}  */
 		instance = CatzRobotMap.getInstance();
 		instance.navx.reset();
 		
@@ -117,20 +114,29 @@ public class CatzPIDTurn
 			if(totalError <= CatzConstants.PID_INTEGRAL_MIN)
 				totalError = CatzConstants.PID_INTEGRAL_MIN;
 			
+			double currentTime = functionTimer.get();
+			if (debugMode = true) {
+				debugData = format.format(currentTime) +","+  deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError + "/n";
+				System.out.println(debugData);
+			}
+			
 			power = ((CatzConstants.TURN_KP * currentError)      
 					+(CatzConstants.TURN_KD * derivative)
 					+(CatzConstants.TURN_KI * totalError));
+			
+			
 			
 			if(currentError > 0)
 				instance.drive.tankDrive(power,-power);
 			else
 				instance.drive.tankDrive(-power, power);
 			
-			if (functionTimer.get() > timeoutSeconds)
+			
+
+			if (currentTime > timeoutSeconds)
 				done = true;
 			
-			String values = deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError;
-			System.out.println(values);
+
 		}
 		instance.drive.tankDrive(0.0, 0.0); // makes robot stop
 		functionTimer.stop();
