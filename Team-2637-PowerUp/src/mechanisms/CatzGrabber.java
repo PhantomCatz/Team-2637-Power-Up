@@ -20,44 +20,40 @@ public class CatzGrabber {
 
 	CatzRobotMap instance = CatzRobotMap.getInstance();
 
-	public void openFlapToggle() {          // meant to be used with A button
+	public void forearmOpen() {
 
-		if (CatzConstants.flapOpen == true) {
-			CatzConstants.flapOpen = false;
-			instance.intakeOpen.set(CatzConstants.flapOpen);
-			
-		} 
-		else {               // flapOpen == false
-			CatzConstants.flapOpen = true;
-			instance.intakeOpen.set(CatzConstants.flapOpen);
-		}
+		CatzConstants.forearmOpen = true;
+		instance.intakeForearm.set(CatzConstants.forearmOpen);
+
 	}
 
-	public void intakeCube() // meant to be used with right trigger
-	{
+	public void forearmClose() {
+		CatzConstants.forearmOpen = false;
+		instance.intakeForearm.set(CatzConstants.forearmOpen);
+
+	}
+
+	public void intakeCube() { // meant to be used with right trigger
 		instance.intakeRight.setSpeed(CatzConstants.INTAKE_SPEED);
 		instance.intakeLeft.setSpeed(-CatzConstants.INTAKE_SPEED);
 
 	}
 
-	public void launchCube() // meant to be used with left trigger
-	{
+	public void launchCube() { // meant to be used with left trigger
 
 		instance.intakeRight.setSpeed(-CatzConstants.INTAKE_SPEED);
 		instance.intakeLeft.setSpeed(CatzConstants.INTAKE_SPEED);
 
 	}
 
-	public void retractIntake() // meant to be used with right bumper
-	{
-		CatzConstants.grabberDeployed = false;
-		instance.intakeDeploy.set(CatzConstants.grabberDeployed);
+	public void retractBicep() { // meant to be used with right bumper
+		CatzConstants.bicepDeployed = false;
+		instance.intakeBicep.set(CatzConstants.bicepDeployed);
 
 	}
 
-	public void deployIntake() // meant to be used with left bumper
-	{
-		CatzConstants.grabberDeployed = true;
-		instance.intakeDeploy.set(CatzConstants.grabberDeployed);
+	public void deployBicep() { // meant to be used with left bumper
+		CatzConstants.bicepDeployed = true;
+		instance.intakeBicep.set(CatzConstants.bicepDeployed);
 	}
 }
