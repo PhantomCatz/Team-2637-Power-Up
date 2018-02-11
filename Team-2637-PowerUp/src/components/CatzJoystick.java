@@ -16,11 +16,11 @@ public class CatzJoystick
 	private Joystick joy;
 	//private CatzLogger //logger;
 	final static private int TRIGGER = 1;
-	final static private int THUMB_BUTTON = 2;
-	final static private int BUTTON_THREE = 3;
-	final static private int BUTTON_FOUR = 4;
-	final static private int BUTTON_FIVE = 5;
-	final static private int BUTTON_SIX = 6;
+	final static private int SIDE_THUMB_BUTTON = 2;
+	final static private int BOTTOM_LEFT_THUMB_BUTTON = 3;
+	final static private int BOTTOM_RIGHT_THUMB_BUTTON = 4;
+	final static private int TOP_LEFT_THUMB_BUTTON = 5;
+	final static private int TOP_RIGHT_THUMB_BUTTON = 6;
 	final static private int BUTTON_SEVEN = 7;
 	final static private int BUTTON_EIGHT = 8;
 	final static private int BUTTON_NINE = 9;
@@ -37,37 +37,37 @@ public class CatzJoystick
 	{
 		//NAME = this.getClass().getSimpleName();
 		joy = new Joystick(port);
-		////logger = CatzLogger.getInstance();
+		//logger = CatzLogger.getInstance();
 	}
 	public boolean getTrigger()
 	{
 		//logger.add(NAME, "Trigger button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
 		return joy.getRawButton(TRIGGER);
 	}
-	public boolean getThumbButton()
+	public boolean getSideThumbButton()
 	{
 		//logger.add(NAME, "Thumb button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return joy.getRawButton(THUMB_BUTTON);
+		return joy.getRawButton(SIDE_THUMB_BUTTON);
 	}
-	public boolean getButtonThree()
+	public boolean getBottomLeftThumbButton()
 	{
 		//logger.add(NAME, "Three button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return joy.getRawButton(BUTTON_THREE);
+		return joy.getRawButton(BOTTOM_LEFT_THUMB_BUTTON);
 	}
-	public boolean getButtonFour()
+	public boolean getBottomRightThumbButton()
 	{
 		//logger.add(NAME, "Four button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return joy.getRawButton(BUTTON_FOUR);
+		return joy.getRawButton(BOTTOM_RIGHT_THUMB_BUTTON);
 	}
-	public boolean getButtonFive()
+	public boolean getTopLeftThumbButton()
 	{
 		//logger.add(NAME, "Five button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return joy.getRawButton(BUTTON_FIVE);
+		return joy.getRawButton(TOP_LEFT_THUMB_BUTTON);
 	}
-	public boolean getButtonSix()
+	public boolean getTopRightThumbButton()
 	{
 		//logger.add(NAME, "Six button pressed.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
-		return joy.getRawButton(BUTTON_SIX);
+		return joy.getRawButton(TOP_RIGHT_THUMB_BUTTON);
 	}
 	public boolean getButtonSeven()
 	{
