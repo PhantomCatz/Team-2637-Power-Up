@@ -53,7 +53,8 @@ public class CatzPIDTurn
 	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
 	{
 		if(debugMode == true) {
-			System.out.println("timestamp,deltaT,currentAngle,currentError,derivative,totalError/n");
+			System.out.print("PIDTurn debug data/n");
+			System.out.print("timestamp,deltaT,currentAngle,currentError,derivative,totalError/n");
 		}
 		
 		functionTimer = new Timer();
@@ -115,9 +116,9 @@ public class CatzPIDTurn
 				totalError = CatzConstants.PID_INTEGRAL_MIN;
 			
 			double currentTime = functionTimer.get();
-			if (debugMode = true) {
+			if (debugMode == true) {
 				debugData = format.format(currentTime) +","+  deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError + "/n";
-				System.out.println(debugData);
+				System.out.print(debugData);
 			}
 			
 			power = ((CatzConstants.TURN_KP * currentError)      

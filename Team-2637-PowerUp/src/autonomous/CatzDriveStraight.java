@@ -1,4 +1,5 @@
 package autonomous;
+import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
 import constants.CatzConstants;
@@ -6,12 +7,24 @@ import edu.wpi.first.wpilibj.Timer;
 public class CatzDriveStraight
 {
 	static CatzRobotMap instance;
-	public static void EncoderStraightDrive(double speed, double distance, double timeout)
+	
+	static boolean debugMode = false;
+	static DecimalFormat format = new DecimalFormat("###.#####");
+	public static void setDebugModeEnabled(boolean enabled) {
+		debugMode = enabled;
+	}
+	
+	public static void encoderStraightDrive(double speed, double distance, double timeout)
 	{
 		instance = CatzRobotMap.getInstance();
 		Timer functionTimer = new Timer();
 		Timer loopTimer = new Timer();
 		
+		
+		if(debugMode == true) {
+			System.out.print("encoderStraightDrive debug data/n");
+			System.out.print("timestamp,deltaTimeMillis,currentAngleDegrees,currentErrorDegrees,derivative/n");
+		}
 		
 		/*int loopCount        = 0;
 		double encoderIssues = 0;
@@ -36,7 +49,7 @@ public class CatzDriveStraight
 		loopTimer.start();
 		
 		
-		while(/*Math.abs(instance.wheelEncoderL.getDistance()) < distance && */done == false)
+		while(Math.abs(instance.wheelEncoderL.getDistance()) < distance && done == false)
 		{
 			loopTimer.stop();
 			deltaTimeMillisec = TimeUnit.SECONDS.toMillis((long)loopTimer.get());
@@ -49,6 +62,11 @@ public class CatzDriveStraight
 	
 			derivative = deltaAngleDegrees/deltaTimeMillisec;
 	
+			if(debugMode == true) {
+				String data = format.format(functionTimer.get())+","+deltaTimeMillisec+","+currentAngleDegrees+","+deltaAngleDegrees+","+derivative+"/n";
+				System.out.print(data);
+			}
+			
 			instance.drive.arcadeDrive(speed, CatzConstants.straightkP*currentAngleDegrees + CatzConstants.straightkD*derivative);
 	
 			previousAngleDegrees = currentAngleDegrees;
