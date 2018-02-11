@@ -1,23 +1,28 @@
 package org.usfirst.frc.team2637.robot;
 
 import com.kauailabs.navx.frc.AHRS;
+import constants.CatzConstants;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import components.CatzCANTalonSRX;
 import components.CatzDrive;
 import components.CatzJoystick;
 import components.CatzSpark;
 import components.CatzXboxController;
-import constants.CatzConstants;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import mechanisms.CatzClimber;
+import mechanisms.CatzGrabber;
+import mechanisms.CatzLift;
 
 public class CatzRobotMap 
 {
 	public static CatzRobotMap instance;
+	
+	public CatzClimber Climber;
+	public CatzGrabber grabber;
+	public CatzLift lift;
 	
 	public CatzCANTalonSRX fRight;
 	public CatzCANTalonSRX rRight;
@@ -49,13 +54,12 @@ public class CatzRobotMap
 	public Solenoid intakeForearm;
 	public Solenoid intakeBicep;
 	
-	
 	//public static CatzLogger logger;
 	
 	//public  Lidar lidar;
 	
 	private CatzRobotMap() 
-	{
+	{	
 		
 		fRight = new CatzCANTalonSRX(CatzConstants.PORT_6);
 		rRight = new CatzCANTalonSRX(CatzConstants.PORT_5);
