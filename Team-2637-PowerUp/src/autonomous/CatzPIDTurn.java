@@ -30,6 +30,7 @@ public class CatzPIDTurn
 	static double totalError;
 	
 	static double currentAngle;
+	static double currentAngleAbs;
 	static double targetAngle;
 	static double targetAngleAbs;
 	static double targetUpperLimit;
@@ -38,23 +39,23 @@ public class CatzPIDTurn
 	static boolean done;
 	static boolean debug;
 	
-	public static void pidDebug()
+	/*public static void pidDebug()
 	{
 		String name;
 		instance.logger.add("object", "PID Debug", 5, debugTimer.get());
-	}
+	}*/
 	
 	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
 	{
 		functionTimer = new Timer();
 		pdTimer = new Timer();
 		
-		if(debug == true)
+	/*	if(debug == true)
 		{
 			debugTimer = new Timer();
 			debugTimer.start();
 			pidDebug();
-		}
+		}  */
 		
 		instance = CatzRobotMap.getInstance();
 		instance.navx.reset();
@@ -63,8 +64,8 @@ public class CatzPIDTurn
 		
 		done = false;
 		
-		previousError = CatzConstants.ZERO;
-		totalError = CatzConstants.ZERO;
+		previousError = 0.0;
+		totalError = 0.0;
 		
 		functionTimer.reset();
 		functionTimer.start();
@@ -73,16 +74,20 @@ public class CatzPIDTurn
 		pdTimer.start();
 		
 		currentAngle = instance.navx.getAngle();
-		
+		currentAngleAbs = Math.abs(currentAngle);
 		targetAngle = degreesToTurn + currentAngle;
+		
 		targetAngleAbs = Math.abs(targetAngle);
 		
 		targetUpperLimit = targetAngleAbs-CatzConstants.PID_TURN_THRESHOLD;
 		targetLowerLimit = targetAngleAbs+CatzConstants.PID_TURN_THRESHOLD;
 		
-		while(currentAngle < targetLowerLimit || currentAngle > targetUpperLimit && done == false)
+		while((currentAngleAbs < targetLowerLimit || currentAngleAbs > targetUpperLimit) && done == false)
 		{
-			currentAngle = Math.abs(instance.navx.getAngle());
+			currentAngle = instance.navx.getAngle();
+			currentAngleAbs = Math.abs(currentAngle);
+			
+			System.out.println(currentAngle);
 			pdTimer.stop();
 			
 			deltaT = pdTimer.get();
@@ -111,12 +116,18 @@ public class CatzPIDTurn
 					+(CatzConstants.TURN_KD * derivative)
 					+(CatzConstants.TURN_KI * totalError));
 			
-			instance.drive.tankDrive(power,-power);
-
+			if(currentError > 0)
+				instance.drive.tankDrive(power,-power);
+			else
+				instance.drive.tankDrive(-power, power);
+			
 			if (functionTimer.get() > timeoutSeconds)
 				done = true;
+			
+			String values = deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError;
+			System.out.println(values);
 		}
-		instance.drive.tankDrive(CatzConstants.ZERO, CatzConstants.ZERO);
+		instance.drive.tankDrive(0.0, 0.0); // makes robot stop
 		functionTimer.stop();
 		
 		pdTimer.stop();
