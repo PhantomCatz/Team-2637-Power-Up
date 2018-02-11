@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CatzDriveStraight
 {
 	static CatzRobotMap instance;
@@ -36,7 +37,18 @@ public class CatzDriveStraight
 		if(debugMode == true) {
 			String data = format.format(functionTimer.get())+","+deltaTimeMillisec+","+currentAngleDegrees+","+deltaAngleDegrees+","+derivative+"/n";
 			System.out.print(data);
+			printDatainSmartDashboard();
+			
 		}
+	}
+	
+	public static void printDatainSmartDashboard() {
+		SmartDashboard.putNumber("timestamp", functionTimer.get());
+		SmartDashboard.putNumber("deltaTimeMillis", deltaTimeMillisec);
+		SmartDashboard.putNumber("currentAngleDegrees", currentAngleDegrees);
+		SmartDashboard.putNumber("currentErrorDegrees", deltaAngleDegrees);
+		SmartDashboard.putNumber("derivative",derivative );
+		
 	}
 	
 	public static void encoderStraightDrive(double speed, double distance, double timeout)

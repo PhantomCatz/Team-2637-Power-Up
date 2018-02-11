@@ -1,5 +1,6 @@
 package autonomous;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import constants.CatzConstants;
 
 import java.text.DecimalFormat;
@@ -43,7 +44,6 @@ public class CatzPIDTurn
 	static boolean debugMode = true;
 	static String debugData;
 	
-	static DecimalFormat format = new DecimalFormat("###.#####");
 	
 	public static void setDebugModeEnabled(boolean enabled){
 		debugMode = enabled;
@@ -52,6 +52,7 @@ public class CatzPIDTurn
 	{
 		if(debugMode == true)
 		{
+			DecimalFormat format = new DecimalFormat("###.#####");
 			debugData = format.format("CurrentAngle,"   + currentAngle  + "\n" +
 					          		  "targetAngle,"    + targetAngle   + "\n" +
 					                  "targetAngleAbs," + targetAngleAbs + "\n" +
@@ -72,9 +73,22 @@ public class CatzPIDTurn
 	}
 	public static void printDebugData() {
 		if (debugMode == true) {
+			DecimalFormat format = new DecimalFormat("###.#####");
 			debugData = format.format(functionTimer.get()) +","+  deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError + "/n";
 			System.out.print(debugData);
+			printDatainSmartDashboard();
 		}
+	}
+	
+	public static void printDatainSmartDashboard() {
+		
+		SmartDashboard.putNumber("timestamp", functionTimer.get());
+		SmartDashboard.putNumber("deltaT", deltaT);
+		SmartDashboard.putNumber("currentAngle", currentAngle);
+		SmartDashboard.putNumber("CurrentError", currentError);
+		SmartDashboard.putNumber("derivative", derivative);
+		SmartDashboard.putNumber("totalError", totalError);
+		
 	}
 	
 	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
@@ -110,6 +124,7 @@ public class CatzPIDTurn
 		targetLowerLimit = targetAngleAbs+CatzConstants.PID_TURN_THRESHOLD;
 		
 		printDebugInit();
+		printDebugHeader();
 		while((currentAngleAbs < targetLowerLimit || currentAngleAbs > targetUpperLimit) && done == false)
 		{
 			currentAngle = instance.navx.getAngle();
