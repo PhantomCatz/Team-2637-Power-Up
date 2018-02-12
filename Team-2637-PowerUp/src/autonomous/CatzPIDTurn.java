@@ -53,28 +53,28 @@ public class CatzPIDTurn
 		if(debugMode == true)
 		{
 			DecimalFormat format = new DecimalFormat("###.#####");
-			debugData = format.format("CurrentAngle,"   + currentAngle  + "\n" +
+			debugData = "CurrentAngle,"   + currentAngle  + "\n" +
 					          		  "targetAngle,"    + targetAngle   + "\n" +
 					                  "targetAngleAbs," + targetAngleAbs + "\n" +
 					                  "tgtUpperLimit,"  + targetUpperLimit + "\n" +
 					                  "tgtLowerLimit,"  + targetLowerLimit + "\n" +
 					      			  "kP,"             + CatzConstants.TURN_KP + "\n" +
 					    			  "kI,"             + CatzConstants.TURN_KI + "\n" +
-					    			  "kD,"             + CatzConstants.TURN_KD + "\n" );
+					    			  "kD,"             + CatzConstants.TURN_KD + "\n" ;
 			
 			System.out.print(debugData);
 		}
 	}
 	public static void printDebugHeader() {
 		if(debugMode == true) {
-			System.out.print("PIDTurn debug data/n");
-			System.out.print("timestamp,deltaT,currentAngle,currentError,derivative,totalError/n");
+			System.out.print("PIDTurn debug data\n");
+			System.out.print("timestamp,deltaT,currentAngle,currentError,derivative,totalError\n");
 		}
 	}
 	public static void printDebugData() {
 		if (debugMode == true) {
 			DecimalFormat format = new DecimalFormat("###.#####");
-			debugData = format.format(functionTimer.get()) +","+  deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError + "/n";
+			debugData = functionTimer.get() +","+  deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError + "\n";
 			System.out.print(debugData);
 			printDatainSmartDashboard();
 		}
@@ -115,7 +115,6 @@ public class CatzPIDTurn
 		pdTimer.start();
 		
 		currentAngle = instance.navx.getAngle();
-		currentAngleAbs = Math.abs(currentAngle);
 		targetAngle = degreesToTurn + currentAngle;
 		
 		targetAngleAbs = Math.abs(targetAngle);
