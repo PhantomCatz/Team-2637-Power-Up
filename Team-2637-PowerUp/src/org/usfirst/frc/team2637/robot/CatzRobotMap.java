@@ -69,7 +69,7 @@ public class CatzRobotMap
 		climber = new CatzCANTalonSRX(CatzConstants.PORT_3);
 		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
-		navx = new AHRS(SPI.Port.kMXP);
+		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 				
 		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT_2,CatzConstants.DIO_PORT_3, false, Encoder.EncodingType.k2X);
 		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT_0,CatzConstants.DIO_PORT_1,false,Encoder.EncodingType.k2X);

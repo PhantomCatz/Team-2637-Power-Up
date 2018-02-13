@@ -22,7 +22,7 @@ public class CatzPIDTurn
 	static Timer pdTimer;
 	static Timer debugTimer;
 	
-	static double currentError;
+	static double currentError; 
 	static double deltaError;
 	static double derivative; 
 	static double deltaT;
@@ -38,6 +38,8 @@ public class CatzPIDTurn
 	static double targetAngleAbs;
 	static double targetUpperLimit;
 	static double targetLowerLimit;
+	
+	static double lastDerivative = 0;
 
 	static boolean done;
 	static boolean debugMode = true;
@@ -57,7 +59,7 @@ public class CatzPIDTurn
                     "tgtUpperLimit,"  + targetUpperLimit               + "\n" +
                     "tgtLowerLimit,"  + targetLowerLimit               + "\n" +
                     "kP,"             + CatzConstants.TURN_KP          + "\n" +
-                    "kI,"             + CatzConstants.TURN_KI          + "\n" +
+                    "kI,"             + CatzConstants.TURN_KD          + "\n" +
                     "kD,"             + CatzConstants.TURN_KI          + "\n" +
                     "MaxI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" +
                     "MinI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" );
@@ -100,7 +102,6 @@ public class CatzPIDTurn
 	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
 	{
 		
-		
 		functionTimer = new Timer();
 		pdTimer = new Timer();
 		
@@ -122,15 +123,16 @@ public class CatzPIDTurn
 		
 		currentAngle = instance.navx.getAngle();
 		targetAngle = degreesToTurn + currentAngle;
+		currentError = targetAngle - currentAngle;
 		
 		targetAngleAbs = Math.abs(targetAngle);
 		
-		targetUpperLimit = targetAngleAbs-CatzConstants.PID_TURN_THRESHOLD;
-		targetLowerLimit = targetAngleAbs+CatzConstants.PID_TURN_THRESHOLD;
+		//targetUpperLimit = targetAngleAbs-CatzConstants.PID_TURN_THRESHOLD;
+		//targetLowerLimit = targetAngleAbs+CatzConstants.PID_TURN_THRESHOLD;
 		
 		printDebugInit();
 		printDebugHeader();
-		while((currentAngleAbs < targetLowerLimit || currentAngleAbs > targetUpperLimit) && done == false)
+		while(Math.abs(currentError)>CatzConstants.PID_TURN_THRESHOLD && done == false)
 		{
 			currentAngle = instance.navx.getAngle();
 			deltaT = pdTimer.get();
@@ -146,7 +148,9 @@ public class CatzPIDTurn
 			
 			// calculates derivative term
 			deltaError = currentError-previousError;
-			derivative = deltaError/deltaT;
+			derivative = CatzConstants.PIDTURN_FILTER_CONSTANT*lastDerivative + (1-CatzConstants.PIDTURN_FILTER_CONSTANT*(deltaError/deltaT));
+			//filter smoothes derivative graph; ask Walter for specifics ^
+			lastDerivative = derivative;
 			
 			previousError = currentError;  // saves error for next iteration
 			
@@ -160,23 +164,19 @@ public class CatzPIDTurn
 				totalError = CatzConstants.PID_INTEGRAL_MIN;
 			
 			
-			power = ((CatzConstants.TURN_KP * currentError)
+			power = CatzConstants.TURN_SCALE_FACTOR*((CatzConstants.TURN_KP * currentError)
 					+(CatzConstants.TURN_KI * totalError)
 					+(CatzConstants.TURN_KD * derivative));
-			
-			
-			if(currentError > 0)
-				instance.drive.tankDrive(power,-power);
-			else
-				instance.drive.tankDrive(-power, power);
-			
+				
+			instance.drive.tankDrive(power, -power);
+			//signs are already flipped on derivative and error, no need for if statement
 			
 			if (functionTimer.get() > timeoutSeconds)
 				done = true;
 			
 			printDebugData();
 			
-			Timer.delay(0.014);
+			Timer.delay(0.01); //was .005,.008
 		}
 		instance.drive.tankDrive(0.0, 0.0); // makes robot stop
 		

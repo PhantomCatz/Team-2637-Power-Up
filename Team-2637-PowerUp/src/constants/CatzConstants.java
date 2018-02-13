@@ -61,8 +61,13 @@ public class CatzConstants
 	final static public int LOGGER_LEVEL4 = 4;
 	final static public int LOGGER_LEVEL5 = 5;
 	
-	static public double TURN_KP = 0.0708;
-	static public double TURN_KD = 0.1044;
+	final static public double PID_TURN_THRESHOLD = .1;
+	final static public double NAVX_RESET_WAIT_TIME = 0.3;
+	
+	static public double PIDTURN_FILTER_CONSTANT = .5;
+	static public double TURN_SCALE_FACTOR = .7;
+	static public double TURN_KP = 0.0508;
+	static public double TURN_KD = 0.1344;
 	static public double TURN_KI = 0.0;  //
 	static public double PID_INTEGRAL_MAX = 0.0;  //need values
 	static public double PID_INTEGRAL_MIN = 0.0;  //
@@ -97,10 +102,7 @@ public class CatzConstants
 	final static public double DIST_251_73IN = 251.73;
 	
 	final static public double ZERO = 0.0;
-	
-	final static public double PID_TURN_THRESHOLD = 0.1;
-	final static public double NAVX_RESET_WAIT_TIME = 0.1;
-	
+
 	final static public double CLIMB_SPEED = 0;
 	final static public double LIFT_SPEED = 0;
 	final static public double INTAKE_SPEED = 0.7;

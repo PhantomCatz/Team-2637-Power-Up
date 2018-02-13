@@ -43,8 +43,6 @@ public class CatzTeleopPeriodic
 		if(instance.xbox.getRightTrigger() > 0.8)
 			instance.grabber.launchCube();
 		
-		
-		
 		//sets drive control to xbox
 		instance.drive.setModeArcadeDriveFlash(instance.xbox);
 	}
