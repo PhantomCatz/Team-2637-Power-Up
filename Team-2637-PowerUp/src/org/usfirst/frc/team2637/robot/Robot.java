@@ -8,7 +8,7 @@
 package org.usfirst.frc.team2637.robot;
 
 import autonomous.CatzAutonomousInit;
-
+import autonomous.CatzAutonomousPeriodic;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot
 	public void robotPeriodic()
 	{
 		//SmartDashboard.putNumber("navx reading 2", instance.navx.getAngle());
-		//CatzRobotPeriodic.runRobotPeriodic();
+		CatzRobotPeriodic.runRobotPeriodic();
 		
 	}
 	/**
@@ -63,7 +63,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic()
 	{
-		//CatzAutonomousPeriodic.runAutonomousPeriodic();
+		CatzAutonomousPeriodic.runAutonomousPeriodic();
 	}
 	/**
 	 * This function is called periodically during operator control.

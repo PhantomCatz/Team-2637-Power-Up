@@ -9,13 +9,14 @@ public class CatzAutonomousInit
 	
 	public static void runAutnomousInit()
 	{
-		//choosePath();
-		CatzPIDTurn.PIDturn(90, 3);
+		choosePath();
+		//CatzPIDTurn.PIDturn(90, 3);
 	}
 	
 	public static void choosePath() {
 		
 		String gameData;
+		
 		
 		boolean check_box1 = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
 		boolean check_box2 = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
@@ -34,12 +35,12 @@ public class CatzAutonomousInit
 			CatzAutonomousPaths.middlePathR();
 			
 		} else if(gameData.charAt(1) == 'R' && check_box3 == true){
-			CatzAutonomousPaths.rightPath();	
 			System.out.println("rightPath");
+			CatzAutonomousPaths.rightPath();	
 			
 		} else if(gameData.charAt(1) == 'L' && check_box1 == true){
-			CatzAutonomousPaths.leftPath();
 			System.out.println("LeftPath");
+			CatzAutonomousPaths.leftPath();
 		} 
 			
 		System.out.println("Init Done");
