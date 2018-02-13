@@ -1,5 +1,4 @@
 package autonomous;
-import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
 import constants.CatzConstants;
@@ -21,7 +20,6 @@ public class CatzDriveStraight
 	static Timer loopTimer;
 	
 	static boolean debugMode = false;
-	static DecimalFormat format = new DecimalFormat("###.#####");
 	public static void setDebugModeEnabled(boolean enabled) {
 		debugMode = enabled;
 	}
@@ -35,7 +33,7 @@ public class CatzDriveStraight
 	
 	public static void printDebugData() {
 		if(debugMode == true) {
-			String data = format.format(functionTimer.get())+","+deltaTimeMillisec+","+currentAngleDegrees+","+deltaAngleDegrees+","+derivative+"/n";
+			String data = functionTimer.get()+","+deltaTimeMillisec+","+currentAngleDegrees+","+deltaAngleDegrees+","+derivative+"/n";
 			System.out.print(data);
 			printDatainSmartDashboard();
 			

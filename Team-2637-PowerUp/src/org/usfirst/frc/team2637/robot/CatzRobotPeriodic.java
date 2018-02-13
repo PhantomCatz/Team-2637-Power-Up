@@ -9,7 +9,7 @@ package org.usfirst.frc.team2637.robot;
 
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import mechanisms.CatzGrabber;
+
 
 public class CatzRobotPeriodic
 {	

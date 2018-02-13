@@ -2,10 +2,9 @@ package autonomous;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import constants.CatzConstants;
-
-import java.text.DecimalFormat;
-
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
+
+
 /*
  *  Author : Derek Duenas
  *  Revision History : 
@@ -52,12 +51,11 @@ public class CatzPIDTurn
 	{
 		if(debugMode == true)
 		{
-			DecimalFormat format = new DecimalFormat("###.#####");
 			debugData = "CurrentAngle,"   + currentAngle  + "\n" +
-					          		  "targetAngle,"    + targetAngle   + "\n" +
-					                  "targetAngleAbs," + targetAngleAbs + "\n" +
-					                  "tgtUpperLimit,"  + targetUpperLimit + "\n" +
-					                  "tgtLowerLimit,"  + targetLowerLimit + "\n" +
+					          		  "targetAngle,"    + targetAngle           + "\n" +
+					                  "targetAngleAbs," + targetAngleAbs        + "\n" +
+					                  "tgtUpperLimit,"  + targetUpperLimit      + "\n" +
+					                  "tgtLowerLimit,"  + targetLowerLimit      + "\n" +
 					      			  "kP,"             + CatzConstants.TURN_KP + "\n" +
 					    			  "kI,"             + CatzConstants.TURN_KI + "\n" +
 					    			  "kD,"             + CatzConstants.TURN_KD + "\n" ;
@@ -73,7 +71,6 @@ public class CatzPIDTurn
 	}
 	public static void printDebugData() {
 		if (debugMode == true) {
-			DecimalFormat format = new DecimalFormat("###.#####");
 			debugData = functionTimer.get() +","+  deltaT + "," + currentAngle + "," + currentError + "," + derivative + "," + totalError + "\n";
 			System.out.print(debugData);
 			printDatainSmartDashboard();
@@ -170,7 +167,7 @@ public class CatzPIDTurn
 			
 			printDebugData();
 			
-			Timer.delay(0.006);
+			Timer.delay(0.014);
 		}
 		instance.drive.tankDrive(0.0, 0.0); // makes robot stop
 		
