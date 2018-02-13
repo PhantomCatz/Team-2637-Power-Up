@@ -118,8 +118,7 @@ public class CatzPIDTurn
 		functionTimer.reset();
 		functionTimer.start();
 		
-		pdTimer.reset();
-		pdTimer.start();
+		
 		
 		currentAngle = instance.navx.getAngle();
 		targetAngle = degreesToTurn + currentAngle;
@@ -132,6 +131,10 @@ public class CatzPIDTurn
 		
 		printDebugInit();
 		printDebugHeader();
+		
+		
+		pdTimer.reset();
+		pdTimer.start();
 		while(Math.abs(currentError)>CatzConstants.PID_TURN_THRESHOLD && done == false)
 		{
 			currentAngle = instance.navx.getAngle();
@@ -168,7 +171,14 @@ public class CatzPIDTurn
 					+(CatzConstants.TURN_KI * totalError)
 					+(CatzConstants.TURN_KD * derivative));
 				
-			instance.drive.tankDrive(power, -power);
+			if(functionTimer.get()<.15){
+				if(currentError>0)
+					instance.drive.tankDrive(.7, -.7);
+				else
+					instance.drive.tankDrive(-.7, .7);          //for the first 150 milliseconds, automatically turn at set power to avoid infinite derivative
+			}
+			else
+				instance.drive.tankDrive(power, -power);
 			//signs are already flipped on derivative and error, no need for if statement
 			
 			if (functionTimer.get() > timeoutSeconds)

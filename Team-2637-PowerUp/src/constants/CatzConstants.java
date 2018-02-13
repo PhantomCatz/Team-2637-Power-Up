@@ -67,7 +67,7 @@ public class CatzConstants
 	static public double PIDTURN_FILTER_CONSTANT = .5;
 	static public double TURN_SCALE_FACTOR = .7;
 	static public double TURN_KP = 0.0508;
-	static public double TURN_KD = 0.1344;
+	static public double TURN_KD = 0.0744;
 	static public double TURN_KI = 0.0;  //
 	static public double PID_INTEGRAL_MAX = 0.0;  //need values
 	static public double PID_INTEGRAL_MIN = 0.0;  //
