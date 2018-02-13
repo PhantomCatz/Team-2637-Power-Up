@@ -24,6 +24,11 @@ public class CatzDriveStraight
 		debugMode = enabled;
 	}
 	
+	public static void printDebugInit() {
+		if(debugMode == true) {
+			
+		}
+	}
 	public static void printDebugHeader() {
 		if (debugMode == true) {
 			System.out.print("encoderStraightDrive debug data/n");
@@ -33,7 +38,11 @@ public class CatzDriveStraight
 	
 	public static void printDebugData() {
 		if(debugMode == true) {
-			String data = functionTimer.get()+","+deltaTimeMillisec+","+currentAngleDegrees+","+deltaAngleDegrees+","+derivative+"/n";
+			String data = functionTimer.get()+","+
+						  deltaTimeMillisec+","+
+						  currentAngleDegrees+","+
+						  deltaAngleDegrees+","+
+						  derivative+"/n";
 			System.out.print(data);
 			printDatainSmartDashboard();
 			
