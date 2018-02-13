@@ -69,8 +69,8 @@ public class CatzRobotPeriodic
 		SmartDashboard.putNumber("Speed of Left Encoder", CatzRobotMap.getInstance().wheelEncoderL.getRate());
 		SmartDashboard.putNumber("Speed of Right Encoder", CatzRobotMap.getInstance().wheelEncoderR.getRate());
 		
-		SmartDashboard.putBoolean("Graber Forearms Open", CatzConstants.flapOpen);
-		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzConstants.grabberDeployed);
+		SmartDashboard.putBoolean("Graber Forearms Open", CatzConstants.forearmOpen);
+		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzConstants.bicepDeployed);
 		
 	}
 }
