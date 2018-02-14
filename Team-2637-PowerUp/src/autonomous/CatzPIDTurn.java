@@ -39,7 +39,7 @@ public class CatzPIDTurn
 	static double targetUpperLimit;
 	static double targetLowerLimit;
 	
-	static double lastDerivative = 0;
+	static double previousDerivative = 0;
 
 	static boolean done;
 	static boolean debugMode = true;
@@ -151,35 +151,31 @@ public class CatzPIDTurn
 			
 			// calculates derivative term
 			deltaError = currentError-previousError;
-			derivative = CatzConstants.PIDTURN_FILTER_CONSTANT*lastDerivative + (1-CatzConstants.PIDTURN_FILTER_CONSTANT*(deltaError/deltaT));
+			derivative = CatzConstants.PIDTURN_FILTER_CONSTANT*previousDerivative + ((1-CatzConstants.PIDTURN_FILTER_CONSTANT)*(deltaError/deltaT));
 			//filter smoothes derivative graph; ask Walter for specifics ^
-			lastDerivative = derivative;
+			previousDerivative = derivative;
 			
 			previousError = currentError;  // saves error for next iteration
 			
 			// calculates integral term
 			totalError += currentError * deltaT;   
+			
 	
-			if(totalError >= CatzConstants.PID_INTEGRAL_MAX)     // saturation
+			/*if(totalError >= CatzConstants.PID_INTEGRAL_MAX)     // saturation
 				totalError = CatzConstants.PID_INTEGRAL_MAX;	 // makes sure the integral term doesn't get too big or small
 			
 			if(totalError <= CatzConstants.PID_INTEGRAL_MIN)
-				totalError = CatzConstants.PID_INTEGRAL_MIN;
+				totalError = CatzConstants.PID_INTEGRAL_MIN;*/
 			
 			
 			power = CatzConstants.TURN_SCALE_FACTOR*((CatzConstants.TURN_KP * currentError)
 					+(CatzConstants.TURN_KI * totalError)
 					+(CatzConstants.TURN_KD * derivative));
 				
-			if(functionTimer.get()<.15){
-				if(currentError>0)
-					instance.drive.tankDrive(.7, -.7);
-				else
-					instance.drive.tankDrive(-.7, .7);          //for the first 150 milliseconds, automatically turn at set power to avoid infinite derivative
-			}
-			else
-				instance.drive.tankDrive(power, -power);
+		
+			instance.drive.tankDrive(power, -power);
 			//signs are already flipped on derivative and error, no need for if statement
+			
 			
 			if (functionTimer.get() > timeoutSeconds)
 				done = true;
