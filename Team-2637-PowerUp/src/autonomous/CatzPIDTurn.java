@@ -42,62 +42,9 @@ public class CatzPIDTurn
 	static double previousDerivative = 0;
 
 	static boolean done;
-	static boolean debugMode = true;
+	static boolean debugMode = false;
+	static boolean tuningMode = false;
 	static String debugData;
-	
-	
-	public static void setDebugModeEnabled(boolean enabled){
-		debugMode = enabled;
-	}
-	public static void printDebugInit()
-	{
-		if(debugMode == true)
-		{
-			debugData =  ( "CurrentAngle,"   + currentAngle                   + "\n" +
-                    "targetAngle,"    + targetAngle                    + "\n" +
-                    "targetAngleAbs," + targetAngleAbs                 + "\n" +
-                    "tgtUpperLimit,"  + targetUpperLimit               + "\n" +
-                    "tgtLowerLimit,"  + targetLowerLimit               + "\n" +
-                    "kP,"             + CatzConstants.TURN_KP          + "\n" +
-                    "kI,"             + CatzConstants.TURN_KD          + "\n" +
-                    "kD,"             + CatzConstants.TURN_KI          + "\n" +
-                    "MaxI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" +
-                    "MinI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" );
-			System.out.print(debugData);
-		}
-	}
-	public static void printDebugHeader() {
-		if(debugMode == true) {
-			System.out.print("PIDTurn debug data\n");
-			System.out.print("timestamp,deltaT,currentAngle,currentError,deltaError,derivative,totalError,power\n");
-		}
-	}
-	public static void printDebugData() {
-		if (debugMode == true) {
-			debugData = functionTimer.get() + "," +
-                    deltaT                  + "," + 
-                    currentAngle            + "," + 
-                    currentError            + "," + 
-                    deltaError              + "," + 
-                    derivative              + "," + 
-                    totalError              + "," + 
-                    power                   + "\n";
-			System.out.print(debugData);
-			printDatainSmartDashboard();
-		}
-	}
-	
-	public static void printDatainSmartDashboard() {
-		
-		SmartDashboard.putNumber("PID turn:timestamp", functionTimer.get());
-		SmartDashboard.putNumber("PID turn:deltaT", deltaT);
-		SmartDashboard.putNumber("PID turn:currentAngle", currentAngle);
-		SmartDashboard.putNumber("PID turn:CurrentError", currentError);
-		SmartDashboard.putNumber("PID turn:derivative", derivative);
-		SmartDashboard.putNumber("PID turn:totalError", totalError);
-		SmartDashboard.putNumber("PID turn:power", power);
-		
-	}
 	
 	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
 	{
@@ -188,5 +135,69 @@ public class CatzPIDTurn
 		
 		functionTimer.stop();
 		pdTimer.stop();
+	}
+	public static void setDebugModeEnabled(boolean enabled){
+		debugMode = enabled;
+	}
+	public static boolean isTuningModeEnabled() {
+		return tuningMode;
+	}
+	public static void setTuningModeEnabled(boolean enabled) {
+		tuningMode = enabled;
+		
+		if(tuningMode == true) {
+			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, CatzConstants.TURN_SCALE_FACTOR);
+			SmartDashboard.putNumber(CatzConstants.Turn_KP, CatzConstants.TURN_KP);
+			SmartDashboard.putNumber(CatzConstants.Turn_KD, CatzConstants.TURN_KD);
+			SmartDashboard.putNumber(CatzConstants.Turn_KI, CatzConstants.TURN_KI);
+		}
+	}
+	
+	public static void printDebugInit()
+	{
+		if(debugMode == true)
+		{
+			debugData =  ( "CurrentAngle,"   + currentAngle                   + "\n" +
+                    "targetAngle,"    + targetAngle                    + "\n" +
+                    "targetAngleAbs," + targetAngleAbs                 + "\n" +
+                    "tgtUpperLimit,"  + targetUpperLimit               + "\n" +
+                    "tgtLowerLimit,"  + targetLowerLimit               + "\n" +
+                    "kP,"             + CatzConstants.TURN_KP          + "\n" +
+                    "kI,"             + CatzConstants.TURN_KD          + "\n" +
+                    "kD,"             + CatzConstants.TURN_KI          + "\n");
+			System.out.print(debugData);
+		}
+	}
+	public static void printDebugHeader() {
+		if(debugMode == true) {
+			System.out.print("PIDTurn debug data\n");
+			System.out.print("timestamp,deltaT,currentAngle,currentError,deltaError,derivative,totalError,power\n");
+		}
+	}
+	public static void printDebugData() {
+		if (debugMode == true) {
+			debugData = functionTimer.get() + "," +
+                    deltaT                  + "," + 
+                    currentAngle            + "," + 
+                    currentError            + "," + 
+                    deltaError              + "," + 
+                    derivative              + "," + 
+                    totalError              + "," + 
+                    power                   + "\n";
+			System.out.print(debugData);
+			printDatainSmartDashboard();
+		}
+	}
+	
+	public static void printDatainSmartDashboard() {
+		
+		SmartDashboard.putNumber("PID turn:timestamp", functionTimer.get());
+		SmartDashboard.putNumber("PID turn:deltaT", deltaT);
+		SmartDashboard.putNumber("PID turn:currentAngle", currentAngle);
+		SmartDashboard.putNumber("PID turn:CurrentError", currentError);
+		SmartDashboard.putNumber("PID turn:derivative", derivative);
+		SmartDashboard.putNumber("PID turn:totalError", totalError);
+		SmartDashboard.putNumber("PID turn:power", power);
+		
 	}
 }

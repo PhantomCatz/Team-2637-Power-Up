@@ -71,6 +71,10 @@ public class CatzConstants
 	static public double TURN_KI = 0.0;  //
 	static public double PID_INTEGRAL_MAX = 0.0;  //need values
 	static public double PID_INTEGRAL_MIN = 0.0;  //
+	static public String Turn_KP = "Turn KP";
+	static public String Turn_KI = "Turn KI";
+	static public String Turn_KD = "Turn KD";
+	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
 	
 	//the distances below are for MID AUTONOMOUS PATHS
 	

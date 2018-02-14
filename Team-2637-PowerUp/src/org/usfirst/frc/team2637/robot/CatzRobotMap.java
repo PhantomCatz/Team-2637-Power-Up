@@ -65,8 +65,13 @@ public class CatzRobotMap
 		rRight = new CatzCANTalonSRX(CatzConstants.PORT_5);
 		fLeft = new CatzCANTalonSRX(CatzConstants.PORT_1);
 		rLeft = new CatzCANTalonSRX(CatzConstants.PORT_2);
+		fRight.setSafetyEnabled(false);
+		rRight.setSafetyEnabled(false);
+		fLeft.setSafetyEnabled(false);
+		rLeft.setSafetyEnabled(false);
 		
 		climber = new CatzCANTalonSRX(CatzConstants.PORT_3);
+		climber.setSafetyEnabled(false);
 		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);

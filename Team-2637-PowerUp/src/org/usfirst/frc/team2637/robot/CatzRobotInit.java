@@ -17,6 +17,7 @@ public class CatzRobotInit
 	{
 		setSmartDashboard();
 		CatzPIDTurn.setDebugModeEnabled(true);
+		
 	}
 	
 	public static void setSmartDashboard() {

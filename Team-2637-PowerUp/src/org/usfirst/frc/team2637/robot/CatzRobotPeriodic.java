@@ -7,6 +7,7 @@
  */
 package org.usfirst.frc.team2637.robot;
 
+import autonomous.CatzPIDTurn;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,7 +28,9 @@ public class CatzRobotPeriodic
 	
 		startPositionSelector();
 		//updateSmartDashboard();
-
+		if(CatzPIDTurn.isTuningModeEnabled())
+			updatePIDTurnConstants();
+		
 	} 
 	
 	public static void startPositionSelector() {
@@ -73,4 +76,13 @@ public class CatzRobotPeriodic
 		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzConstants.bicepDeployed);
 		
 	}
+	
+	public static void updatePIDTurnConstants()   {
+		CatzConstants.TURN_SCALE_FACTOR = SmartDashboard.getNumber("Turn SF",10);
+		CatzConstants.TURN_KP = SmartDashboard.getNumber("Turn KP",10);
+		CatzConstants.TURN_KD = SmartDashboard.getNumber("Turn KD",10);
+	    CatzConstants.TURN_KI = SmartDashboard.getNumber("Turn KI",10);
+	}
+	
+	
 }
