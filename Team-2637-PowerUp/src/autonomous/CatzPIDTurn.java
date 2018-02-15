@@ -78,7 +78,7 @@ public class CatzPIDTurn
 		
 		pdTimer.reset();
 		pdTimer.start();
-		while(Math.abs(currentError)>CatzConstants.PID_TURN_THRESHOLD && done == false)
+		while(Math.abs(currentError)>CatzConstants.PIDTURN_THRESHOLD && done == false)
 		{
 			currentAngle = instance.navx.getAngle();
 			deltaT = pdTimer.get();
@@ -116,18 +116,19 @@ public class CatzPIDTurn
 			// calculates integral term
 			totalError += currentError * deltaT;   
 			
-			if(totalError >= CatzConstants.PID_INTEGRAL_MAX)     // saturation
-				totalError = CatzConstants.PID_INTEGRAL_MAX;	 // makes sure the integral term doesn't get too big or small
+			if(totalError >= CatzConstants.PIDTURN_INTEGRAL_MAX)     // saturation
+				totalError = CatzConstants.PIDTURN_INTEGRAL_MAX;	 // makes sure the integral term doesn't get too big or small
 			
-			if(totalError <= CatzConstants.PID_INTEGRAL_MIN)
-				totalError = CatzConstants.PID_INTEGRAL_MIN;
+			if(totalError <= CatzConstants.PIDTURN_INTEGRAL_MIN)
+				totalError = CatzConstants.PIDTURN_INTEGRAL_MIN;
 			
 			
-			power = CatzConstants.PIDTURN_POWER_SCALE_FACTOR*((CatzConstants.TURN_KP * currentError)
-													+(CatzConstants.TURN_KI * totalError)
-													+(CatzConstants.TURN_KD * derivative));	
+			power = CatzConstants.PIDTURN_POWER_SCALE_FACTOR*((CatzConstants.PIDTURN_KP * currentError)
+													+(CatzConstants.PIDTURN_KI * totalError)
+													+(CatzConstants.PIDTURN_KD * derivative));	
 			
 			if (power > 0.0) {
+				
 				if(power > CatzConstants.PIDTURN_MAX_POWER_RT)
 					power = CatzConstants.PIDTURN_MAX_POWER_RT;
 				else if (power < CatzConstants.PIDTURN_MIN_POWER_RT)
@@ -155,6 +156,9 @@ public class CatzPIDTurn
 		functionTimer.stop();
 		pdTimer.stop();
 	}
+	
+	
+	
 	public static void setDebugModeEnabled(boolean enabled){
 		debugMode = enabled;
 	}
@@ -166,12 +170,11 @@ public class CatzPIDTurn
 		
 		if(tuningMode == true) {
 			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, CatzConstants.PIDTURN_POWER_SCALE_FACTOR);
-			SmartDashboard.putNumber(CatzConstants.Turn_KP, CatzConstants.TURN_KP);
-			SmartDashboard.putNumber(CatzConstants.Turn_KD, CatzConstants.TURN_KD);
-			SmartDashboard.putNumber(CatzConstants.Turn_KI, CatzConstants.TURN_KI);
+			SmartDashboard.putNumber(CatzConstants.Turn_KP, CatzConstants.PIDTURN_KP);
+			SmartDashboard.putNumber(CatzConstants.Turn_KD, CatzConstants.PIDTURN_KD);
+			SmartDashboard.putNumber(CatzConstants.Turn_KI, CatzConstants.PIDTURN_KI);
 		}
 	}
-	
 	public static void printDebugInit()
 	{
 		if(debugMode == true)
@@ -181,12 +184,12 @@ public class CatzPIDTurn
                     "targetAngleAbs," + targetAngleAbs                 + "\n" +
                     "tgtUpperLimit,"  + targetUpperLimit               + "\n" +
                     "tgtLowerLimit,"  + targetLowerLimit               + "\n" +
-                    "kP,"             + CatzConstants.TURN_KP          + "\n" +
-                    "kI,"             + CatzConstants.TURN_KI          + "\n" +
-                    "kD,"             + CatzConstants.TURN_KD          + "\n" +
+                    "kP,"             + CatzConstants.PIDTURN_KP          + "\n" +
+                    "kI,"             + CatzConstants.PIDTURN_KI          + "\n" +
+                    "kD,"             + CatzConstants.PIDTURN_KD          + "\n" +
                     "Power Scale Factor," + CatzConstants.PIDTURN_POWER_SCALE_FACTOR + "\n" +
-                    "MaxI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" +
-                    "MinI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" );
+                    "MaxI,"           + CatzConstants.PIDTURN_INTEGRAL_MAX + "\n" +
+                    "MinI,"           + CatzConstants.PIDTURN_INTEGRAL_MAX + "\n" );
 			System.out.println("****************************************************************************");
 			System.out.print(debugData);
 			System.out.printf("PIDTurn MaxPwr, %.3f\n", CatzConstants.PIDTURN_MAX_POWER_RT);
