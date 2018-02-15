@@ -3,6 +3,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import constants.CatzConstants;
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
+
+
 /*
  *  Author : Derek Duenas
  *  Revision History : 
@@ -40,69 +42,13 @@ public class CatzPIDTurn
 	static double previousDerivative = 0;
 
 	static boolean done;
-	static boolean debugMode = true;
+	static boolean debugMode = false;
+	static boolean tuningMode = false;
 	static String debugData;
-	
-	
-	public static void setDebugModeEnabled(boolean enabled){
-		debugMode = enabled;
-	}
-	public static void printDebugInit()
-	{
-		if(debugMode == true)
-		{
-			debugData =  ( "CurrentAngle,"   + currentAngle                   + "\n" +
-                    "targetAngle,"    + targetAngle                    + "\n" +
-                    "targetAngleAbs," + targetAngleAbs                 + "\n" +
-                    "tgtUpperLimit,"  + targetUpperLimit               + "\n" +
-                    "tgtLowerLimit,"  + targetLowerLimit               + "\n" +
-                    "kP,"             + CatzConstants.TURN_KP          + "\n" +
-                    "kI,"             + CatzConstants.TURN_KI          + "\n" +
-                    "kD,"             + CatzConstants.TURN_KD          + "\n" +
-                    "Power Scale Factor," + CatzConstants.TURN_SCALE_FACTOR + "\n" +
-                    "MaxI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" +
-                    "MinI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" );
-			System.out.println("****************************************************************************");
-			System.out.print(debugData);
-		}
-	}
-	public static void printDebugHeader() {
-		if(debugMode == true) {
-			System.out.print("PIDTurn debug data\n");
-			System.out.print("timestamp,deltaT,currentAngle,currentError,deltaError,derivative,totalError,power\n");
-		}
-	}
-	public static void printDebugData() {
-		if (debugMode == true) {
-			debugData = functionTimer.get() + "," +
-                    deltaT                  + "," + 
-                    currentAngle            + "," + 
-                    currentError            + "," + 
-                    deltaError              + "," + 
-                    derivative              + "," + 
-                    totalError              + "," + 
-                    power                   + "\n";
-			System.out.print(debugData);
-
-			printDatainSmartDashboard();
-		}
-	}
-	
-	public static void printDatainSmartDashboard() {
-		
-		SmartDashboard.putNumber("PID turn:timestamp", functionTimer.get());
-		SmartDashboard.putNumber("PID turn:deltaT", deltaT);
-		SmartDashboard.putNumber("PID turn:currentAngle", currentAngle);
-		SmartDashboard.putNumber("PID turn:CurrentError", currentError);
-		SmartDashboard.putNumber("PID turn:derivative", derivative);
-		SmartDashboard.putNumber("PID turn:totalError", totalError);
-		SmartDashboard.putNumber("PID turn:power", power);
-		
-	}
 	
 	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
 	{
-		
+		boolean firstTime = true;
 		functionTimer = new Timer();
 		pdTimer = new Timer();
 		
@@ -147,9 +93,21 @@ public class CatzPIDTurn
 			currentError = targetAngle - currentAngle;
 			
 			// calculates derivative term
-			deltaError = currentError-previousError;
-			derivative = CatzConstants.PIDTURN_FILTER_CONSTANT*previousDerivative + ((1-CatzConstants.PIDTURN_FILTER_CONSTANT)*(deltaError/deltaT));
 			//filter smoothes derivative graph; ask Walter for specifics ^
+			deltaError = currentError-previousError;
+			if (firstTime == false) {
+   			   if ( (deltaError == 0.0) && (Math.abs(currentError) > 3.0 ) ) {
+   				   derivative =  previousDerivative;   
+   			   } else {
+   				   derivative =    CatzConstants.PIDTURN_FILTER_CONSTANT*previousDerivative + 
+   			               ((1-CatzConstants.PIDTURN_FILTER_CONSTANT)*(deltaError/deltaT));
+   			   }
+			} else {
+				firstTime = false;
+				derivative = 0;
+			}
+			
+			
 			previousDerivative = derivative;
 			
 			previousError = currentError;  // saves error for next iteration
@@ -165,16 +123,24 @@ public class CatzPIDTurn
 				totalError = CatzConstants.PID_INTEGRAL_MIN;
 			
 			
-			power = CatzConstants.TURN_SCALE_FACTOR*((CatzConstants.TURN_KP * currentError)
+			power = CatzConstants.PIDTURN_POWER_SCALE_FACTOR*((CatzConstants.TURN_KP * currentError)
 													+(CatzConstants.TURN_KI * totalError)
 													+(CatzConstants.TURN_KD * derivative));	
 			
-			if(power > CatzConstants.PID_TURN_MAX_POWER)
-				power = CatzConstants.PID_TURN_MAX_POWER;
+			if (power > 0.0) {
+				if(power > CatzConstants.PIDTURN_MAX_POWER_RT)
+					power = CatzConstants.PIDTURN_MAX_POWER_RT;
+				else if (power < CatzConstants.PIDTURN_MIN_POWER_RT)
+					power = CatzConstants.PIDTURN_MIN_POWER_RT;
+			} else {
 			
-			if(power < CatzConstants.PID_TURN_MIN_POWER)
-				power = CatzConstants.PID_TURN_MIN_POWER;
+      			if(power < CatzConstants.PIDTURN_MAX_POWER_LT)
+				    power = CatzConstants.PIDTURN_MAX_POWER_LT;
+      			else if (power > CatzConstants.PIDTURN_MIN_POWER_LT)
+ 				    power = CatzConstants.PIDTURN_MIN_POWER_LT;
+			}
 			
+      			
 			instance.drive.tankDrive(power, -power);
 			
 			if (functionTimer.get() > timeoutSeconds)
@@ -188,5 +154,74 @@ public class CatzPIDTurn
 		
 		functionTimer.stop();
 		pdTimer.stop();
+	}
+	public static void setDebugModeEnabled(boolean enabled){
+		debugMode = enabled;
+	}
+	public static boolean isTuningModeEnabled() {
+		return tuningMode;
+	}
+	public static void setTuningModeEnabled(boolean enabled) {
+		tuningMode = enabled;
+		
+		if(tuningMode == true) {
+			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, CatzConstants.PIDTURN_POWER_SCALE_FACTOR);
+			SmartDashboard.putNumber(CatzConstants.Turn_KP, CatzConstants.TURN_KP);
+			SmartDashboard.putNumber(CatzConstants.Turn_KD, CatzConstants.TURN_KD);
+			SmartDashboard.putNumber(CatzConstants.Turn_KI, CatzConstants.TURN_KI);
+		}
+	}
+	
+	public static void printDebugInit()
+	{
+		if(debugMode == true)
+		{
+			debugData =  ( "CurrentAngle,"   + currentAngle                   + "\n" +
+                    "targetAngle,"    + targetAngle                    + "\n" +
+                    "targetAngleAbs," + targetAngleAbs                 + "\n" +
+                    "tgtUpperLimit,"  + targetUpperLimit               + "\n" +
+                    "tgtLowerLimit,"  + targetLowerLimit               + "\n" +
+                    "kP,"             + CatzConstants.TURN_KP          + "\n" +
+                    "kI,"             + CatzConstants.TURN_KI          + "\n" +
+                    "kD,"             + CatzConstants.TURN_KD          + "\n" +
+                    "Power Scale Factor," + CatzConstants.PIDTURN_POWER_SCALE_FACTOR + "\n" +
+                    "MaxI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" +
+                    "MinI,"           + CatzConstants.PID_INTEGRAL_MAX + "\n" );
+			System.out.println("****************************************************************************");
+			System.out.print(debugData);
+			System.out.printf("PIDTurn MaxPwr, %.3f\n", CatzConstants.PIDTURN_MAX_POWER_RT);
+		}
+	}
+	public static void printDebugHeader() {
+		if(debugMode == true) {
+			System.out.print("PIDTurn debug data\n");
+			System.out.print("timestamp,deltaT,currentAngle,currentError,deltaError,derivative,totalError,power\n");
+		}
+	}
+	public static void printDebugData() {
+		if (debugMode == true) {
+			debugData = functionTimer.get() + "," +
+                    deltaT                  + "," + 
+                    currentAngle            + "," + 
+                    currentError            + "," + 
+                    deltaError              + "," + 
+                    derivative              + "," + 
+                    totalError              + "," + 
+                    power                   + "\n";
+			System.out.print(debugData);
+			printDatainSmartDashboard();
+		}
+	}
+	
+	public static void printDatainSmartDashboard() {
+		
+		SmartDashboard.putNumber("PID turn:timestamp", functionTimer.get());
+		SmartDashboard.putNumber("PID turn:deltaT", deltaT);
+		SmartDashboard.putNumber("PID turn:currentAngle", currentAngle);
+		SmartDashboard.putNumber("PID turn:CurrentError", currentError);
+		SmartDashboard.putNumber("PID turn:derivative", derivative);
+		SmartDashboard.putNumber("PID turn:totalError", totalError);
+		SmartDashboard.putNumber("PID turn:power", power);
+		
 	}
 }

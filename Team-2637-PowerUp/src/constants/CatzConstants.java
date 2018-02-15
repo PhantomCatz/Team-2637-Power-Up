@@ -65,12 +65,18 @@ public class CatzConstants
 	final static public double NAVX_RESET_WAIT_TIME = 0.3;
 	
 	static public double PIDTURN_FILTER_CONSTANT = .5;
-	static public double TURN_SCALE_FACTOR = .7;
-	static public double TURN_KP = 0.0508;
-	static public double TURN_KD = 0.0744;
-	static public double TURN_KI = 0.0;  //
+	static public double PIDTURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
+	static public double TURN_KP = 0.035;  //0.0508
+	static public double TURN_KD = 0.008;  //0.0744
+	static public double TURN_KI = 0.0;    //
 	static public double PID_INTEGRAL_MAX = 0.0;  //need values
 	static public double PID_INTEGRAL_MIN = 0.0;  //
+	
+	final public static double PIDTURN_MAX_POWER_RT =  1.0;
+	final public static double PIDTURN_MIN_POWER_RT =  0.4;
+
+	final public static double PIDTURN_MAX_POWER_LT = -1.0;
+	final public static double PIDTURN_MIN_POWER_LT = -0.4;
 	
 	//the distances below are for MID AUTONOMOUS PATHS
 	
@@ -121,7 +127,9 @@ public class CatzConstants
 	final static public String POSITION_SELECTORL = "Position Left";
 	final static public String POSITION_SELECTORM = "Position Mid";
 	final static public String POSITION_SELECTORR = "Position Right";
-	
-	final public static double PID_TURN_MAX_POWER = 0.85;
-	final public static double PID_TURN_MIN_POWER = -0.85;
+	static public String Turn_KP = "Turn KP";
+	static public String Turn_KI = "Turn KI";
+	static public String Turn_KD = "Turn KD";
+	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
+
 }

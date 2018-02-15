@@ -18,7 +18,7 @@ import constants.CatzConstants;
 
 public class CatzGrabber {
 
-	CatzRobotMap instance = CatzRobotMap.getInstance();
+	CatzRobotMap instance;
 
 	public void forearmOpen() {
 

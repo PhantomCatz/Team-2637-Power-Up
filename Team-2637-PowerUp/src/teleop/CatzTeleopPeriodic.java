@@ -7,7 +7,22 @@ public class CatzTeleopPeriodic
 	static CatzRobotMap instance;
 	public static void runTeleopPeriodic()
 	{
-		instance = CatzRobotMap.getInstance();
+		instance.drive.setModeArcadeDriveFlash(instance.xbox);
+		//runDriverControls()
+		
+		
+		
+		/*if(instance.xbox.getAButton()==true) {
+			instance.climberMechanism.climbUp();
+		} else if(instance.xbox.getBButton()==true) {        for lifter testing
+			instance.climberMechanism.climbDown();
+		} else {
+			instance.climberMechanism.stopClimb();
+		}*/
+			
+		
+	}
+	public void runDriverControls() {
 		// if joystick button three is pressed the lfit goes down
 		if(instance.joy.getBottomLeftThumbButton())
 			instance.lift.liftDown();
@@ -22,9 +37,9 @@ public class CatzTeleopPeriodic
 		
 		// if joystick trigger is pressed the climber goes up
 		if(instance.joy.getTrigger())
-			instance.Climber.climbUp();
+			instance.climberMechanism.climbUp();
 		else
-			instance.Climber.stopClimb();
+			instance.climberMechanism.stopClimb();
 		
 		// if xbox right bumper is pressed the intake is deployed
 		if(instance.xbox.getRightBumper())

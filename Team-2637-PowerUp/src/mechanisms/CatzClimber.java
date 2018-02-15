@@ -16,17 +16,17 @@ public class CatzClimber
 	CatzRobotMap instance;
 	public void climbUp()
 	{
-		instance.climber.set(CatzConstants.CLIMB_SPEED);
+		instance.climberMotor.set(CatzConstants.CLIMB_SPEED);
 		//instance.climber2.set(CatzConstants.CLIMB_SPEED);
 	}
 	public void climbDown()
 	{
-		instance.climber.set(-CatzConstants.CLIMB_SPEED);
+		instance.climberMotor.set(-CatzConstants.CLIMB_SPEED);
 		//instance.climber2.set(-CatzConstants.CLIMB_SPEED);
 	}
 	public void stopClimb()
 	{
-		instance.climber.set(CatzConstants.ZERO);
+		instance.climberMotor.set(CatzConstants.ZERO);
 		//instance.climber2.set(CatzConstants.ZERO);
 	}
 }
