@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2637.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Encoder;
@@ -20,39 +21,39 @@ public class CatzRobotMap
 {
 	public static CatzRobotMap instance;
 	
-	public CatzClimber Climber;
-	public CatzGrabber grabber;
-	public CatzLift lift;
+	public static CatzClimber climberMechanism;
+	public static CatzGrabber grabber;
+	public static CatzLift lift;
 	
-	public CatzCANTalonSRX fRight;
-	public CatzCANTalonSRX rRight;
-	public CatzCANTalonSRX fLeft;
-	public CatzCANTalonSRX rLeft;
+	public static WPI_TalonSRX fRight;
+	public static WPI_TalonSRX rRight;
+	public static WPI_TalonSRX fLeft;
+	public static WPI_TalonSRX rLeft;
 	
-	public CatzCANTalonSRX climber;  
-	//public CatzCANTalonSRX climber2;  //robot does not yet have a second climber motor
+	public static WPI_TalonSRX climberMotor;  
+	//public static CatzCANTalonSRX climber2;  //robot does not yet have a second climber motor
 	
-	public Encoder wheelEncoderR;
-	public Encoder wheelEncoderL;
+	public static Encoder wheelEncoderR;
+	public static Encoder wheelEncoderL;
 	
-	public CatzSpark lifterR;
-	public CatzSpark lifterL;
+	public static CatzSpark lifterR;
+	public static CatzSpark lifterL;
 	
-	public CatzSpark intakeRight;
-	public CatzSpark intakeLeft;
+	public static CatzSpark intakeRight;
+	public static CatzSpark intakeLeft;
 	
-	public AHRS navx;
+	public static AHRS navx;
 	
-	public Timer timer;
-	public CatzXboxController xbox;
-	public CatzJoystick joy;
+	public static Timer timer;
+	public static CatzXboxController xbox;
+	public static CatzJoystick joy;
 	
-	public CatzDrive drive;
-	public SpeedControllerGroup leftMotors;
-	public SpeedControllerGroup rightMotors;
+	public static CatzDrive drive;
+	public static SpeedControllerGroup leftMotors;
+	public static SpeedControllerGroup rightMotors;
 	
-	public Solenoid intakeForearm;
-	public Solenoid intakeBicep;
+	public static Solenoid intakeForearm;
+	public static Solenoid intakeBicep;
 	
 	//public static CatzLogger logger;
 	
@@ -60,27 +61,38 @@ public class CatzRobotMap
 	
 	private CatzRobotMap() 
 	{	
+		System.out.println("Started Contstructor");
+
 		
-		fRight = new CatzCANTalonSRX(CatzConstants.PORT_6);
-		rRight = new CatzCANTalonSRX(CatzConstants.PORT_5);
-		fLeft = new CatzCANTalonSRX(CatzConstants.PORT_1);
-		rLeft = new CatzCANTalonSRX(CatzConstants.PORT_2);
+		fRight = new WPI_TalonSRX(CatzConstants.PORT_4);  //cubee : FR = 4, BR = 5, FL = 0, BL = 1 
+		rRight = new WPI_TalonSRX(CatzConstants.PORT_5);
+		fLeft = new WPI_TalonSRX(CatzConstants.PORT_0);
+		rLeft = new WPI_TalonSRX(CatzConstants.PORT_1);
+		fRight.setSafetyEnabled(false);
+		rRight.setSafetyEnabled(false);
+		fLeft.setSafetyEnabled(false);
+		rLeft.setSafetyEnabled(false);
 		
-		climber = new CatzCANTalonSRX(CatzConstants.PORT_3);
+		climberMotor = new WPI_TalonSRX(CatzConstants.PORT_3);
+		climberMotor.setSafetyEnabled(false);
 		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
-		navx = new AHRS(SPI.Port.kMXP);
+		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 				
 		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT_2,CatzConstants.DIO_PORT_3, false, Encoder.EncodingType.k2X);
 		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT_0,CatzConstants.DIO_PORT_1,false,Encoder.EncodingType.k2X);
 		
 		timer = new Timer();
 		
+		System.out.println("controllers");
+		
 		xbox = new CatzXboxController(CatzConstants.PORT_0);
 		joy = new CatzJoystick(CatzConstants.PORT_1);
 		
 		leftMotors = new SpeedControllerGroup(fLeft, rLeft);
 		rightMotors = new SpeedControllerGroup(fRight, rRight);
+		
+		System.out.println("Before CatzDrive construction");
 		drive = new CatzDrive(leftMotors, rightMotors);
 		
 		lifterR = new CatzSpark(CatzConstants.PWM_PORT_1);
@@ -91,7 +103,12 @@ public class CatzRobotMap
 		
 		intakeForearm = new Solenoid(CatzConstants.PCM_PORT_0);
 		intakeBicep = new Solenoid(CatzConstants.PCM_PORT_1);
+		
+		climberMechanism=new CatzClimber();
+		grabber=new CatzGrabber();
+		lift= new CatzLift();
 		//logger = new CatzLogger();
+		System.out.println("finished Contstructor");
 	}
 	public static CatzRobotMap getInstance()
 	{

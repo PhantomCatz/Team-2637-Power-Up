@@ -1,10 +1,21 @@
+/*
+ *  Author : Jean Kwon
+ *  Last Revised : 2-10-2018 JK
+ *  add the checkbooks to select the path
+ *  Methods :  startPositionSelector, updateSmartDashboard
+ *  Functionality : select the start position, show the values
+ */
 package org.usfirst.frc.team2637.robot;
 
+import autonomous.CatzPIDTurn;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+
 public class CatzRobotPeriodic
 {	
+	static CatzRobotMap instance = CatzRobotMap.getInstance();
+	
 	static boolean check_box1 = false;
 	static boolean check_box2 = false;
 	static boolean check_box3 = false;
@@ -16,7 +27,10 @@ public class CatzRobotPeriodic
 	public static void runRobotPeriodic(){
 	
 		startPositionSelector();
-
+		//updateSmartDashboard();
+		if(CatzPIDTurn.isTuningModeEnabled())
+			updatePIDTurnConstants();
+		
 	} 
 	
 	public static void startPositionSelector() {
@@ -49,4 +63,26 @@ public class CatzRobotPeriodic
 
 		
 	}
+	
+	public static void updateSmartDashboard() {
+		
+		SmartDashboard.putNumber("navX", CatzRobotMap.getInstance().navx.getAngle());
+		SmartDashboard.putNumber("Distance of left Encoder", CatzRobotMap.getInstance().wheelEncoderL.getDistance());
+		SmartDashboard.putNumber("Distance of right Encoder", CatzRobotMap.getInstance().wheelEncoderR.getDistance());
+		SmartDashboard.putNumber("Speed of Left Encoder", CatzRobotMap.getInstance().wheelEncoderL.getRate());
+		SmartDashboard.putNumber("Speed of Right Encoder", CatzRobotMap.getInstance().wheelEncoderR.getRate());
+		
+		SmartDashboard.putBoolean("Graber Forearms Open", CatzConstants.forearmOpen);
+		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzConstants.bicepDeployed);
+		
+	}
+	
+	public static void updatePIDTurnConstants()   {
+		CatzConstants.PIDTURN_POWER_SCALE_FACTOR = SmartDashboard.getNumber("Turn SF",10);
+		CatzConstants.PIDTURN_KP = SmartDashboard.getNumber("Turn KP",10);
+		CatzConstants.PIDTURN_KD = SmartDashboard.getNumber("Turn KD",10);
+	    CatzConstants.PIDTURN_KI = SmartDashboard.getNumber("Turn KI",10);
+	}
+	
+	
 }

@@ -21,6 +21,7 @@ public class CatzDrive
 		//logger = CatzLogger.getInstance();
 		//NAME = this.getClass().getSimpleName();
 		drive = new DifferentialDrive(leftMotors, rightMotors);
+		drive.setSafetyEnabled(false);
 	}
 	
 	public void setModeArcadeDriveRacing(CatzXboxController control){
