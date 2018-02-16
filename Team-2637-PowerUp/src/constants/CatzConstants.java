@@ -66,7 +66,7 @@ public class CatzConstants
 	
 	static public double PIDTURN_FILTER_CONSTANT = .5;
 	static public double PIDTURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
-	static public double PIDTURN_KP = 0.035;  //0.0508
+	static public double PIDTURN_KP = 0.0508;  //0.0508
 	static public double PIDTURN_KD = 0.008;  //0.0744
 	static public double PIDTURN_KI = 0.0;    //
 	static public double PIDTURN_INTEGRAL_MAX = 0.0;  //need values

@@ -31,14 +31,14 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		//instance = CatzRobotMap.getInstance();
-		//CatzRobotInit.run();
+		instance = CatzRobotMap.getInstance();
+		CatzRobotInit.run();
 	}
 	
 	public void robotPeriodic()
 	{
 		//SmartDashboard.putNumber("navx reading 2", instance.navx.getAngle());
-		//CatzRobotPeriodic.runRobotPeriodic();
+		CatzRobotPeriodic.runRobotPeriodic();
 		
 	}
 	/**
@@ -73,12 +73,12 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopInit()
 	{
-		CatzTeleopInit.runTeleopInit();
+		//CatzTeleopInit.runTeleopInit();
 	}
 	@Override
 	public void teleopPeriodic()
 	{			
-		CatzTeleopPeriodic.runTeleopPeriodic();
+		//CatzTeleopPeriodic.runTeleopPeriodic();
 	}
 
 }
