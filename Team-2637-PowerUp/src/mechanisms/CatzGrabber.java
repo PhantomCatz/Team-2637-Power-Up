@@ -45,6 +45,12 @@ public class CatzGrabber {
 		instance.intakeLeft.setSpeed(CatzConstants.INTAKE_SPEED);
 
 	}
+	
+	public void stopLauncher() {
+		instance.intakeRight.setSpeed(0);
+		instance.intakeLeft.setSpeed(0);
+		
+	}
 
 	public void retractBicep() { // meant to be used with right bumper
 		CatzConstants.bicepDeployed = false;
@@ -56,4 +62,6 @@ public class CatzGrabber {
 		CatzConstants.bicepDeployed = true;
 		instance.intakeBicep.set(CatzConstants.bicepDeployed);
 	}
+
+
 }
