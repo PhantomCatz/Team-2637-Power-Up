@@ -13,6 +13,10 @@ import constants.CatzConstants;
 
 public class CatzLift 
 {
+	public void setSpeed(double relativeSpeed) {
+		CatzRobotMap.lifterL.set(relativeSpeed);
+		CatzRobotMap.lifterR.set(relativeSpeed);
+	}
 	public void liftUp()
 	{
 		CatzRobotMap.lifterL.set(CatzConstants.LIFT_SPEED);

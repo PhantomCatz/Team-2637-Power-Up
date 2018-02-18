@@ -51,6 +51,17 @@ public class CatzConstants
 	final static public int PCM_PORT_8 = 8;
 	final static public int PCM_PORT_9 = 9;
 	
+	final static public int CUBEE_TALON_ID_LT_FRONT = 0;
+	final static public int CUBEE_TALON_ID_LT_REAR  = 1;
+	final static public int CUBEE_TALON_ID_RT_FRONT = 4;
+	final static public int CUBEE_TALON_ID_RT_REAR  = 5;
+
+	final static public int TALON_ID_LT_FRONT = 5;
+	final static public int TALON_ID_LT_REAR  = 1;
+	final static public int TALON_ID_RT_FRONT = 4;
+	final static public int TALON_ID_RT_REAR  = 6;
+	
+	
 	final static public double PID_DRIVE_KP = .15;
 	final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
 	final static public double PID_DRIVE_BRAKE_SPEED = .43;

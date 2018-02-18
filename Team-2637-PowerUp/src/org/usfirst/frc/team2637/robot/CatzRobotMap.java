@@ -44,8 +44,8 @@ public class CatzRobotMap
 	public static AHRS navx;
 	
 	public static Timer timer;
-	public static CatzXboxController xbox;
-	public static CatzJoystick joy;
+	public static CatzXboxController xboxDrive;
+	public static CatzXboxController xboxAux;
 	
 	public static CatzDrive drive;
 	public static SpeedControllerGroup leftMotors;
@@ -63,10 +63,10 @@ public class CatzRobotMap
 		System.out.println("Started Contstructor");
 
 		
-		fRight = new WPI_TalonSRX(CatzConstants.PORT_4);  //cubee : FR = 4, BR = 5, FL = 0, BL = 1 
-		rRight = new WPI_TalonSRX(CatzConstants.PORT_6);
-		fLeft = new WPI_TalonSRX(CatzConstants.PORT_5);
-		rLeft = new WPI_TalonSRX(CatzConstants.PORT_1);
+		fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_RT_FRONT); 
+		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_RT_REAR);
+		fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_LT_FRONT);
+		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_LT_REAR);
 		fRight.setSafetyEnabled(false);
 		rRight.setSafetyEnabled(false);
 		fLeft.setSafetyEnabled(false);
@@ -79,14 +79,14 @@ public class CatzRobotMap
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 				
 		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT_2,CatzConstants.DIO_PORT_3, false, Encoder.EncodingType.k2X);
-		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT_0,CatzConstants.DIO_PORT_1,false,Encoder.EncodingType.k2X);
+		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT_0,CatzConstants.DIO_PORT_1, false, Encoder.EncodingType.k2X);
 		
 		timer = new Timer();
 		
 		System.out.println("controllers");
 		
-		xbox = new CatzXboxController(CatzConstants.PORT_0);
-		joy = new CatzJoystick(CatzConstants.PORT_1);
+		xboxDrive = new CatzXboxController(CatzConstants.PORT_0);
+		xboxAux = new CatzXboxController(CatzConstants.PORT_1);
 		
 		leftMotors = new SpeedControllerGroup(fLeft, rLeft);
 		rightMotors = new SpeedControllerGroup(fRight, rRight);

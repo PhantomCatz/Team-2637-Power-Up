@@ -19,26 +19,30 @@ import constants.CatzConstants;
 public class CatzGrabber 
 {
 
+	public void setIntakeSpeed(double relativeSpeed) {
+		CatzRobotMap.intakeLeft.set(relativeSpeed);
+		CatzRobotMap.intakeRight.set(-relativeSpeed);
+	}
+	
 	public void forearmOpen() 
 	{
+		CatzConstants.forearmOpen=true;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
 	}
 
 	public void forearmClose() 
 	{
+		CatzConstants.forearmOpen=false;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
 	}
-
-	public void intakeCube() 
-	{
-		CatzRobotMap.intakeRight.setSpeed(CatzConstants.INTAKE_SPEED);
-		CatzRobotMap.intakeLeft.setSpeed(-CatzConstants.INTAKE_SPEED);
-	}
-
-	public void launchCube() 
-	{
-		CatzRobotMap.intakeRight.setSpeed(-CatzConstants.INTAKE_SPEED);
-		CatzRobotMap.intakeLeft.setSpeed(CatzConstants.INTAKE_SPEED);
+	
+	public void toggleForearm() {
+		if(CatzConstants.forearmOpen==true) {
+			this.forearmClose();
+		}
+		else {
+			this.forearmOpen();
+		}
 	}
 
 	public void retractBicep() 

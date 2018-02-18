@@ -1,5 +1,7 @@
 package autonomous;
 
+import org.usfirst.frc.team2637.robot.CatzRobotMap;
+
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,6 +11,7 @@ public class CatzAutonomousInit
 	
 	public static void runAutonomousInit()
 	{
+		setMechanisms();
 		//choosePath();
 		//CatzPIDTurn.setDebugModeEnabled( true );
 		//CatzPIDTurn.PIDturn(90, 5);
@@ -16,6 +19,12 @@ public class CatzAutonomousInit
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
+	
+	public static void setMechanisms() {
+		CatzRobotMap.grabber.forearmClose();
+		CatzRobotMap.grabber.retractBicep();
+	}
+	
 	public static void choosePath() 
 	{	
 		String gameData;
