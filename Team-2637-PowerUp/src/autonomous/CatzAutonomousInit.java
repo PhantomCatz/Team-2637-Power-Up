@@ -7,16 +7,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CatzAutonomousInit
 {
 	
-	public static void runAutnomousInit()
+	public static void runAutonomousInit()
 	{
-		choosePath();
+		//choosePath();
 		//CatzPIDTurn.setDebugModeEnabled( true );
 		//CatzPIDTurn.PIDturn(90, 5);
 		//CatzPIDTurn.PIDturn(-90, 5);
+		CatzPIDDrive.setDebugModeEnabled(true);
+		CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
-	
-	public static void choosePath() {
-		
+	public static void choosePath() 
+	{	
 		String gameData;
 		
 		boolean check_box1 = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);

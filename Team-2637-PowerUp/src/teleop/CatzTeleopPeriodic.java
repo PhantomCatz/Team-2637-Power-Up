@@ -9,69 +9,52 @@ public class CatzTeleopPeriodic
 	static CatzRobotMap instance;
 	public static void runTeleopPeriodic()
 	{
-		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xbox);
-		//runDriverControls()
-		
-		
-		
-		/*if(instance.xbox.getAButton()==true) {
-			instance.climberMechanism.climbUp();
-		} else if(instance.xbox.getBButton()==true) {        for lifter testing
-			instance.climberMechanism.climbDown();
-		} else {
-			instance.climberMechanism.stopClimb();
-		}*/
-			
-		
-	}
-	public void runDriverControls() {
-		// if joystick button three is pressed the lift goes down
-		if(CatzRobotMap.joy.getBottomLeftThumbButton())
-			CatzRobotMap.lift.liftDown();
+		instance = CatzRobotMap.getInstance();
+		// if joystick button three is pressed the lfit goes down
+		if(instance.joy.getBottomLeftThumbButton())
+			instance.lift.liftDown();
 		else
-			CatzRobotMap.lift.noLift();
+			instance.lift.noLift();
 		
 		// if joystick button four is pressed the lift goes up
-		if(CatzRobotMap.joy.getTopLeftThumbButton())
-			CatzRobotMap.lift.liftUp();
+		if(instance.joy.getTopLeftThumbButton())
+			instance.lift.liftUp();
 		else
-			CatzRobotMap.lift.noLift();
+			instance.lift.noLift();
 		
 		// if joystick trigger is pressed the climber goes up
-		if(CatzRobotMap.joy.getTrigger())
-			CatzRobotMap.climberMechanism.climbUp();
+		if(instance.joy.getTrigger())
+			instance.Climber.climbUp();
 		else
-			CatzRobotMap.climberMechanism.stopClimb();
+			instance.Climber.stopClimb();
 		
 		// if xbox right bumper is pressed the intake is deployed
-		if(CatzRobotMap.xbox.getRightBumper())
-			CatzRobotMap.grabber.deployBicep();
+		if(instance.xbox.getRightBumper())
+			instance.grabber.deployBicep();
 		
-		// if xbox left bumper is pressed the intake is retracted
-		if(CatzRobotMap.xbox.getLeftBumper())
-			CatzRobotMap.grabber.retractBicep();
+		// if xbox left bumper is pressed the intake runs
+		if(instance.xbox.getLeftTrigger() > 0.8)
+			instance.grabber.intakeCube();
 		
-		//if xbox left trigger is pressed the forearm Closes
-		if(CatzRobotMap.xbox.getLeftTrigger()>0.8) 
-			CatzRobotMap.grabber.forearmClose();
-		//if xbox right trigger is pressed the forearm Opens
-		else if (CatzRobotMap.xbox.getRightTrigger()>0.8)
-			CatzRobotMap.grabber.forearmOpen();
+		// if xbox left trigger is pressed the intake is retracted
+		if(instance.xbox.getLeftBumper())
+			instance.grabber.retractBicep();
 		
-		// if xbox B button is pressed the intake runs
-		if(CatzRobotMap.xbox.getBButton())
-			CatzRobotMap.grabber.intakeCube();		
-		// if xbox A button is pressed the cube is launched
-		else if(CatzRobotMap.xbox.getAButton())
-			CatzRobotMap.grabber.launchCube();
-		else
-			CatzRobotMap.grabber.stopLauncher();
+		// if xbox right trigger is pressed the cube is launched
+		if(instance.xbox.getRightTrigger() > 0.8)
+			instance.grabber.launchCube();
 		
-		//whenever the intake is deployed the intake motors are running
-		if(CatzConstants.bicepDeployed==true)
-			CatzRobotMap.grabber.intakeCube();
+		// if xbox A button is pressed the grabber opens or closes
+		if(instance.xbox.getAButton())
+		{
+			CatzConstants.forearmOpen = !CatzConstants.forearmOpen;	
+			if(CatzConstants.forearmOpen == true)
+				instance.grabber.deployBicep();
+			else
+				instance.grabber.retractBicep();
+		}
 		
 		//sets drive control to xbox
-		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xbox);
+		instance.drive.setModeArcadeDriveFlash(instance.xbox);
 	}
 }

@@ -56,7 +56,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
-		CatzAutonomousInit.runAutnomousInit();
+		CatzAutonomousInit.runAutonomousInit();
 	}
 
 	/**
