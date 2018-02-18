@@ -8,7 +8,7 @@ public class CatzTeleopPeriodic
 {
 	public static void runTeleopPeriodic()
 	{
-		// if joystick button three is pressed the lfit goes down
+		/*// if joystick button three is pressed the lfit goes down
 		if(CatzRobotMap.joy.getBottomLeftThumbButton())
 			CatzRobotMap.lift.liftDown();
 		else
@@ -17,10 +17,8 @@ public class CatzTeleopPeriodic
 		// if joystick button four is pressed the lift goes up
 		if(CatzRobotMap.joy.getTopLeftThumbButton())
 			CatzRobotMap.lift.liftUp();
-		else
-			CatzRobotMap.lift.noLift();
 		
-		/*// if joystick trigger is pressed the climber goes up
+		// if joystick trigger is pressed the climber goes up
 		if(CatzRobotMap.joy.getTrigger())
 			CatzRobotMap.climberMechanism.climbUp();
 		else
@@ -52,6 +50,13 @@ public class CatzTeleopPeriodic
 				CatzRobotMap.grabber.retractBicep();
 		}*/
 		
+		
+		if (CatzRobotMap.xbox.getAButton()==true)
+			CatzRobotMap.lift.liftUp();
+		else if(CatzRobotMap.xbox.getBButton()==true)
+			CatzRobotMap.lift.liftDown();
+		else
+			CatzRobotMap.lift.noLift();
 		//sets drive control to xbox
 		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xbox);
 	}

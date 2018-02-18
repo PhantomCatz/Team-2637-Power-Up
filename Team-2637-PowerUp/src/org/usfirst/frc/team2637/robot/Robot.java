@@ -9,6 +9,7 @@ package org.usfirst.frc.team2637.robot;
 
 import autonomous.CatzAutonomousInit;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import teleop.CatzTeleopPeriodic;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -29,13 +30,13 @@ public class Robot extends IterativeRobot
 	public void robotInit()
 	{
 		instance = CatzRobotMap.getInstance();
-		CatzRobotInit.run();
+		//CatzRobotInit.run();
 	}
 	
 	public void robotPeriodic()
 	{
 		//SmartDashboard.putNumber("navx reading 2", instance.navx.getAngle());
-		CatzRobotPeriodic.runRobotPeriodic();
+		//CatzRobotPeriodic.runRobotPeriodic();
 		
 	}
 	/**
@@ -75,7 +76,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{			
-		//CatzTeleopPeriodic.runTeleopPeriodic();
+		CatzTeleopPeriodic.runTeleopPeriodic();
 	}
 
 }

@@ -6,11 +6,11 @@ import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import components.CatzDrive;
 import components.CatzJoystick;
-import components.CatzSpark;
 import components.CatzXboxController;
 import mechanisms.CatzClimber;
 import mechanisms.CatzGrabber;
@@ -35,11 +35,11 @@ public class CatzRobotMap
 	public static Encoder wheelEncoderR;
 	public static Encoder wheelEncoderL;
 	
-	public static CatzSpark lifterR;
-	public static CatzSpark lifterL;
+	public static Spark lifterR;
+	public static Spark lifterL;
 	
-	public static CatzSpark intakeRight;
-	public static CatzSpark intakeLeft;
+	public static Spark intakeRight;
+	public static Spark intakeLeft;
 	
 	public static AHRS navx;
 	
@@ -64,8 +64,8 @@ public class CatzRobotMap
 
 		
 		fRight = new WPI_TalonSRX(CatzConstants.PORT_4);  //cubee : FR = 4, BR = 5, FL = 0, BL = 1 
-		rRight = new WPI_TalonSRX(CatzConstants.PORT_5);
-		fLeft = new WPI_TalonSRX(CatzConstants.PORT_0);
+		rRight = new WPI_TalonSRX(CatzConstants.PORT_6);
+		fLeft = new WPI_TalonSRX(CatzConstants.PORT_5);
 		rLeft = new WPI_TalonSRX(CatzConstants.PORT_1);
 		fRight.setSafetyEnabled(false);
 		rRight.setSafetyEnabled(false);
@@ -94,11 +94,13 @@ public class CatzRobotMap
 		System.out.println("Before CatzDrive construction");
 		drive = new CatzDrive(leftMotors, rightMotors);
 		
-		lifterR = new CatzSpark(CatzConstants.PWM_PORT_1);
-		lifterL = new CatzSpark(CatzConstants.PWM_PORT_0);
 		
-		intakeRight = new CatzSpark(CatzConstants.PWM_PORT_2);
-		intakeLeft = new CatzSpark(CatzConstants.PWM_PORT_3);
+		System.out.println("after CatzDrive construction");
+		lifterR = new Spark(CatzConstants.PWM_PORT_1);
+		lifterL = new Spark(CatzConstants.PWM_PORT_0);
+		
+		intakeRight = new Spark(CatzConstants.PWM_PORT_2);
+		intakeLeft = new Spark(CatzConstants.PWM_PORT_3);
 		
 		intakeForearm = new Solenoid(CatzConstants.PCM_PORT_0);
 		intakeBicep = new Solenoid(CatzConstants.PCM_PORT_1);
