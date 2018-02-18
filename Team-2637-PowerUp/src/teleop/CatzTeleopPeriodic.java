@@ -51,13 +51,15 @@ public class CatzTeleopPeriodic
 		}*/
 		
 		
-		if (CatzRobotMap.xbox.getAButton()==true)
+		/*if (CatzRobotMap.xbox.getAButton()==true)
 			CatzRobotMap.lift.liftUp();
 		else if(CatzRobotMap.xbox.getBButton()==true)
 			CatzRobotMap.lift.liftDown();
 		else
-			CatzRobotMap.lift.noLift();
+			CatzRobotMap.lift.noLift();*/
 		//sets drive control to xbox
-		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xbox);
+		//CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xbox);
+		CatzRobotMap.lifterL.set(CatzRobotMap.xbox.getLeftStickY());
+		CatzRobotMap.lifterR.set(CatzRobotMap.xbox.getLeftStickY());
 	}
 }

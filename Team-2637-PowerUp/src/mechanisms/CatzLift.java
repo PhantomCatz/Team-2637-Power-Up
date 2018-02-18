@@ -15,17 +15,17 @@ public class CatzLift
 {
 	public void liftUp()
 	{
-		CatzRobotMap.lifterL.setSpeed(CatzConstants.LIFT_SPEED);
-		CatzRobotMap.lifterR.setSpeed(CatzConstants.LIFT_SPEED);
+		CatzRobotMap.lifterL.set(CatzConstants.LIFT_SPEED);
+		CatzRobotMap.lifterR.set(CatzConstants.LIFT_SPEED);
 	}
 	public void liftDown()
 	{
-		CatzRobotMap.lifterL.setSpeed(-CatzConstants.LIFT_SPEED);
-		CatzRobotMap.lifterR.setSpeed(-CatzConstants.LIFT_SPEED);
+		CatzRobotMap.lifterL.set(-CatzConstants.LIFT_SPEED);
+		CatzRobotMap.lifterR.set(-CatzConstants.LIFT_SPEED);
 	}
 	public void noLift()
 	{
-		CatzRobotMap.lifterL.setSpeed(CatzConstants.ZERO);
-		CatzRobotMap.lifterR.setSpeed(CatzConstants.ZERO);
+		CatzRobotMap.lifterL.set(CatzConstants.ZERO);
+		CatzRobotMap.lifterR.set(CatzConstants.ZERO);
 	}
 }
