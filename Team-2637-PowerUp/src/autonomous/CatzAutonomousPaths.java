@@ -3,6 +3,7 @@ package autonomous;
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
 
 import constants.CatzConstants;
+import mechanisms.CatzLift;
 
 /**********************************************************
  * Timothy Vu
@@ -229,5 +230,20 @@ public class CatzAutonomousPaths
 		 * 
 		 ******************************************************/
 		
+	}
+	
+	public static void rightScaleScale () {
+	
+	//write the code for lift 
+	
+	CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.RIGHT_SCALE_SCALE_INIT_DIST - CatzConstants.ROBOT_LENGTH2,
+			              CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive 216-17.5 to approach to the scale
+	
+	CatzPIDTurn.PIDturn(-90, CatzConstants.STRAIGHTDRIVE_TIMEOUT);  //turn 90deg left 
+	
+	CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.RIGHT_SCALE_SCALE_LEFT_TURN - CatzConstants.ROBOT_LENGTH2,
+			              CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+	
+	
 	}
 }

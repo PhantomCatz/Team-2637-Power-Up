@@ -128,6 +128,11 @@ public class CatzConstants
 	final static public double NO_SCALE_APPROACH_SCALE = 84;
 	final static public double NO_SCALE_POSITION_NEXT_TO_SCALE = 24.0;
 	
+	//the distance below are for the rightSclaeScale AUTONOMOUS PATHS
+	
+	final static public double RIGHT_SCALE_SCALE_INIT_DIST = 216.0;
+	final static public double RIGHT_SCALE_SCALE_LEFT_TURN = 44.0;
+	
 	final static public double ZERO = 0.0;
 
 	final static public double CLIMB_SPEED = 0;
