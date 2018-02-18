@@ -20,7 +20,8 @@ public class CatzAutonomousInit
 		CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
 	
-	public static void setMechanisms() {
+	public static void setMechanisms() 
+	{
 		CatzRobotMap.grabber.forearmClose();
 		CatzRobotMap.grabber.retractBicep();
 	}

@@ -7,28 +7,38 @@ public class CatzTeleopPeriodic
 	public static void runTeleopPeriodic()
 	{		
 
-		//sets drive control to xbox
+		//sets drive control to drive xbox controller 
 		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
 
-		//lifter mech speed is controlled by auxController left joystick y-axis
-		CatzRobotMap.lift.setSpeed(CatzRobotMap.xboxAux.getLeftStickY());
+		
 		
 		runGrabberControls();
+		runLiftControls();
+		runClimberControls();
 	}
-	
-	
-	private static void runGrabberControls() {
-		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxAux.getRightTrigger()-CatzRobotMap.xboxAux.getLeftTrigger());
+	private static void runGrabberControls() 
+	{
+		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger() - CatzRobotMap.xboxDrive.getLeftTrigger());
 		
-		if(CatzRobotMap.xboxAux.getRightBumper()==true) {
+		if(CatzRobotMap.xboxDrive.getRightBumper()==true)
+		{
 			CatzRobotMap.grabber.deployBicep();
 		}
-		if(CatzRobotMap.xboxAux.getLeftBumper()==true) {
+		if(CatzRobotMap.xboxDrive.getLeftBumper()==true) 
+		{
 			CatzRobotMap.grabber.retractBicep();
 		}
-		if(CatzRobotMap.xboxAux.getAButton()==true) {
+		if(CatzRobotMap.xboxDrive.getAButton()==true)
+		{
 			CatzRobotMap.grabber.toggleForearm();
 		}
-
+	}
+	private static void runLiftControls()
+	{
+		CatzRobotMap.lift.setLiftSpeed(CatzRobotMap.xboxAux.getRightTrigger() - CatzRobotMap.xboxAux.getLeftTrigger());
+	}
+	private static void runClimberControls()
+	{
+		CatzRobotMap.climberMechanism.setClimberSpeed(CatzRobotMap.xboxAux.getRightTrigger() - CatzRobotMap.xboxAux.getLeftTrigger());
 	}
 }

@@ -19,7 +19,8 @@ import constants.CatzConstants;
 public class CatzGrabber 
 {
 
-	public void setIntakeSpeed(double relativeSpeed) {
+	public void setIntakeSpeed(double relativeSpeed) 
+	{
 		CatzRobotMap.intakeLeft.set(relativeSpeed);
 		CatzRobotMap.intakeRight.set(-relativeSpeed);
 	}
@@ -36,11 +37,14 @@ public class CatzGrabber
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
 	}
 	
-	public void toggleForearm() {
-		if(CatzConstants.forearmOpen==true) {
+	public void toggleForearm() 
+	{
+		if(CatzConstants.forearmOpen==true) 
+		{
 			this.forearmClose();
 		}
-		else {
+		else
+		{
 			this.forearmOpen();
 		}
 	}

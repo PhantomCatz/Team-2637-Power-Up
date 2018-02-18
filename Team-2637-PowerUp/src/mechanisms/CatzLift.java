@@ -13,7 +13,8 @@ import constants.CatzConstants;
 
 public class CatzLift 
 {
-	public void setSpeed(double relativeSpeed) {
+	public void setLiftSpeed(double relativeSpeed) 
+	{
 		CatzRobotMap.lifterL.set(relativeSpeed);
 		CatzRobotMap.lifterR.set(relativeSpeed);
 	}
@@ -27,7 +28,7 @@ public class CatzLift
 		CatzRobotMap.lifterL.set(-CatzConstants.LIFT_SPEED);
 		CatzRobotMap.lifterR.set(-CatzConstants.LIFT_SPEED);
 	}
-	public void noLift()
+	public void stopLift()
 	{
 		CatzRobotMap.lifterL.set(CatzConstants.ZERO);
 		CatzRobotMap.lifterR.set(CatzConstants.ZERO);
