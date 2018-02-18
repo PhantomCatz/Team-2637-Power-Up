@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
-import components.CatzCANTalonSRX;
 import components.CatzDrive;
 import components.CatzJoystick;
 import components.CatzSpark;

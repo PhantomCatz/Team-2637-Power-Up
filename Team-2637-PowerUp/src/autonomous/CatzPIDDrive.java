@@ -1,5 +1,4 @@
 package autonomous;
-import java.util.concurrent.TimeUnit;
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;

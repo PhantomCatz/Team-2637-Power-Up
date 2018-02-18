@@ -50,7 +50,7 @@ public class CatzAutonomousInit
 			
 		} else {
 			System.out.println("Init failed");
-			CatzPIDDrive.encoderStraightDrive(0.5,10,3);
+			CatzPIDDrive.PIDDrive(0.5,10.0,3.0);
 		}
 			
 		

@@ -13,20 +13,19 @@ import constants.CatzConstants;
 
 public class CatzLift 
 {
-	CatzRobotMap instance;
 	public void liftUp()
 	{
-		instance.lifterL.setSpeed(CatzConstants.LIFT_SPEED);
-		instance.lifterR.setSpeed(CatzConstants.LIFT_SPEED);
+		CatzRobotMap.lifterL.setSpeed(CatzConstants.LIFT_SPEED);
+		CatzRobotMap.lifterR.setSpeed(CatzConstants.LIFT_SPEED);
 	}
 	public void liftDown()
 	{
-		instance.lifterL.setSpeed(-CatzConstants.LIFT_SPEED);
-		instance.lifterR.setSpeed(-CatzConstants.LIFT_SPEED);
+		CatzRobotMap.lifterL.setSpeed(-CatzConstants.LIFT_SPEED);
+		CatzRobotMap.lifterR.setSpeed(-CatzConstants.LIFT_SPEED);
 	}
 	public void noLift()
 	{
-		instance.lifterL.setSpeed(CatzConstants.ZERO);
-		instance.lifterR.setSpeed(CatzConstants.ZERO);
+		CatzRobotMap.lifterL.setSpeed(CatzConstants.ZERO);
+		CatzRobotMap.lifterR.setSpeed(CatzConstants.ZERO);
 	}
 }

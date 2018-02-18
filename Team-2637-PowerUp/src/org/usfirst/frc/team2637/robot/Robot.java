@@ -8,10 +8,7 @@
 package org.usfirst.frc.team2637.robot;
 
 import autonomous.CatzAutonomousInit;
-import autonomous.CatzAutonomousPeriodic;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import teleop.CatzTeleopInit;
-import teleop.CatzTeleopPeriodic;
 
 /**
  * The VM is configured to automatically run this class, and to call the

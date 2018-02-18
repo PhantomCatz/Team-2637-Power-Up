@@ -66,11 +66,11 @@ public class CatzRobotPeriodic
 	
 	public static void updateSmartDashboard() {
 		
-		SmartDashboard.putNumber("navX", CatzRobotMap.getInstance().navx.getAngle());
-		SmartDashboard.putNumber("Distance of left Encoder", CatzRobotMap.getInstance().wheelEncoderL.getDistance());
-		SmartDashboard.putNumber("Distance of right Encoder", CatzRobotMap.getInstance().wheelEncoderR.getDistance());
-		SmartDashboard.putNumber("Speed of Left Encoder", CatzRobotMap.getInstance().wheelEncoderL.getRate());
-		SmartDashboard.putNumber("Speed of Right Encoder", CatzRobotMap.getInstance().wheelEncoderR.getRate());
+		SmartDashboard.putNumber("navX", CatzRobotMap.navx.getAngle());
+		SmartDashboard.putNumber("Distance of left Encoder", CatzRobotMap.wheelEncoderL.getDistance());
+		SmartDashboard.putNumber("Distance of right Encoder", CatzRobotMap.wheelEncoderR.getDistance());
+		SmartDashboard.putNumber("Speed of Left Encoder", CatzRobotMap.wheelEncoderL.getRate());
+		SmartDashboard.putNumber("Speed of Right Encoder", CatzRobotMap.wheelEncoderR.getRate());
 		
 		SmartDashboard.putBoolean("Graber Forearms Open", CatzConstants.forearmOpen);
 		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzConstants.bicepDeployed);

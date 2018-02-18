@@ -13,20 +13,19 @@ import constants.CatzConstants;
 
 public class CatzClimber 
 {
-	CatzRobotMap instance;
 	public void climbUp()
 	{
-		instance.climberMotor.set(CatzConstants.CLIMB_SPEED);
+		CatzRobotMap.climberMotor.set(CatzConstants.CLIMB_SPEED);
 		//instance.climber2.set(CatzConstants.CLIMB_SPEED);
 	}
 	public void climbDown()
 	{
-		instance.climberMotor.set(-CatzConstants.CLIMB_SPEED);
+		CatzRobotMap.climberMotor.set(-CatzConstants.CLIMB_SPEED);
 		//instance.climber2.set(-CatzConstants.CLIMB_SPEED);
 	}
 	public void stopClimb()
 	{
-		instance.climberMotor.set(CatzConstants.ZERO);
+		CatzRobotMap.climberMotor.set(CatzConstants.ZERO);
 		//instance.climber2.set(CatzConstants.ZERO);
 	}
 }
