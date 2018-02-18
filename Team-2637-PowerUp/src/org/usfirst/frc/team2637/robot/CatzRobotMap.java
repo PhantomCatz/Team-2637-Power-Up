@@ -103,9 +103,9 @@ public class CatzRobotMap
 		intakeForearm = new Solenoid(CatzConstants.PCM_PORT_0);
 		intakeBicep = new Solenoid(CatzConstants.PCM_PORT_1);
 		
-		climberMechanism=new CatzClimber();
-		grabber=new CatzGrabber();
-		lift= new CatzLift();
+		climberMechanism = new CatzClimber();
+		grabber = new CatzGrabber();
+		lift = new CatzLift();
 		//logger = new CatzLogger();
 		System.out.println("finished Contstructor");
 	}

@@ -20,7 +20,7 @@ public class CatzTeleopPeriodic
 		else
 			CatzRobotMap.lift.noLift();
 		
-		// if joystick trigger is pressed the climber goes up
+		/*// if joystick trigger is pressed the climber goes up
 		if(CatzRobotMap.joy.getTrigger())
 			CatzRobotMap.climberMechanism.climbUp();
 		else
@@ -50,7 +50,7 @@ public class CatzTeleopPeriodic
 				CatzRobotMap.grabber.deployBicep();
 			else
 				CatzRobotMap.grabber.retractBicep();
-		}
+		}*/
 		
 		//sets drive control to xbox
 		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xbox);
