@@ -258,8 +258,6 @@ public class CatzAutonomousPaths {
 
 	public static void middleRightSwitchScale() {
 
-		CatzGrabber instance = new CatzGrabber();
-
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);

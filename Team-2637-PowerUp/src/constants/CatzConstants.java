@@ -61,12 +61,11 @@ public class CatzConstants
 	final static public int TALON_ID_R_FRONT = 4;
 	final static public int TALON_ID_R_REAR  = 6;
 	
-	final static public double PID_DRIVE_KP = .15;
-	final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
-	final static public double PID_DRIVE_BRAKE_SPEED = .43;
-	final static public double PID_DRIVE_BRAKE_TIME = .3;
-	final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
-	final static public int VAR_1_BUFFER_SIZE = 20;
+	/*need to test on final robot*/final static public double PID_DRIVE_KP = .15;
+	/*need to test on final robot*/final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
+	/*need to test on final robot*/final static public double PID_DRIVE_BRAKE_SPEED = .43;
+	/*need to test on final robot*/final static public double PID_DRIVE_BRAKE_TIME = .3;
+	/*need to test on final robot*/final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
 	
 	final static public int LOGGER_LEVEL1 = 1;
 	final static public int LOGGER_LEVEL2 = 2;
@@ -74,23 +73,23 @@ public class CatzConstants
 	final static public int LOGGER_LEVEL4 = 4;
 	final static public int LOGGER_LEVEL5 = 5;
 	
-	final static public double PID_TURN_THRESHOLD = .12;
-	final static public double NAVX_RESET_WAIT_TIME = 0.3;
+	/*need to test on final robot*/final static public double PID_TURN_THRESHOLD = .12;
+	/*need to test on final robot*/final static public double NAVX_RESET_WAIT_TIME = 0.3;
 	
-	final static public double PID_TURN_FILTER_CONSTANT = .9;
-	static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
-	static public double PID_TURN_KP = 0.0508;  //0.0508
-	static public double PID_TURN_KD = 0.008;  //0.0744
-	static public double PID_TURN_KI = 0.0;    //
-	final static public double PID_TURN_TIMEOUT = 3.0;
-	final static public double PID_TURN_INTEGRAL_MAX = 0.0;  //need values
-	final static public double PID_TURN_INTEGRAL_MIN = 0.0;  //
+	/*need to test on final robot*/final static public double PID_TURN_FILTER_CONSTANT = .9;
+	/*need to test on final robot*/static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
+	/*need to test on final robot*/static public double PID_TURN_KP = 0.0508;  //0.0508
+	/*need to test on final robot*/static public double PID_TURN_KD = 0.008;  //0.0744
+	/*need to test on final robot*/static public double PID_TURN_KI = 0.0;
+	/*need to test on final robot*/final static public double PID_TURN_TIMEOUT = 3.0;
+	/*need to test on final robot*/final static public double PID_TURN_INTEGRAL_MAX = 0.0;
+	/*need to test on final robot*/final static public double PID_TURN_INTEGRAL_MIN = 0.0;
 	
-	final public static double PID_TURN_MAX_POWER_RT =  1.0;
-	final public static double PID_TURN_MIN_POWER_RT =  0.4;
+	/*need to test on final robot*/final public static double PID_TURN_MAX_POWER_RT =  1.0;
+	/*need to test on final robot*/final public static double PID_TURN_MIN_POWER_RT =  0.4;
 
-	final public static double PID_TURN_MAX_POWER_LT = -1.0;
-	final public static double PID_TURN_MIN_POWER_LT = -0.4;
+	/*need to test on final robot*/final public static double PID_TURN_MAX_POWER_LT = -1.0;
+	/*need to test on final robot*/final public static double PID_TURN_MIN_POWER_LT = -0.4;
 	
 	//the distances below are for MID AUTONOMOUS PATHS
 	
@@ -119,9 +118,7 @@ public class CatzConstants
 	final static public double HALF_SPEED = 0.5;
 	final static public double STOP = 0.0;
 	
-	final static public int STRAIGHTDRIVE_TIMEOUT = 2;
-	
-	final static public double SAMPLE_TIME = 0.0;
+	/*need to test on final robot*/final static public int STRAIGHTDRIVE_TIMEOUT = 2;
 	
 	final static public double ROBOT_WIDTH = 34.0;
 	final static public double ROBOT_LENGTH = 39.0;
@@ -155,9 +152,9 @@ public class CatzConstants
 		
 	final static public double ZERO = 0.0;
 
-	final static public double CLIMB_SPEED = 0;
-	final static public double LIFT_SPEED = 0;
-	final static public double INTAKE_SPEED = 0.7;
+	/*need to test on final robot*/final static public double CLIMB_SPEED = 0;
+	/*need to test on final robot*/final static public double LIFT_SPEED = 0;
+	/*need to test on final robot*/final static public double INTAKE_SPEED = 0.7;
 	
 	static public boolean bicepDeployed = false;
 	static public boolean forearmOpen = false;
@@ -170,14 +167,14 @@ public class CatzConstants
 	static public String Turn_KD = "Turn KD";
 	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
 	
-	final static public double LIFT_SCALE_HEIGHT = 0.0; //need to get values
-	final static public double LIFT_SWITCH_HEIGHT = 0.0;
-	public static final double LIFTER_ERROR_THRESHOLD_PULSES = 10;
+	/*need to test on final robot*/final static public double LIFT_SCALE_HEIGHT = 0.0; //need to get values
+	/*need to test on final robot*/final static public double LIFT_SWITCH_HEIGHT = 0.0;
+	/*need to test on final robot*/public static final double LIFTER_ERROR_THRESHOLD_PULSES = 10;
 	public static final double INITIAL_LIFTER_ERROR = 1000;
 	
-	static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
-	static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
-	static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
+	/*need to test on final robot*/static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
+	/*need to test on final robot*/static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
+	/*need to test on final robot*/static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
 
 
 }
