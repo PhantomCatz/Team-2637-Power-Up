@@ -51,6 +51,7 @@ public class CatzConstants
 	final static public int PCM_PORT_8 = 8;
 	final static public int PCM_PORT_9 = 9;
 	
+<<<<<<< HEAD
 	final static public int CUBEE_TALON_ID_L_FRONT = 0;
 	final static public int CUBEE_TALON_ID_L_REAR  = 1;
 	final static public int CUBEE_TALON_ID_R_FRONT = 4;
@@ -66,6 +67,10 @@ public class CatzConstants
 	final static public double PID_DRIVE_BRAKE_SPEED = .43;
 	final static public double PID_DRIVE_BRAKE_TIME = .3;
 	final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
+=======
+	static public double straightkP = .18;
+	static public double straightkD = .23;  //ORIGINALLY .18
+>>>>>>> d5effb6351f488d7c92e421917e42587a9c9fd1c
 	final static public int VAR_1_BUFFER_SIZE = 20;
 	
 	final static public int LOGGER_LEVEL1 = 1;
@@ -74,22 +79,11 @@ public class CatzConstants
 	final static public int LOGGER_LEVEL4 = 4;
 	final static public int LOGGER_LEVEL5 = 5;
 	
-	final static public double PID_TURN_THRESHOLD = .12;
-	final static public double NAVX_RESET_WAIT_TIME = 0.3;
-	
-	final static public double PID_TURN_FILTER_CONSTANT = .5;
-	static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
-	static public double PID_TURN_KP = 0.0508;  //0.0508
-	static public double PID_TURN_KD = 0.008;  //0.0744
-	static public double PID_TURN_KI = 0.0;    //
-	final static public double PID_TURN_INTEGRAL_MAX = 0.0;  //need values
-	final static public double PID_TURN_INTEGRAL_MIN = 0.0;  //
-	
-	final public static double PID_TURN_MAX_POWER_RT =  1.0;
-	final public static double PID_TURN_MIN_POWER_RT =  0.4;
-
-	final public static double PID_TURN_MAX_POWER_LT = -1.0;
-	final public static double PID_TURN_MIN_POWER_LT = -0.4;
+	static public double TURN_KP = 0.0708;
+	static public double TURN_KD = 0.1044;
+	static public double TURN_KI = 0.0;  //
+	static public double PID_INTEGRAL_MAX = 0.0;  //need values
+	static public double PID_INTEGRAL_MIN = 0.0;  //
 	
 	//the distances below are for MID AUTONOMOUS PATHS
 	
@@ -104,18 +98,27 @@ public class CatzConstants
 	
 	final static public int TURN_DEG_45 = 45;
 	final static public int TURN_DEG_90 = 90;
+	final static public int TURN_DEG_60 = 60;
+	final static public int TURN_DEG_30 = 30;
 	
 	final static public double HALF_SPEED = 0.5;
 	final static public double STOP = 0.0;
 	
 	final static public int STRAIGHTDRIVE_TIMEOUT = 2;
+	final static public int PIDTURN_TIMEOUT = 2;
 	
 	final static public double SAMPLE_TIME = 0.0;
 	
 	final static public double ROBOT_WIDTH = 34.0;
+<<<<<<< HEAD
 	final static public double ROBOT_LENGTH = 39.0;
 	final static public double HALF_ROBOT_LENGTH = 19.5;
 	final static public double HALF_ROBOT_WIDTH = 17.0;
+=======
+	final static public double ROBOT_LENGTH = 39.0; 
+	final static public double ROBOT_LENGTH_HALF = 19.5;
+	final static public double ROBOT_WIDTH_HALF = 17.0;
+>>>>>>> d5effb6351f488d7c92e421917e42587a9c9fd1c
 	
 	//the distances below are for the LEFT AND RIGHT AUTONOMOUS PATHS
 	
@@ -131,7 +134,10 @@ public class CatzConstants
 	final static public double NO_SCALE_POSITION_NEXT_TO_SCALE = 24.0;
 	
 	final static public double ZERO = 0.0;
-
+	
+	final static public double PID_TURN_THRESHOLD = 0.1;
+	final static public double NAVX_RESET_WAIT_TIME = 0.1;
+	
 	final static public double CLIMB_SPEED = 0;
 	final static public double LIFT_SPEED = 0;
 	final static public double INTAKE_SPEED = 0.7;
@@ -142,6 +148,7 @@ public class CatzConstants
 	final static public String POSITION_SELECTORL = "Position Left";
 	final static public String POSITION_SELECTORM = "Position Mid";
 	final static public String POSITION_SELECTORR = "Position Right";
+<<<<<<< HEAD
 	static public String Turn_KP = "Turn KP";
 	static public String Turn_KI = "Turn KI";
 	static public String Turn_KD = "Turn KD";
@@ -149,5 +156,17 @@ public class CatzConstants
 	
 	final static public double LIFT_SCALE_HEIGHT = 0.0;
 	final static public double LIFT_SWITCH_HEIGHT = 0.0;
+=======
+	
+	//the distances below are for the DOUBLE CUBE MIDDLE RIGHT SWITCH + SCALE PATH
+	
+	final static public double MID_RIGHT_SWITCH_SCALE_INIT_DISTANCE = 66.3;
+	final static public double MID_RIGHT_SWITCH_SCALE_TOWARDS_SWITCH = 64;
+	final static public double MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH = 36.5;
+	final static public double MID_RIGHT_SWITCH_SCALE_LEAVE_SWITCH = 65;
+	final static public double MID_RIGHT_SWITCH_SCALE_AROUND_SWITCH = 89;
+	final static public double MID_RIGHT_SWITCH_SCALE_TOWARDS_CUBE = 47.5;
+	final static public double MID_RIGHT_SWITCH_SCALE_TOWARDS_SCALE = 89;
+>>>>>>> d5effb6351f488d7c92e421917e42587a9c9fd1c
 
 }
