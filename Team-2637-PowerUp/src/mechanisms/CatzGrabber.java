@@ -22,17 +22,6 @@ public class CatzGrabber
 		printOutDebugData("CatzGrabber successfully initialized");
 	}
 	
-	private static void deployGrabber()
-	{
-		CatzRobotMap.grabber.deployBicep();
-		CatzRobotMap.grabber.openForearm();
-	}
-	private static void retractGrabber()
-	{
-		CatzRobotMap.grabber.closeForearm();
-		CatzRobotMap.grabber.retractBicep();
-	}
-	
 	public void setIntakeSpeed(double relativeSpeed) {
 		CatzRobotMap.intakeLeft.set(relativeSpeed);
 		CatzRobotMap.intakeRight.set(-relativeSpeed);

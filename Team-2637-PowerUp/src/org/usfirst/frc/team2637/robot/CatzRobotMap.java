@@ -3,6 +3,7 @@ package org.usfirst.frc.team2637.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import constants.CatzConstants;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -111,6 +112,8 @@ public class CatzRobotMap
 		climberMechanism = new CatzClimber();
 		grabber          = new CatzGrabber();
 		lift             = new CatzLift();
+
+		
 		//logger = new CatzLogger();
 	}
 	public static CatzRobotMap getInstance()

@@ -26,18 +26,16 @@ public class CatzTeleopPeriodic
 	{
 		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger() - CatzRobotMap.xboxDrive.getLeftTrigger());
 		
-		if(CatzRobotMap.xboxDrive.getRightBumper()==true)
-		{
+		if(CatzRobotMap.xboxDrive.getRightBumper()==true){
 			CatzRobotMap.grabber.deployBicep();
 		}
-		if(CatzRobotMap.xboxDrive.getLeftBumper()==true) 
-		{
+		if(CatzRobotMap.xboxDrive.getLeftBumper()==true) {
 			CatzRobotMap.grabber.retractBicep();
 		}
-		if(CatzRobotMap.xboxDrive.getAButton()==true)
-		{
+		if(CatzRobotMap.xboxDrive.getAButton()==true){
 			CatzRobotMap.grabber.toggleForearm();
 		}
+		
 	}
 	private static void runLiftControls()
 	{

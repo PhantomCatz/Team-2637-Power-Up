@@ -27,11 +27,6 @@ public class CatzAutonomousInit
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
 	
-	private static void printOutDebugData(String data){
-		if(CatzRobotMap.debugMode==true) {
-			System.out.println(data);
-		}
-	}
 	public static void setMechanisms() {
 		CatzRobotMap.grabber.closeForearm();
 		CatzRobotMap.grabber.retractBicep();
@@ -74,7 +69,12 @@ public class CatzAutonomousInit
 		              			  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
 		                          CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT);
 		}
-		
+	}
+	
+	private static void printOutDebugData(String data){
+		if(CatzRobotMap.debugMode==true) {
+			System.out.println(data);
+		}
 	}
 
 }
