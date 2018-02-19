@@ -44,7 +44,7 @@ public class CatzPIDTurn
 	static boolean tuningMode = false;
 	static String debugData;
 	
-	public static void PIDturn(double degreesToTurn, int timeoutSeconds)
+	public static void PIDturn(double degreesToTurn, double timeoutSeconds)
 	{
 		boolean firstTime = true;
 		functionTimer = new Timer();
