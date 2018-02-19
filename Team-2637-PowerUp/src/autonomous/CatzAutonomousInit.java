@@ -27,6 +27,11 @@ public class CatzAutonomousInit
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
 	
+	private static void printOutDebugData(String data){
+		if(CatzRobotMap.debugMode==true) {
+			System.out.println(data);
+		}
+	}
 	public static void setMechanisms() 
 	{
 		CatzRobotMap.grabber.closeForearm();
@@ -73,27 +78,27 @@ public class CatzAutonomousInit
 		
 		System.out.println(gameData);
 		if (gameData.charAt(0) == 'L' && check_boxM == true) {
-			System.out.println("middlePathL");
+			printOutDebugData("middlePathL");
 			CatzAutonomousPaths.middlePathL();
-			System.out.println("Init Done");
+			printOutDebugData("Init Done");
 			
 		} else if (gameData.charAt(0) == 'R' && check_boxM == true) {
-			System.out.println("middlePathR");
+			printOutDebugData("middlePathR");
 			CatzAutonomousPaths.middlePathR();
-			System.out.println("Init Done");
+			printOutDebugData("Init Done");
 			
 		} else if(gameData.charAt(1) == 'R' && check_boxR == true){
-			System.out.println("rightPath");
+			printOutDebugData("rightPath");
 			CatzAutonomousPaths.rightPath();	
-			System.out.println("Init Done");
+			printOutDebugData("Init Done");
 			
 		} else if(gameData.charAt(1) == 'L' && check_boxL == true){
-			System.out.println("LeftPath");
+			printOutDebugData("LeftPath");
 			CatzAutonomousPaths.leftPath();
-			System.out.println("Init Done");
+			printOutDebugData("Init Done");
 			
 		} else {
-			System.out.println("Init failed");
+			printOutDebugData("Init failed");
 			CatzPIDDrive.PIDDrive(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
 		              			  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
 		                          CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT);
