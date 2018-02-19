@@ -75,7 +75,7 @@ public class CatzPIDTurn
 		
 		pdTimer.reset();
 		pdTimer.start();
-		while(Math.abs(currentError)>CatzConstants.PID_TURN_THRESHOLD && done == false)
+		while(done == false)
 		{
 			currentAngle = CatzRobotMap.navx.getAngle();
 			deltaT = pdTimer.get();
@@ -89,65 +89,70 @@ public class CatzPIDTurn
 			// calculates proportional term
 			currentError = targetAngle - currentAngle;
 			
-			// calculates derivative term
-			//filter smoothes derivative graph; ask Walter for specifics ^
-			deltaError = currentError-previousError;
-			if (firstTime == false) {
-   			   if ( (deltaError == 0.0) && (Math.abs(currentError) > 3.0 ) ) {
-   				   derivative =  previousDerivative;   
-   			   } else {
-   				   derivative =  CatzConstants.PID_TURN_FILTER_CONSTANT*previousDerivative + 
-   			               ((1-CatzConstants.PID_TURN_FILTER_CONSTANT)*(deltaError/deltaT));
-   			   }
-			} else {
-				firstTime = false;
-				derivative = 0;
-			}
-			
-			
-			previousDerivative = derivative;
-			
-			previousError = currentError;  // saves error for next iteration
-			
-			
-			// calculates integral term
-			totalError += currentError * deltaT;   
-			
-			if(totalError >= CatzConstants.PID_TURN_INTEGRAL_MAX)     // saturation
-				totalError = CatzConstants.PID_TURN_INTEGRAL_MAX;	 // makes sure the integral term doesn't get too big or small
-			
-			if(totalError <= CatzConstants.PID_TURN_INTEGRAL_MIN)
-				totalError = CatzConstants.PID_TURN_INTEGRAL_MIN;
-			
-			
-			power = CatzConstants.PID_TURN_POWER_SCALE_FACTOR*((CatzConstants.PID_TURN_KP * currentError)
-													+(CatzConstants.PID_TURN_KI * totalError)
-													+(CatzConstants.PID_TURN_KD * derivative));	
-			
-			if (power > 0.0) {
-				
-				if(power > CatzConstants.PID_TURN_MAX_POWER_RT)
-					power = CatzConstants.PID_TURN_MAX_POWER_RT;
-				else if (power < CatzConstants.PID_TURN_MIN_POWER_RT)
-					power = CatzConstants.PID_TURN_MIN_POWER_RT;
-			} else {
-			
-      			if(power < CatzConstants.PID_TURN_MAX_POWER_LT)
-				    power = CatzConstants.PID_TURN_MAX_POWER_LT;
-      			else if (power > CatzConstants.PID_TURN_MIN_POWER_LT)
- 				    power = CatzConstants.PID_TURN_MIN_POWER_LT;
-			}
-			
-      			
-			CatzRobotMap.drive.tankDrive(power, -power);
-			
-			if (functionTimer.get() > timeoutSeconds)
+			if (Math.abs(currentError)>CatzConstants.PID_TURN_THRESHOLD) {
 				done = true;
+			} else {
 			
-			printDebugData();
-			
+				// calculates derivative term
+				//filter smoothes derivative graph; ask Walter for specifics ^
+				deltaError = currentError-previousError;
+				if (firstTime == false) {
+	   			   if ( (deltaError == 0.0) && (Math.abs(currentError) > 3.0 ) ) {
+	   				   derivative =  previousDerivative;   
+	   			   } else {
+	   				   derivative =  CatzConstants.PID_TURN_FILTER_CONSTANT*previousDerivative + 
+	   			               ((1-CatzConstants.PID_TURN_FILTER_CONSTANT)*(deltaError/deltaT));
+	   			   }
+				} else {
+					firstTime = false;
+					derivative = 0;
+				}
+				
+				
+				previousDerivative = derivative;
+				
+				previousError = currentError;  // saves error for next iteration
+				
+				
+				// calculates integral term
+				totalError += currentError * deltaT;   
+				
+				if(totalError >= CatzConstants.PID_TURN_INTEGRAL_MAX)     // saturation
+					totalError = CatzConstants.PID_TURN_INTEGRAL_MAX;	 // makes sure the integral term doesn't get too big or small
+				
+				if(totalError <= CatzConstants.PID_TURN_INTEGRAL_MIN)
+					totalError = CatzConstants.PID_TURN_INTEGRAL_MIN;
+				
+				
+				power = CatzConstants.PID_TURN_POWER_SCALE_FACTOR*((CatzConstants.PID_TURN_KP * currentError)
+														+(CatzConstants.PID_TURN_KI * totalError)
+														+(CatzConstants.PID_TURN_KD * derivative));	
+				
+				if (power > 0.0) {
+					
+					if(power > CatzConstants.PID_TURN_MAX_POWER_RT)
+						power = CatzConstants.PID_TURN_MAX_POWER_RT;
+					else if (power < CatzConstants.PID_TURN_MIN_POWER_RT)
+						power = CatzConstants.PID_TURN_MIN_POWER_RT;
+				} else {
+				
+	      			if(power < CatzConstants.PID_TURN_MAX_POWER_LT)
+					    power = CatzConstants.PID_TURN_MAX_POWER_LT;
+	      			else if (power > CatzConstants.PID_TURN_MIN_POWER_LT)
+	 				    power = CatzConstants.PID_TURN_MIN_POWER_LT;
+				}
+				
+	      			
+				CatzRobotMap.drive.tankDrive(power, -power);
+				
+				if (functionTimer.get() > timeoutSeconds)
+					done = true;
+				
+				printDebugData();
+			}
 			Timer.delay(0.015); //was .005,.008
 		}
+		printDebugData();
 		CatzRobotMap.drive.tankDrive(0.0, 0.0); // makes robot stop
 		
 		functionTimer.stop();

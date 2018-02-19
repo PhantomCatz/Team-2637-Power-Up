@@ -51,15 +51,15 @@ public class CatzConstants
 	final static public int PCM_PORT_8 = 8;
 	final static public int PCM_PORT_9 = 9;
 	
-	final static public int CUBEE_TALON_ID_LT_FRONT = 0;
-	final static public int CUBEE_TALON_ID_LT_REAR  = 1;
-	final static public int CUBEE_TALON_ID_RT_FRONT = 4;
-	final static public int CUBEE_TALON_ID_RT_REAR  = 5;
+	final static public int CUBEE_TALON_ID_L_FRONT = 0;
+	final static public int CUBEE_TALON_ID_L_REAR  = 1;
+	final static public int CUBEE_TALON_ID_R_FRONT = 4;
+	final static public int CUBEE_TALON_ID_R_REAR  = 5;
 
-	final static public int TALON_ID_LT_FRONT = 5;
-	final static public int TALON_ID_LT_REAR  = 1;
-	final static public int TALON_ID_RT_FRONT = 4;
-	final static public int TALON_ID_RT_REAR  = 6;
+	final static public int TALON_ID_L_FRONT = 5;
+	final static public int TALON_ID_L_REAR  = 1;
+	final static public int TALON_ID_R_FRONT = 4;
+	final static public int TALON_ID_R_REAR  = 6;
 	
 	final static public double PID_DRIVE_KP = .15;
 	final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
@@ -112,8 +112,10 @@ public class CatzConstants
 	
 	final static public double SAMPLE_TIME = 0.0;
 	
-	final static public double ROBOT_WIDTH = 28.0;
-	final static public double ROBOT_LENGTH = 31.0;   
+	final static public double ROBOT_WIDTH = 34.0;
+	final static public double ROBOT_LENGTH = 39.0;
+	final static public double HALF_ROBOT_LENGTH = 19.5;
+	final static public double HALF_ROBOT_WIDTH = 17.0;
 	
 	//the distances below are for the LEFT AND RIGHT AUTONOMOUS PATHS
 	
@@ -144,5 +146,8 @@ public class CatzConstants
 	static public String Turn_KI = "Turn KI";
 	static public String Turn_KD = "Turn KD";
 	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
+	
+	final static public double LIFT_SCALE_HEIGHT = 0.0;
+	final static public double LIFT_SWITCH_HEIGHT = 0.0;
 
 }

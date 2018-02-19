@@ -25,7 +25,24 @@ public class CatzAutonomousInit
 		CatzRobotMap.grabber.forearmClose();
 		CatzRobotMap.grabber.retractBicep();
 	}
-	
+	public static void liftToSwitchHeight()
+	{
+		if(CatzRobotMap.liftEncoder.get() < CatzConstants.LIFT_SWITCH_HEIGHT)
+			CatzRobotMap.lift.liftUp();
+		else if(CatzRobotMap.liftEncoder.get() > CatzConstants.LIFT_SWITCH_HEIGHT)
+			CatzRobotMap.lift.liftDown();
+		else
+			CatzRobotMap.lift.stopLift();
+	}
+	public static void liftToScaleHeight()
+	{
+		if(CatzRobotMap.liftEncoder.get() < CatzConstants.LIFT_SCALE_HEIGHT)
+			CatzRobotMap.lift.liftUp();
+		else if(CatzRobotMap.liftEncoder.get() > CatzConstants.LIFT_SCALE_HEIGHT)
+			CatzRobotMap.lift.liftDown();
+		else
+			CatzRobotMap.lift.stopLift();
+	}
 	public static void choosePath() 
 	{	
 		String gameData;

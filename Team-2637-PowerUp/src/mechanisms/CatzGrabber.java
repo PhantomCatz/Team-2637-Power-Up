@@ -27,19 +27,19 @@ public class CatzGrabber
 	
 	public void forearmOpen() 
 	{
-		CatzConstants.forearmOpen=true;
+		CatzConstants.forearmOpen = true;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
 	}
 
 	public void forearmClose() 
 	{
-		CatzConstants.forearmOpen=false;
+		CatzConstants.forearmOpen = false;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
 	}
 	
 	public void toggleForearm() 
 	{
-		if(CatzConstants.forearmOpen==true) 
+		if(CatzConstants.forearmOpen == true) 
 		{
 			this.forearmClose();
 		}

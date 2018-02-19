@@ -35,6 +35,7 @@ public class CatzRobotMap
 	public static Encoder wheelEncoderR;
 	public static Encoder wheelEncoderL;
 	
+	public static Encoder liftEncoder;
 	public static Spark lifterR;
 	public static Spark lifterL;
 	
@@ -60,13 +61,11 @@ public class CatzRobotMap
 	
 	private CatzRobotMap() 
 	{	
-		System.out.println("Started Contstructor");
-
 		
-		fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_RT_FRONT); 
-		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_RT_REAR);
-		fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_LT_FRONT);
-		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_LT_REAR);
+		fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_FRONT); 
+		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_REAR);
+		fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_FRONT);
+		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_REAR);
 		fRight.setSafetyEnabled(false);
 		rRight.setSafetyEnabled(false);
 		fLeft.setSafetyEnabled(false);
@@ -78,38 +77,33 @@ public class CatzRobotMap
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 				
-		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT_2,CatzConstants.DIO_PORT_3, false, Encoder.EncodingType.k2X);
-		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT_0,CatzConstants.DIO_PORT_1, false, Encoder.EncodingType.k2X);
+		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT_0, CatzConstants.DIO_PORT_1, false, Encoder.EncodingType.k2X);
+		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT_8, CatzConstants.DIO_PORT_9, false, Encoder.EncodingType.k2X);
+		liftEncoder   = new Encoder(CatzConstants.DIO_PORT_2, CatzConstants.DIO_PORT_3, false, Encoder.EncodingType.k2X);
 		
 		timer = new Timer();
 		
-		System.out.println("controllers");
-		
 		xboxDrive = new CatzXboxController(CatzConstants.PORT_0);
-		xboxAux = new CatzXboxController(CatzConstants.PORT_1);
+		xboxAux   = new CatzXboxController(CatzConstants.PORT_1);
 		
-		leftMotors = new SpeedControllerGroup(fLeft, rLeft);
+		leftMotors  = new SpeedControllerGroup(fLeft, rLeft);
 		rightMotors = new SpeedControllerGroup(fRight, rRight);
 		
-		System.out.println("Before CatzDrive construction");
 		drive = new CatzDrive(leftMotors, rightMotors);
 		
-		
-		System.out.println("after CatzDrive construction");
 		lifterR = new Spark(CatzConstants.PWM_PORT_1);
 		lifterL = new Spark(CatzConstants.PWM_PORT_0);
 		
 		intakeRight = new Spark(CatzConstants.PWM_PORT_2);
-		intakeLeft = new Spark(CatzConstants.PWM_PORT_3);
+		intakeLeft  = new Spark(CatzConstants.PWM_PORT_3);
 		
 		intakeForearm = new Solenoid(CatzConstants.PCM_PORT_0);
-		intakeBicep = new Solenoid(CatzConstants.PCM_PORT_1);
+		intakeBicep   = new Solenoid(CatzConstants.PCM_PORT_1);
 		
 		climberMechanism = new CatzClimber();
-		grabber = new CatzGrabber();
-		lift = new CatzLift();
+		grabber          = new CatzGrabber();
+		lift             = new CatzLift();
 		//logger = new CatzLogger();
-		System.out.println("finished Contstructor");
 	}
 	public static CatzRobotMap getInstance()
 	{
