@@ -172,6 +172,11 @@ public class CatzConstants
 	
 	final static public double LIFT_SCALE_HEIGHT = 0.0;
 	final static public double LIFT_SWITCH_HEIGHT = 0.0;
+	
+	static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
+	static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
+	static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
+	
 
 
 }
