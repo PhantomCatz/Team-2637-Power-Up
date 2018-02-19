@@ -93,7 +93,7 @@ public class CatzPIDTurn
 			} else {
 			
 				// calculates derivative term
-				//filter smoothes derivative graph; ask Walter for specifics ^
+				//filter smoothes derivative graph; ask Walter for specifics
 				deltaError = currentError-previousError;
 				if (firstTime == false) {
 	   			   if ( (deltaError == 0.0) && (Math.abs(currentError) > 3.0 ) ) {
