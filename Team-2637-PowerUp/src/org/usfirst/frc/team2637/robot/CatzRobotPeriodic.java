@@ -16,9 +16,9 @@ public class CatzRobotPeriodic
 {	
 	static CatzRobotMap instance = CatzRobotMap.getInstance();
 	
-	static boolean check_box1 = false;
-	static boolean check_box2 = false;
-	static boolean check_box3 = false;
+	static boolean check_boxL = false;
+	static boolean check_boxM = false;
+	static boolean check_boxR = false;
 	
 	static boolean prev_box1 = false;
 	static boolean prev_box2 = false;
@@ -35,24 +35,24 @@ public class CatzRobotPeriodic
 	
 	public static void startPositionSelector() {
 	
-		check_box1 = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
-		check_box2 = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
-		check_box3 = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false);
+		check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
+		check_boxM = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
+		check_boxR = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false);
 
-		if ((check_box1 != prev_box1) && (check_box1 == true)) {
-			prev_box1 = check_box1;
+		if ((check_boxL != prev_box1) && (check_boxL == true)) {
+			prev_box1 = check_boxL;
 			prev_box2 = false;
 			prev_box3 = false;
 			//System.out.println("Position Left");
-		} else if ((check_box2 != prev_box2) && (check_box2 == true)) {
+		} else if ((check_boxM != prev_box2) && (check_boxM == true)) {
 			prev_box1 = false;
-			prev_box2 = check_box2;
+			prev_box2 = check_boxM;
 			prev_box3 = false;
 			//System.out.println("Position Mid");
-		} else if ((check_box3 != prev_box3) && (check_box3 == true)) {
+		} else if ((check_boxR != prev_box3) && (check_boxR == true)) {
 			prev_box1 = false;
 			prev_box2 = false;
-			prev_box3 = check_box3;
+			prev_box3 = check_boxR;
 			//System.out.println("Position Right");
 		}
 

@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CatzRobotInit 
 {
 	
-	static boolean check_box1 = false;
-	static boolean check_box2 = false;
-	static boolean check_box3 = false;
+	static boolean check_boxL = false;
+	static boolean check_boxM = false;
+	static boolean check_boxR = false;
 
 	
 	public static void run() 
