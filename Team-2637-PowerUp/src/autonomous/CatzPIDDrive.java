@@ -27,6 +27,8 @@ public class CatzPIDDrive
 	private static Timer functionTimer;
 	private static Timer loopTimer;
 	
+	private static boolean debugMode = false;
+	
 	public static void PIDDrive(double speed, double distance, double timeout)
 	{
 		functionTimer = new Timer();
@@ -69,7 +71,7 @@ public class CatzPIDDrive
 		}
 		
 		
-		//brake using motors speed
+		//brake using motors' speed
 		if(speed<0) {
 			CatzRobotMap.drive.tankDrive(CatzConstants.PID_DRIVE_BRAKE_SPEED,CatzConstants.PID_DRIVE_BRAKE_SPEED);
 			Timer.delay(CatzConstants.PID_DRIVE_BRAKE_TIME);
@@ -84,19 +86,19 @@ public class CatzPIDDrive
 	}	
 	
 	public static void printDebugInit() {
-		if(CatzRobotMap.debugMode == true) {
+		if(debugMode == true) {
 			
 		}
 	}
 	public static void printDebugHeader() {
-		if (CatzRobotMap.debugMode == true) {
+		if (debugMode == true) {
 			System.out.print("encoderStraightDrive debug data\n");
 			System.out.print("timestamp,deltaTimeSec,currentErrorDegrees,derivative,deltaError,correction\n");
 		}
 	}
 	
 	public static void printDebugData() {
-		if(CatzRobotMap.debugMode == true) {
+		if(debugMode == true) {
 			String data = functionTimer.get() +","+
 						  deltaTimeSec        +","+
 						  currentError        +","+
@@ -104,7 +106,7 @@ public class CatzPIDDrive
 						  deltaError          +","+
 						  correction          +"\n";
 			System.out.print(data);
-			printDatainSmartDashboard();
+			//printDatainSmartDashboard();
 			
 		}
 	}

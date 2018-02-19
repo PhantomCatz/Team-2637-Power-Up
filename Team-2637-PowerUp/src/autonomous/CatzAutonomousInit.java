@@ -32,14 +32,12 @@ public class CatzAutonomousInit
 			System.out.println(data);
 		}
 	}
-	public static void setMechanisms() 
-	{
+	public static void setMechanisms() {
 		CatzRobotMap.grabber.closeForearm();
 		CatzRobotMap.grabber.retractBicep();
 	}
 
-	public static void choosePath() 
-	{	
+	public static void choosePath() {	
 		String gameData;
 		
 		boolean check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
