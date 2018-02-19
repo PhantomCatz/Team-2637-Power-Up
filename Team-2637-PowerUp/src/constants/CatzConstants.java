@@ -172,6 +172,8 @@ public class CatzConstants
 	
 	final static public double LIFT_SCALE_HEIGHT = 0.0; //need to get values
 	final static public double LIFT_SWITCH_HEIGHT = 0.0;
+	public static final double LIFTER_ERROR_THRESHOLD_PULSES = 10;
+	public static final double INITIAL_LIFTER_ERROR = 1000;
 	
 	static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
 	static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;

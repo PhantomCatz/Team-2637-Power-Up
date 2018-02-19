@@ -26,40 +26,12 @@ public class CatzAutonomousInit
 		//CatzPIDTurn.PIDturn(-90, 5);
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
-	
 	public static void setMechanisms() 
 	{
 		CatzRobotMap.grabber.closeForearm();
 		CatzRobotMap.grabber.retractBicep();
 	}
-	public static void liftToSwitchHeight()
-	{
-		if(CatzRobotMap.liftEncoder.get() < CatzConstants.LIFT_SWITCH_HEIGHT)
-			CatzRobotMap.lift.liftUp();
-		else if(CatzRobotMap.liftEncoder.get() > CatzConstants.LIFT_SWITCH_HEIGHT)
-			CatzRobotMap.lift.liftDown();
-		else
-			CatzRobotMap.lift.stopLift();
-	}
-	public static void liftToScaleHeight()
-	{
-		if(CatzRobotMap.liftEncoder.get() < CatzConstants.LIFT_SCALE_HEIGHT)
-			CatzRobotMap.lift.liftUp();
-		else if(CatzRobotMap.liftEncoder.get() > CatzConstants.LIFT_SCALE_HEIGHT)
-			CatzRobotMap.lift.liftDown();
-		else
-			CatzRobotMap.lift.stopLift();
-	}
-	private static void deployGrabber()
-	{
-		CatzRobotMap.grabber.deployBicep();
-		CatzRobotMap.grabber.openForearm();
-	}
-	private static void retractGrabber()
-	{
-		CatzRobotMap.grabber.closeForearm();
-		CatzRobotMap.grabber.retractBicep();
-	}
+
 	public static void choosePath() 
 	{	
 		String gameData;
@@ -98,7 +70,6 @@ public class CatzAutonomousInit
 		              			  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
 		                          CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT);
 		}
-			
 		
 	}
 

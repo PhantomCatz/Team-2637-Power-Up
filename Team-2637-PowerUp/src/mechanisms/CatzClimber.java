@@ -19,21 +19,19 @@ public class CatzClimber
 	public void setClimberSpeed(double relativeSpeed) {
 		CatzRobotMap.climberMotor.set(relativeSpeed);
 	}
-	public void climbUp(){
+	public void climbUp() {
 		CatzRobotMap.climberMotor.set(CatzConstants.CLIMB_SPEED);
 		//CatzRobotMap.climber2.set(CatzConstants.CLIMB_SPEED);
 	}
-	public void climbDown()
-	{
+	public void climbDown() {
 		CatzRobotMap.climberMotor.set(-CatzConstants.CLIMB_SPEED);
 		//CatzRobotMap.climber2.set(-CatzConstants.CLIMB_SPEED);
 	}
-	public void stopClimb()
-	{
+	public void stopClimb() {
 		CatzRobotMap.climberMotor.set(CatzConstants.ZERO);
 		//CatzRobotMap.climber2.set(CatzConstants.ZERO);
 	}
-	private static void printOutDebugData(String data){
+	private static void printOutDebugData(String data) {
 		if(CatzRobotMap.debugMode==true) {
 			System.out.println(data);
 		}

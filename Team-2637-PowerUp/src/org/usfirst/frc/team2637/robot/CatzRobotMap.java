@@ -63,10 +63,14 @@ public class CatzRobotMap
 	private CatzRobotMap() 
 	{	
 
-		fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_FRONT); 
+		/*fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_FRONT); 
 		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_REAR);
 		fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_FRONT);
-		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_REAR);
+		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_REAR);*/
+		fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT);
+		rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
+		fLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_FRONT);
+		rLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);
 		fRight.setSafetyEnabled(false);
 		rRight.setSafetyEnabled(false);
 		fLeft.setSafetyEnabled(false);

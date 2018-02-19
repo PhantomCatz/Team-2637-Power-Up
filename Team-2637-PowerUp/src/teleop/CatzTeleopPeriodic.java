@@ -18,9 +18,9 @@ public class CatzTeleopPeriodic
 		//sets drive control to drive xbox controller 
 		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
 		
-		runGrabberControls();
+		/*runGrabberControls();
 		runLiftControls();
-		runClimberControls();
+		runClimberControls();*/
 	}
 	private static void runGrabberControls() 
 	{

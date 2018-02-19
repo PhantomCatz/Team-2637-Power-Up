@@ -9,6 +9,7 @@ package org.usfirst.frc.team2637.robot;
 
 import autonomous.CatzAutonomousInit;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import teleop.CatzTeleopInit;
 import teleop.CatzTeleopPeriodic;
 
 /**
@@ -28,6 +29,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
+		CatzRobotMap.getInstance();
 		//CatzRobotInit.run();
 	}
 	
@@ -52,7 +54,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousInit() 
 	{
-		CatzAutonomousInit.runAutonomousInit();
+		//CatzAutonomousInit.runAutonomousInit();
 	}
 
 	/**
@@ -69,7 +71,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopInit()
 	{
-		//CatzTeleopInit.runTeleopInit();
+		CatzTeleopInit.runTeleopInit();
 	}
 	@Override
 	public void teleopPeriodic()
