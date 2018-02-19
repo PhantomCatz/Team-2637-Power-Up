@@ -40,7 +40,6 @@ public class CatzPIDTurn
 	static double previousDerivative = 0;
 
 	static boolean done;
-	static boolean debugMode = false;
 	static boolean tuningMode = false;
 	static String debugData;
 	
@@ -161,9 +160,6 @@ public class CatzPIDTurn
 	
 	
 	
-	public static void setDebugModeEnabled(boolean enabled){
-		debugMode = enabled;
-	}
 	public static boolean isTuningModeEnabled() {
 		return tuningMode;
 	}
@@ -179,7 +175,7 @@ public class CatzPIDTurn
 	}
 	public static void printDebugInit()
 	{
-		if(debugMode == true)
+		if(CatzRobotMap.debugMode == true)
 		{
 			debugData =  ( "CurrentAngle,"   + currentAngle                   + "\n" +
                     "targetAngle,"    + targetAngle                    + "\n" +
@@ -198,13 +194,13 @@ public class CatzPIDTurn
 		}
 	}
 	public static void printDebugHeader() {
-		if(debugMode == true) {
+		if(CatzRobotMap.debugMode == true) {
 			System.out.print("PIDTurn debug data\n");
 			System.out.print("timestamp,deltaT,currentAngle,currentError,deltaError,derivative,totalError,power\n");
 		}
 	}
 	public static void printDebugData() {
-		if (debugMode == true) {
+		if (CatzRobotMap.debugMode == true) {
 			debugData = functionTimer.get() + "," +
                     deltaT                  + "," + 
                     currentAngle            + "," + 

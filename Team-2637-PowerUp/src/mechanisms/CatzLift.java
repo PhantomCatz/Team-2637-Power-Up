@@ -5,14 +5,17 @@ import constants.CatzConstants;
 
 /*
  *  Author : Derek Duenas
- *  Last Revised : 2-4-2018 DD
- *  Added functionality to move the lift up and down
+ *  Last Revised : 2-19-18
+ *  Added debug data printouts
  *  Methods : lift
  *  Functionality : Move the lift up and down
  */
 
 public class CatzLift 
 {
+	public CatzLift() {
+		printOutDebugData("CatzLift successfully initialized");
+	}
 	public void setLiftSpeed(double relativeSpeed) 
 	{
 		CatzRobotMap.lifterL.set(relativeSpeed);
@@ -32,5 +35,10 @@ public class CatzLift
 	{
 		CatzRobotMap.lifterL.set(CatzConstants.ZERO);
 		CatzRobotMap.lifterR.set(CatzConstants.ZERO);
+	}
+	private static void printOutDebugData(String data){
+		if(CatzRobotMap.debugMode==true) {
+			System.out.println(data);
+		}
 	}
 }

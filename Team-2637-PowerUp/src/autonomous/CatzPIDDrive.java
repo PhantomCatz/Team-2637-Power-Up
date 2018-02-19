@@ -3,6 +3,15 @@ import org.usfirst.frc.team2637.robot.CatzRobotMap;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+/**********************************************************
+ * Timothy Vu
+ * 3 Feb 2018  TV
+ * Adding in Left and Right paths
+ * Methods: middlePathL  middlePathR  leftPath  rightPath
+ *Functionality: Paths for the autonomous period
+ *********************************************************/
+
 public class CatzPIDDrive
 {	
 	private static boolean done     = false;
@@ -17,8 +26,6 @@ public class CatzPIDDrive
 	
 	private static Timer functionTimer;
 	private static Timer loopTimer;
-	
-	private static boolean debugMode = true;
 	
 	public static void PIDDrive(double speed, double distance, double timeout)
 	{
@@ -75,24 +82,21 @@ public class CatzPIDDrive
 		functionTimer.stop();
 		
 	}	
-	public static void setDebugModeEnabled(boolean enabled) {
-		debugMode = enabled;
-	}
 	
 	public static void printDebugInit() {
-		if(debugMode == true) {
+		if(CatzRobotMap.debugMode == true) {
 			
 		}
 	}
 	public static void printDebugHeader() {
-		if (debugMode == true) {
+		if (CatzRobotMap.debugMode == true) {
 			System.out.print("encoderStraightDrive debug data\n");
 			System.out.print("timestamp,deltaTimeSec,currentErrorDegrees,derivative,deltaError,correction\n");
 		}
 	}
 	
 	public static void printDebugData() {
-		if(debugMode == true) {
+		if(CatzRobotMap.debugMode == true) {
 			String data = functionTimer.get() +","+
 						  deltaTimeSec        +","+
 						  currentError        +","+

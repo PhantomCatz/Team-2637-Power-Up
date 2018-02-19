@@ -1,4 +1,6 @@
 package components;
+import org.usfirst.frc.team2637.robot.CatzRobotMap;
+
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -22,6 +24,7 @@ public class CatzDrive
 		//NAME = this.getClass().getSimpleName();
 		drive = new DifferentialDrive(leftMotors, rightMotors);
 		drive.setSafetyEnabled(false);
+		printOutDebugData("Successfully instantiated CatzDrive");
 	}
 	
 	public void setModeArcadeDriveRacing(CatzXboxController control){
@@ -40,5 +43,11 @@ public class CatzDrive
 	
 	public void arcadeDrive(double xSpeed, double zRotation) {
 		drive.arcadeDrive(xSpeed, zRotation);
+	}
+	
+	private static void printOutDebugData(String data){
+		if(CatzRobotMap.debugMode==true) {
+			System.out.println(data);
+		}
 	}
 }

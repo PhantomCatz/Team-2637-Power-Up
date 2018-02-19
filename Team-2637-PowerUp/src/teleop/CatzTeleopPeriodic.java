@@ -2,6 +2,14 @@ package teleop;
 
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
 
+/**********************************************************
+ * Andrew Lai
+ * 2/16/2018 AL
+ * Revised driver controls to fun with 2 xbox controllers
+ * Methods: runGrabbercontrols,runLiftControls,unClimberControls,runTeleopPeriodic
+ * Functionality: activates driver controls in periodic class
+ *********************************************************/
+
 public class CatzTeleopPeriodic 
 {
 	public static void runTeleopPeriodic()
@@ -9,8 +17,6 @@ public class CatzTeleopPeriodic
 
 		//sets drive control to drive xbox controller 
 		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
-
-		
 		
 		runGrabberControls();
 		runLiftControls();

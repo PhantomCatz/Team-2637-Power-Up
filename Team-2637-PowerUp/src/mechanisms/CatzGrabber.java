@@ -1,9 +1,9 @@
 /************************************************
  * Timothy Vu
  * 
- * Last Revised: 2/9/17 TV
+ * Last Revised: 2/19/18
  * 
- * Fixed bad logic within methods
+ * added printout debug data code
  * 
  * Methods: openFlapToggle(), intakeCube(), launchCube(), 
  * deployIntake(), retractIntake()
@@ -18,27 +18,28 @@ import constants.CatzConstants;
 
 public class CatzGrabber 
 {
-
-	public void setIntakeSpeed(double relativeSpeed) 
-	{
+	public CatzGrabber() {
+		printOutDebugData("CatzGrabber successfully initialized");
+	}
+	
+	public void setIntakeSpeed(double relativeSpeed) {
 		CatzRobotMap.intakeLeft.set(relativeSpeed);
 		CatzRobotMap.intakeRight.set(-relativeSpeed);
 	}
 	
-	public void forearmOpen() 
-	{
+	public void forearmOpen() {
 		CatzConstants.forearmOpen = true;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
+		printOutDebugData("Grabber forearm set to Open");
 	}
 
-	public void forearmClose() 
-	{
+	public void forearmClose() {
 		CatzConstants.forearmOpen = false;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
+		printOutDebugData("Grabber forearm set to Closed");
 	}
 	
-	public void toggleForearm() 
-	{
+	public void toggleForearm() {
 		if(CatzConstants.forearmOpen == true) 
 		{
 			this.forearmClose();
@@ -49,15 +50,21 @@ public class CatzGrabber
 		}
 	}
 
-	public void retractBicep() 
-	{ 
+	public void retractBicep() { 
 		CatzConstants.bicepDeployed = false;
 		CatzRobotMap.intakeBicep.set(CatzConstants.bicepDeployed);
+		printOutDebugData("Grabber Bicep set to Retract");
 	}
 
-	public void deployBicep() 
-	{
+	public void deployBicep() {
 		CatzConstants.bicepDeployed = true;
 		CatzRobotMap.intakeBicep.set(CatzConstants.bicepDeployed);
+		printOutDebugData("Grabber forearm set to Deploy");
+	}
+	
+	private static void printOutDebugData(String data){
+		if(CatzRobotMap.debugMode==true) {
+			System.out.println(data);
+		}
 	}
 }

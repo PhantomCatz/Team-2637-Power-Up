@@ -1,4 +1,6 @@
 package components;
+import org.usfirst.frc.team2637.robot.CatzRobotMap;
+
 import edu.wpi.first.wpilibj.Spark;
 
 /*
@@ -17,17 +19,14 @@ public class CatzSpark extends Spark
 	public CatzSpark(int port)
 	{
 		super(port);
+		printOutDebugData("Successfully instantiated spark #"+port);
 		//timer = CatzTimerMap.getInstance();
 		//logger = CatzLogger.getInstance();
 		//NAME = this.getClass().getSimpleName();
 	}
-	public double getSpeed()
-	{
-		return this.get();
-	}
-	public void setSpeed(double speed)
-	{
-		this.set(speed);
-		//logger.add(NAME, "Spark speed set to " + speed + ".", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
+	private static void printOutDebugData(String data){
+		if(CatzRobotMap.debugMode==true) {
+			System.out.println(data);
+		}
 	}
 }

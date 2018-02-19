@@ -44,7 +44,7 @@ public class CatzRobotMap
 	
 	public static AHRS navx;
 	
-	public static Timer timer;
+	public static Timer globalTimer;
 	public static CatzXboxController xboxDrive;
 	public static CatzXboxController xboxAux;
 	
@@ -55,13 +55,14 @@ public class CatzRobotMap
 	public static Solenoid intakeForearm;
 	public static Solenoid intakeBicep;
 	
+	public static boolean debugMode = false;
 	//public static CatzLogger logger;
 	
 	//public  Lidar lidar;
 	
 	private CatzRobotMap() 
 	{	
-		
+
 		fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_FRONT); 
 		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_REAR);
 		fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_FRONT);
@@ -71,8 +72,14 @@ public class CatzRobotMap
 		fLeft.setSafetyEnabled(false);
 		rLeft.setSafetyEnabled(false);
 		
+		leftMotors  = new SpeedControllerGroup(fLeft, rLeft);
+		rightMotors = new SpeedControllerGroup(fRight, rRight);
+		drive = new CatzDrive(leftMotors, rightMotors);
+		printOutDebugData("Successfully initialized full drive train");
+		
 		climberMotor = new WPI_TalonSRX(CatzConstants.PORT_3);
 		climberMotor.setSafetyEnabled(false);
+		printOutDebugData("Successfully initialized climber Motor");
 		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
@@ -80,16 +87,12 @@ public class CatzRobotMap
 		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT_0, CatzConstants.DIO_PORT_1, false, Encoder.EncodingType.k2X);
 		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT_8, CatzConstants.DIO_PORT_9, false, Encoder.EncodingType.k2X);
 		liftEncoder   = new Encoder(CatzConstants.DIO_PORT_2, CatzConstants.DIO_PORT_3, false, Encoder.EncodingType.k2X);
+		printOutDebugData("Successfully Encoders");
 		
-		timer = new Timer();
+		globalTimer = new Timer();
 		
 		xboxDrive = new CatzXboxController(CatzConstants.PORT_0);
 		xboxAux   = new CatzXboxController(CatzConstants.PORT_1);
-		
-		leftMotors  = new SpeedControllerGroup(fLeft, rLeft);
-		rightMotors = new SpeedControllerGroup(fRight, rRight);
-		
-		drive = new CatzDrive(leftMotors, rightMotors);
 		
 		lifterR = new Spark(CatzConstants.PWM_PORT_1);
 		lifterL = new Spark(CatzConstants.PWM_PORT_0);
@@ -99,6 +102,7 @@ public class CatzRobotMap
 		
 		intakeForearm = new Solenoid(CatzConstants.PCM_PORT_0);
 		intakeBicep   = new Solenoid(CatzConstants.PCM_PORT_1);
+		printOutDebugData("Successfully initialized auxilary actuators");
 		
 		climberMechanism = new CatzClimber();
 		grabber          = new CatzGrabber();
@@ -110,5 +114,10 @@ public class CatzRobotMap
 		if(instance == null)
 			instance = new CatzRobotMap();
 		return instance;
+	}
+	private static void printOutDebugData(String info) {
+		if(debugMode == true) {
+			System.out.println(info);
+		}
 	}
 }

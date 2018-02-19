@@ -1,4 +1,6 @@
 package components;
+import org.usfirst.frc.team2637.robot.CatzRobotMap;
+
 import edu.wpi.first.wpilibj.XboxController;
 
 /*
@@ -31,7 +33,8 @@ public class CatzXboxController extends XboxController
 	public CatzXboxController(int port)
 	{
 		super(port);
-		////logger = CatzLogger.getInstance();
+		printOutDebugData("Successfully initialized xbox Controller #"+port);
+		//logger = CatzLogger.getInstance();
 		//NAME = this.getClass().getSimpleName();
 		//timer = CatzTimerMap.getInstance();
 	}
@@ -94,5 +97,10 @@ public class CatzXboxController extends XboxController
 	{
 		//logger.add(NAME, "Left Trigger moved.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
 		return this.getRawAxis(LEFT_TRIGGER);
+	}
+	private static void printOutDebugData(String data){
+		if(CatzRobotMap.debugMode==true) {
+			System.out.println(data);
+		}
 	}
 }

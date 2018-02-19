@@ -16,7 +16,6 @@ public class CatzAutonomousInit
 		//CatzPIDTurn.setDebugModeEnabled( true );
 		//CatzPIDTurn.PIDturn(90, 5);
 		//CatzPIDTurn.PIDturn(-90, 5);
-		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
 	
