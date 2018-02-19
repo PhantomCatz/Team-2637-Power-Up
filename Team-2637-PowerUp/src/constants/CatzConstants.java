@@ -77,7 +77,7 @@ public class CatzConstants
 	final static public double PID_TURN_THRESHOLD = .12;
 	final static public double NAVX_RESET_WAIT_TIME = 0.3;
 	
-	final static public double PID_TURN_FILTER_CONSTANT = .5;
+	final static public double PID_TURN_FILTER_CONSTANT = .9;
 	static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
 	static public double PID_TURN_KP = 0.0508;  //0.0508
 	static public double PID_TURN_KD = 0.008;  //0.0744
@@ -170,13 +170,12 @@ public class CatzConstants
 	static public String Turn_KD = "Turn KD";
 	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
 	
-	final static public double LIFT_SCALE_HEIGHT = 0.0;
+	final static public double LIFT_SCALE_HEIGHT = 0.0; //need to get values
 	final static public double LIFT_SWITCH_HEIGHT = 0.0;
 	
 	static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
 	static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
 	static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
-	
 
 
 }
