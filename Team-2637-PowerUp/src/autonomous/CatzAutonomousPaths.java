@@ -21,21 +21,21 @@ public class CatzAutonomousPaths {
 
 	public static void middlePathR() {
 		CatzRobotMap.getInstance();
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_LEAVE_WALL - CatzConstants.ROBOT_LENGTH_HALF), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_LEAVE_WALL - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
 																														// forward
 																														// 36in
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_45, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Turn 45deg right
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_AFTER_TURN_DIST - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_AFTER_TURN_DIST - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 72in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_45, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Turn 45deg left
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_APPROACH_SWITCH - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_APPROACH_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 55.2in
 
 		/******************************************************
@@ -43,27 +43,27 @@ public class CatzAutonomousPaths {
 		 * 
 		 ******************************************************/
 
-		CatzDriveStraight.encoderStraightDrive(-CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_BACK_AWAY - CatzConstants.ROBOT_LENGTH_HALF), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
+		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_BACK_AWAY - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
 																														// backwards
 																														// 20in
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg right
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_LEAVE_SWITCH - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_LEAVE_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 43.2in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg left
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_GO_AROUND_SWITCH - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_GO_AROUND_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 84in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg left
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_APPROACH_CUBE_CLOSE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_APPROACH_CUBE_CLOSE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // 48in can be used here for the further cube
 
 		/******************************************************
@@ -74,21 +74,21 @@ public class CatzAutonomousPaths {
 
 	public static void middlePathL() {
 		CatzRobotMap.getInstance();
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_LEAVE_WALL - CatzConstants.ROBOT_LENGTH_HALF), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_LEAVE_WALL - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
 																														// forward
 																														// 36in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_45, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Turn 45deg right
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_AFTER_TURN_DIST - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_AFTER_TURN_DIST - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 72in
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_45, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Turn 45deg left
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_APPROACH_SWITCH - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_APPROACH_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 55.2in
 
 		/******************************************************
@@ -96,27 +96,27 @@ public class CatzAutonomousPaths {
 		 * 
 		 ******************************************************/
 
-		CatzDriveStraight.encoderStraightDrive(-CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_BACK_AWAY - CatzConstants.ROBOT_LENGTH_HALF), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
+		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_BACK_AWAY - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
 																														// backwards
 																														// 20in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg left
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_LEAVE_SWITCH - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_LEAVE_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 43.2in
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg right
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_GO_AROUND_SWITCH - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_GO_AROUND_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 84in
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg right
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_APPROACH_CUBE_CLOSE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_APPROACH_CUBE_CLOSE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // 48in can be used here for the further cube
 
 		/******************************************************
@@ -127,14 +127,14 @@ public class CatzAutonomousPaths {
 
 	public static void leftPath() {
 		CatzRobotMap.getInstance();
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 335_65in
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg right
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.SIDE_PATH_APPROACH_SCALE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_APPROACH_SCALE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive forward 41.88in
 
 		/******************************************************
@@ -144,14 +144,14 @@ public class CatzAutonomousPaths {
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg right
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.SIDE_PATH_LEAVE_SCALE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_LEAVE_SCALE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 112_8in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.SIDE_PATH_APPROACH_CUBE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_APPROACH_CUBE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 12in
 
 		/******************************************************
@@ -163,14 +163,14 @@ public class CatzAutonomousPaths {
 
 	public static void rightPath() {
 		CatzRobotMap.getInstance();
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive forward 335_65in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg left
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.SIDE_PATH_APPROACH_SCALE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_APPROACH_SCALE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive forward 41.88in
 
 		/******************************************************
@@ -180,14 +180,14 @@ public class CatzAutonomousPaths {
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg left
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.SIDE_PATH_LEAVE_SCALE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_LEAVE_SCALE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive forward 112.8in
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg right
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.SIDE_PATH_APPROACH_CUBE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_APPROACH_CUBE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive forward 12in
 
 		/******************************************************
@@ -198,26 +198,26 @@ public class CatzAutonomousPaths {
 	}
 
 	public static void leftSideNoScale() {
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.NO_SCALE_INIT_DISTANCE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.NO_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive forward 251.73in
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90 deg right
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.NO_SCALE_INIT_DISTANCE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.NO_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive 251.73in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90 deg left
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.NO_SCALE_APPROACH_SCALE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.NO_SCALE_APPROACH_SCALE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive 84 in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90 deg left
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.NO_SCALE_POSITION_NEXT_TO_SCALE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.NO_SCALE_POSITION_NEXT_TO_SCALE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive forward 24in
 
 		/******************************************************
@@ -227,26 +227,26 @@ public class CatzAutonomousPaths {
 	}
 
 	public static void rightSideNoScale() {
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.NO_SCALE_INIT_DISTANCE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.NO_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.NO_SCALE_INIT_DISTANCE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.NO_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.NO_SCALE_APPROACH_SCALE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.NO_SCALE_APPROACH_SCALE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.NO_SCALE_POSITION_NEXT_TO_SCALE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.NO_SCALE_POSITION_NEXT_TO_SCALE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
 		/******************************************************
@@ -260,42 +260,42 @@ public class CatzAutonomousPaths {
 
 		CatzGrabber instance = new CatzGrabber();
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_INIT_DISTANCE - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_RIGHT_SWITCH_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_60, CatzConstants.PIDTURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_60, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_SWITCH), CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_30, CatzConstants.PIDTURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_30, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
 		// instance.launchCube(); Put cube placing code here
 
-		CatzDriveStraight.encoderStraightDrive(-CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PIDTURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_LEAVE_SWITCH - CatzConstants.ROBOT_LENGTH_HALF),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_RIGHT_SWITCH_SCALE_LEAVE_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PIDTURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				CatzConstants.MID_RIGHT_SWITCH_SCALE_AROUND_SWITCH, CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PIDTURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
-				CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_CUBE - CatzConstants.ROBOT_LENGTH_HALF,
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_CUBE - CatzConstants.HALF_ROBOT_LENGTH,
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
 		/******************************************************
@@ -303,9 +303,9 @@ public class CatzAutonomousPaths {
 		 * 
 		 ******************************************************/
 
-		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PIDTURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_SCALE, CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
 		/******************************************************

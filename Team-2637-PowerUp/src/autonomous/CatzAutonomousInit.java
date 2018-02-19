@@ -26,15 +26,12 @@ public class CatzAutonomousInit
 		//CatzPIDTurn.PIDturn(-90, 5);
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
-<<<<<<< HEAD
-=======
 	
 	private static void printOutDebugData(String data){
 		if(CatzRobotMap.debugMode==true) {
 			System.out.println(data);
 		}
 	}
->>>>>>> 6e2d9dceb637a29ddddb1d8a1059300ec59f823e
 	public static void setMechanisms() 
 	{
 		CatzRobotMap.grabber.closeForearm();
