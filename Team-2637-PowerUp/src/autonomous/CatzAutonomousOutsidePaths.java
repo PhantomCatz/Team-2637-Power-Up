@@ -1,3 +1,11 @@
+/*******************************************************
+ *  Author : Jean Kwon
+ *   Last Revised : 2-19-2018 JK
+ *  Last revision summary: create the class
+ *  Methods: rightScaleScale
+ *  Functionality: paths of outside starting positions
+*******************************************************/
+
 package autonomous;
 
 import constants.CatzConstants;

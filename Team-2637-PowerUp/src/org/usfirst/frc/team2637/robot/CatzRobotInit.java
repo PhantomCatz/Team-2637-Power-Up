@@ -1,3 +1,11 @@
+/*******************************************************
+ *  Author : Jean Kwon
+ *   Last Revised : 2-19-2018 JK
+ *  Last revision summary: rename the check box
+ *  Methods: run, setSmartDashboard
+ *  Functionality: set the smartDashboard
+*******************************************************/
+
 package org.usfirst.frc.team2637.robot;
 
 import autonomous.CatzPIDTurn;

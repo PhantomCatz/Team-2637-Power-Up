@@ -20,9 +20,9 @@ public class CatzRobotPeriodic
 	static boolean check_boxM = false;
 	static boolean check_boxR = false;
 	
-	static boolean prev_box1 = false;
-	static boolean prev_box2 = false;
-	static boolean prev_box3 = false;
+	static boolean prev_boxL = false;
+	static boolean prev_boxM = false;
+	static boolean prev_boxR = false;
 
 	public static void runRobotPeriodic(){
 	
@@ -39,27 +39,31 @@ public class CatzRobotPeriodic
 		check_boxM = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
 		check_boxR = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false);
 
-		if ((check_boxL != prev_box1) && (check_boxL == true)) {
-			prev_box1 = check_boxL;
-			prev_box2 = false;
-			prev_box3 = false;
+		if ((check_boxL != prev_boxL) && (check_boxL == true)) {
+			prev_boxL = check_boxL;
+			prev_boxM = false;
+			prev_boxR = false;
 			//System.out.println("Position Left");
-		} else if ((check_boxM != prev_box2) && (check_boxM == true)) {
-			prev_box1 = false;
-			prev_box2 = check_boxM;
-			prev_box3 = false;
+		} else if ((check_boxM != prev_boxM) && (check_boxM == true)) {
+			prev_boxL = false;
+			prev_boxM = check_boxM;
+			prev_boxR = false;
 			//System.out.println("Position Mid");
-		} else if ((check_boxR != prev_box3) && (check_boxR == true)) {
-			prev_box1 = false;
-			prev_box2 = false;
-			prev_box3 = check_boxR;
+		} else if ((check_boxR != prev_boxR) && (check_boxR == true)) {
+			prev_boxL = false;
+			prev_boxM = false;
+			prev_boxR = check_boxR;
 			//System.out.println("Position Right");
+		} else {
+			prev_boxL = false;
+			prev_boxM = false;
+			prev_boxR = false;
 		}
 
 		// Update display
-		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORL, prev_box1);
-		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORM, prev_box2);
-		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORR, prev_box3);
+		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORL, prev_boxL);
+		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORM, prev_boxM);
+		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORR, prev_boxR);
 
 		
 	}

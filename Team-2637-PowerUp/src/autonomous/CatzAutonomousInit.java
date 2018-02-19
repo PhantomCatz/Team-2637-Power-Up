@@ -1,3 +1,11 @@
+/*******************************************************
+ *  Author : Jean Kwon
+ *   Last Revised : 2-19-2018 JK
+ *  Last revision summary: rename the check box
+ *  Methods: runAutonomousInit, setMechanisms, liftToSwitchHeight, liftToScaleHeight, choosePath
+ *  Functionality: choose the path for autonomous
+*******************************************************/
+
 package autonomous;
 
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
@@ -17,7 +25,8 @@ public class CatzAutonomousInit
 		//CatzPIDTurn.PIDturn(90, 5);
 		//CatzPIDTurn.PIDturn(-90, 5);
 		CatzPIDDrive.setDebugModeEnabled(true);
-		CatzPIDDrive.PIDDrive(0.7, 100, 3);
+		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
+		
 	}
 	
 	public static void setMechanisms() 
@@ -47,37 +56,39 @@ public class CatzAutonomousInit
 	{	
 		String gameData;
 		
-		boolean check_box1 = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
-		boolean check_box2 = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
-		boolean check_box3 = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false); 
+		boolean check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
+		boolean check_boxM = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
+		boolean check_boxR = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false); 
 
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		System.out.println(gameData);
-		if (gameData.charAt(0) == 'L' && check_box2 == true) {
+		if (gameData.charAt(0) == 'L' && check_boxM == true) {
 			System.out.println("middlePathL");
 			CatzAutonomousPaths.middlePathL();
 			System.out.println("Init Done");
 			
-		} else if (gameData.charAt(0) == 'R' && check_box2 == true) {
+		} else if (gameData.charAt(0) == 'R' && check_boxM == true) {
 			System.out.println("middlePathR");
 			CatzAutonomousPaths.middlePathR();
 			System.out.println("Init Done");
 			
-		} else if(gameData.charAt(1) == 'R' && check_box3 == true){
+		} else if(gameData.charAt(1) == 'R' && check_boxR == true){
 			System.out.println("rightPath");
 			CatzAutonomousPaths.rightPath();	
 			System.out.println("Init Done");
 			
-		} else if(gameData.charAt(1) == 'L' && check_box1 == true){
+		} else if(gameData.charAt(1) == 'L' && check_boxL == true){
 			System.out.println("LeftPath");
 			CatzAutonomousPaths.leftPath();
 			System.out.println("Init Done");
 			
 		} else {
 			System.out.println("Init failed");
-			CatzPIDDrive.PIDDrive(0.5,10.0,3.0);
+			CatzPIDDrive.PIDDrive(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
+		              			  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
+		                          CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT);
 		}
 			
 		
