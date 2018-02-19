@@ -1,3 +1,11 @@
+/*******************************************************
+ *  Author : Jean Kwon
+ *   Last Revised : 2-19-2018 JK
+ *  Last revision summary: rename the check box
+ *  Methods: runAutonomousInit, setMechanisms, liftToSwitchHeight, liftToScaleHeight, choosePath
+ *  Functionality: choose the path for autonomous
+*******************************************************/
+
 package autonomous;
 
 import org.usfirst.frc.team2637.robot.CatzRobotMap;
@@ -16,7 +24,7 @@ public class CatzAutonomousInit
 		//CatzPIDTurn.setDebugModeEnabled( true );
 		//CatzPIDTurn.PIDturn(90, 5);
 		//CatzPIDTurn.PIDturn(-90, 5);
-		CatzPIDDrive.PIDDrive(0.7, 100, 3);
+		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
 	
 	public static void setMechanisms() 
@@ -76,7 +84,9 @@ public class CatzAutonomousInit
 			
 		} else {
 			System.out.println("Init failed");
-			CatzPIDDrive.PIDDrive(0.5,10.0,3.0);
+			CatzPIDDrive.PIDDrive(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
+		              			  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
+		                          CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT);
 		}
 			
 		

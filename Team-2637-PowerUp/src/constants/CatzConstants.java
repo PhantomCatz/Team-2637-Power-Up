@@ -141,7 +141,18 @@ public class CatzConstants
 	final static public double NO_SCALE_APPROACH_SCALE = 84;
 	final static public double NO_SCALE_POSITION_NEXT_TO_SCALE = 24.0;
 
+	//the distance below are for the rightSclaeScale AUTONOMOUS PATHS
 	
+	final static public double RIGHT_SCALE_SCALE_INIT_DIST = 216.0;
+	final static public double RIGHT_SCALE_SCALE_LEFT_TURN = 85.25 - //Distance from switch to wall
+				                                             29.69 - //Distance from side to wall to robot
+				                                             34.00 - //Width of robot
+				                                             6.0;   //Avoid platform ramp
+	final static public double RIGHT_SCALE_SCALE_APPRO_SCALE = 64.0;
+	final static public double RIGHT_SCALE_SCALE_BACK_UP = 20.0;
+	final static public double RIGHT_SCALE_SCALE_APPRO_CUBE_OPEN = 30.7; 
+	final static public double RIGHT_SCLALE_SCALE_APPRO_CUBE = 20.0;
+		
 	final static public double ZERO = 0.0;
 
 	final static public double CLIMB_SPEED = 0;
