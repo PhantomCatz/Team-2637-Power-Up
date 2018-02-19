@@ -29,7 +29,7 @@ public class CatzAutonomousInit
 	
 	public static void setMechanisms() 
 	{
-		CatzRobotMap.grabber.forearmClose();
+		CatzRobotMap.grabber.closeForearm();
 		CatzRobotMap.grabber.retractBicep();
 	}
 	public static void liftToSwitchHeight()
@@ -49,6 +49,16 @@ public class CatzAutonomousInit
 			CatzRobotMap.lift.liftDown();
 		else
 			CatzRobotMap.lift.stopLift();
+	}
+	private static void deployGrabber()
+	{
+		CatzRobotMap.grabber.deployBicep();
+		CatzRobotMap.grabber.openForearm();
+	}
+	private static void retractGrabber()
+	{
+		CatzRobotMap.grabber.closeForearm();
+		CatzRobotMap.grabber.retractBicep();
 	}
 	public static void choosePath() 
 	{	

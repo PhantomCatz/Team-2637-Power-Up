@@ -75,6 +75,6 @@ public class CatzAutonomousOutsidePaths {
 		
 		
 	    // Drive back to Scale
-		CatzConstants.PIDDrive(CatzConstants.HALF_SPEED,CatzConstants.
+		//CatzConstants.PIDDrive(CatzConstants.HALF_SPEED,CatzConstants.
 	}
 }

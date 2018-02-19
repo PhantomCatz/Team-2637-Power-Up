@@ -27,13 +27,14 @@ public class CatzGrabber
 		CatzRobotMap.intakeRight.set(-relativeSpeed);
 	}
 	
-	public void forearmOpen() {
+	public void openForearm() 
+	{
 		CatzConstants.forearmOpen = true;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
 		printOutDebugData("Grabber forearm set to Open");
 	}
 
-	public void forearmClose() {
+	public void closeForearm() {
 		CatzConstants.forearmOpen = false;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
 		printOutDebugData("Grabber forearm set to Closed");
@@ -42,11 +43,11 @@ public class CatzGrabber
 	public void toggleForearm() {
 		if(CatzConstants.forearmOpen == true) 
 		{
-			this.forearmClose();
+			this.closeForearm();
 		}
 		else
 		{
-			this.forearmOpen();
+			this.openForearm();
 		}
 	}
 
