@@ -142,7 +142,7 @@ public class CatzConstants
 	final static public double NO_SCALE_APPROACH_SCALE = 84;
 	final static public double NO_SCALE_POSITION_NEXT_TO_SCALE = 24.0;
 
-	//the distance below are for the rightSclaeScale AUTONOMOUS PATHS
+	//the distance below are for the rightSclaeScale AUTONOMOUS PATHS Right LRL
 	
 	final static public double RIGHT_SCALE_SCALE_INIT_DIST = 261.0;
 	final static public double RIGHT_SCALE_SCALE_LEFT_TURN = 85.25 - //Distance from switch to wall
@@ -156,7 +156,31 @@ public class CatzConstants
 	final static public double RIGHT_SCALE_SCALE_ACCUE_CUBE = 7.0;
 	final static public double RIGHT_SCALE_SCAlE_APPRO_SWITCH = 50.0;
 	final static public double RIGHT_SCALE_SCALE_APPRO_FINAL_SCLAE = 70.0;
+	
+	//the distance below are for the leftSclaeScale AUTONOMOUS PATHS Left RLR
+	
+	final static public double LEFT_SCALE_SCALE_INIT_DIST = 261.0;
+	final static public double LEFTT_SCALE_SCALE_LEFT_TURN = 85.25 - //Distance from switch to wall
+					                                             29.69 - //Distance from side to wall to robot
+					                                             34.00 - //Width of robot
+					                                             6.0;   //Avoid platform ramp
+	final static public double LEFT_SCALE_SCALE_APPRO_SCALE = 38.0;
+	final static public double LEFT_SCALE_SCALE_BACK_UP = 20.0;
+	final static public double LEFT_SCALE_SCALE_APPRO_CUBE_OPEN = 30.7; 
+	final static public double LEFT_SCLALE_SCALE_APPRO_CUBE = 20.0;
+	final static public double LEFT_SCALE_SCALE_ACCUE_CUBE = 7.0;
+	final static public double LEFT_SCALE_SCAlE_APPRO_SWITCH = 50.0;
+	final static public double LEFT_SCALE_SCALE_APPRO_FINAL_SCLAE = 70.0;
 		
+	// the distance below are for the rightScaleSclaeSwitch AUTONOMOUS PATHS Right LLL
+		
+	final static public double OPPO_RIGHT_SCALE_SCALE_INIT = 215.737;
+	final static public double OPPO_RIGHT_SCALE_SCALE_TO_OPPO = 195.7385;
+	final static public double OPPO_RIGHT_SCALE_SCALE_APPRO_SCALE = 64.4;
+	final static public double OPPO_RIGHT_SCALE_SCALE_BCAK_UP = 20.0;
+	final static public double OPPO_RIGHT_SCALE_SCALE_APPRO_CUBE = 44.4;
+	final static public double OPPO_RIGHT_SCALE_SCALE_CUBE_DEG = 31.8;
+	
 	final static public double ZERO = 0.0;
 
 	/*need to acquire for final robot*/final static public double CLIMB_SPEED = 0;
@@ -179,9 +203,9 @@ public class CatzConstants
 	/*need to acquire for final robot*/public static final double LIFTER_ERROR_THRESHOLD_PULSES = 10;
 	public static final double INITIAL_LIFTER_ERROR = 1000;
 	
-	/*need to acquire for final robot*/static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
-	/*need to acquire for final robot*/static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
-	/*need to acquire for final robot*/static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
+	final static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
+	final static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
+	final static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
 
 
 }
