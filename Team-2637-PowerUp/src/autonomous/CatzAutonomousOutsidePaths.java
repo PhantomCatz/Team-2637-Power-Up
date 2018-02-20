@@ -8,6 +8,8 @@
 
 package autonomous;
 
+import org.usfirst.frc.team2637.robot.CatzRobotMap;
+
 import constants.CatzConstants;
 
 public class CatzAutonomousOutsidePaths {
@@ -34,7 +36,6 @@ public class CatzAutonomousOutsidePaths {
 		double distanceSegment1;
 		double distanceSegment2;
 		double distanceSegment3;
-		double distanceSegment4;
 	
 	    // Initialize distances
 		distanceSegment1 = CatzConstants.RIGHT_SCALE_SCALE_INIT_DIST - CatzConstants.HALF_ROBOT_LENGTH;
@@ -42,6 +43,7 @@ public class CatzAutonomousOutsidePaths {
 		distanceSegment3 = CatzConstants.RIGHT_SCALE_SCALE_APPRO_SCALE - CatzConstants.HALF_ROBOT_LENGTH;
 		
 	    // Drive to Scale
+		
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, distanceSegment1, CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
 		
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT);  //turn 90deg left 
@@ -52,29 +54,57 @@ public class CatzAutonomousOutsidePaths {
 	
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, distanceSegment3, CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
 		
-		/******************************************************
-		 * Write scale cube placing code here
-		 * 
-		 ******************************************************/
-	
+		CatzRobotMap.grabber.openForearm(); 
+		CatzRobotMap.grabber.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
+		
 	    // Drive to pick up power cube by switch
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, -CatzConstants.RIGHT_SCALE_SCALE_BACK_UP,
-				              CatzConstants.STRAIGHTDRIVE_TIMEOUT);
+				              CatzConstants.STRAIGHTDRIVE_TIMEOUT); //back up 20in to turn 180deg
 		
 		CatzPIDTurn.PIDturn(180, CatzConstants.PID_TURN_TIMEOUT); //turn 180deg right
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.RIGHT_SCALE_SCALE_APPRO_CUBE_OPEN, 
-				              CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive forward 50in to open the grabber
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.RIGHT_SCLALE_SCALE_APPRO_CUBE, 
+				              CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive forward 20in to open the grabber
 		
-		//open the grabber
+		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg 
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.RIGHT_SCLALE_SCALE_APPRO_CUBE,
-				              CatzConstants.STRAIGHTDRIVE_TIMEOUT);
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.RIGHT_SCALE_SCALE_ACCUE_CUBE, 
+				              CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive forward 7in to grab the cube accurately
 		
-		//close the grabber
+		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg left
 		
+		CatzRobotMap.grabber.deployBicep(); //down
 		
+		CatzRobotMap.grabber.openForearm(); //open the grabber
+		
+		CatzRobotMap.grabber.setIntakeSpeed(CatzConstants.INTAKE_SPEED); //turn on the intake
+		
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,CatzConstants.RIGHT_SCALE_SCAlE_APPRO_SWITCH-CatzConstants.HALF_ROBOT_LENGTH, 
+				              CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive 50 forward to get to the switch
+		
+		CatzRobotMap.grabber.closeForearm(); //close the grabber 
+				
 	    // Drive back to Scale
-		//CatzConstants.PIDDrive(CatzConstants.HALF_SPEED,CatzConstants.
+		
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, -CatzConstants.RIGHT_SCALE_SCALE_BACK_UP, 
+				              CatzConstants.STRAIGHTDRIVE_TIMEOUT); //back up 20in to turn 90deg
+		
+		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); 
+		
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.RIGHT_SCALE_SCALE_ACCUE_CUBE,
+				              CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+		
+		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); // 90deg
+		
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.RIGHT_SCALE_SCALE_APPRO_FINAL_SCLAE,
+				              CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive forward 70in to get to scale
+		
+		//CatzRobotMap.grabber.openForearm(); 
+		//CatzRobotMap.grabber.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
+		
+
 	}
-}
+		
+
+		
+	}
