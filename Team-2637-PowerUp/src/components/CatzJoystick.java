@@ -1,7 +1,6 @@
 package components;
-import org.usfirst.frc.team2637.robot.CatzRobotMap;
-
 import edu.wpi.first.wpilibj.Joystick;
+import robot.CatzRobotMap;
 
 /*
 *  Author : Derek Duenas

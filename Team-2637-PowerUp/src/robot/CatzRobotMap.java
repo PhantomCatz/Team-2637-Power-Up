@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2637.robot;
+package robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
@@ -64,14 +64,14 @@ public class CatzRobotMap
 	private CatzRobotMap() 
 	{	
 
-		/*fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_FRONT); 
+		fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_FRONT); 
 		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_REAR);
 		fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_FRONT);
-		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_REAR);*/
-		fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT);
+		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_REAR);
+		/*fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT);
 		rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
 		fLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_FRONT);
-		rLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);
+		rLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);*/
 		fRight.setSafetyEnabled(false);
 		rRight.setSafetyEnabled(false);
 		fLeft.setSafetyEnabled(false);

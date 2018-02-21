@@ -1,8 +1,8 @@
 package autonomous;
-import org.usfirst.frc.team2637.robot.CatzRobotMap;
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.CatzRobotMap;
 
 /**********************************************************
  * Timothy Vu

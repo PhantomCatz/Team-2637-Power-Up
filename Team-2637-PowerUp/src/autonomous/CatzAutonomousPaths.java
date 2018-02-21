@@ -1,9 +1,8 @@
 package autonomous;
 
-import org.usfirst.frc.team2637.robot.CatzRobotMap;
-
 import constants.CatzConstants;
 import mechanisms.CatzGrabber;
+import robot.CatzRobotMap;
 
 /**********************************************************
  * Timothy Vu 3 Feb 2018 TV Adding in Left and Right paths Methods: middlePathL
@@ -15,12 +14,16 @@ public class CatzAutonomousPaths {
 	 * 
 	 * Timeout is set to 2 sec
 	 ****************************/
-	CatzGrabber instance = new CatzGrabber();
 
 	public static void middlePathR() {
+<<<<<<< HEAD
 		CatzRobotMap.getInstance();
 		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_LEAVE_WALL - CatzConstants.ROBOT_LENGTH_HALF), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
+=======
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.MID_LEAVE_WALL - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
+>>>>>>> 19ee6591fd6442142b1ce6dd2c3e0d34e22b502a
 																														// forward
 																														// 36in
 
@@ -121,9 +124,14 @@ public class CatzAutonomousPaths {
 	}
 
 	public static void leftPath() {
+<<<<<<< HEAD
 		CatzRobotMap.getInstance();
 		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.ROBOT_LENGTH_HALF),
+=======
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
+>>>>>>> 19ee6591fd6442142b1ce6dd2c3e0d34e22b502a
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 335_65in
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg right
@@ -157,9 +165,14 @@ public class CatzAutonomousPaths {
 	}
 
 	public static void rightPath() {
+<<<<<<< HEAD
 		CatzRobotMap.getInstance();
 		CatzDriveStraight.encoderStraightDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.ROBOT_LENGTH_HALF),
+=======
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
+				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
+>>>>>>> 19ee6591fd6442142b1ce6dd2c3e0d34e22b502a
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive forward 335_65in
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.STRAIGHTDRIVE_TIMEOUT); // turn 90deg left
@@ -326,7 +339,7 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.ROBOT_LENGTH_HALF),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		// instance.launchCube(); Put cube placing code here
+		//CatzRobotMap.grabber.setIntakeSpeed(-1);// Put cube placing code here
 
 		CatzDriveStraight.encoderStraightDrive(-CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.ROBOT_LENGTH_HALF),

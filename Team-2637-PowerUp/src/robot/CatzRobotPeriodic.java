@@ -5,7 +5,7 @@
  *  Methods :  startPositionSelector, updateSmartDashboard
  *  Functionality : select the start position, show the values
  */
-package org.usfirst.frc.team2637.robot;
+package robot;
 
 import autonomous.CatzPIDTurn;
 import constants.CatzConstants;
@@ -71,10 +71,10 @@ public class CatzRobotPeriodic
 	public static void updateSmartDashboard() {
 		
 		SmartDashboard.putNumber("navX", CatzRobotMap.navx.getAngle());
-		SmartDashboard.putNumber("Distance of left Encoder", CatzRobotMap.wheelEncoderL.getDistance());
-		SmartDashboard.putNumber("Distance of right Encoder", CatzRobotMap.wheelEncoderR.getDistance());
-		SmartDashboard.putNumber("Speed of Left Encoder", CatzRobotMap.wheelEncoderL.getRate());
-		SmartDashboard.putNumber("Speed of Right Encoder", CatzRobotMap.wheelEncoderR.getRate());
+		SmartDashboard.putNumber("Distance of Ldeft Encoder", CatzRobotMap.wheelEncoderL.getDistance());
+		SmartDashboard.putNumber("Distance of Right Encoder", CatzRobotMap.wheelEncoderR.getDistance());
+		SmartDashboard.putNumber("Value of Left Encoder", CatzRobotMap.wheelEncoderL.get());
+		SmartDashboard.putNumber("Value of Right Encoder", CatzRobotMap.wheelEncoderR.get());
 		
 		SmartDashboard.putBoolean("Graber Forearms Open", CatzConstants.forearmOpen);
 		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzConstants.bicepDeployed);

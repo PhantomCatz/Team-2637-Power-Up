@@ -1,7 +1,8 @@
 package mechanisms;
 
-import org.usfirst.frc.team2637.robot.CatzRobotMap;
 import constants.CatzConstants;
+import robot.CatzRobotMap;
+
 //import PIDFunctions.PID;
 //import edu.wpi.first.wpilibj.Timer;
 
@@ -92,28 +93,32 @@ public class CatzLift
 	
 	*/
 	
-	public void setLiftSpeed(double relativeSpeed) {
+	public void setLiftSpeed(double relativeSpeed) 
+	{
 		CatzRobotMap.lifterL.set(relativeSpeed);
 		CatzRobotMap.lifterR.set(relativeSpeed);
 	}
 	
-	public void liftUp(){
+	public void liftUp()
+	{
 		CatzRobotMap.lifterL.set(CatzConstants.LIFT_SPEED);
 		CatzRobotMap.lifterR.set(CatzConstants.LIFT_SPEED);
 	}
-	
-	public void liftDown(){
+	public void liftDown()
+	{
 		CatzRobotMap.lifterL.set(-CatzConstants.LIFT_SPEED);
 		CatzRobotMap.lifterR.set(-CatzConstants.LIFT_SPEED);
 	}
-	
-	public void stopLift(){
+	public void stopLift()
+	{
 		CatzRobotMap.lifterL.set(CatzConstants.ZERO);
 		CatzRobotMap.lifterR.set(CatzConstants.ZERO);
 	}
 	
-	private static void printOutDebugData(String data){
-		if(CatzRobotMap.debugMode==true) {
+	private static void printOutDebugData(String data)
+	{
+		if(CatzRobotMap.debugMode==true) 
+		{
 			System.out.println(data);
 		}
 	}
