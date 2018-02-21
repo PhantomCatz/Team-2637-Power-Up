@@ -8,7 +8,7 @@
 
 package autonomous;
 
-import org.usfirst.frc.team2637.robot.CatzRobotMap;
+import robot.CatzRobotMap;
 
 public class CatzAutonomousPeriodic
 {

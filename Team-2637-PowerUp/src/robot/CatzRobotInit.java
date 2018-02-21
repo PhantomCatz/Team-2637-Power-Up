@@ -6,7 +6,7 @@
  *  Functionality: set the smartDashboard
 *******************************************************/
 
-package org.usfirst.frc.team2637.robot;
+package robot;
 
 import autonomous.CatzPIDDrive;
 import autonomous.CatzPIDTurn;

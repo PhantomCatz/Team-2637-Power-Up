@@ -56,9 +56,9 @@ public class CatzConstants
 	final static public int CUBEE_TALON_ID_R_FRONT = 4;
 	final static public int CUBEE_TALON_ID_R_REAR  = 5;
 
-	final static public int TALON_ID_L_FRONT = 5;
-	final static public int TALON_ID_L_REAR  = 1;
-	final static public int TALON_ID_R_FRONT = 4;
+	final static public int TALON_ID_L_FRONT = 4;
+	final static public int TALON_ID_L_REAR  = 3;
+	final static public int TALON_ID_R_FRONT = 5;
 	final static public int TALON_ID_R_REAR  = 6;
 	
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KP = .15;

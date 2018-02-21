@@ -1,9 +1,8 @@
 package autonomous;
 
-import org.usfirst.frc.team2637.robot.CatzRobotMap;
-
 import constants.CatzConstants;
 import mechanisms.CatzGrabber;
+import robot.CatzRobotMap;
 
 /**********************************************************
  * Timothy Vu 3 Feb 2018 TV 

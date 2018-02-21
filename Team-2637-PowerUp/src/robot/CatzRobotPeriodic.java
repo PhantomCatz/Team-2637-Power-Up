@@ -5,7 +5,7 @@
  *  Methods :  startPositionSelector, updateSmartDashboard
  *  Functionality : select the start position, show the values
  */
-package org.usfirst.frc.team2637.robot;
+package robot;
 
 import autonomous.CatzPIDTurn;
 import constants.CatzConstants;
