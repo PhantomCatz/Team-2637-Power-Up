@@ -1,7 +1,13 @@
 package mechanisms;
 
 import constants.CatzConstants;
+<<<<<<< HEAD
 import robot.CatzRobotMap;
+=======
+//import PIDFunctions.PID;
+//import edu.wpi.first.wpilibj.Timer;
+
+>>>>>>> de701ffa1033001cbbcf5f216522518717829981
 
 /*
  *  Author : Derek Duenas
@@ -59,6 +65,35 @@ public class CatzLift
         });
         t.start();
 	}
+
+	/*
+	public void liftToScaleHeight2(){
+		
+		PID liftPID = new PID();
+		Timer timer  = new Timer();
+		
+		
+		Thread t = new Thread(() -> {
+			
+			while (!Thread.interrupted()) {
+				while(liftPID.getError()>CatzConstants.LIFTER_ERROR_THRESHOLD_PULSES) {
+					
+					liftPID.setPreviousTime(liftPID.getCurrentTime());
+					liftPID.setCurrentTime(timer.getMatchTime());
+					liftPID.deltaTCalculate();
+					
+					liftPID.calculatePID(CatzConstants.LIFT_SCALE_HEIGHT,CatzRobotMap.liftEncoder.get(),CatzConstants.PID_LIFT_POWER_SCALE_FACTOR);
+					
+				}
+				this.stopLift();
+				printOutDebugData("Lift to scale height thread complete");
+				Thread.currentThread().interrupt();
+            }
+        });
+        t.start();
+	}
+	
+	*/
 	
 	public void setLiftSpeed(double relativeSpeed) {
 		CatzRobotMap.lifterL.set(relativeSpeed);

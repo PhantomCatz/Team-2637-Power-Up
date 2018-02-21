@@ -16,10 +16,8 @@ public class CatzAutonomousPaths {
 	 * 
 	 * Timeout is set to 2 sec
 	 ****************************/
-	CatzGrabber instance = new CatzGrabber();
 
 	public static void middlePathR() {
-		CatzRobotMap.getInstance();
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_LEAVE_WALL - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive
 																														// forward
@@ -125,7 +123,6 @@ public class CatzAutonomousPaths {
 	}
 
 	public static void leftPath() {
-		CatzRobotMap.getInstance();
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // Drive forward 335_65in
@@ -161,7 +158,6 @@ public class CatzAutonomousPaths {
 	}
 
 	public static void rightPath() {
-		CatzRobotMap.getInstance();
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.SIDE_PATH_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive forward 335_65in
@@ -272,7 +268,7 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		// instance.launchCube(); Put cube placing code here
+		//CatzRobotMap.grabber.setIntakeSpeed(-1);// Put cube placing code here
 
 		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.HALF_ROBOT_LENGTH),

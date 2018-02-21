@@ -78,9 +78,13 @@ public class CatzConstants
 	
 	/*need to acquire for final robot*/final static public double PID_TURN_FILTER_CONSTANT = .9;
 	/*need to acquire for final robot*/static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
+	/*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;    //0.7;
 	/*need to acquire for final robot*/static public double PID_TURN_KP = 0.0508;  //0.0508
 	/*need to acquire for final robot*/static public double PID_TURN_KD = 0.008;  //0.0744
 	/*need to acquire for final robot*/static public double PID_TURN_KI = 0.0;
+	/*need to acquire for final robot*/static public double PID_LIFT_KP = 0.0508;  //0.0508
+	/*need to acquire for final robot*/static public double PID_LIFT_KD = 0.008;  //0.0744
+	/*need to acquire for final robot*/static public double PID_LIFT_KI = 0.0;
 	/*need to acquire for final robot*/final static public double PID_TURN_TIMEOUT = 3.0;
 	/*need to acquire for final robot*/final static public double PID_TURN_INTEGRAL_MAX = 0.0;
 	/*need to acquire for final robot*/final static public double PID_TURN_INTEGRAL_MIN = 0.0;
@@ -186,6 +190,7 @@ public class CatzConstants
 	/*need to acquire for final robot*/final static public double CLIMB_SPEED = 0;
 	/*need to acquire for final robot*/final static public double LIFT_SPEED = 0;
 	/*need to acquire for final robot*/final static public double INTAKE_SPEED = 0.7;
+	
 	
 	static public boolean bicepDeployed = false;
 	static public boolean forearmOpen = false;

@@ -24,7 +24,7 @@ public class CatzRobotInit
 	
 	public static void run() 
 	{
-		
+		CatzRobotMap.getInstance();
 		setSmartDashboard();
 		
 	}
