@@ -63,6 +63,25 @@ public class CatzLift
         });
         t.start();
 	}
+	
+	public void liftToGroundHeight(){
+		Thread t = new Thread(() -> {
+            double error=CatzConstants.INITIAL_LIFTER_ERROR;
+			while (!Thread.interrupted()) {
+				while(error>CatzConstants.LIFTER_ERROR_THRESHOLD_PULSES) {
+	            	if(CatzRobotMap.liftEncoder.get() > CatzConstants.ZERO)
+	        			this.liftDown();
+	        		else
+	        			this.stopLift();
+	            	error = Math.abs(CatzRobotMap.liftEncoder.get()-CatzConstants.LIFT_SCALE_HEIGHT);
+				}
+				this.stopLift();
+				printOutDebugData("Lift to scale height thread complete");
+				Thread.currentThread().interrupt();
+            }
+        });
+        t.start();
+	}
 
 	/*
 	public void liftToScaleHeight2(){
