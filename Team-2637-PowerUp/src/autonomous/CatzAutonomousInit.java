@@ -28,6 +28,7 @@ public class CatzAutonomousInit
 	}
 	
 	public static void setMechanisms() {
+		CatzRobotMap.comp.setClosedLoopControl(true);
 		CatzRobotMap.grabber.closeForearm();
 		CatzRobotMap.grabber.retractBicep();
 	}

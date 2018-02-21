@@ -173,9 +173,9 @@ public class CatzPIDTurn
 		
 		if(tuningMode == true) {
 			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, CatzConstants.PID_TURN_POWER_SCALE_FACTOR);
-			SmartDashboard.putNumber(CatzConstants.Turn_KP, CatzConstants.PID_TURN_KP);
-			SmartDashboard.putNumber(CatzConstants.Turn_KD, CatzConstants.PID_TURN_KD);
-			SmartDashboard.putNumber(CatzConstants.Turn_KI, CatzConstants.PID_TURN_KI);
+			SmartDashboard.putNumber(CatzConstants.TURN_KP_LABEL, CatzConstants.PID_TURN_KP);
+			SmartDashboard.putNumber(CatzConstants.TURN_KD_LABEL, CatzConstants.PID_TURN_KD);
+			SmartDashboard.putNumber(CatzConstants.TURN_KI_LABEL, CatzConstants.PID_TURN_KI);
 		}
 	}
 	public static void printDebugInit()

@@ -3,6 +3,7 @@ package org.usfirst.frc.team2637.robot;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import constants.CatzConstants;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
@@ -56,6 +57,8 @@ public class CatzRobotMap
 	public static Solenoid intakeForearm;
 	public static Solenoid intakeBicep;
 	
+	public static Compressor comp;
+	
 	public static boolean debugMode = false;
 	//public static CatzLogger logger;
 	
@@ -64,14 +67,14 @@ public class CatzRobotMap
 	private CatzRobotMap() 
 	{	
 
-		/*fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_FRONT); 
-		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_REAR);
-		fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_FRONT);
-		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_REAR);*/
-		fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT);
+		fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_R); 
+		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_BACK_R);
+		fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_L);
+		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_BACK_L);
+		/*fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT);
 		rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
 		fLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_FRONT);
-		rLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);
+		rLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);*/
 		fRight.setSafetyEnabled(false);
 		rRight.setSafetyEnabled(false);
 		fLeft.setSafetyEnabled(false);
@@ -109,12 +112,17 @@ public class CatzRobotMap
 		intakeBicep   = new Solenoid(CatzConstants.PCM_PORT_1);
 		printOutDebugData("Successfully initialized auxilary actuators");
 		
+		comp = new Compressor(2);  //add constant 
+		
 		climberMechanism = new CatzClimber();
 		grabber          = new CatzGrabber();
 		lift             = new CatzLift();
 
 		
 		//logger = new CatzLogger();
+	}
+	public static void setDebugModeEnabled(boolean enabled) {
+		debugMode = enabled;
 	}
 	public static CatzRobotMap getInstance()
 	{

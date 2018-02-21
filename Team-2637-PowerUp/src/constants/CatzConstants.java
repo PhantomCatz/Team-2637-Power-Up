@@ -56,10 +56,10 @@ public class CatzConstants
 	final static public int CUBEE_TALON_ID_R_FRONT = 4;
 	final static public int CUBEE_TALON_ID_R_REAR  = 5;
 
-	final static public int TALON_ID_L_FRONT = 5;
-	final static public int TALON_ID_L_REAR  = 1;
-	final static public int TALON_ID_R_FRONT = 4;
-	final static public int TALON_ID_R_REAR  = 6;
+	final static public int TALON_ID_FRONT_L = 4;
+	final static public int TALON_ID_BACK_L  = 3;
+	final static public int TALON_ID_FRONT_R = 5;
+	final static public int TALON_ID_BACK_R  = 6;
 	
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KP = .15;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
@@ -198,9 +198,9 @@ public class CatzConstants
 	final static public String POSITION_SELECTORL = "Position Left";
 	final static public String POSITION_SELECTORM = "Position Mid";
 	final static public String POSITION_SELECTORR = "Position Right";
-	static public String Turn_KP = "Turn KP";
-	static public String Turn_KI = "Turn KI";
-	static public String Turn_KD = "Turn KD";
+	static public String TURN_KP_LABEL = "Turn KP";
+	static public String TURN_KI_LABEL = "Turn KI";
+	static public String TURN_KD_LABEL = "Turn KD";
 	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
 	
 	/*need to acquire for final robot*/final static public double LIFT_SCALE_HEIGHT = 0.0;

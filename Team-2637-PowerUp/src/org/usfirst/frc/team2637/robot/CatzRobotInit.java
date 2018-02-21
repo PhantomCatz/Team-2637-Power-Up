@@ -22,10 +22,12 @@ public class CatzRobotInit
 	static boolean check_boxR = false;
 
 	
-	public static void run() 
+	public static void runRobotInit() 
 	{
-		CatzRobotMap.getInstance();
 		setSmartDashboard();
+		CatzPIDTurn.setTuningModeEnabled(true);
+		CatzRobotMap.setDebugModeEnabled(true);
+		CatzRobotMap.getInstance();
 		
 	}
 	
