@@ -67,7 +67,7 @@ public class CatzAutonomousInit
 			printOutDebugData("Init failed");
 			CatzPIDDrive.PIDDrive(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
 		              			  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
-		                          CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT);
+		                          CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT); //if all else fails, just drive forward
 		}
 	}
 	
