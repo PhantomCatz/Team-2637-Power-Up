@@ -8,9 +8,11 @@ package teleop;
  *  Functionality : prepares robot for operator control
  */
 
-import org.usfirst.frc.team2637.robot.CatzRobotMap;
+
 
 import constants.CatzConstants;
+import robot.CatzRobotMap;
+
 
 public class CatzTeleopInit 
 {

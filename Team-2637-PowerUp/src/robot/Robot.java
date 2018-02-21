@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.usfirst.frc.team2637.robot;
+package robot;
 
 import autonomous.CatzAutonomousInit;
 import autonomous.CatzAutonomousPeriodic;

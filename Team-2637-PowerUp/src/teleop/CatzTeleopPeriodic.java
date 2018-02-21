@@ -1,6 +1,6 @@
 package teleop;
 
-import org.usfirst.frc.team2637.robot.CatzRobotMap;
+import robot.CatzRobotMap;
 
 /**********************************************************
  * Andrew Lai
@@ -17,7 +17,7 @@ public class CatzTeleopPeriodic
 
 		//sets drive control to drive xbox controller 
 		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
-		
+
 		runGrabberControls();
 		runLiftControls();
 		runClimberControls();

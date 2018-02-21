@@ -66,6 +66,7 @@ public class CatzConstants
 	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_SPEED = .43;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_TIME = .3;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
+	final static public double PID_DRIVE_TIMEOUT = 2.0;
 	
 	final static public int LOGGER_LEVEL1 = 1;
 	final static public int LOGGER_LEVEL2 = 2;
