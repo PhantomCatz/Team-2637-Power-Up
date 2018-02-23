@@ -61,7 +61,7 @@ public class CatzAutonomousPaths {
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_DRIVE_TIMEOUT); // turn 90deg left
 		
-		CatzRobotMap.lift.dropToGround();
+		CatzRobotMap.lift.dropToGroundHeight();
 		
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_APPROACH_CUBE_CLOSE - CatzConstants.HALF_ROBOT_LENGTH),
@@ -92,7 +92,7 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_APPROACH_SWITCH - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.PID_DRIVE_TIMEOUT); // Drive
 																															// forward
 																															// 55.2in
-		
+		//CatzAutonomousInit.outtakeCubeToSwitch();
 		/******************************************************
 		/*  cube placing code here   */
 		CatzRobotMap.grabber.outtakeCubeToSwitch();
@@ -115,15 +115,20 @@ public class CatzAutonomousPaths {
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_DRIVE_TIMEOUT); // turn 90deg right
 		
-		CatzRobotMap.lift.dropToGround();
+		CatzRobotMap.lift.dropToGroundHeight();
 		
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_APPROACH_CUBE_CLOSE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT); // 48in can be used here for the further cube
 		/******************************************************
+		 * Write cube pickup code here
+		 * 
+		 ******************************************************/
+		//CatzAutonomousInit.intakeCube();
 		/* cube pickup code here  */
 		CatzRobotMap.grabber.intakeCube();
 		/******************************************************/
+
 	}
 
 	public static void leftPath() {
@@ -155,7 +160,7 @@ public class CatzAutonomousPaths {
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_DRIVE_TIMEOUT); // turn 90deg
 		
-		CatzRobotMap.lift.dropToGround();
+		CatzRobotMap.lift.dropToGroundHeight();
 		
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.SIDE_PATH_APPROACH_CUBE - CatzConstants.HALF_ROBOT_LENGTH),
@@ -288,7 +293,7 @@ public class CatzAutonomousPaths {
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_30, CatzConstants.PID_TURN_TIMEOUT);
-
+		
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
