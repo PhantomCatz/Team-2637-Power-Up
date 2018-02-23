@@ -56,17 +56,18 @@ public class CatzConstants
 	final static public int CUBEE_TALON_ID_R_FRONT = 4;
 	final static public int CUBEE_TALON_ID_R_REAR  = 5;
 
-	final static public int TALON_ID_FRONT_L = 4;
-	final static public int TALON_ID_REAR_L  = 3;
-	final static public int TALON_ID_FRONT_R = 5;
-	final static public int TALON_ID_REAR_R  = 6;
+	
+	final static public int TALON_ID_FRONT_L = 4; 
+	final static public int TALON_ID_REAR_L  = 3;  
+	final static public int TALON_ID_FRONT_R = 5; 
+	final static public int TALON_ID_REAR_R  = 6; 
 	
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KP = .15;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
 	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_SPEED = .43;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_TIME = .3;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
-	final static public double PID_DRIVE_TIMEOUT = 2.0;
+	final static public double PID_DRIVE_TIMEOUT = 10.0;
 	
 	final static public int LOGGER_LEVEL1 = 1;
 	final static public int LOGGER_LEVEL2 = 2;

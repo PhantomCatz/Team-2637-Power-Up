@@ -19,12 +19,13 @@ public class CatzAutonomousInit
 	
 	public static void runAutonomousInit()
 	{
-		retractMechanisms();
+		//retractMechanisms();
 		//choosePath();
 		//CatzPIDTurn.setDebugModeEnabled( true );
-		//CatzPIDTurn.PIDturn(90, 5);
-		//CatzPIDTurn.PIDturn(-90, 5);
+		//CatzPIDTurn.PIDturn(-45, 5);
+		//CatzPIDTurn.PIDturn(-90, 10);
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
+		CatzAutonomousPaths.middlePathL();
 	}
 	
 	public static void retractMechanisms() 
@@ -55,7 +56,7 @@ public class CatzAutonomousInit
 	}
 	public static void intakeCube()
 	{
-		CatzRobotMap.lift.liftToGroundHeight();
+		CatzRobotMap.lift.dropToGroundHeight();
 		deployMechanisms();
 		CatzRobotMap.grabber.setIntakeSpeed(CatzConstants.INTAKE_SPEED);
 		Timer.delay(CatzConstants.CUBE_INTAKE_WAIT_TIME);

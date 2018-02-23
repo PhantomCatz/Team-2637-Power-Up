@@ -19,7 +19,6 @@ public class CatzAutonomousPaths {
 
 	public static void middlePathR() {
 
-		CatzRobotMap.getInstance();
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_LEAVE_WALL - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.PID_DRIVE_TIMEOUT); // Drive
 
@@ -91,7 +90,7 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_APPROACH_SWITCH - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.PID_DRIVE_TIMEOUT); // Drive
 																															// forward
 																															// 55.2in
-		CatzAutonomousInit.outtakeCubeToSwitch();
+		//CatzAutonomousInit.outtakeCubeToSwitch();
 		/******************************************************
 		 * Write cube placing code here
 		 * 
@@ -122,7 +121,7 @@ public class CatzAutonomousPaths {
 		 * Write cube pickup code here
 		 * 
 		 ******************************************************/
-		CatzAutonomousInit.intakeCube();
+		//CatzAutonomousInit.intakeCube();
 	}
 
 	public static void leftPath() {
@@ -285,7 +284,7 @@ public class CatzAutonomousPaths {
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_30, CatzConstants.PID_TURN_TIMEOUT);
-
+		
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);

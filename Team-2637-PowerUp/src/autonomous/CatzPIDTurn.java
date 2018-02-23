@@ -91,7 +91,8 @@ public class CatzPIDTurn
 			// calculates proportional term
 			currentError = targetAngle - currentAngle;
 			
-			if (Math.abs(currentError)>CatzConstants.PID_TURN_THRESHOLD) {
+			
+			if (Math.abs(currentError)<CatzConstants.PID_TURN_THRESHOLD) {
 				done = true;
 			} else {
 			
@@ -150,6 +151,7 @@ public class CatzPIDTurn
 				if (functionTimer.get() > timeoutSeconds)
 					done = true;
 				
+				System.out.println("value of done flag="+String.valueOf(done));
 				printDebugData();
 			}
 			Timer.delay(0.015); //was .005,.008

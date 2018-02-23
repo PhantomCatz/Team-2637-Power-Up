@@ -26,8 +26,8 @@ public class CatzRobotPeriodic
 
 	public static void runRobotPeriodic(){
 	
-		runPositionSelector();
-		updateSmartDashboard();
+		//runPositionSelector();
+		//updateSmartDashboard();
 		if(CatzPIDTurn.isTuningModeEnabled())
 			updatePIDTurnConstants();
 		

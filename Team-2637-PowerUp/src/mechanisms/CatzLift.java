@@ -64,7 +64,7 @@ public class CatzLift
         t.start();
 	}
 	
-	public void liftToGroundHeight(){
+	public void dropToGroundHeight(){
 		Thread t = new Thread(() -> {
             double error=CatzConstants.INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
@@ -73,7 +73,7 @@ public class CatzLift
 	        			this.liftDown();
 	        		else
 	        			this.stopLift();
-	            	error = Math.abs(CatzRobotMap.liftEncoder.get()-CatzConstants.LIFT_SCALE_HEIGHT);
+	            	error = Math.abs(CatzRobotMap.liftEncoder.get());
 				}
 				this.stopLift();
 				printOutDebugData("Lift to scale height thread complete");

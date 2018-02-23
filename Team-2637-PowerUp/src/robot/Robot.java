@@ -34,12 +34,13 @@ public class Robot extends IterativeRobot
 	{
 		CatzAutonomousInit.runAutonomousInit();
 	}
-
+/*
 	@Override
 	public void autonomousPeriodic()
 	{
 		CatzAutonomousPeriodic.runAutonomousPeriodic();
 	}
+
 
 	@Override
 	public void teleopInit()
@@ -52,5 +53,5 @@ public class Robot extends IterativeRobot
 	{			
 		CatzTeleopPeriodic.runTeleopPeriodic();
 	}
-
+*/
 }
