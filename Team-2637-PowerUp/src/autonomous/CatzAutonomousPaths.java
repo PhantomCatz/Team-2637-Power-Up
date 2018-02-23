@@ -39,10 +39,6 @@ public class CatzAutonomousPaths {
 																															// forward
 					
 		CatzAutonomousInit.outtakeCubeToSwitch();
-		/******************************************************
-		 * Write cube placing code here
-		 * 
-		 ******************************************************/
 		
 
 		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
@@ -66,10 +62,7 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_APPROACH_CUBE_CLOSE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT); // 48in can be used here for the further cube
 
-		/******************************************************
-		 * Write cube pickup code here
-		 * 
-		 ******************************************************/
+
 		CatzAutonomousInit.intakeCube();
 	}
 
@@ -92,10 +85,7 @@ public class CatzAutonomousPaths {
 																															// forward
 																															// 55.2in
 		CatzAutonomousInit.outtakeCubeToSwitch();
-		/******************************************************
-		 * Write cube placing code here
-		 * 
-		 ******************************************************/
+
 
 		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_BACK_AWAY + CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.PID_DRIVE_TIMEOUT); // Drive
@@ -118,10 +108,6 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_APPROACH_CUBE_CLOSE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT); // 48in can be used here for the further cube
 
-		/******************************************************
-		 * Write cube pickup code here
-		 * 
-		 ******************************************************/
 		CatzAutonomousInit.intakeCube();
 	}
 
@@ -142,10 +128,7 @@ public class CatzAutonomousPaths {
 				CatzConstants.PID_DRIVE_TIMEOUT); // drive forward 41.88in
 		
 		CatzAutonomousInit.outtakeCubeToScale();
-		/******************************************************
-		 * Write scale cube placing code here
-		 * 
-		 ******************************************************/
+
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_DRIVE_TIMEOUT); // turn 90deg right
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (CatzConstants.SIDE_PATH_LEAVE_SCALE),
@@ -157,10 +140,7 @@ public class CatzAutonomousPaths {
 				(CatzConstants.SIDE_PATH_APPROACH_CUBE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT); // Drive forward 12in
 
-		/******************************************************
-		 * Write cube pickup code here
-		 * 
-		 ******************************************************/
+
 		CatzAutonomousInit.intakeCube();
 	}
 
@@ -183,10 +163,7 @@ public class CatzAutonomousPaths {
 				CatzConstants.PID_DRIVE_TIMEOUT); // drive forward 41.88in
 		
 		CatzAutonomousInit.outtakeCubeToScale();
-		/******************************************************
-		 * Write scale cube placing code here
-		 * 
-		 ******************************************************/
+
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_DRIVE_TIMEOUT); // turn 90deg left
 
@@ -200,10 +177,7 @@ public class CatzAutonomousPaths {
 				(CatzConstants.SIDE_PATH_APPROACH_CUBE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT); // drive forward 12in
 
-		/******************************************************
-		 * Write cube pickup code here
-		 * 
-		 ******************************************************/
+
 		CatzAutonomousInit.intakeCube();
 	}
 
@@ -276,118 +250,107 @@ public class CatzAutonomousPaths {
 
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
+				(CatzConstants.MID_SWITCH_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_60, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_SWITCH),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (CatzConstants.MID_SWITCH_SCALE_TOWARDS_SWITCH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_30, CatzConstants.PID_TURN_TIMEOUT);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
+				(CatzConstants.MID_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzAutonomousInit.outtakeCubeToSwitch();
 
 		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.HALF_ROBOT_LENGTH),
+				(CatzConstants.MID_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_LEAVE_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
+				(CatzConstants.MID_SWITCH_SCALE_LEAVE_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_RIGHT_SWITCH_SCALE_AROUND_SWITCH,
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_SWITCH_SCALE_AROUND_SWITCH,
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
-				CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_CUBE - CatzConstants.HALF_ROBOT_LENGTH,
+				CatzConstants.MID_SWITCH_SCALE_TOWARDS_CUBE - CatzConstants.HALF_ROBOT_LENGTH,
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
-		/******************************************************
-		 * Write cube pickup code here
-		 * 
-		 ******************************************************/
+
 		CatzAutonomousInit.intakeCube();
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_SCALE,
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_SWITCH_SCALE_TOWARDS_SCALE,
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
-		/******************************************************
-		 * Write scale cube deploy code here
-		 * 
-		 ******************************************************/
 		CatzAutonomousInit.outtakeCubeToScale();
 	}
 
 	public void middleLeftSwitchScale() {
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
+				(CatzConstants.MID_SWITCH_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_60, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_SWITCH),
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (CatzConstants.MID_SWITCH_SCALE_TOWARDS_SWITCH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_30, CatzConstants.PID_TURN_TIMEOUT);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
+				(CatzConstants.MID_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzAutonomousInit.outtakeCubeToSwitch();
 
 		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.HALF_ROBOT_LENGTH),
+				(CatzConstants.MID_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
-				(CatzConstants.MID_RIGHT_SWITCH_SCALE_LEAVE_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
+				(CatzConstants.MID_SWITCH_SCALE_LEAVE_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_RIGHT_SWITCH_SCALE_AROUND_SWITCH,
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_SWITCH_SCALE_AROUND_SWITCH,
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
-				CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_CUBE - CatzConstants.HALF_ROBOT_LENGTH,
+				CatzConstants.MID_SWITCH_SCALE_TOWARDS_CUBE - CatzConstants.HALF_ROBOT_LENGTH,
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
-		/******************************************************
-		 * Write cube pickup code here
-		 * 
-		 ******************************************************/
+	
 		CatzAutonomousInit.intakeCube();
 		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_SCALE,
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_SWITCH_SCALE_TOWARDS_SCALE,
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
-		/******************************************************
-		 * Write scale cube deploy code here
-		 * 
-		 ******************************************************/
+
 		CatzAutonomousInit.outtakeCubeToScale();
 	}
 
 	public void middleRightSwitchSwitch() {
+		
+		
 
 	}
 }

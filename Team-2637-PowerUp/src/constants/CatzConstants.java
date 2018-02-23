@@ -111,13 +111,14 @@ public class CatzConstants
 	final static public double MID_APPROACH_CUBE_FAR = 48.0;
 	final static public double MID_BACK_AWAY = 20.0;
 	
-	final static public double MID_RIGHT_SWITCH_SCALE_INIT_DISTANCE = 66.3;
-	final static public double MID_RIGHT_SWITCH_SCALE_TOWARDS_SWITCH = 64;
-	final static public double MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH = 36.5;
-	final static public double MID_RIGHT_SWITCH_SCALE_LEAVE_SWITCH = 65;
-	final static public double MID_RIGHT_SWITCH_SCALE_AROUND_SWITCH = 89;
-	final static public double MID_RIGHT_SWITCH_SCALE_TOWARDS_CUBE = 47.5;
-	final static public double MID_RIGHT_SWITCH_SCALE_TOWARDS_SCALE = 89;
+	final static public double MID_SWITCH_SCALE_INIT_DISTANCE = 66.3;
+	final static public double MID_SWITCH_SCALE_TOWARDS_SWITCH = 64;
+	final static public double MID_SWITCH_SCALE_NEXT_TO_SWITCH = 36.5;
+	final static public double MID_SWITCH_SCALE_LEAVE_SWITCH = 65;
+	final static public double MID_SWITCH_SCALE_AROUND_SWITCH = 89;
+	final static public double MID_SWITCH_SCALE_TOWARDS_CUBE = 47.5;
+	final static public double MID_SWITCH_SCALE_TOWARDS_SCALE = 89;
+	
 	
 	final static public int TURN_DEG_45 = 45;
 	final static public int TURN_DEG_90 = 90;
@@ -185,6 +186,7 @@ public class CatzConstants
 	final static public double OPPO_RIGHT_SCALE_SCALE_BCAK_UP = 20.0;
 	final static public double OPPO_RIGHT_SCALE_SCALE_APPRO_CUBE = 44.4;
 	final static public double OPPO_RIGHT_SCALE_SCALE_CUBE_DEG = 31.8;
+
 	
 	final static public double ZERO = 0.0;
 
