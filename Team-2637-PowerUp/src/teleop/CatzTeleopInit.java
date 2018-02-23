@@ -22,6 +22,7 @@ public class CatzTeleopInit
 		
 	}
 	public static void setMechanisms() {
+
 		CatzRobotMap.grabber.closeForearm();
 		CatzRobotMap.grabber.retractBicep();
 	}

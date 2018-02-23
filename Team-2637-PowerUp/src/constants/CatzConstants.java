@@ -213,5 +213,6 @@ public class CatzConstants
 	final static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
 	final static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
 
-
+	final static public double CUBE_OUTTAKE_WAIT_TIME = 0.2;
+	final static public double CUBE_INTAKE_WAIT_TIME = 0.2;
 }

@@ -34,8 +34,8 @@ public class CatzRobotInit
 		CatzPIDTurn.setTuningModeEnabled(true);
 		CatzRobotMap.setDebugModeEnabled(true);
 		CatzRobotMap.getInstance();
-		CameraServer.getInstance().startAutomaticCapture();
-		cameraSetup();
+		//CameraServer.getInstance().startAutomaticCapture();
+		//cameraSetup();
 	}
 	
 	public static void setSmartDashboard() {

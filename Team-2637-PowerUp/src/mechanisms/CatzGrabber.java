@@ -1,9 +1,10 @@
 /************************************************
  * Timothy Vu
  * 
- * Last Revised: 2/19/18
+ * Last Revised: 2/20/18 AL
  * 
  * added printout debug data code
+ * flipped polarity of forearm and bicep solenoids
  * 
  * Methods: openFlapToggle(), intakeCube(), launchCube(), 
  * deployIntake(), retractIntake()
@@ -25,6 +26,7 @@ public class CatzGrabber
 	public void setIntakeSpeed(double relativeSpeed) {
 		CatzRobotMap.intakeLeft.set(relativeSpeed);
 		CatzRobotMap.intakeRight.set(-relativeSpeed);
+		//if bump switch is pressed then set at 0
 	}
 	
 	public void openForearm() {
