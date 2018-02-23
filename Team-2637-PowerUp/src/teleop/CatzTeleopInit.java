@@ -18,12 +18,11 @@ public class CatzTeleopInit
 {
 	public static void runTeleopInit()
 	{
-		//CatzRobotMap.comp.setClosedLoopControl(true);
 		setMechanisms();
 		
 	}
 	public static void setMechanisms() {
-		//CatzRobotMap.comp.setClosedLoopControl(true);
+
 		CatzRobotMap.grabber.closeForearm();
 		CatzRobotMap.grabber.retractBicep();
 	}

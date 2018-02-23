@@ -2,10 +2,8 @@ package robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-
 import autonomous.CatzAutonomousInit;
 import constants.CatzConstants;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -13,7 +11,6 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import components.CatzDrive;
-import components.CatzJoystick;
 import components.CatzXboxController;
 import mechanisms.CatzClimber;
 import mechanisms.CatzGrabber;
@@ -57,7 +54,7 @@ public class CatzRobotMap
 	
 	public static Solenoid intakeForearm;
 	public static Solenoid intakeBicep;
-	
+
 	public static boolean debugMode = false;
 	//public static CatzLogger logger;
 	
@@ -67,13 +64,14 @@ public class CatzRobotMap
 	{	
 
 		fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_R); 
-		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_BACK_R);
+		rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_R);
 		fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_L);
-		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_BACK_L);
+		rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_L);
 		/*fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT);
 		rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
 		fLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_FRONT);
 		rLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);*/
+		
 		fRight.setSafetyEnabled(false);
 		rRight.setSafetyEnabled(false);
 		fLeft.setSafetyEnabled(false);
@@ -84,7 +82,7 @@ public class CatzRobotMap
 		drive = new CatzDrive(leftMotors, rightMotors);
 		printOutDebugData("Successfully initialized full drive train");
 		
-		climberMotor = new WPI_TalonSRX(CatzConstants.PORT_3);
+		climberMotor = new WPI_TalonSRX(CatzConstants.PORT_1);
 		climberMotor.setSafetyEnabled(false);
 		printOutDebugData("Successfully initialized climber Motor");
 		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
@@ -107,8 +105,8 @@ public class CatzRobotMap
 		intakeRight = new Spark(CatzConstants.PWM_PORT_2);
 		intakeLeft  = new Spark(CatzConstants.PWM_PORT_3);
 		
-		intakeForearm = new Solenoid(CatzConstants.PCM_PORT_0);
-		intakeBicep   = new Solenoid(CatzConstants.PCM_PORT_1);
+		intakeForearm = new Solenoid(CatzConstants.PCM_PORT_1);
+		intakeBicep   = new Solenoid(CatzConstants.PCM_PORT_0);
 		printOutDebugData("Successfully initialized auxilary actuators");
 		
 		climberMechanism = new CatzClimber();

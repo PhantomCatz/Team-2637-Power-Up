@@ -57,9 +57,9 @@ public class CatzConstants
 	final static public int CUBEE_TALON_ID_R_REAR  = 5;
 
 	final static public int TALON_ID_FRONT_L = 4;
-	final static public int TALON_ID_BACK_L  = 3;
+	final static public int TALON_ID_REAR_L  = 3;
 	final static public int TALON_ID_FRONT_R = 5;
-	final static public int TALON_ID_BACK_R  = 6;
+	final static public int TALON_ID_REAR_R  = 6;
 	
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KP = .15;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
@@ -195,8 +195,8 @@ public class CatzConstants
 	/*need to acquire for final robot*/final static public double INTAKE_SPEED = 0.7;
 	
 	
-	static public boolean bicepDeployed = false;
-	static public boolean forearmOpen = false;
+	static public boolean bicepRetracted = false;
+	static public boolean forearmClosed = false;
 	
 	final static public String POSITION_SELECTORL = "Position Left";
 	final static public String POSITION_SELECTORM = "Position Mid";
