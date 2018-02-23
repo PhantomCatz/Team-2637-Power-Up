@@ -2,10 +2,8 @@ package robot;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-
 import autonomous.CatzAutonomousInit;
 import constants.CatzConstants;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -13,7 +11,6 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import components.CatzDrive;
-import components.CatzJoystick;
 import components.CatzXboxController;
 import mechanisms.CatzClimber;
 import mechanisms.CatzGrabber;

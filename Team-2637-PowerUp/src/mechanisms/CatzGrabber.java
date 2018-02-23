@@ -15,6 +15,7 @@
 package mechanisms;
 
 import constants.CatzConstants;
+import edu.wpi.first.wpilibj.Timer;
 import robot.CatzRobotMap;
 
 public class CatzGrabber 
@@ -66,5 +67,36 @@ public class CatzGrabber
 		if(CatzRobotMap.debugMode==true) {
 			System.out.println(data);
 		}
+	}
+	public void retractGrabber() 
+	{
+		this.closeForearm();
+		this.retractBicep();
+	}
+	public void deployGrabber()
+	{
+		this.deployBicep();
+		this.openForearm();
+	}
+	public void outtakeCubeToScale()
+	{
+		this.deployBicep();
+		this.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
+		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
+		this.setIntakeSpeed(0.0);
+	}
+	public void outtakeCubeToSwitch()
+	{
+		this.deployBicep();
+		this.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
+		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
+		this.setIntakeSpeed(0.0);
+	}
+	public void intakeCube()
+	{
+		this.deployBicep();
+		this.setIntakeSpeed(CatzConstants.INTAKE_SPEED);
+		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
+		this.setIntakeSpeed(0.0);
 	}
 }

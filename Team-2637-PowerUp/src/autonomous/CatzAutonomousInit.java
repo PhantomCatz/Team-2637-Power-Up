@@ -20,6 +20,7 @@ public class CatzAutonomousInit
 	public static void runAutonomousInit()
 	{
 		//retractMechanisms();
+		CatzRobotMap.grabber.retractGrabber();
 		//choosePath();
 		//CatzPIDTurn.setDebugModeEnabled( true );
 		//CatzPIDTurn.PIDturn(-45, 5);
@@ -27,7 +28,7 @@ public class CatzAutonomousInit
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
 		CatzAutonomousPaths.middlePathL();
 	}
-	
+
 	public static void retractMechanisms() 
 	{
 		CatzRobotMap.grabber.closeForearm();
@@ -62,6 +63,7 @@ public class CatzAutonomousInit
 		Timer.delay(CatzConstants.CUBE_INTAKE_WAIT_TIME);
 		retractMechanisms();
 	}
+
 	
 	public static void choosePath() {	
 		String gameData;
