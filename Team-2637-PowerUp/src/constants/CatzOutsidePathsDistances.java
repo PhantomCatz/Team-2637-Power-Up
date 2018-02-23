@@ -7,6 +7,21 @@
 package constants;
 
 public class CatzOutsidePathsDistances {
+	
+	final static public double HALF_ROBOT_LENGTH = 19.5;
+	final static public double HALF_ROBOT_WIDTH = 17.0;
+	
+	final static public int STRAIGHTDRIVE_TIMEOUT = 2;
+	
+	final static public double HALF_SPEED = 0.5;
+
+	final static public double PID_TURN_TIMEOUT = 3.0;
+	
+	final static public double CLIMB_SPEED = 0;
+	final static public double LIFT_SPEED = 0;
+	final static public double INTAKE_SPEED = 0.7;
+
+	
 	//the distance below are for the right_LRL
 	
 		final static public double RIGHT_LRL_INIT_DIST = 261.0;
@@ -100,5 +115,6 @@ public class CatzOutsidePathsDistances {
 		final static public double LEFT_LLL_ACCUE_CUBE = 7.0;
 		final static public double LEFT_LLL_APPRO_SWITCH = 50.0;
 		final static public double LEFT_LLL_APPRO_FINAL_SCLAE = 70.0;
+		
 		
 }
