@@ -19,7 +19,7 @@ public class CatzAutonomousInit
 	
 	public static void runAutonomousInit()
 	{
-		retractMechanisms();
+		CatzRobotMap.grabber.retractGrabber();
 		//choosePath();
 		//CatzPIDTurn.setDebugModeEnabled( true );
 		//CatzPIDTurn.PIDturn(90, 5);
@@ -27,40 +27,8 @@ public class CatzAutonomousInit
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
 	
-	public static void retractMechanisms() 
-	{
-		CatzRobotMap.grabber.closeForearm();
-		CatzRobotMap.grabber.retractBicep();
-	}
-	public static void deployMechanisms()
-	{
-		CatzRobotMap.grabber.deployBicep();
-		CatzRobotMap.grabber.openForearm();
-	}
-	public static void outtakeCubeToScale()
-	{
-		CatzRobotMap.lift.liftToScaleHeight();
-		deployMechanisms();
-		CatzRobotMap.grabber.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
-		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
-		retractMechanisms();
-	}
-	public static void outtakeCubeToSwitch()
-	{
-		CatzRobotMap.lift.liftToSwitchHeight();
-		deployMechanisms();
-		CatzRobotMap.grabber.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
-		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
-		retractMechanisms();
-	}
-	public static void intakeCube()
-	{
-		CatzRobotMap.lift.liftToGroundHeight();
-		deployMechanisms();
-		CatzRobotMap.grabber.setIntakeSpeed(CatzConstants.INTAKE_SPEED);
-		Timer.delay(CatzConstants.CUBE_INTAKE_WAIT_TIME);
-		retractMechanisms();
-	}
+	
+
 	
 	public static void choosePath() {	
 		String gameData;

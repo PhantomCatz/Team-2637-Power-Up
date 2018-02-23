@@ -64,7 +64,7 @@ public class CatzLift
         t.start();
 	}
 	
-	public void liftToGroundHeight(){
+	public void dropToGround(){
 		Thread t = new Thread(() -> {
             double error=CatzConstants.INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
