@@ -28,19 +28,19 @@ public class CatzGrabber
 	}
 	
 	public void openForearm() {
-		CatzConstants.forearmOpen = true;
-		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
+		CatzConstants.forearmClosed = false;
+		CatzRobotMap.intakeForearm.set(CatzConstants.forearmClosed);
 		printOutDebugData("Grabber forearm set to Open");
 	}
 
 	public void closeForearm() {
-		CatzConstants.forearmOpen = false;
-		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
+		CatzConstants.forearmClosed = true;
+		CatzRobotMap.intakeForearm.set(CatzConstants.forearmClosed);
 		printOutDebugData("Grabber forearm set to Closed");
 	}
 	
 	public void toggleForearm() {
-		if(CatzConstants.forearmOpen == true) {
+		if(CatzConstants.forearmClosed == false) {
 			this.closeForearm();
 		}
 		else{
@@ -49,14 +49,14 @@ public class CatzGrabber
 	}
 
 	public void retractBicep() { 
-		CatzConstants.bicepDeployed = false;
-		CatzRobotMap.intakeBicep.set(CatzConstants.bicepDeployed);
+		CatzConstants.bicepRetracted = true;
+		CatzRobotMap.intakeBicep.set(CatzConstants.bicepRetracted);
 		printOutDebugData("Grabber Bicep set to Retract");
 	}
 
 	public void deployBicep() {
-		CatzConstants.bicepDeployed = true;
-		CatzRobotMap.intakeBicep.set(CatzConstants.bicepDeployed);
+		CatzConstants.bicepRetracted = false;
+		CatzRobotMap.intakeBicep.set(CatzConstants.bicepRetracted);
 		printOutDebugData("Grabber forearm set to Deploy");
 	}
 	
