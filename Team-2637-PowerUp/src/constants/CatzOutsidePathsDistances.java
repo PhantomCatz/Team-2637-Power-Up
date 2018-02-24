@@ -22,7 +22,7 @@ public class CatzOutsidePathsDistances {
 	final static public double INTAKE_SPEED = 0.7;
 
 	
-	//the distance below are for the right_LRL
+	//the distance below are for the right_LRL <5>
 	
 		final static public double RIGHT_LRL_INIT_DIST = 261.0;
 		final static public double RIGHT_LRL_LEFT_TURN = 85.25 - //Distance from switch to wall
@@ -30,14 +30,11 @@ public class CatzOutsidePathsDistances {
 					                                34.00 - //Width of robot
 					                                6.0;   //Avoid platform ramp
 		final static public double RIGHT_LRL_APPRO_SCALE = 38.0;
-		final static public double RIGHT_LRL_BACK_UP = 20.0;
-		final static public double RIGHT_LRL_APPRO_CUBE_OPEN = 30.7; 
-		final static public double RIGHT_LRL_APPRO_CUBE = 20.0;
+		final static public double RIGHT_LRL_APPRO_CUBE = 50.7;
 		final static public double RIGHT_LRL_ACCUE_CUBE = 7.0;
-		final static public double RIGHT_LRL_APPRO_SWITCH = 50.0;
-		final static public double RIGHT_LRL_APPRO_FINAL_SCLAE = 70.0;
+		final static public double RIGHT_LRL_TO_CUBE = 40.0;
 		
-		//the distance below are for the left_RLR
+		//the distance below are for the left_RLR <5>
 		
 		final static public double LEFT_RLR_INIT_DIST = 261.0;
 		final static public double LEFTT_RLR_LEFT_TURN = 85.25 - //Distance from switch to wall
@@ -45,12 +42,9 @@ public class CatzOutsidePathsDistances {
 						                                             34.00 - //Width of robot
 						                                             6.0;   //Avoid platform ramp
 		final static public double LEFT_RLR_APPRO_SCALE = 38.0;
-		final static public double LEFT_RLR_BACK_UP = 20.0;
-		final static public double LEFT_RLR_APPRO_CUBE_OPEN = 30.7; 
-		final static public double LEFT_RLR_APPRO_CUBE = 20.0;
+		final static public double LEFT_RLR_APPRO_CUBE = 50.7;
 		final static public double LEFT_RLR_ACCUE_CUBE = 7.0;
-		final static public double LEFT_RLR_APPRO_SWITCH = 50.0;
-		final static public double LEFT_RLR_APPRO_FINAL_SCLAE = 70.0;
+		final static public double LEFT_RLR_TO_CUBE = 40.0;
 			
 		// the distance below are for the rightScaleSclaeSwitch AUTONOMOUS PATHS Right LLL by Artie
 		final static public double OPPO_RIGHT_SCALE_SCALE_INIT_A = 222;
