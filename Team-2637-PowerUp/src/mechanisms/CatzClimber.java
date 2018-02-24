@@ -31,9 +31,10 @@ public class CatzClimber
 		CatzRobotMap.climberMotor.set(CatzConstants.ZERO);
 		//CatzRobotMap.climber2.set(CatzConstants.ZERO);
 	}
-	private static void printOutDebugData(String data) {
-		if(CatzRobotMap.debugMode==true) {
-			System.out.println(data);
+	private static void printOutDebugData(String info) {
+		if(CatzRobotMap.debugMode == true) {
+			double currentTime = CatzRobotMap.globalTimer.get();
+			System.out.println(currentTime + "  -" + info);
 		}
 	}
 }

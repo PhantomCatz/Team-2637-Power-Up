@@ -16,6 +16,23 @@ import constants.CatzConstants;
  */
 public class CatzPIDTurn
 {
+	
+	/*need to acquire for final robot*/final static public double PID_TURN_FILTER_CONSTANT = .9;
+	/*need to acquire for final robot*/static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
+	/*need to acquire for final robot*/static public double PID_TURN_KP = 0.0508;  //0.0508
+	/*need to acquire for final robot*/static public double PID_TURN_KD = 0.008;  //0.0744
+	/*need to acquire for final robot*/static public double PID_TURN_KI = 0.0;
+	/*need to acquire for final robot*/final static public double PID_TURN_INTEGRAL_MAX = 0.0;
+	/*need to acquire for final robot*/final static public double PID_TURN_INTEGRAL_MIN = 0.0;
+	
+	/*need to acquire for final robot*/final public static double PID_TURN_MAX_POWER_RT =  1.0;
+	/*need to acquire for final robot*/final public static double PID_TURN_MIN_POWER_RT =  0.4;
+
+	/*need to acquire for final robot*/final public static double PID_TURN_MAX_POWER_LT = -1.0;
+	/*need to acquire for final robot*/final public static double PID_TURN_MIN_POWER_LT = -0.4;
+	
+	/*need to acquire for final robot*/final static public double PID_TURN_THRESHOLD = .12;
+	
 	static Timer functionTimer;
 	static Timer pdTimer;
 	static Timer debugTimer;
@@ -92,7 +109,7 @@ public class CatzPIDTurn
 			currentError = targetAngle - currentAngle;
 			
 			
-			if (Math.abs(currentError)<CatzConstants.PID_TURN_THRESHOLD) {
+			if (Math.abs(currentError)<PID_TURN_THRESHOLD) {
 				done = true;
 			} else {
 			
@@ -103,8 +120,8 @@ public class CatzPIDTurn
 	   			   if ( (deltaError == 0.0) && (Math.abs(currentError) > 3.0 ) ) {
 	   				   derivative =  previousDerivative;   
 	   			   } else {
-	   				   derivative =  CatzConstants.PID_TURN_FILTER_CONSTANT*previousDerivative + 
-	   			               ((1-CatzConstants.PID_TURN_FILTER_CONSTANT)*(deltaError/deltaT));
+	   				   derivative =  PID_TURN_FILTER_CONSTANT*previousDerivative + 
+	   			               ((1-PID_TURN_FILTER_CONSTANT)*(deltaError/deltaT));
 	   			   }
 				} else {
 					firstTime = false;
@@ -120,29 +137,29 @@ public class CatzPIDTurn
 				// calculates integral term
 				totalError += currentError * deltaT;   
 				
-				if(totalError >= CatzConstants.PID_TURN_INTEGRAL_MAX)     // saturation
-					totalError = CatzConstants.PID_TURN_INTEGRAL_MAX;	 // makes sure the integral term doesn't get too big or small
+				if(totalError >= PID_TURN_INTEGRAL_MAX)     // saturation
+					totalError = PID_TURN_INTEGRAL_MAX;	 // makes sure the integral term doesn't get too big or small
 				
-				if(totalError <= CatzConstants.PID_TURN_INTEGRAL_MIN)
-					totalError = CatzConstants.PID_TURN_INTEGRAL_MIN;
+				if(totalError <= PID_TURN_INTEGRAL_MIN)
+					totalError = PID_TURN_INTEGRAL_MIN;
 				
 				
-				power = CatzConstants.PID_TURN_POWER_SCALE_FACTOR*((CatzConstants.PID_TURN_KP * currentError)
-														+(CatzConstants.PID_TURN_KI * totalError)
-														+(CatzConstants.PID_TURN_KD * derivative));	
+				power = PID_TURN_POWER_SCALE_FACTOR*((PID_TURN_KP * currentError)
+														+(PID_TURN_KI * totalError)
+														+(PID_TURN_KD * derivative));	
 				
 				if (power > 0.0) {
 					
-					if(power > CatzConstants.PID_TURN_MAX_POWER_RT)
-						power = CatzConstants.PID_TURN_MAX_POWER_RT;
-					else if (power < CatzConstants.PID_TURN_MIN_POWER_RT)
-						power = CatzConstants.PID_TURN_MIN_POWER_RT;
+					if(power > PID_TURN_MAX_POWER_RT)
+						power = PID_TURN_MAX_POWER_RT;
+					else if (power < PID_TURN_MIN_POWER_RT)
+						power = PID_TURN_MIN_POWER_RT;
 				} else {
 				
-	      			if(power < CatzConstants.PID_TURN_MAX_POWER_LT)
-					    power = CatzConstants.PID_TURN_MAX_POWER_LT;
-	      			else if (power > CatzConstants.PID_TURN_MIN_POWER_LT)
-	 				    power = CatzConstants.PID_TURN_MIN_POWER_LT;
+	      			if(power < PID_TURN_MAX_POWER_LT)
+					    power = PID_TURN_MAX_POWER_LT;
+	      			else if (power > PID_TURN_MIN_POWER_LT)
+	 				    power = PID_TURN_MIN_POWER_LT;
 				}
 				
 	      			
@@ -174,10 +191,10 @@ public class CatzPIDTurn
 		tuningMode = enabled;
 		
 		if(tuningMode == true) {
-			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, CatzConstants.PID_TURN_POWER_SCALE_FACTOR);
-			SmartDashboard.putNumber(CatzConstants.TURN_KP_LABEL, CatzConstants.PID_TURN_KP);
-			SmartDashboard.putNumber(CatzConstants.TURN_KD_LABEL, CatzConstants.PID_TURN_KD);
-			SmartDashboard.putNumber(CatzConstants.TURN_KI_LABEL, CatzConstants.PID_TURN_KI);
+			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, PID_TURN_POWER_SCALE_FACTOR);
+			SmartDashboard.putNumber(CatzConstants.TURN_KP_LABEL, PID_TURN_KP);
+			SmartDashboard.putNumber(CatzConstants.TURN_KD_LABEL, PID_TURN_KD);
+			SmartDashboard.putNumber(CatzConstants.TURN_KI_LABEL, PID_TURN_KI);
 		}
 	}
 	public static void printDebugInit()
@@ -189,15 +206,15 @@ public class CatzPIDTurn
                     "targetAngleAbs," + targetAngleAbs                 + "\n" +
                     "tgtUpperLimit,"  + targetUpperLimit               + "\n" +
                     "tgtLowerLimit,"  + targetLowerLimit               + "\n" +
-                    "kP,"             + CatzConstants.PID_TURN_KP          + "\n" +
-                    "kI,"             + CatzConstants.PID_TURN_KI          + "\n" +
-                    "kD,"             + CatzConstants.PID_TURN_KD          + "\n" +
-                    "Power Scale Factor," + CatzConstants.PID_TURN_POWER_SCALE_FACTOR + "\n" +
-                    "MaxI,"           + CatzConstants.PID_TURN_INTEGRAL_MAX + "\n" +
-                    "MinI,"           + CatzConstants.PID_TURN_INTEGRAL_MAX + "\n" );
+                    "kP,"             + PID_TURN_KP          + "\n" +
+                    "kI,"             + PID_TURN_KI          + "\n" +
+                    "kD,"             + PID_TURN_KD          + "\n" +
+                    "Power Scale Factor," + PID_TURN_POWER_SCALE_FACTOR + "\n" +
+                    "MaxI,"           + PID_TURN_INTEGRAL_MAX + "\n" +
+                    "MinI,"           + PID_TURN_INTEGRAL_MAX + "\n" );
 			System.out.println("****************************************************************************");
 			System.out.print(debugData);
-			System.out.printf("PIDTurn MaxPwr, %.3f\n", CatzConstants.PID_TURN_MAX_POWER_RT);
+			System.out.printf("PIDTurn MaxPwr, %.3f\n", PID_TURN_MAX_POWER_RT);
 		}
 	}
 	public static void printDebugHeader() {

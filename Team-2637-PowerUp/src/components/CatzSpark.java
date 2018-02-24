@@ -23,9 +23,10 @@ public class CatzSpark extends Spark
 		//logger = CatzLogger.getInstance();
 		//NAME = this.getClass().getSimpleName();
 	}
-	private static void printOutDebugData(String data){
-		if(CatzRobotMap.debugMode==true) {
-			System.out.println(data);
+	private static void printOutDebugData(String info) {
+		if(CatzRobotMap.debugMode == true) {
+			double currentTime = CatzRobotMap.globalTimer.get();
+			System.out.println(currentTime + "  -" + info);
 		}
 	}
 }

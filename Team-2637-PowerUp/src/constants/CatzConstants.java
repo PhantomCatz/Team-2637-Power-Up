@@ -7,96 +7,52 @@ package constants;
  */
 public class CatzConstants
 {
-	final static public int DIO_PORT_0 = 0;
-	final static public int DIO_PORT_1 = 1;
-	final static public int DIO_PORT_2 = 2;
-	final static public int DIO_PORT_3 = 3;
-	final static public int DIO_PORT_4 = 4;
-	final static public int DIO_PORT_5 = 5;
-	final static public int DIO_PORT_6 = 6;
-	final static public int DIO_PORT_7 = 7;
-	final static public int DIO_PORT_8 = 8;
-	final static public int DIO_PORT_9 = 9;
-	
-	final static public int PORT_0 = 0;
-	final static public int PORT_1 = 1;
-	final static public int PORT_2 = 2;
-	final static public int PORT_3 = 3;
-	final static public int PORT_4 = 4;
-	final static public int PORT_5 = 5;
-	final static public int PORT_6 = 6;
-	final static public int PORT_7 = 7;
-	final static public int PORT_8 = 8;
-	final static public int PORT_9 = 9;
-	
-	final static public int PWM_PORT_0 = 0;
-	final static public int PWM_PORT_1 = 1;
-	final static public int PWM_PORT_2 = 2;
-	final static public int PWM_PORT_3 = 3;
-	final static public int PWM_PORT_4 = 4;
-	final static public int PWM_PORT_5 = 5;
-	final static public int PWM_PORT_6 = 6;
-	final static public int PWM_PORT_7 = 7;
-	final static public int PWM_PORT_8 = 8;
-	final static public int PWM_PORT_9 = 9;
-	
-	final static public int PCM_PORT_0 = 0;
-	final static public int PCM_PORT_1 = 1;
-	final static public int PCM_PORT_2 = 2;
-	final static public int PCM_PORT_3 = 3;
-	final static public int PCM_PORT_4 = 4;
-	final static public int PCM_PORT_5 = 5;
-	final static public int PCM_PORT_6 = 6;
-	final static public int PCM_PORT_7 = 7;
-	final static public int PCM_PORT_8 = 8;
-	final static public int PCM_PORT_9 = 9;
-	
+
+	//*************************************************************
+	//ROBOT COMPONENTS PORTS
 	final static public int CUBEE_TALON_ID_L_FRONT = 0;
 	final static public int CUBEE_TALON_ID_L_REAR  = 1;
 	final static public int CUBEE_TALON_ID_R_FRONT = 4;
 	final static public int CUBEE_TALON_ID_R_REAR  = 5;
-
 
 	final static public int TALON_ID_FRONT_L = 4;
 	final static public int TALON_ID_REAR_L  = 3;
 	final static public int TALON_ID_FRONT_R = 5;
 	final static public int TALON_ID_REAR_R  = 6;
 	
-	/*need to acquire for final robot*/final static public double PID_DRIVE_KP = .15;
-	/*need to acquire for final robot*/final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
-	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_SPEED = .43;
-	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_TIME = .3;
-	/*need to acquire for final robot*/final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
-	final static public double PID_DRIVE_TIMEOUT = 10.0;
+	final static public int CLIMBER_TALON_ID = 1;
+	
+	final static public int DRIVE_XBOX_PORT = 0;
+	final static public int AUX_XBOX_PORT = 1;
+	
+	final static public int RIGHT_LIFTER_PWM = 1;
+	final static public int LEFT_LIFTER_PWM = 0;
+	
+	final static public int RIGHT_INTAKE_PWM = 2;
+	final static public int LEFT_INTAKE_PWM = 3;
+	final static public int INTAKE_FOREARM_PCM = 1;
+	final static public int INTAKE_BICEP_PCM = 0;
+	
+	final static public int WHEEL_ENCODER_R_DIOA = 0;
+	final static public int WHEEL_ENCODER_R_DIOB = 1;
+	
+	final static public int WHEEL_ENCODER_L_DIOA = 8;
+	final static public int WHEEL_ENCODER_L_DIOB = 9;
+	
+	final static public int LIFT_ENCODER_DIOA = 2;
+	final static public int LIFT_ENCODER_DIOB = 3;
+	//**************************************************************
 	
 	final static public int LOGGER_LEVEL1 = 1;
 	final static public int LOGGER_LEVEL2 = 2;
 	final static public int LOGGER_LEVEL3 = 3;
 	final static public int LOGGER_LEVEL4 = 4;
 	final static public int LOGGER_LEVEL5 = 5;
-	
-	/*need to acquire for final robot*/final static public double PID_TURN_THRESHOLD = .12;
-	/*need to acquire for final robot*/final static public double NAVX_RESET_WAIT_TIME = 0.3;
-	
-	/*need to acquire for final robot*/final static public double PID_TURN_FILTER_CONSTANT = .9;
-	/*need to acquire for final robot*/static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
-	/*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;    //0.7;
-	/*need to acquire for final robot*/static public double PID_TURN_KP = 0.0508;  //0.0508
-	/*need to acquire for final robot*/static public double PID_TURN_KD = 0.008;  //0.0744
-	/*need to acquire for final robot*/static public double PID_TURN_KI = 0.0;
-	/*need to acquire for final robot*/static public double PID_LIFT_KP = 0.0508;  //0.0508
-	/*need to acquire for final robot*/static public double PID_LIFT_KD = 0.008;  //0.0744
-	/*need to acquire for final robot*/static public double PID_LIFT_KI = 0.0;
-	/*need to acquire for final robot*/final static public double PID_TURN_TIMEOUT = 3.0;
-	/*need to acquire for final robot*/final static public double PID_TURN_INTEGRAL_MAX = 0.0;
-	/*need to acquire for final robot*/final static public double PID_TURN_INTEGRAL_MIN = 0.0;
-	
-	/*need to acquire for final robot*/final public static double PID_TURN_MAX_POWER_RT =  1.0;
-	/*need to acquire for final robot*/final public static double PID_TURN_MIN_POWER_RT =  0.4;
 
-	/*need to acquire for final robot*/final public static double PID_TURN_MAX_POWER_LT = -1.0;
-	/*need to acquire for final robot*/final public static double PID_TURN_MIN_POWER_LT = -0.4;
-	
+	/*need to acquire for final robot*/final static public double PID_TURN_TIMEOUT = 3.0;
+	/*need to acquire for final robot*/final static public double PID_DRIVE_TIMEOUT = 5.0;
+	/*need to acquire for final robot*/final static public double NAVX_RESET_WAIT_TIME = 0.3;
+
 	/*need to acquire for final robot*/final public static double LIFT_ENCODER_DISTANCE_PER_PULSE = 1.0;
 	/*need to acquire for final robot*/final public static double LEFT_DRIVE_TRAIN_DISTANCE_PER_PULSE = 1.0;
 	/*need to acquire for final robot*/final public static double RIGHT_DRIVE_TRAIN_DISTANCE_PER_PULSE = 1.0;
@@ -202,7 +158,6 @@ public class CatzConstants
 	final static public double ZERO = 0.0;
 
 	/*need to acquire for final robot*/final static public double CLIMB_SPEED = 0;
-	/*need to acquire for final robot*/final static public double LIFT_SPEED = 0;
 	/*need to acquire for final robot*/final static public double INTAKE_SPEED = 0.7;
 	
 	
@@ -218,10 +173,6 @@ public class CatzConstants
 	static public String TURN_KD_LABEL = "Turn KD";
 	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
 	
-	/*need to acquire for final robot*/final static public double LIFT_SCALE_HEIGHT = 0.0;
-	/*need to acquire for final robot*/final static public double LIFT_SWITCH_HEIGHT = 0.0;
-	/*need to acquire for final robot*/public static final double LIFTER_ERROR_THRESHOLD_PULSES = 10;
-	public static final double INITIAL_LIFTER_ERROR = 1000;
 	
 	final static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
 	final static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
