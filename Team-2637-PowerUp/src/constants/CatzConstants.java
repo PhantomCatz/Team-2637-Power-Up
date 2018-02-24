@@ -143,6 +143,16 @@ public class CatzConstants
 	final static public double OPPO_RIGHT_SCALE_SCALE_BCAK_UP = 20.0;
 	final static public double OPPO_RIGHT_SCALE_SCALE_APPRO_CUBE = 44.4;
 	final static public double OPPO_RIGHT_SCALE_SCALE_CUBE_DEG = 31.8;
+	
+	// the distances below are for the MID SWITCH SWITCH PATHS
+	final static public double MID_SWITCH_SWITCH_INIT_DIST = 66.5;
+	final static public double MID_SWITCH_SWITCH_TOWARDS_SWITCH = 64;
+	final static public double MID_SWITCH_SWITCH_APPROACH_SWITCH = 36.5;
+	final static public double MID_SWITCH_SWITCH_LEAVE_SWITCH = 65;
+	final static public double MID_SWITCH_SWITCH_AROUND_SWITCH = 89;
+	final static public double MID_SWITCH_SWITCH_TOWARDS_CUBE = 47.5;
+	final static public double MID_SWITCH_SWITCH_LEAVE_CUBE = 35;
+	final static public double MID_SWITCH_SWITCH_SIDE_OF_SWITCH = 45.5;
 
 	
 	final static public double ZERO = 0.0;
