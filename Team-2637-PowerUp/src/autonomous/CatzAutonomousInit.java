@@ -29,42 +29,6 @@ public class CatzAutonomousInit
 		CatzAutonomousPaths.middlePathL();
 	}
 
-	public static void retractMechanisms() 
-	{
-		CatzRobotMap.grabber.closeForearm();
-		CatzRobotMap.grabber.retractBicep();
-	}
-	public static void deployMechanisms()
-	{
-		CatzRobotMap.grabber.deployBicep();
-		CatzRobotMap.grabber.openForearm();
-	}
-	public static void outtakeCubeToScale()
-	{
-		CatzRobotMap.lift.liftToScaleHeight();
-		deployMechanisms();
-		CatzRobotMap.grabber.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
-		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
-		retractMechanisms();
-	}
-	public static void outtakeCubeToSwitch()
-	{
-		CatzRobotMap.lift.liftToSwitchHeight();
-		deployMechanisms();
-		CatzRobotMap.grabber.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
-		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
-		retractMechanisms();
-	}
-	public static void intakeCube()
-	{
-		CatzRobotMap.lift.dropToGroundHeight();
-		deployMechanisms();
-		CatzRobotMap.grabber.setIntakeSpeed(CatzConstants.INTAKE_SPEED);
-		Timer.delay(CatzConstants.CUBE_INTAKE_WAIT_TIME);
-		retractMechanisms();
-	}
-
-	
 	public static void choosePath() {	
 		String gameData;
 		
