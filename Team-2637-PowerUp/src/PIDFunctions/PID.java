@@ -2,6 +2,7 @@ package PIDFunctions;
 
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
+import mechanisms.CatzLift;
 
 
 public class PID {
@@ -97,7 +98,7 @@ public class PID {
 		  integralLimit();
 		  calculateDerivative();
 		  
-		  power = scaleFactor*(currentError*CatzConstants.PID_LIFT_KP) + (integral*CatzConstants.PID_LIFT_KI) + (derivative*CatzConstants.PID_LIFT_KD);
+		  power = scaleFactor*(currentError*CatzLift.PID_LIFT_KP) + (integral*CatzLift.PID_LIFT_KI) + (derivative*CatzLift.PID_LIFT_KD);
 		 
 		  return power;
 	}

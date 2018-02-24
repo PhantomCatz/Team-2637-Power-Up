@@ -97,9 +97,10 @@ public class CatzXboxController extends XboxController
 		//logger.add(NAME, "Left Trigger moved.", CatzConstants.LEVEL5, timer.get(CatzConstants.LOGGER_TIMER_INDEX));
 		return this.getRawAxis(LEFT_TRIGGER);
 	}
-	private static void printOutDebugData(String data){
-		if(CatzRobotMap.debugMode==true) {
-			System.out.println(data);
+	private static void printOutDebugData(String info) {
+		if(CatzRobotMap.debugMode == true) {
+			double currentTime = CatzRobotMap.globalTimer.get();
+			System.out.println(currentTime + "  -" + info);
 		}
 	}
 }

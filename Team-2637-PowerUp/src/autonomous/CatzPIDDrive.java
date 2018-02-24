@@ -14,6 +14,12 @@ import robot.CatzRobotMap;
 
 public class CatzPIDDrive
 {	
+	/*need to acquire for final robot*/final static public double PID_DRIVE_KP = .15;
+	/*need to acquire for final robot*/final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
+	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_SPEED = .43;
+	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_TIME = .3;
+	/*need to acquire for final robot*/final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
+	
 	private static boolean done     = false;
 
 	private static double previousError = 0.0;
@@ -52,11 +58,11 @@ public class CatzPIDDrive
 			currentError = CatzRobotMap.navx.getAngle();
 			deltaError = currentError - previousError;  
 	
-			derivative =    CatzConstants.PID_TURN_FILTER_CONSTANT*previousDerivative + 
-		               ((1-CatzConstants.PID_TURN_FILTER_CONSTANT)*(deltaError/deltaTimeSec));
+			derivative =    PID_DRIVE_FILTER_CONSTANT*previousDerivative + 
+		               ((1-PID_DRIVE_FILTER_CONSTANT)*(deltaError/deltaTimeSec));
 			
 			//derivative = deltaAngleDegrees/deltaTimeSec;
-			correction = -CatzConstants.PID_DRIVE_KP*currentError + CatzConstants.PID_DRIVE_KD*derivative;
+			correction = -PID_DRIVE_KP*currentError + PID_DRIVE_KD*derivative;
 			
 			CatzRobotMap.drive.arcadeDrive(speed, correction);
 	
@@ -73,12 +79,12 @@ public class CatzPIDDrive
 		
 		//brake using motors' speed
 		if(speed<0) {
-			CatzRobotMap.drive.tankDrive(CatzConstants.PID_DRIVE_BRAKE_SPEED,CatzConstants.PID_DRIVE_BRAKE_SPEED);
-			Timer.delay(CatzConstants.PID_DRIVE_BRAKE_TIME);
+			CatzRobotMap.drive.tankDrive(PID_DRIVE_BRAKE_SPEED,PID_DRIVE_BRAKE_SPEED);
+			Timer.delay(PID_DRIVE_BRAKE_TIME);
 		}
 		else {
-			CatzRobotMap.drive.tankDrive(-CatzConstants.PID_DRIVE_BRAKE_SPEED,-CatzConstants.PID_DRIVE_BRAKE_SPEED);
-			Timer.delay(CatzConstants.PID_DRIVE_BRAKE_TIME);
+			CatzRobotMap.drive.tankDrive(-PID_DRIVE_BRAKE_SPEED,-PID_DRIVE_BRAKE_SPEED);
+			Timer.delay(PID_DRIVE_BRAKE_TIME);
 		}
 		CatzRobotMap.drive.tankDrive(0,0);
 		functionTimer.stop();
