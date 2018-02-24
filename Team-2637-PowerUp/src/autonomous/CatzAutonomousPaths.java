@@ -40,7 +40,7 @@ public class CatzAutonomousPaths {
 																															// forward
 		/******************************************************
 		/* cube placing code here   */
-		CatzRobotMap.grabber.outtakeCubeToSwitch();
+		CatzRobotMap.grabber.shootCube();
 		/******************************************************/
 		
 
@@ -92,10 +92,10 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_APPROACH_SWITCH - CatzConstants.HALF_ROBOT_LENGTH), CatzConstants.PID_DRIVE_TIMEOUT); // Drive
 																															// forward
 																															// 55.2in
-		//CatzAutonomousInit.outtakeCubeToSwitch();
+		//CatzAutonomousInit.shootCube();
 		/******************************************************
 		/*  cube placing code here   */
-		CatzRobotMap.grabber.outtakeCubeToSwitch();
+		CatzRobotMap.grabber.shootCube();
 		/******************************************************/
 
 		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
@@ -151,7 +151,7 @@ public class CatzAutonomousPaths {
 		
 		/******************************************************
 		/*  scale cube placing code here  */
-		CatzRobotMap.grabber.outtakeCubeToScale();
+		CatzRobotMap.grabber.shootCube();
 		/******************************************************/
 		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_DRIVE_TIMEOUT); // turn 90deg right
 
@@ -193,7 +193,7 @@ public class CatzAutonomousPaths {
 		
 		/******************************************************
 		/* Write scale cube placing code here */
-		CatzRobotMap.grabber.outtakeCubeToScale();
+		CatzRobotMap.grabber.shootCube();
 		/******************************************************/
 
 
@@ -298,7 +298,7 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
-		CatzRobotMap.grabber.outtakeCubeToSwitch();
+		CatzRobotMap.grabber.shootCube();
 
 		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.HALF_ROBOT_LENGTH),
@@ -334,7 +334,7 @@ public class CatzAutonomousPaths {
 
 		/******************************************************
 		/* scale cube deploy code here   */
-		CatzRobotMap.grabber.outtakeCubeToScale();
+		CatzRobotMap.grabber.shootCube();
 		/******************************************************/
 
 	}
@@ -356,7 +356,7 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);
 
-		CatzRobotMap.grabber.outtakeCubeToSwitch();
+		CatzRobotMap.grabber.shootCube();
 
 		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.HALF_ROBOT_LENGTH),
@@ -392,7 +392,7 @@ public class CatzAutonomousPaths {
 		/******************************************************
 		/* Write scale cube deploy code here   */
 
-		CatzRobotMap.grabber.outtakeCubeToScale();
+		CatzRobotMap.grabber.shootCube();
 		/******************************************************/
 	}
 
