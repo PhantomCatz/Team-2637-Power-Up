@@ -398,6 +398,38 @@ public class CatzAutonomousPaths {
 
 	public void middleRightSwitchSwitch() {
 		
+		/************************************
+		 * The following code:
+		 * Drives forward to the switch
+		 * Places cube in the switch
+		 ************************************/
+		
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_SWITCH_SWITCH_INIT_DIST - CatzConstants.HALF_ROBOT_LENGTH,
+					CatzConstants.PID_DRIVE_TIMEOUT);
+																														
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_60, CatzConstants.PID_TURN_TIMEOUT);
+		
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_SWITCH_SCALE_TOWARDS_SWITCH,            
+					CatzConstants.PID_TURN_TIMEOUT);
+		
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_30, CatzConstants.PID_TURN_TIMEOUT);
+		
+		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, CatzConstants.MID_SWITCH_SWITCH_APPROACH_SWITCH - CatzConstants.HALF_ROBOT_LENGTH, 
+					CatzConstants.PID_DRIVE_TIMEOUT);
+		
+		CatzRobotMap.grabber.outtakeCubeToSwitch();
+		
+		/*****************************************
+		 * The following code:
+		 * Backs away from switch
+		 * Goes around and grabs another cube
+		 * Turns and approaches the side of switch
+		 * Places second cube in switch
+		 *****************************************/
+		
+		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, CatzConstants.MID_LEAVE_SWITCH + CatzConstants.HALF_ROBOT_LENGTH, 
+					CatzConstants.PID_TURN_TIMEOUT);
+		
 		
 
 	}
