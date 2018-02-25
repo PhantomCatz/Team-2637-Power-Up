@@ -37,6 +37,7 @@ public class CatzPIDDrive
 		printDebugHeader();
 		
 		CatzRobotMap.navx.reset();
+		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
 		
 		functionTimer.start();
 		loopTimer.start();
@@ -52,8 +53,8 @@ public class CatzPIDDrive
 			currentError = CatzRobotMap.navx.getAngle();
 			deltaError = currentError - previousError;  
 	
-			derivative =    CatzConstants.PID_TURN_FILTER_CONSTANT*previousDerivative + 
-		               ((1-CatzConstants.PID_TURN_FILTER_CONSTANT)*(deltaError/deltaTimeSec));
+			derivative =    CatzConstants.PID_DRIVE_FILTER_CONSTANT*previousDerivative + 
+		               ((1-CatzConstants.PID_DRIVE_FILTER_CONSTANT)*(deltaError/deltaTimeSec));
 			
 			//derivative = deltaAngleDegrees/deltaTimeSec;
 			correction = -CatzConstants.PID_DRIVE_KP*currentError + CatzConstants.PID_DRIVE_KD*derivative;

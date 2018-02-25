@@ -30,9 +30,9 @@ public class CatzRobotInit
 	public static void run() 
 	{
 		CatzRobotMap.getInstance();
-		CameraServer.getInstance().startAutomaticCapture();
-		setSmartDashboard();
-		cameraSetup();
+		//CameraServer.getInstance().startAutomaticCapture();
+		//setSmartDashboard();
+		//cameraSetup();
 	}
 	
 	public static void setSmartDashboard() {

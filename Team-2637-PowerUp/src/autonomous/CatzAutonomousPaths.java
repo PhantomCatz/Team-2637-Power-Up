@@ -257,12 +257,12 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_INIT_DISTANCE - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_60, CatzConstants.PID_TURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_60, CatzConstants.AUTO_TURN_TIMEOUT_90_DEG);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_SWITCH), CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_30, CatzConstants.PID_TURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_30, CatzConstants.AUTO_TURN_TIMEOUT_90_DEG);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
@@ -274,18 +274,18 @@ public class CatzAutonomousPaths {
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH + CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.AUTO_TURN_TIMEOUT_90_DEG);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				(CatzConstants.MID_RIGHT_SWITCH_SCALE_LEAVE_SWITCH - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.AUTO_TURN_TIMEOUT_90_DEG);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				CatzConstants.MID_RIGHT_SWITCH_SCALE_AROUND_SWITCH, CatzConstants.STRAIGHTDRIVE_TIMEOUT);
 
-		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(-CatzConstants.TURN_DEG_90, CatzConstants.AUTO_TURN_TIMEOUT_90_DEG);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_CUBE - CatzConstants.HALF_ROBOT_LENGTH,
@@ -296,7 +296,7 @@ public class CatzAutonomousPaths {
 		 * 
 		 ******************************************************/
 
-		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.PID_TURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(CatzConstants.TURN_DEG_90, CatzConstants.AUTO_TURN_TIMEOUT_90_DEG);
 
 		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED,
 				CatzConstants.MID_RIGHT_SWITCH_SCALE_TOWARDS_SCALE, CatzConstants.STRAIGHTDRIVE_TIMEOUT);

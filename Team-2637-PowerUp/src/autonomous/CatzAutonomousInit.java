@@ -10,6 +10,7 @@ package autonomous;
 
 import constants.CatzConstants;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.CatzRobotMap;
 
@@ -18,11 +19,18 @@ public class CatzAutonomousInit
 	
 	public static void runAutonomousInit()
 	{
-		setMechanisms();
+		//setMechanisms();
 		//choosePath();
 		//CatzPIDTurn.setDebugModeEnabled( true );
-		//CatzPIDTurn.PIDturn(90, 5);
-		//CatzPIDTurn.PIDturn(-90, 5);
+		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
+//        PIDTurn.PIDturn(90, 3);
+//	Timer.delay(0.5);
+//		CatzPIDTurn.PIDturn(-90, 3);
+//	Timer.delay(0.5);
+		CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
+	Timer.delay(0.5);
+		CatzPIDTurn.PIDturn(-45, CatzConstants.DEF_VALUE);
+		
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
 	}
 	

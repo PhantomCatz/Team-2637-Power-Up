@@ -16,6 +16,43 @@ import constants.CatzConstants;
  */
 public class CatzPIDTurn
 {
+
+    /***************************************************************************
+    *
+    *  PID Turn Constants
+    *
+    ***************************************************************************/
+	final static public double PID_TURN_MAX_TIMEOUT = 4.0;
+
+	final static public double PID_TURN_THRESHOLD = .12;
+	
+    /***************************************************************************
+    *  PID_TURN_DELTAERROR_THRESHOLD_HI - Delta Error Values larger than this
+    *                                     are considered invalid
+    ***************************************************************************/	
+
+	final static public double PID_TURN_DELTAERROR_THRESHOLD_HI  = 4.0;    //Ignore Delta Error Values above this
+	final public static double PID_TURN_DELTAERROR_THRESHOLD_LO =  0.11;   //Only set power to MIN_xxx_POWER if Delta Error value is below this
+
+	final static public double PID_TURN_FILTER_CONSTANT    = 0.7;
+	      static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
+
+	      static public double PID_TURN_KP = 0.060;  //0.0508
+	      static public double PID_TURN_KI = 0.0;
+	      static public double PID_TURN_KD = 0.008;   //0.0744
+
+	final static public double PID_TURN_INTEGRAL_MAX =  1.0;
+	final static public double PID_TURN_INTEGRAL_MIN = -1.0;
+
+	final public static double PID_TURN_MIN_POS_POWER =  0.4;
+	final public static double PID_TURN_MIN_NEG_POWER = -PID_TURN_MIN_POS_POWER;
+
+	
+    /***************************************************************************
+    *
+    *  PID Turn Variables
+    *
+    ***************************************************************************/	
 	static Timer functionTimer;
 	static Timer pdTimer;
 	static Timer debugTimer;
@@ -34,178 +71,308 @@ public class CatzPIDTurn
 	static double currentAngleAbs;
 	static double targetAngle;
 	static double targetAngleAbs;
-	static double targetUpperLimit;
-	static double targetLowerLimit;
+
+	static double timeout;
 	
 	static double previousDerivative = 0;
 
 	static boolean done;
 	static boolean tuningMode = false;
 	static boolean debugMode = false;
-	static String debugData;
+	static String  debugData;
 	
 	
-	
+    /***************************************************************************
+    *  PIDturn()
+    *  
+    *  timeoutSeconds:  -1  : PIDturn() will calculate timeout based on degreesToTurn
+    *                    0  : Max Timeout
+    *                    >0 : # of seconds before aborting
+    ***************************************************************************/	
 	public static void PIDturn(double degreesToTurn, double timeoutSeconds)
 	{
 		boolean firstTime = true;
 		functionTimer = new Timer();
-		pdTimer = new Timer();
+		pdTimer       = new Timer();
+		
 		
 		CatzRobotMap.navx.reset();
-		
 		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
 		
 		done = false;
 		
 		previousError = 0.0;
-		totalError = 0.0;
+		totalError    = 0.0;
 		
 		functionTimer.reset();
 		functionTimer.start();
 		
 		
 		currentAngle = CatzRobotMap.navx.getAngle();
-		targetAngle = degreesToTurn + currentAngle;
+		targetAngle  = degreesToTurn + currentAngle;
 		currentError = targetAngle - currentAngle;
 		
 		targetAngleAbs = Math.abs(targetAngle);
-	
+		
+	    /***************************************************************************
+		*  Calculate Timeout
+		*    timeoutSeconds:  <0  : PIDturn() will calculate timeout based on degreesToTurn
+		*                      0  : Max Timeout
+		*                     >0  : # of seconds before aborting
+		***************************************************************************/	
+		if (timeoutSeconds < 0.0) {
+			if (targetAngleAbs < 91.0) {
+                timeout = 1.2;				
+			} else if (targetAngleAbs < 150.0) {
+				timeout = 2.0;
+			} else {
+				timeout = PID_TURN_MAX_TIMEOUT;
+			}
+		} else {
+			if (timeoutSeconds == 0.0) {
+				timeout = PID_TURN_MAX_TIMEOUT;
+			} else {
+				timeout = timeoutSeconds;
+			}
+		}
+		
 		printDebugInit();
 		printDebugHeader();
-		
 		
 		pdTimer.reset();
 		pdTimer.start();
 		while(done == false)
 		{
 			currentAngle = CatzRobotMap.navx.getAngle();
-			deltaT = pdTimer.get();
+			deltaT       = pdTimer.get();
 
 			currentAngleAbs = Math.abs(currentAngle);
 			
 			pdTimer.stop();
 			pdTimer.reset();
 			pdTimer.start();
+			
 
 			// calculates proportional term
 			currentError = targetAngle - currentAngle;
 			
-			if (Math.abs(currentError)>CatzConstants.PID_TURN_THRESHOLD) {
+			if (Math.abs(currentError) < PID_TURN_THRESHOLD) {
 				done = true;
 			} else {
-			
-				// calculates derivative term
-				//filter smoothes derivative graph; ask Walter for specifics
-				deltaError = currentError-previousError;
-				if (firstTime == false) {
-	   			   if ( (deltaError == 0.0) && (Math.abs(currentError) > 3.0 ) ) {
-	   				   derivative =  previousDerivative;   
-	   			   } else {
-	   				   derivative =  CatzConstants.PID_TURN_FILTER_CONSTANT*previousDerivative + 
-	   			               ((1-CatzConstants.PID_TURN_FILTER_CONSTANT)*(deltaError/deltaT));
-	   			   }
+				if (functionTimer.get() > timeout) {
+					done = true;					
 				} else {
-					firstTime = false;
-					derivative = 0;
-				}
-				
-				
-				previousDerivative = derivative;
-				
-				previousError = currentError;  // saves error for next iteration
-				
-				
-				// calculates integral term
-				totalError += currentError * deltaT;   
-				
-				if(totalError >= CatzConstants.PID_TURN_INTEGRAL_MAX)     // saturation
-					totalError = CatzConstants.PID_TURN_INTEGRAL_MAX;	 // makes sure the integral term doesn't get too big or small
-				
-				if(totalError <= CatzConstants.PID_TURN_INTEGRAL_MIN)
-					totalError = CatzConstants.PID_TURN_INTEGRAL_MIN;
-				
-				
-				power = CatzConstants.PID_TURN_POWER_SCALE_FACTOR*((CatzConstants.PID_TURN_KP * currentError)
-														+(CatzConstants.PID_TURN_KI * totalError)
-														+(CatzConstants.PID_TURN_KD * derivative));	
-				
-				if (power > 0.0) {
+					/************************************************************
+					*  Calculate derivative term
+					*  If this is the first time through the loop, we don't have
+					*  a previousError or previouisDerivative value, so we will
+					*  just set derivative to zero.
+					************************************************************/
+					deltaError = currentError - previousError;
 					
-					if(power > CatzConstants.PID_TURN_MAX_POWER_RT)
-						power = CatzConstants.PID_TURN_MAX_POWER_RT;
-					else if (power < CatzConstants.PID_TURN_MIN_POWER_RT)
-						power = CatzConstants.PID_TURN_MIN_POWER_RT;
-				} else {
-				
-	      			if(power < CatzConstants.PID_TURN_MAX_POWER_LT)
-					    power = CatzConstants.PID_TURN_MAX_POWER_LT;
-	      			else if (power > CatzConstants.PID_TURN_MIN_POWER_LT)
-	 				    power = CatzConstants.PID_TURN_MIN_POWER_LT;
+					if (firstTime == false) {
+
+		                /*************************************************************
+		                *  Filter out invalid values (noise) as we don't want the 
+		                *  control loop to react to these.  Invalid values can occur 
+		                *  due to mechanical imperfections causing the drivetrain to 
+		                *  bind/release as it is turning, missed samples, etc.  When 
+		                *  the control loop reacts to these unexpected jumps, it will 
+		                *  lead to large swings in power as it tries to correct for a
+		                *  large intermittent error that comes & goes.  This may be 
+		                *  seen as the robot shaking during the turn.
+		                *
+		                *  An invalid value is characterized as one o
+		                *    - jumping to zero when we are not close to targetAngle
+		                *    - Change in delta error has exceeded a threshold
+		                *
+		                *  If we have an invalid value, use the previous derivative value.
+		                *************************************************************/
+						if ( (deltaError == 0.0) && (Math.abs(currentError) > 3.0 ) ) {
+							derivative =  previousDerivative;   
+						} else {
+
+							if (Math.abs(deltaError) > PID_TURN_DELTAERROR_THRESHOLD_HI ) {
+								derivative  = previousDerivative;
+
+							} else {
+		                        /**********************************************************
+			                    *  We have a good deltaError value.  Filter the derivative 
+			                    *  value to smooth out jumps in derivative value
+			                    **********************************************************/
+								derivative =  PID_TURN_FILTER_CONSTANT  *  previousDerivative + 
+		   			                      ((1-PID_TURN_FILTER_CONSTANT) * (deltaError/deltaT));
+							}
+					   }
+					} else {
+						firstTime = false;
+						derivative = 0;
+					}
+					
+					//  Save values for next iteration
+					previousDerivative = derivative;
+					previousError      = currentError;  
+
+					/*******************************************************************
+		            * Calculate integral term
+		            *
+		            *  Check if we are entering saturation.  If we are cap totalError at
+		            *  max value (make sure the integral term doesn't get too big or small)
+		            *******************************************************************/
+					totalError += currentError * deltaT;   
+					
+					if(totalError >= PID_TURN_INTEGRAL_MAX)
+						totalError = PID_TURN_INTEGRAL_MAX;
+					
+					if(totalError <= PID_TURN_INTEGRAL_MIN)
+						totalError = PID_TURN_INTEGRAL_MIN;
+					
+					
+		            /**********************************************************************
+		            *
+		            * calculates drivetrain power
+		            *
+		            **********************************************************************/
+					power = PID_TURN_POWER_SCALE_FACTOR * ((PID_TURN_KP * currentError)
+														  +(PID_TURN_KI * totalError  )
+														  +(PID_TURN_KD * derivative  ));
+
+		            /**********************************************************************
+			        * Verify we have not exceeded max power when turning right or left
+			        **********************************************************************/
+					if(power > CatzConstants.DRIVE_MAX_POS_POWER) 
+						power = CatzConstants.DRIVE_MAX_POS_POWER;
+
+					if(power < CatzConstants.DRIVE_MAX_NEG_POWER)
+						power = CatzConstants.DRIVE_MAX_NEG_POWER;
+
+		            /**********************************************************************
+			        * Verify we have not gone under min power when turning right or left
+			        **********************************************************************/
+			        if (power >= 0.0) 
+			           {
+			           if ( (power < PID_TURN_MIN_POS_POWER) && (Math.abs(deltaError) < PID_TURN_DELTAERROR_THRESHOLD_LO) )
+			              power = PID_TURN_MIN_POS_POWER;
+			           }
+			        else if (power < 0.0)
+			           {
+			           if ( (power > PID_TURN_MIN_NEG_POWER) && (Math.abs(deltaError) < PID_TURN_DELTAERROR_THRESHOLD_LO) )
+			              power = PID_TURN_MIN_NEG_POWER;
+			           }
+			        
+			        /*******************************************************************
+		            *  Cmd robot to turn at new power level
+		            *  Note: Power will be positive if turning right and negative if 
+		            *        turning left
+		            *******************************************************************/
+					CatzRobotMap.drive.tankDrive(power, -power);
+					
+					printDebugData();
+					Timer.delay(0.015); //was .005,.008
 				}
-				
-	      			
-				CatzRobotMap.drive.tankDrive(power, -power);
-				
-				if (functionTimer.get() > timeoutSeconds)
-					done = true;
-				
-				printDebugData();
 			}
-			Timer.delay(0.015); //was .005,.008
 		}
-		printDebugData();
+
+        /**********************************************************************
+        *  We're at targetAngle or timed out.  Stop the robot and do final
+        *  cleanup.
+        *     - Print out last set of debug data (note that this may not be
+        *        a complete set of data)
+        *     - Stop timers
+        **********************************************************************/
 		CatzRobotMap.drive.tankDrive(0.0, 0.0); // makes robot stop
+
+		printDebugData();
 		
 		functionTimer.stop();
 		pdTimer.stop();
 	}
 	
 	
+	/****************************************************************************
+	*
+    *  setPIDTurnDebugModeEnabled()
+	*
+	****************************************************************************/
 	public static void setPIDTurnDebugModeEnabled(boolean enabled) {
 		debugMode = enabled;
 	}
+
+	/****************************************************************************
+	*
+    *  isTuningModeEnabled()
+	*
+	****************************************************************************/
 	public static boolean isTuningModeEnabled() {
 		return tuningMode;
 	}
+
+	
+	/****************************************************************************
+	*
+    *  setTuningModeEnabled()
+	*
+	****************************************************************************/
 	public static void setTuningModeEnabled(boolean enabled) {
 		tuningMode = enabled;
 		
 		if(tuningMode == true) {
-			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, CatzConstants.PID_TURN_POWER_SCALE_FACTOR);
-			SmartDashboard.putNumber(CatzConstants.Turn_KP, CatzConstants.PID_TURN_KP);
-			SmartDashboard.putNumber(CatzConstants.Turn_KD, CatzConstants.PID_TURN_KD);
-			SmartDashboard.putNumber(CatzConstants.Turn_KI, CatzConstants.PID_TURN_KI);
+			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, PID_TURN_POWER_SCALE_FACTOR);
+			SmartDashboard.putNumber(CatzConstants.Turn_KP, PID_TURN_KP);
+			SmartDashboard.putNumber(CatzConstants.Turn_KD, PID_TURN_KD);
+			SmartDashboard.putNumber(CatzConstants.Turn_KI, PID_TURN_KI);
 		}
 	}
+
+	/****************************************************************************
+	*
+    *  printDebugInit()
+	*
+	****************************************************************************/
 	public static void printDebugInit()
 	{
 		if(debugMode == true)
 		{
-			debugData =  ( "CurrentAngle,"   + currentAngle                   + "\n" +
-                    "targetAngle,"    + targetAngle                    + "\n" +
-                    "targetAngleAbs," + targetAngleAbs                 + "\n" +
-                    "tgtUpperLimit,"  + targetUpperLimit               + "\n" +
-                    "tgtLowerLimit,"  + targetLowerLimit               + "\n" +
-                    "kP,"             + CatzConstants.PID_TURN_KP          + "\n" +
-                    "kI,"             + CatzConstants.PID_TURN_KI          + "\n" +
-                    "kD,"             + CatzConstants.PID_TURN_KD          + "\n" +
-                    "Power Scale Factor," + CatzConstants.PID_TURN_POWER_SCALE_FACTOR + "\n" +
-                    "MaxI,"           + CatzConstants.PID_TURN_INTEGRAL_MAX + "\n" +
-                    "MinI,"           + CatzConstants.PID_TURN_INTEGRAL_MAX + "\n" );
+			debugData =  ( "CurrentAngle,"   + currentAngle        + "\n" +
+                    "targetAngle,"    + targetAngle           + "\n" +
+                    "targetAngleAbs," + targetAngleAbs        + "\n" +
+                    "errorThreshold," + PID_TURN_THRESHOLD    + "\n" +
+                    "kP,"             + PID_TURN_KP           + "\n" +
+                    "kI,"             + PID_TURN_KI           + "\n" +
+                    "kD,"             + PID_TURN_KD           + "\n" +
+                    "PwrScaleFactor," + PID_TURN_POWER_SCALE_FACTOR + "\n" +
+                    "MaxI,"           + PID_TURN_INTEGRAL_MAX + "\n" +
+                    "MinI,"           + PID_TURN_INTEGRAL_MIN + "\n" );
 			System.out.println("****************************************************************************");
 			System.out.print(debugData);
-			System.out.printf("PIDTurn MaxPwr, %.3f\n", CatzConstants.PID_TURN_MAX_POWER_RT);
+	        System.out.printf("PIDTurn DerivFiltConst, %.3f\n", PID_TURN_FILTER_CONSTANT  );
+			System.out.printf("PIDTurn MinPosPwr,      %.3f\n", PID_TURN_MIN_POS_POWER);
+			System.out.printf("PIDTurn MinNegPwr,      %.3f\n", PID_TURN_MIN_NEG_POWER);
+			System.out.printf("PIDTurn deltaErrThresh, %.3f\n", PID_TURN_DELTAERROR_THRESHOLD_HI);
+			System.out.printf("PIDTurn deltaErrThresh, %.3f\n", PID_TURN_DELTAERROR_THRESHOLD_LO);
 		}
 	}
+
+	/****************************************************************************
+	*
+	*  printDebugHeader()
+	*
+	****************************************************************************/
 	public static void printDebugHeader() {
 		if(debugMode == true) {
 			System.out.print("PIDTurn debug data\n");
 			System.out.print("timestamp,deltaT,currentAngle,currentError,deltaError,derivative,totalError,power\n");
 		}
 	}
+
+	/****************************************************************************
+    *
+	*  printDebugData()
+	*
+	****************************************************************************/
 	public static void printDebugData() {
 		if (debugMode == true) {
+			/***
 			debugData = functionTimer.get() + "," +
                     deltaT                  + "," + 
                     currentAngle            + "," + 
@@ -215,6 +382,17 @@ public class CatzPIDTurn
                     totalError              + "," + 
                     power                   + "\n";
 			System.out.print(debugData);
+			***/
+			System.out.printf("%.3f, %.3f %.3f, %.3f %.3f, %.3f %.3f, %.3f \n",
+					        functionTimer.get(),
+		                    deltaT, 
+		                    currentAngle, 
+		                    currentError, 
+		                    deltaError, 
+		                    derivative, 
+		                    totalError, 
+		                    power);
+			
 			//printDatainSmartDashboard();
 		}
 	}

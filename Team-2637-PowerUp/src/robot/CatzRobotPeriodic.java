@@ -82,10 +82,10 @@ public class CatzRobotPeriodic
 	}
 	
 	public static void updatePIDTurnConstants()   {
-		CatzConstants.PID_TURN_POWER_SCALE_FACTOR = SmartDashboard.getNumber("Turn SF",10);
-		CatzConstants.PID_TURN_KP = SmartDashboard.getNumber("Turn KP",10);
-		CatzConstants.PID_TURN_KD = SmartDashboard.getNumber("Turn KD",10);
-	    CatzConstants.PID_TURN_KI = SmartDashboard.getNumber("Turn KI",10);
+		CatzPIDTurn.PID_TURN_POWER_SCALE_FACTOR = SmartDashboard.getNumber("Turn SF",10);
+		CatzPIDTurn.PID_TURN_KP = SmartDashboard.getNumber("Turn KP",10);
+		CatzPIDTurn.PID_TURN_KD = SmartDashboard.getNumber("Turn KD",10);
+	    CatzPIDTurn.PID_TURN_KI = SmartDashboard.getNumber("Turn KI",10);
 	}
 	
 	

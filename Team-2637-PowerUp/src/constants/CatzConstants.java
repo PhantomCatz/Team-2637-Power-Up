@@ -51,6 +51,9 @@ public class CatzConstants
 	final static public int PCM_PORT_8 = 8;
 	final static public int PCM_PORT_9 = 9;
 	
+	final static public int DEF_VALUE = -1;
+	
+	
 	final static public int CUBEE_TALON_ID_L_FRONT = 0;
 	final static public int CUBEE_TALON_ID_L_REAR  = 1;
 	final static public int CUBEE_TALON_ID_R_FRONT = 4;
@@ -73,27 +76,38 @@ public class CatzConstants
 	final static public int LOGGER_LEVEL4 = 4;
 	final static public int LOGGER_LEVEL5 = 5;
 	
-	/*need to acquire for final robot*/final static public double PID_TURN_THRESHOLD = .12;
+	/*need to acquire for final robot*/final public static double DRIVE_MAX_POS_POWER =  1.0;
+	/*need to acquire for final robot*/final public static double DRIVE_MAX_NEG_POWER = -1.0;
+	
 	/*need to acquire for final robot*/final static public double NAVX_RESET_WAIT_TIME = 0.3;
 	
-	/*need to acquire for final robot*/final static public double PID_TURN_FILTER_CONSTANT = .9;
-	/*need to acquire for final robot*/static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
-	/*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;    //0.7;
-	/*need to acquire for final robot*/static public double PID_TURN_KP = 0.0508;  //0.0508
-	/*need to acquire for final robot*/static public double PID_TURN_KD = 0.008;  //0.0744
-	/*need to acquire for final robot*/static public double PID_TURN_KI = 0.0;
+	
+/***
+
+
+	final static public double PID_TURN_DELTAERROR_FACTOR  = 1.6;
+	final static public double PID_TURN_FILTER_CONSTANT    = 0.7;
+	      static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
+
+	      static public double PID_TURN_KP = 0.0508;  //0.0508
+	      static public double PID_TURN_KI = 0.0;
+	      static public double PID_TURN_KD = 0.008;   //0.0744
+
+	final static public double PID_TURN_INTEGRAL_MAX =  1.0;
+	final static public double PID_TURN_INTEGRAL_MIN = -1.0;
+
+	final public static double PID_TURN_MIN_POS_POWER =  0.1;
+	final public static double PID_TURN_MIN_NEG_POWER = -PID_TURN_MIN_POS_POWER;
+
+***/
+	final static public double AUTO_TURN_TIMEOUT_90_DEG = 3.0;
+	
+	
+	
+	/*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;
 	/*need to acquire for final robot*/static public double PID_LIFT_KP = 0.0508;  //0.0508
 	/*need to acquire for final robot*/static public double PID_LIFT_KD = 0.008;  //0.0744
 	/*need to acquire for final robot*/static public double PID_LIFT_KI = 0.0;
-	/*need to acquire for final robot*/final static public double PID_TURN_TIMEOUT = 3.0;
-	/*need to acquire for final robot*/final static public double PID_TURN_INTEGRAL_MAX = 0.0;
-	/*need to acquire for final robot*/final static public double PID_TURN_INTEGRAL_MIN = 0.0;
-	
-	/*need to acquire for final robot*/final public static double PID_TURN_MAX_POWER_RT =  1.0;
-	/*need to acquire for final robot*/final public static double PID_TURN_MIN_POWER_RT =  0.4;
-
-	/*need to acquire for final robot*/final public static double PID_TURN_MAX_POWER_LT = -1.0;
-	/*need to acquire for final robot*/final public static double PID_TURN_MIN_POWER_LT = -0.4;
 	
 	/*need to acquire for final robot*/final public static double LIFT_ENCODER_DISTANCE_PER_PULSE = 1.0;
 	/*need to acquire for final robot*/final public static double LEFT_DRIVE_TRAIN_DISTANCE_PER_PULSE = 1.0;

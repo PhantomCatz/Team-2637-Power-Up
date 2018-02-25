@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot
 	
 	public void robotPeriodic()
 	{
-		CatzRobotPeriodic.runRobotPeriodic();
+		//CatzRobotPeriodic.runRobotPeriodic();
 		
 	}
 	/**
@@ -63,7 +63,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void autonomousPeriodic()
 	{
-		CatzAutonomousPeriodic.runAutonomousPeriodic();
+		//CatzAutonomousPeriodic.runAutonomousPeriodic();
 	}
 	/**
 	 * This function is called periodically during operator control.
@@ -71,12 +71,12 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopInit()
 	{
-		CatzTeleopInit.runTeleopInit();
+		//CatzTeleopInit.runTeleopInit();
 	}
 	@Override
 	public void teleopPeriodic()
 	{			
-		CatzTeleopPeriodic.runTeleopPeriodic();
+		//CatzTeleopPeriodic.runTeleopPeriodic();
 	}
 
 }
