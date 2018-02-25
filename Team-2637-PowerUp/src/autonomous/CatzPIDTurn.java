@@ -24,15 +24,20 @@ public class CatzPIDTurn
     ***************************************************************************/
 	final static public double PID_TURN_MAX_TIMEOUT = 4.0;
 
-	final static public double PID_TURN_THRESHOLD = .12;
+	final static public double PID_TURN_THRESHOLD   = 0.12;
 	
     /***************************************************************************
     *  PID_TURN_DELTAERROR_THRESHOLD_HI - Delta Error Values larger than this
-    *                                     are considered invalid
+    *                                     are considered invalid and  will be
+    *                                     ignored
+    *  PID_TURN_DELTAERROR_THRESHOLD_LO - When drivetrain power drops below the
+    *                                     PID_TURN_MIN_xxx_POWER, we will check
+    *                                     to see if deltaError is below this 
+    *                                     threshold before setting power at
+    *                                     PID_TURN_MIN_xxx_POWER.
     ***************************************************************************/	
-
-	final static public double PID_TURN_DELTAERROR_THRESHOLD_HI  = 4.0;    //Ignore Delta Error Values above this
-	final public static double PID_TURN_DELTAERROR_THRESHOLD_LO =  0.11;   //Only set power to MIN_xxx_POWER if Delta Error value is below this
+	final static public double PID_TURN_DELTAERROR_THRESHOLD_HI =  4.0;
+	final public static double PID_TURN_DELTAERROR_THRESHOLD_LO =  0.11;
 
 	final static public double PID_TURN_FILTER_CONSTANT    = 0.7;
 	      static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
@@ -44,7 +49,7 @@ public class CatzPIDTurn
 	final static public double PID_TURN_INTEGRAL_MAX =  1.0;
 	final static public double PID_TURN_INTEGRAL_MIN = -1.0;
 
-	final public static double PID_TURN_MIN_POS_POWER =  0.4;
+	final public static double PID_TURN_MIN_POS_POWER =  0.4;     //0.4 is min power to move robot when it is stopped
 	final public static double PID_TURN_MIN_NEG_POWER = -PID_TURN_MIN_POS_POWER;
 
 	
@@ -247,7 +252,11 @@ public class CatzPIDTurn
 						power = CatzConstants.DRIVE_MAX_NEG_POWER;
 
 		            /**********************************************************************
-			        * Verify we have not gone under min power when turning right or left
+			        *  We need to make sure drivetrain power doesn't get too low but we
+			        *  also need to allow the robot to gradually brake.  The brake 
+			        *  condition is defined as when deltaError is > PID_TURN_DELTAERROR_THRESHOLD_LO
+			        *  If deltaError is < PID_TURN_DELTAERROR_THRESHOLD_LO, then we will
+			        *  set power to PID_TURN_MIN_xxx_POWER.  
 			        **********************************************************************/
 			        if (power >= 0.0) 
 			           {
@@ -318,9 +327,9 @@ public class CatzPIDTurn
 		
 		if(tuningMode == true) {
 			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, PID_TURN_POWER_SCALE_FACTOR);
-			SmartDashboard.putNumber(CatzConstants.Turn_KP, PID_TURN_KP);
-			SmartDashboard.putNumber(CatzConstants.Turn_KD, PID_TURN_KD);
-			SmartDashboard.putNumber(CatzConstants.Turn_KI, PID_TURN_KI);
+			SmartDashboard.putNumber(CatzConstants.TURN_KP_LABEL, PID_TURN_KP);
+			SmartDashboard.putNumber(CatzConstants.TURN_KD_LABEL, PID_TURN_KD);
+			SmartDashboard.putNumber(CatzConstants.TURN_KI_LABEL, PID_TURN_KI);
 		}
 	}
 
@@ -372,17 +381,7 @@ public class CatzPIDTurn
 	****************************************************************************/
 	public static void printDebugData() {
 		if (debugMode == true) {
-			/***
-			debugData = functionTimer.get() + "," +
-                    deltaT                  + "," + 
-                    currentAngle            + "," + 
-                    currentError            + "," + 
-                    deltaError              + "," + 
-                    derivative              + "," + 
-                    totalError              + "," + 
-                    power                   + "\n";
-			System.out.print(debugData);
-			***/
+
 			System.out.printf("%.3f, %.3f %.3f, %.3f %.3f, %.3f %.3f, %.3f \n",
 					        functionTimer.get(),
 		                    deltaT, 

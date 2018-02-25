@@ -54,27 +54,47 @@ public class CatzConstants
 	final static public int DEF_VALUE = -1;
 	
 	
+
+	//ROBOT COMPONENTS PORTS
 	final static public int CUBEE_TALON_ID_L_FRONT = 0;
 	final static public int CUBEE_TALON_ID_L_REAR  = 1;
 	final static public int CUBEE_TALON_ID_R_FRONT = 4;
 	final static public int CUBEE_TALON_ID_R_REAR  = 5;
 
-	final static public int TALON_ID_L_FRONT = 4;
-	final static public int TALON_ID_L_REAR  = 3;
-	final static public int TALON_ID_R_FRONT = 5;
-	final static public int TALON_ID_R_REAR  = 6;
+	final static public int TALON_ID_FRONT_L = 4;
+	final static public int TALON_ID_REAR_L  = 3;
+	final static public int TALON_ID_FRONT_R = 5;
+	final static public int TALON_ID_REAR_R  = 6;
 	
-	/*need to acquire for final robot*/final static public double PID_DRIVE_KP = .15;
-	/*need to acquire for final robot*/final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
-	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_SPEED = .43;
-	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_TIME = .3;
-	/*need to acquire for final robot*/final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
+	final static public int CLIMBER_TALON_ID = 1;
+	
+	final static public int DRIVE_XBOX_PORT = 0;
+	final static public int AUX_XBOX_PORT = 1;
+	
+	final static public int RIGHT_LIFTER_PWM = 1;
+	final static public int LEFT_LIFTER_PWM = 0;
+	
+	final static public int RIGHT_INTAKE_PWM = 2;
+	final static public int LEFT_INTAKE_PWM = 3;
+	final static public int INTAKE_FOREARM_PCM = 1;
+	final static public int INTAKE_BICEP_PCM = 0;
+	
+	final static public int WHEEL_ENCODER_R_DIOA = 0;
+	final static public int WHEEL_ENCODER_R_DIOB = 1;
+	
+	final static public int WHEEL_ENCODER_L_DIOA = 8;
+	final static public int WHEEL_ENCODER_L_DIOB = 9;
+	
+	final static public int LIFT_ENCODER_DIOA = 2;
+	final static public int LIFT_ENCODER_DIOB = 3;
+	//**************************************************************
 	
 	final static public int LOGGER_LEVEL1 = 1;
 	final static public int LOGGER_LEVEL2 = 2;
 	final static public int LOGGER_LEVEL3 = 3;
 	final static public int LOGGER_LEVEL4 = 4;
 	final static public int LOGGER_LEVEL5 = 5;
+
 	
 	/*need to acquire for final robot*/final public static double DRIVE_MAX_POS_POWER =  1.0;
 	/*need to acquire for final robot*/final public static double DRIVE_MAX_NEG_POWER = -1.0;
@@ -109,6 +129,10 @@ public class CatzConstants
 	/*need to acquire for final robot*/static public double PID_LIFT_KD = 0.008;  //0.0744
 	/*need to acquire for final robot*/static public double PID_LIFT_KI = 0.0;
 	
+
+	/*need to acquire for final robot*/final static public double PID_TURN_TIMEOUT = 3.0;
+	/*need to acquire for final robot*/final static public double PID_DRIVE_TIMEOUT = 5.0;
+
 	/*need to acquire for final robot*/final public static double LIFT_ENCODER_DISTANCE_PER_PULSE = 1.0;
 	/*need to acquire for final robot*/final public static double LEFT_DRIVE_TRAIN_DISTANCE_PER_PULSE = 1.0;
 	/*need to acquire for final robot*/final public static double RIGHT_DRIVE_TRAIN_DISTANCE_PER_PULSE = 1.0;
@@ -124,13 +148,14 @@ public class CatzConstants
 	final static public double MID_APPROACH_CUBE_FAR = 48.0;
 	final static public double MID_BACK_AWAY = 20.0;
 	
-	final static public double MID_RIGHT_SWITCH_SCALE_INIT_DISTANCE = 66.3;
-	final static public double MID_RIGHT_SWITCH_SCALE_TOWARDS_SWITCH = 64;
-	final static public double MID_RIGHT_SWITCH_SCALE_NEXT_TO_SWITCH = 36.5;
-	final static public double MID_RIGHT_SWITCH_SCALE_LEAVE_SWITCH = 65;
-	final static public double MID_RIGHT_SWITCH_SCALE_AROUND_SWITCH = 89;
-	final static public double MID_RIGHT_SWITCH_SCALE_TOWARDS_CUBE = 47.5;
-	final static public double MID_RIGHT_SWITCH_SCALE_TOWARDS_SCALE = 89;
+	final static public double MID_SWITCH_SCALE_INIT_DISTANCE = 66.3;
+	final static public double MID_SWITCH_SCALE_TOWARDS_SWITCH = 64;
+	final static public double MID_SWITCH_SCALE_NEXT_TO_SWITCH = 36.5;
+	final static public double MID_SWITCH_SCALE_LEAVE_SWITCH = 65;
+	final static public double MID_SWITCH_SCALE_AROUND_SWITCH = 89;
+	final static public double MID_SWITCH_SCALE_TOWARDS_CUBE = 47.5;
+	final static public double MID_SWITCH_SCALE_TOWARDS_SCALE = 89;
+	
 	
 	final static public int TURN_DEG_45 = 45;
 	final static public int TURN_DEG_90 = 90;
@@ -140,12 +165,11 @@ public class CatzConstants
 	final static public double HALF_SPEED = 0.5;
 	final static public double STOP = 0.0;
 	
-	/*need to acquire for final robot*/final static public int STRAIGHTDRIVE_TIMEOUT = 2;
 	
 	final static public double ROBOT_WIDTH = 34.0;
 	final static public double ROBOT_LENGTH = 39.0;
-	final static public double HALF_ROBOT_LENGTH = 19.5;
-	final static public double HALF_ROBOT_WIDTH = 17.0;
+	final static public double HALF_ROBOT_LENGTH = ROBOT_LENGTH/2;
+	final static public double HALF_ROBOT_WIDTH = ROBOT_WIDTH/2;
 	
 	//the distances below are for the LEFT AND RIGHT AUTONOMOUS PATHS
 	
@@ -160,71 +184,44 @@ public class CatzConstants
 	final static public double NO_SCALE_APPROACH_SCALE = 84;
 	final static public double NO_SCALE_POSITION_NEXT_TO_SCALE = 24.0;
 
-	//the distance below are for the rightSclaeScale AUTONOMOUS PATHS Right LRL
-	
-	final static public double RIGHT_SCALE_SCALE_INIT_DIST = 261.0;
-	final static public double RIGHT_SCALE_SCALE_LEFT_TURN = 85.25 - //Distance from switch to wall
-				                                             29.69 - //Distance from side to wall to robot
-				                                             34.00 - //Width of robot
-				                                             6.0;   //Avoid platform ramp
-	final static public double RIGHT_SCALE_SCALE_APPRO_SCALE = 38.0;
-	final static public double RIGHT_SCALE_SCALE_BACK_UP = 20.0;
-	final static public double RIGHT_SCALE_SCALE_APPRO_CUBE_OPEN = 30.7; 
-	final static public double RIGHT_SCLALE_SCALE_APPRO_CUBE = 20.0;
-	final static public double RIGHT_SCALE_SCALE_ACCUE_CUBE = 7.0;
-	final static public double RIGHT_SCALE_SCAlE_APPRO_SWITCH = 50.0;
-	final static public double RIGHT_SCALE_SCALE_APPRO_FINAL_SCLAE = 70.0;
-	
-	//the distance below are for the leftSclaeScale AUTONOMOUS PATHS Left RLR
-	
-	final static public double LEFT_SCALE_SCALE_INIT_DIST = 261.0;
-	final static public double LEFTT_SCALE_SCALE_LEFT_TURN = 85.25 - //Distance from switch to wall
-					                                             29.69 - //Distance from side to wall to robot
-					                                             34.00 - //Width of robot
-					                                             6.0;   //Avoid platform ramp
-	final static public double LEFT_SCALE_SCALE_APPRO_SCALE = 38.0;
-	final static public double LEFT_SCALE_SCALE_BACK_UP = 20.0;
-	final static public double LEFT_SCALE_SCALE_APPRO_CUBE_OPEN = 30.7; 
-	final static public double LEFT_SCLALE_SCALE_APPRO_CUBE = 20.0;
-	final static public double LEFT_SCALE_SCALE_ACCUE_CUBE = 7.0;
-	final static public double LEFT_SCALE_SCAlE_APPRO_SWITCH = 50.0;
-	final static public double LEFT_SCALE_SCALE_APPRO_FINAL_SCLAE = 70.0;
-		
-	// the distance below are for the rightScaleSclaeSwitch AUTONOMOUS PATHS Right LLL
-		
-	final static public double OPPO_RIGHT_SCALE_SCALE_INIT = 215.737;
-	final static public double OPPO_RIGHT_SCALE_SCALE_TO_OPPO = 195.7385;
-	final static public double OPPO_RIGHT_SCALE_SCALE_APPRO_SCALE = 64.4;
-	final static public double OPPO_RIGHT_SCALE_SCALE_BCAK_UP = 20.0;
-	final static public double OPPO_RIGHT_SCALE_SCALE_APPRO_CUBE = 44.4;
-	final static public double OPPO_RIGHT_SCALE_SCALE_CUBE_DEG = 31.8;
+	// the distances below are for the MID SWITCH SWITCH PATHS
+	final static public double MID_SWITCH_SWITCH_INIT_DIST = 66.5;
+	final static public double MID_SWITCH_SWITCH_TOWARDS_SWITCH = 64;
+	final static public double MID_SWITCH_SWITCH_APPROACH_SWITCH = 36.5;
+	final static public double MID_SWITCH_SWITCH_LEAVE_SWITCH = 65;
+	final static public double MID_SWITCH_SWITCH_AROUND_SWITCH = 89;
+	final static public double MID_SWITCH_SWITCH_TOWARDS_CUBE = 47.5;
+	final static public double MID_SWITCH_SWITCH_LEAVE_CUBE = 35;
+	final static public double MID_SWITCH_SWITCH_SIDE_OF_SWITCH = 45.5;
+
 	
 	final static public double ZERO = 0.0;
 
 	/*need to acquire for final robot*/final static public double CLIMB_SPEED = 0;
-	/*need to acquire for final robot*/final static public double LIFT_SPEED = 0;
 	/*need to acquire for final robot*/final static public double INTAKE_SPEED = 0.7;
 	
 	
-	static public boolean bicepDeployed = false;
-	static public boolean forearmOpen = false;
+
+	static public boolean bicepRetracted = true;
+	static public boolean forearmClosed = true;
 	
 	final static public String POSITION_SELECTORL = "Position Left";
 	final static public String POSITION_SELECTORM = "Position Mid";
 	final static public String POSITION_SELECTORR = "Position Right";
-	static public String Turn_KP = "Turn KP";
-	static public String Turn_KI = "Turn KI";
-	static public String Turn_KD = "Turn KD";
+	static public String TURN_KP_LABEL = "Turn KP";
+	static public String TURN_KI_LABEL = "Turn KI";
+	static public String TURN_KD_LABEL = "Turn KD";
 	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
 	
-	/*need to acquire for final robot*/final static public double LIFT_SCALE_HEIGHT = 0.0;
-	/*need to acquire for final robot*/final static public double LIFT_SWITCH_HEIGHT = 0.0;
-	/*need to acquire for final robot*/public static final double LIFTER_ERROR_THRESHOLD_PULSES = 10;
-	public static final double INITIAL_LIFTER_ERROR = 1000;
 	
 	final static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
 	final static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
 	final static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
 
+	final static public double CUBE_OUTTAKE_WAIT_TIME = 0.2;
+	final static public double CUBE_INTAKE_WAIT_TIME = 0.2;
+	
+	final static public double DEG_TO_RAD = Math.PI/180.0;
+	final static public double RAD_TO_DEG = 180.0/Math.PI;
 
 }

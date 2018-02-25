@@ -26,14 +26,14 @@ public class CatzRobotPeriodic
 
 	public static void runRobotPeriodic(){
 	
-		startPositionSelector();
+		//runPositionSelector();
 		//updateSmartDashboard();
 		if(CatzPIDTurn.isTuningModeEnabled())
 			updatePIDTurnConstants();
 		
 	} 
 	
-	public static void startPositionSelector() {
+	public static void runPositionSelector() {
 	
 		check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
 		check_boxM = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
@@ -71,21 +71,24 @@ public class CatzRobotPeriodic
 	public static void updateSmartDashboard() {
 		
 		SmartDashboard.putNumber("navX", CatzRobotMap.navx.getAngle());
-		SmartDashboard.putNumber("Distance of Ldeft Encoder", CatzRobotMap.wheelEncoderL.getDistance());
+		SmartDashboard.putNumber("Distance of Left Encoder", CatzRobotMap.wheelEncoderL.getDistance());
 		SmartDashboard.putNumber("Distance of Right Encoder", CatzRobotMap.wheelEncoderR.getDistance());
 		SmartDashboard.putNumber("Value of Left Encoder", CatzRobotMap.wheelEncoderL.get());
 		SmartDashboard.putNumber("Value of Right Encoder", CatzRobotMap.wheelEncoderR.get());
+		SmartDashboard.putNumber("Value of lifter Encoder",CatzRobotMap.liftEncoder.get());
 		
-		SmartDashboard.putBoolean("Graber Forearms Open", CatzConstants.forearmOpen);
-		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzConstants.bicepDeployed);
+		SmartDashboard.putBoolean("Graber Forearms Open", CatzConstants.forearmClosed);
+		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzConstants.bicepRetracted);
 		
 	}
 	
 	public static void updatePIDTurnConstants()   {
-		CatzPIDTurn.PID_TURN_POWER_SCALE_FACTOR = SmartDashboard.getNumber("Turn SF",10);
-		CatzPIDTurn.PID_TURN_KP = SmartDashboard.getNumber("Turn KP",10);
-		CatzPIDTurn.PID_TURN_KD = SmartDashboard.getNumber("Turn KD",10);
-	    CatzPIDTurn.PID_TURN_KI = SmartDashboard.getNumber("Turn KI",10);
+
+		CatzPIDTurn.PID_TURN_POWER_SCALE_FACTOR = SmartDashboard.getNumber(CatzConstants.SCALE_FACTOR_LABEL,0);
+		CatzPIDTurn.PID_TURN_KP = SmartDashboard.getNumber(CatzConstants.TURN_KP_LABEL,0);
+		CatzPIDTurn.PID_TURN_KD = SmartDashboard.getNumber(CatzConstants.TURN_KD_LABEL,0);
+		CatzPIDTurn.PID_TURN_KI = SmartDashboard.getNumber(CatzConstants.TURN_KI_LABEL,0);
+
 	}
 	
 	

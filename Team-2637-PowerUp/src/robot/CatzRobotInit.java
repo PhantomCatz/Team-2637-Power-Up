@@ -11,6 +11,7 @@ package robot;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
+import autonomous.CatzPIDTurn;
 import constants.CatzConstants;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -27,11 +28,15 @@ public class CatzRobotInit
 	static boolean check_boxR = false;
 
 	
-	public static void run() 
+	public static void runRobotInit() 
 	{
 		CatzRobotMap.getInstance();
-		//CameraServer.getInstance().startAutomaticCapture();
+
 		//setSmartDashboard();
+		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
+		CatzRobotMap.setDebugModeEnabled(true);
+
+		//CameraServer.getInstance().startAutomaticCapture();
 		//cameraSetup();
 	}
 	

@@ -1,9 +1,10 @@
 /************************************************
  * Timothy Vu
  * 
- * Last Revised: 2/19/18
+ * Last Revised: 2/20/18 AL
  * 
  * added printout debug data code
+ * flipped polarity of forearm and bicep solenoids
  * 
  * Methods: openFlapToggle(), intakeCube(), launchCube(), 
  * deployIntake(), retractIntake()
@@ -14,6 +15,7 @@
 package mechanisms;
 
 import constants.CatzConstants;
+import edu.wpi.first.wpilibj.Timer;
 import robot.CatzRobotMap;
 
 public class CatzGrabber 
@@ -25,22 +27,23 @@ public class CatzGrabber
 	public void setIntakeSpeed(double relativeSpeed) {
 		CatzRobotMap.intakeLeft.set(relativeSpeed);
 		CatzRobotMap.intakeRight.set(-relativeSpeed);
+		//if bump switch is pressed then set at 0
 	}
 	
 	public void openForearm() {
-		CatzConstants.forearmOpen = true;
-		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
+		CatzConstants.forearmClosed = false;
+		CatzRobotMap.intakeForearm.set(CatzConstants.forearmClosed);
 		printOutDebugData("Grabber forearm set to Open");
 	}
 
 	public void closeForearm() {
-		CatzConstants.forearmOpen = false;
-		CatzRobotMap.intakeForearm.set(CatzConstants.forearmOpen);
+		CatzConstants.forearmClosed = true;
+		CatzRobotMap.intakeForearm.set(CatzConstants.forearmClosed);
 		printOutDebugData("Grabber forearm set to Closed");
 	}
 	
 	public void toggleForearm() {
-		if(CatzConstants.forearmOpen == true) {
+		if(CatzConstants.forearmClosed == false) {
 			this.closeForearm();
 		}
 		else{
@@ -49,20 +52,45 @@ public class CatzGrabber
 	}
 
 	public void retractBicep() { 
-		CatzConstants.bicepDeployed = false;
-		CatzRobotMap.intakeBicep.set(CatzConstants.bicepDeployed);
+		CatzConstants.bicepRetracted = true;
+		CatzRobotMap.intakeBicep.set(CatzConstants.bicepRetracted);
 		printOutDebugData("Grabber Bicep set to Retract");
 	}
 
 	public void deployBicep() {
-		CatzConstants.bicepDeployed = true;
-		CatzRobotMap.intakeBicep.set(CatzConstants.bicepDeployed);
+		CatzConstants.bicepRetracted = false;
+		CatzRobotMap.intakeBicep.set(CatzConstants.bicepRetracted);
 		printOutDebugData("Grabber forearm set to Deploy");
 	}
 	
-	private static void printOutDebugData(String data){
-		if(CatzRobotMap.debugMode==true) {
-			System.out.println(data);
+	private static void printOutDebugData(String info) {
+		if(CatzRobotMap.debugMode == true) {
+			double currentTime = CatzRobotMap.globalTimer.get();
+			System.out.println(currentTime + "  -" + info);
 		}
+	}
+	public void retractGrabber() 
+	{
+		this.closeForearm();
+		this.retractBicep();
+	}
+	public void deployGrabber()
+	{
+		this.deployBicep();
+		this.openForearm();
+	}
+	public void shootCube()
+	{
+		this.deployBicep();
+		this.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
+		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
+		this.setIntakeSpeed(0.0);
+	}
+	public void intakeCube()
+	{
+		this.deployBicep();
+		this.setIntakeSpeed(CatzConstants.INTAKE_SPEED);
+		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
+		this.setIntakeSpeed(0.0);
 	}
 }

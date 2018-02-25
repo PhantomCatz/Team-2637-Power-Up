@@ -1,9 +1,11 @@
 package robot;
 
+import java.text.DecimalFormat;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+import autonomous.CatzAutonomousInit;
 import constants.CatzConstants;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -11,7 +13,6 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import components.CatzDrive;
-import components.CatzJoystick;
 import components.CatzXboxController;
 import mechanisms.CatzClimber;
 import mechanisms.CatzGrabber;
@@ -56,25 +57,27 @@ public class CatzRobotMap
 	public static Solenoid intakeForearm;
 	public static Solenoid intakeBicep;
 	
+	public static DecimalFormat secondsFormat;
+
 	public static boolean debugMode = false;
+	public static boolean usingCubeee = false;
 	//public static CatzLogger logger;
 	
 	//public  Lidar lidar;
 	
 	private CatzRobotMap() 
 	{	
-		boolean useCubee = true;
 
-		if (useCubee == true) {
-			fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT);
+		if(usingCubeee) {
+			fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT); 
 			rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
 			fLeft  = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_FRONT);
 			rLeft  = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);
 		} else {
-			fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_FRONT); 
-			rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_R_REAR);
-			fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_FRONT);
-			rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_L_REAR);
+			fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_R); 
+			rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_R);
+			fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_L);
+			rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_L);
 		}
 		
 		fRight.setSafetyEnabled(false);
@@ -87,39 +90,43 @@ public class CatzRobotMap
 		drive = new CatzDrive(leftMotors, rightMotors);
 		printOutDebugData("Successfully initialized full drive train");
 		
-		climberMotor = new WPI_TalonSRX(CatzConstants.PORT_3);
+		climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
 		climberMotor.setSafetyEnabled(false);
 		printOutDebugData("Successfully initialized climber Motor");
 		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 				
-		wheelEncoderR = new Encoder(CatzConstants.DIO_PORT_0, CatzConstants.DIO_PORT_1, false, Encoder.EncodingType.k2X);
-		wheelEncoderL = new Encoder(CatzConstants.DIO_PORT_8, CatzConstants.DIO_PORT_9, false, Encoder.EncodingType.k2X);
-		liftEncoder   = new Encoder(CatzConstants.DIO_PORT_2, CatzConstants.DIO_PORT_3, false, Encoder.EncodingType.k2X);
+		wheelEncoderR = new Encoder(CatzConstants.WHEEL_ENCODER_R_DIOA, CatzConstants.WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k2X);
+		wheelEncoderL = new Encoder(CatzConstants.WHEEL_ENCODER_L_DIOA, CatzConstants.WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k2X);
+		liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k2X);
 		printOutDebugData("Successfully Encoders");
 		
 		globalTimer = new Timer();
 		
-		xboxDrive = new CatzXboxController(CatzConstants.PORT_0);
-		xboxAux   = new CatzXboxController(CatzConstants.PORT_1);
+		xboxDrive = new CatzXboxController(CatzConstants.DRIVE_XBOX_PORT);
+		xboxAux   = new CatzXboxController(CatzConstants.AUX_XBOX_PORT);
 		
-		lifterR = new Spark(CatzConstants.PWM_PORT_1);
-		lifterL = new Spark(CatzConstants.PWM_PORT_0);
+		lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
+		lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
 		
-		intakeRight = new Spark(CatzConstants.PWM_PORT_2);
-		intakeLeft  = new Spark(CatzConstants.PWM_PORT_3);
+		intakeRight = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
+		intakeLeft  = new Spark(CatzConstants.LEFT_INTAKE_PWM);
 		
-		intakeForearm = new Solenoid(CatzConstants.PCM_PORT_0);
-		intakeBicep   = new Solenoid(CatzConstants.PCM_PORT_1);
+		intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
+		intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);
 		printOutDebugData("Successfully initialized auxilary actuators");
 		
 		climberMechanism = new CatzClimber();
 		grabber          = new CatzGrabber();
 		lift             = new CatzLift();
 
-		
+		secondsFormat = new DecimalFormat("#.###");
 		//logger = new CatzLogger();
+	}
+	public static void setDebugModeEnabled(boolean enabled) 
+	{
+		debugMode = enabled;
 	}
 	public static CatzRobotMap getInstance()
 	{
@@ -129,7 +136,8 @@ public class CatzRobotMap
 	}
 	private static void printOutDebugData(String info) {
 		if(debugMode == true) {
-			System.out.println(info);
+			double currentTime = CatzRobotMap.globalTimer.get();
+			System.out.println(currentTime + "  -" + info);
 		}
 	}
 }

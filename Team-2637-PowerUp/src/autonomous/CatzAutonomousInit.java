@@ -30,13 +30,14 @@ public class CatzAutonomousInit
 		CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
 	Timer.delay(0.5);
 		CatzPIDTurn.PIDturn(-45, CatzConstants.DEF_VALUE);
-		
+		//retractMechanisms();
+		CatzRobotMap.grabber.retractGrabber();
+		//choosePath();
+		//CatzPIDTurn.setDebugModeEnabled( true );
+		//CatzPIDTurn.PIDturn(-45, 5);
+		//CatzPIDTurn.PIDturn(-90, 10);
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
-	}
-	
-	public static void setMechanisms() {
-		CatzRobotMap.grabber.closeForearm();
-		CatzRobotMap.grabber.retractBicep();
+		//CatzAutonomousPaths.middlePathL();
 	}
 
 	public static void choosePath() {	
@@ -52,22 +53,22 @@ public class CatzAutonomousInit
 		System.out.println(gameData);
 		if (gameData.charAt(0) == 'L' && check_boxM == true) {
 			printOutDebugData("middlePathL");
-			CatzAutonomousPaths.middlePathL();
+			CatzAutonomousPaths.middleSingle_LXX();
 			printOutDebugData("Init Done");
 			
 		} else if (gameData.charAt(0) == 'R' && check_boxM == true) {
 			printOutDebugData("middlePathR");
-			CatzAutonomousPaths.middlePathR();
+			CatzAutonomousPaths.middleSingle_RXX();
 			printOutDebugData("Init Done");
 			
 		} else if(gameData.charAt(1) == 'R' && check_boxR == true){
 			printOutDebugData("rightPath");
-			CatzAutonomousPaths.rightPath();	
+			CatzAutonomousPaths.right_XRX();	
 			printOutDebugData("Init Done");
 			
 		} else if(gameData.charAt(1) == 'L' && check_boxL == true){
 			printOutDebugData("LeftPath");
-			CatzAutonomousPaths.leftPath();
+			CatzAutonomousPaths.left_XLX();
 			printOutDebugData("Init Done");
 			
 		} else {
@@ -78,9 +79,10 @@ public class CatzAutonomousInit
 		}
 	}
 	
-	private static void printOutDebugData(String data){
-		if(CatzRobotMap.debugMode==true) {
-			System.out.println(data);
+	private static void printOutDebugData(String info) {
+		if(CatzRobotMap.debugMode == true) {
+			double currentTime = CatzRobotMap.globalTimer.get();
+			System.out.println(currentTime + "  -" + info);
 		}
 	}
 

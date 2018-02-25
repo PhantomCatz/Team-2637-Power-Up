@@ -35,6 +35,10 @@ public class CatzDrive
 		//logger.add(NAME, "Arcade Drive set to Flash.", CatzConstants.LEVEL5, timer.get());
 		drive.arcadeDrive(control.getLeftStickY(), control.getRightStickX());
 	}
+	public void setModeReverseArcadeDriveFlash(CatzXboxController control){
+		//logger.add(NAME, "Arcade Drive set to Flash.", CatzConstants.LEVEL5, timer.get());
+		drive.arcadeDrive(-control.getLeftStickY(), -control.getRightStickX());
+	}
 	
 	public void tankDrive(double lPower, double rPower){
 		drive.tankDrive(lPower, rPower);
@@ -44,9 +48,10 @@ public class CatzDrive
 		drive.arcadeDrive(xSpeed, zRotation);
 	}
 	
-	private static void printOutDebugData(String data){
-		if(CatzRobotMap.debugMode==true) {
-			System.out.println(data);
+	private static void printOutDebugData(String info) {
+		if(CatzRobotMap.debugMode == true) {
+			double currentTime = CatzRobotMap.globalTimer.get();
+			System.out.println(currentTime + "  -" + info);
 		}
 	}
 }
