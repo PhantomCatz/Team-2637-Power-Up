@@ -12,27 +12,40 @@ import robot.CatzRobotMap;
 
 public class CatzTeleopPeriodic 
 {
+	private static boolean reversed;
 	public static void runTeleopPeriodic()
-	{		
-
-		//sets drive control to drive xbox controller 
-		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
-
+	{	
+		if(CatzRobotMap.xboxDrive.getBackButtonPressed())
+			reversed = !reversed;
+		
+		 
+		if(reversed)
+			CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
+		else
+			CatzRobotMap.drive.setModeReverseArcadeDriveFlash(CatzRobotMap.xboxDrive);
+		
 		runGrabberControls();
 		runLiftControls();
 		runClimberControls();
 	}
+	
+	
 	private static void runGrabberControls() 
 	{
-		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxAux.getLeftStickY());
+		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getLeftStickY());
 		
-		if(CatzRobotMap.xboxAux.getRightBumper()==true){
+		if(CatzRobotMap.xboxAux.getRightBumper())
+		{
 			CatzRobotMap.grabber.deployBicep();
 		}
-		if(CatzRobotMap.xboxAux.getLeftBumper()==true) {
+		
+		if(CatzRobotMap.xboxAux.getLeftBumper()) 
+		{
 			CatzRobotMap.grabber.retractBicep();
 		}
-		if(CatzRobotMap.xboxAux.getAButton()==true){
+		
+		if(CatzRobotMap.xboxDrive.getAButton())
+		{
 			CatzRobotMap.grabber.toggleForearm();
 		}
 		
@@ -43,6 +56,6 @@ public class CatzTeleopPeriodic
 	}
 	private static void runClimberControls()
 	{
-		CatzRobotMap.climberMechanism.setClimberSpeed(CatzRobotMap.xboxDrive.getRightTrigger() - CatzRobotMap.xboxDrive.getLeftTrigger());
+		CatzRobotMap.climberMechanism.setClimberSpeed(CatzRobotMap.xboxAux.getRightTrigger() - CatzRobotMap.xboxAux.getLeftTrigger());
 	}
 }
