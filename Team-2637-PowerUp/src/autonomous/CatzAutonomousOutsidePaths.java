@@ -8,13 +8,12 @@
 
 package autonomous;
 
-import robot.CatzRobotMap;
 import constants.CatzConstants;
-import constants.CatzOutsidePathsDistances;
+import robot.CatzRobotMap;
 
 public class CatzAutonomousOutsidePaths {
 
-	final static public double PICK_UP_CUBE_ACCUE_CUBE = 7.0; //to get to the cube accurately
+	final static public double TO_GET_ACCUE = 7.0; //to get to the cube and Scale accurately
 	final static public double PICK_UP_CUBE_TO_CUBE = 45.0; //go to the scale to pick up the cube
 	final static public double BACK_TO_SCALE = 45.0; //back to the scale to place the 2nd cube
 	final static public double TO_SCALE = 85.25 - //Distance from switch to wall
@@ -24,185 +23,150 @@ public class CatzAutonomousOutsidePaths {
 
 	public static void right_LRL () { //<5>
 		
-	    // Drive to right Scale
-		to_Right_Scale();
+	   to_Right_Scale();             // Drive to right Scale
 		
-	    // Drive to right switch to pick up the cube
-		pick_Up_Cube_Right();
+	   pick_Up_Cube_Right();        // Drive to right switch to pick up the cube
 				
-	    // Drive back to right Scale
-		back_To_Right_Scale();
+	   back_To_Right_Scale(); 	    // Drive back to right Scale
 
 	}
 	
 	public static void left_RLR() { //<5>
 		 
-		// Drive to left Scale
-		to_Left_Scale();
+		to_Left_Scale();	        // Drive to left Scale
 	
-	    // Drive to switch to pick up the cube
-		pick_Up_Cube_Left();
-				
-	    // Drive back to left Scale
-		back_To_Left_Scale();
-		
+		pick_Up_Cube_Left(); 	    // Drive to switch to pick up the cube
+
+		back_To_Left_Scale(); 	    // Drive back to left Scale
+
 	}
 
 	public static void right_LLL() { //<4> opposite side
 	 
-		//drive to left scale (opposite)
-		to_Left_Scale_Oppo();
-	
-		//drive to left scale to pick up the cube
+		to_Left_Scale_Oppo(); 		//drive to left scale (opposite)
 		
-		pick_Up_Cube_Left();
+		pick_Up_Cube_Left();		//drive to left scale to pick up the cube
 		
-		//drive back to scale
-		
-		back_To_Left_Scale();
-		
+		back_To_Left_Scale();		//drive back to scale
+
 	}
 	
 	public static void left_RRR() { //Left RRR <4> opposite side
 					
-		//drive to right scale 
+		to_Right_Scale_Oppo(); 		//drive to right scale opposite
 		
-		CatzPIDDrive.PIDDrive(0.5,CatzOutsidePathsDistances.LEFT_RRR_INIT-CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive forward 222in
+		pick_Up_Cube_Right();		//drive to right scale to pick up the cube
 		
-		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right
-		
-		CatzPIDDrive.PIDDrive(0.5, CatzOutsidePathsDistances.LEFT_RRR_APPO_SCALE-CatzConstants.HALF_ROBOT_LENGTH, 
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive 217in forward to appro to Scale
-		
-		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg left to face the Sclae
-		
-		CatzRobotMap.lift.liftToScaleHeight();
-		
-		CatzPIDDrive.PIDDrive(0.5, CatzOutsidePathsDistances.LEFT_RRR_GET_SCALE-CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive 64in forward to get scale 
-		
-		CatzRobotMap.grabber.shootCube(); //outtake the cube in the left scale
-		
-		//drive to right scale to pick up the cube
-		
-		pick_Up_Cube_Right();
+		back_To_Right_Scale();      //drive back to right scale
 
-		//drive back to right scale
-		
-		back_To_Right_Scale();
-		
 		}
 	
 	public static void right_RLR() { // <6> opposite sides 
 		
-		//drive to left scale
-		to_Left_Scale_Oppo();
-		
-		// drive to the left switch to pick up the cube 
+		to_Left_Scale_Oppo();		//drive to left scale
 
-		pick_Up_Cube_Left();
-		
-		//drive back to left scale
+		pick_Up_Cube_Left();		// drive to the left switch to pick up the cube 
 
-		back_To_Left_Scale();
+		back_To_Left_Scale();		// drive to the left switch to pick up the cube 
+
 	}
 	
 	public static void left_LRL() { //<6>
+			
+		to_Right_Scale_Oppo();		//drive to right scale 
+
+		pick_Up_Cube_Right();		//drive to right switch to pick up the cube
+
+		back_To_Right_Scale();		//drive back to right scale
 	
-		//drive to right scale 
-		
-		CatzPIDDrive.PIDDrive(0.5,CatzOutsidePathsDistances.LEFT_LRL_INIT-CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive forward 222in
-
-		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right
-
-		CatzPIDDrive.PIDDrive(0.5, CatzOutsidePathsDistances.LEFT_LRL_APPO_SCALE-CatzConstants.HALF_ROBOT_LENGTH, 
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive 217in forward to appro to Scale
-
-		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg left to face the Scale
-
-		CatzRobotMap.lift.liftToScaleHeight();
-		
-		CatzPIDDrive.PIDDrive(0.5, CatzOutsidePathsDistances.LEFT_LRL_GET_SCALE-CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive 64in forward to get scale 
-
-		CatzRobotMap.grabber.shootCube();
-		
-		//drive to right switch to pick up the cube
-
-		pick_Up_Cube_Right();
-
-		//drive back to right scale
-
-		back_To_Right_Scale();
-		
 	}
 	
 	public static void right_RRR() {// <3>
 		
-	    // Drive to right Scale
-		to_Right_Scale();
-		
-		// Drive to right switch to pick up the cube
-		pick_Up_Cube_Right();
+		to_Right_Scale();	        // Drive to right Scale
 
-	    // Drive back to right Scale
-		back_To_Right_Scale();
-		
+		pick_Up_Cube_Right();		// Drive to right switch to pick up the cube
+
+		back_To_Right_Scale();	    // Drive back to right Scale
+
 		}
 	
 	public static void left_LLL() { //<3>
 		
-		 // Drive to right Scale
-		to_Left_Scale();
+		to_Left_Scale();	    	  // Drive to right Scale
 		
-	    // Drive to left switch to pick up the cube
+		pick_Up_Cube_Left();	     // Drive to left switch to pick up the cube
 		
-		pick_Up_Cube_Left();
-		
-	    // Drive back to left Scale
-		
-		back_To_Left_Scale();
+		back_To_Left_Scale();	    // Drive back to left Scale
 		
 	}
 	
 	public static void pick_Up_Cube_Right() {
+		
+		/**********************************************************************
+		*  
+		*  Right SCALE Drive to Right Cube
+		*      +
+		*      | 
+		*      |     45inches
+		*  7in |   
+		*   +--+ 
+		*   |
+		*   |  45inches
+		*   |
+		*   + 
+		* Right Switch Cube
+		**********************************************************************/
 
 		CatzPIDDrive.PIDDrive(0.5,CatzAutonomousOutsidePaths.PICK_UP_CUBE_TO_CUBE-CatzConstants.HALF_ROBOT_LENGTH, 
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //back 45in to turn
+				CatzConstants.PID_DRIVE_TIMEOUT); //back 45in to turn
 		
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg left
 		
-		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.PICK_UP_CUBE_ACCUE_CUBE, 
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive forward 7in to grab the cube accurately
+		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.TO_GET_ACCUE, 
+				CatzConstants.PID_DRIVE_TIMEOUT); //drive forward 7in to grab the cube accurately
 		
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg left
 		
 		CatzRobotMap.lift.dropToGroundHeight();
 		
 		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.PICK_UP_CUBE_TO_CUBE-CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive 45in to go to the cube
+				CatzConstants.PID_DRIVE_TIMEOUT); // drive 45in to go to the cube
 		
 		CatzRobotMap.grabber.intakeCube(); //intakes the cube
 	}
 	
 	public static void pick_Up_Cube_Left() {
 		
+		/**********************************************************************
+		*  
+		*  Left SCALE Drive to Left Cube
+		*   +
+		*   | 45inches
+		*   |     
+		*   | 7in 
+		*   +---+ 
+		*       |
+		*       |  45inches
+		*       |
+		*       + 
+		* Left Switch Cube
+		**********************************************************************/
+		
 		CatzPIDDrive.PIDDrive(0.5,CatzAutonomousOutsidePaths.PICK_UP_CUBE_TO_CUBE-CatzConstants.HALF_ROBOT_LENGTH, 
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //back 45in to turn
+				CatzConstants.PID_DRIVE_TIMEOUT); //back 45in to turn
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right
 
-		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.PICK_UP_CUBE_ACCUE_CUBE, 
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive forward 7in to grab the cube accurately
+		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.TO_GET_ACCUE, 
+				CatzConstants.PID_DRIVE_TIMEOUT); //drive forward 7in to grab the cube accurately
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right
 
 		CatzRobotMap.lift.dropToGroundHeight();
 
 		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.PICK_UP_CUBE_TO_CUBE-CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive 45in to go to the cube
+				CatzConstants.PID_DRIVE_TIMEOUT); // drive 45in to go to the cube
   
 		CatzRobotMap.grabber.intakeCube(); //intakes the cube
 		
@@ -210,40 +174,70 @@ public class CatzAutonomousOutsidePaths {
 	
 	public static void back_To_Right_Scale() {
 		
+		/**********************************************************************
+		*  
+		*  Right SCALE Drive back to right Scale
+		*      +
+		*      | 
+		*      |  45inches
+		*  7in |   
+		*   +--+ 
+		*   |
+		*   |  45inches
+		*   |
+		*   + 
+		* Right Switch 
+		**********************************************************************/
+		
 		CatzPIDDrive.PIDDrive(0.5, -CatzAutonomousOutsidePaths.BACK_TO_SCALE+CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive 45in back to go to the switch
+				              CatzConstants.PID_DRIVE_TIMEOUT); // drive 45in back to go to the switch
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg left
 
-		CatzPIDDrive.PIDDrive(0.5, CatzOutsidePathsDistances.RIGHT_LRL_ACCUE_CUBE,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.TO_GET_ACCUE,
+				               CatzConstants.PID_DRIVE_TIMEOUT); 
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); // turn 90deg left
 
 		CatzRobotMap.lift.liftToScaleHeight();
 
 		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.BACK_TO_SCALE-CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive 45in to get to the scale
+				               CatzConstants.PID_DRIVE_TIMEOUT); // drive 45in to get to the scale
 
 		CatzRobotMap.grabber.shootCube();
 	}
 	
 	public static void back_To_Left_Scale() {
+
+		/**********************************************************************
+		*  
+		*  Left SCALE Drive to back to Left Scale
+		*   +
+		*   | 45inches
+		*   |     
+		*   | 7in 
+		*   +---+ 
+		*       |
+		*       |  45inches
+		*       |
+		*       + 
+		* Left Switch 
+		**********************************************************************/
 		
 		CatzPIDDrive.PIDDrive(0.5, -CatzAutonomousOutsidePaths.BACK_TO_SCALE+CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive 45in back to go to the switch
+				CatzConstants.PID_DRIVE_TIMEOUT); // drive 45in back to go to the switch
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right
 
-		CatzPIDDrive.PIDDrive(0.5, CatzOutsidePathsDistances.LEFT_RLR_ACCUE_CUBE,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.TO_GET_ACCUE,
+				CatzConstants.PID_DRIVE_TIMEOUT); 
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); // turn 90deg right
 
 		CatzRobotMap.lift.liftToScaleHeight();
 
 		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.BACK_TO_SCALE-CatzConstants.HALF_ROBOT_LENGTH,
-				CatzConstants.STRAIGHTDRIVE_TIMEOUT); // drive 45in to get to the scale
+				CatzConstants.PID_DRIVE_TIMEOUT); // drive 45in to get to the scale
 
 		CatzRobotMap.grabber.shootCube();
 	}
@@ -252,93 +246,104 @@ public class CatzAutonomousOutsidePaths {
 		
 		/**********************************************************************
 		*  
-		*  SCALE Drive to right scale
+		*  Right SCALE Drive to right Switch 
 		*  +
-		*  |  Segment 3: drive 38 in forward to Scale
+		*  |  38 inches
 		*  |
-		*  |   Segment 2: drive 15.56 in forward to get closer to the scale
-		*  +--+
-		*     |
-		*     |  Segment1: drive 216-19.5in forward to approach to the scale
-		*     |
-		*     + 
+		*  |   15.56inches (TO_SCALE)
+		*  +----+
+		*       |
+		*       |  261inches
+		*       |
+		*       + 
 		*       Back wall Right
 		**********************************************************************/
 		
-		// Initialize distances
-		
-		double distanceSegment1;
-		double distanceSegment2;
-		double distanceSegment3;
-	
-		distanceSegment1 = 261 - CatzConstants.HALF_ROBOT_LENGTH; 
-		distanceSegment2 = CatzOutsidePathsDistances.TO_SCALE - CatzConstants.HALF_ROBOT_LENGTH;
-		distanceSegment3 = 38 - CatzConstants.HALF_ROBOT_LENGTH;
-		
-		CatzPIDDrive.PIDDrive(0.5, distanceSegment1, CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+		CatzPIDDrive.PIDDrive(0.5, 261 - CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); 
 		
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT);  //turn 90deg left 
 	
-		CatzPIDDrive.PIDDrive(0.5, distanceSegment2, CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.TO_SCALE - CatzConstants.HALF_ROBOT_LENGTH, 
+				             CatzConstants.PID_DRIVE_TIMEOUT); 
 	
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right
 
 		CatzRobotMap.lift.liftToScaleHeight();
 
-		CatzPIDDrive.PIDDrive(0.5, distanceSegment3, CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+		CatzPIDDrive.PIDDrive(0.5, 38 - CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); 
 				
-		CatzRobotMap.grabber.shootCube(); //out take the cube in the scale
+		CatzRobotMap.grabber.shootCube(); //out take the cube in the scale 
 	}
 	
 	public static void to_Left_Scale() { 	    // Drive to left Scale <3> <5>
 		
 		/**********************************************************************
 		*  
-		*  SCALE Drive to left scale
-		*      +
-		*      |  Segment 3: drive 38 in forward to Scale
-		*      |
-		*      |   Segment 2: drive 15.56 in forward to get closer to the scale
-		*   +--+
+		*  SCALE Drive to left Switch 
+		*          +
+		*          |  38inches
+		* (TO_SCLE)|
+		*  15.56in |   
+		*   +------+
 		*   |
-		*   |  Segment1: drive 216-19.5in forward to approach to the scale
+		*   |  261 inches
 		*   |
 		*   + 
-		*       Backwall Left
+		*  Backwall Left
 		**********************************************************************/
-		// Initialize distances
 		
-		double distanceSegment1;
-		double distanceSegment2;
-		double distanceSegment3;
-		
-		distanceSegment1 = 261 - CatzConstants.HALF_ROBOT_LENGTH; 
-		distanceSegment2 = CatzOutsidePathsDistances.TO_SCALE - CatzConstants.HALF_ROBOT_LENGTH;
-		distanceSegment3 = 38 - CatzConstants.HALF_ROBOT_LENGTH;
-		
-		CatzPIDDrive.PIDDrive(0.5, distanceSegment1, CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+		CatzPIDDrive.PIDDrive(0.5, 261 - CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); 
 		
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);  //turn 90deg right
 	
-		CatzPIDDrive.PIDDrive(0.5, distanceSegment2, CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+		CatzPIDDrive.PIDDrive(0.5, CatzAutonomousOutsidePaths.TO_SCALE - CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); 
 	
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg left
 		
 		CatzRobotMap.lift.liftToScaleHeight();
 	
-		CatzPIDDrive.PIDDrive(0.5, distanceSegment3, CatzConstants.STRAIGHTDRIVE_TIMEOUT); 
+		CatzPIDDrive.PIDDrive(0.5, 38 - CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); 
 		
 	}
 	
-	public static void to_Right_Scale_Oppo() {
-		
-	}
-	
-	public static void to_Left_Scale_Oppo() { // drive to left scale <4> <6> opposite side
+	public static void to_Right_Scale_Oppo() { //drive to right scale  <4> <6> opposite side start at left 
 		
 		/**********************************************************************
 		*  
-		*  SCALE Drive to left scale
+		*  SCALE Drive to Right Scale opposite side
+		*                  +
+		*                  |  64inches
+		*                  |
+		*       217incehs  |   
+		*   +--------------+
+		*   |
+		*   |  222 inches
+		*   |
+		*   + 
+		*  Backwall Left
+		**********************************************************************/
+	
+		CatzPIDDrive.PIDDrive(0.5,222-CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); //drive forward 222in
+		
+		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right
+		
+		CatzPIDDrive.PIDDrive(0.5, 217-CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); //drive 217in forward to appro to Scale
+		
+		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg left to face the Sclae
+		
+		CatzRobotMap.lift.liftToScaleHeight();
+		
+		CatzPIDDrive.PIDDrive(0.5, 64-CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); //drive 64in forward to get scale 
+		
+		CatzRobotMap.grabber.shootCube(); //outtake the cube in the left scale
+		
+	}
+	
+	public static void to_Left_Scale_Oppo() { // drive to left scale <4> <6> opposite side start at right 
+		
+		/**********************************************************************
+		*  
+		*  SCALE Drive to left scale opposite side 
 		*   +
 		*   |  64inches
 		*   |
@@ -350,23 +355,19 @@ public class CatzAutonomousOutsidePaths {
 		*              + 
 		*          Backwall Right
 		**********************************************************************/
-		
-		//drive to left scale (opposite)
-		
-		CatzPIDDrive.PIDDrive(0.5,222-CatzConstants.HALF_ROBOT_LENGTH,
-						CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive forward 222in
+				
+		CatzPIDDrive.PIDDrive(0.5,222-CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); //drive forward 222in
 				
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg left
 				
-		CatzPIDDrive.PIDDrive(0.5, 217-CatzConstants.HALF_ROBOT_LENGTH, 
-						CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive 217in forward to appro to Scale
+		CatzPIDDrive.PIDDrive(0.5, 217-CatzConstants.HALF_ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT); //drive 217in forward to appro to Scale
 				
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right to face the Scale
 				
 		CatzRobotMap.lift.liftToScaleHeight();
 				
 		CatzPIDDrive.PIDDrive(0.5, 64-CatzConstants.HALF_ROBOT_LENGTH,
-						CatzConstants.STRAIGHTDRIVE_TIMEOUT); //drive 64in forward to get scale 
+						CatzConstants.PID_DRIVE_TIMEOUT); //drive 64in forward to get scale 
 				
 		CatzRobotMap.grabber.shootCube(); //outtake the cube in the left scale
 	
