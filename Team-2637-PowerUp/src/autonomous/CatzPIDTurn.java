@@ -42,6 +42,8 @@ public class CatzPIDTurn
 	static double derivative; 
 	static double deltaT;
 	
+	static double timeout;
+	
 	static double power;
 	
 	static double previousError;
@@ -87,7 +89,21 @@ public class CatzPIDTurn
 		currentError = targetAngle - currentAngle;
 		
 		targetAngleAbs = Math.abs(targetAngle);
-	
+		
+		if(timeoutSeconds < 0.0)
+			if(targetAngleAbs < 91.0)
+				timeout = 1.2;
+			else if(targetAngleAbs < 150.0)
+				timeout = 2.0;
+			else
+				timeout = 2000;
+		
+		else
+			if(timeoutSeconds == 0.0)
+				timeout = 2000;
+			else
+				timeout = timeoutSeconds;
+		
 		printDebugInit();
 		printDebugHeader();
 		

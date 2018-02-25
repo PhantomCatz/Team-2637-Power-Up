@@ -5,15 +5,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.CatzRobotMap;
 
 /**********************************************************
- * Timothy Vu
- * 3 Feb 2018  TV
- * Adding in Left and Right paths
- * Methods: middlePathL  middlePathR  leftPath  rightPath
- *Functionality: Paths for the autonomous period
+ * 
+ * 
+ * 
+ * 
+ *
  *********************************************************/
 
 public class CatzPIDDrive
 {	
+	final static double PID_DRIVE_ERROR_THRESHOLD = 1.0;
+	final static public double PID_DRIVE_TIMEOUT = 5.0;
+	
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KP = .15;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
 	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_SPEED = .43;
@@ -23,57 +26,114 @@ public class CatzPIDDrive
 	private static boolean done     = false;
 
 	private static double previousError = 0.0;
-	private static double currentError;			//FUNCTION VARIABLES
+	private static double currentHeading;			//FUNCTION VARIABLES
 	private static double derivative;
 	private static double deltaTimeSec;
 	private static double previousDerivative;
 	private static double deltaError;
 	private static double correction;
+	private static double encoderLeft;
+	private static double encoderRight;
+	private static double cumDriftError;
+	private static double actualDistanceTraveled;
+	private static double totalDistanceTraveled;
+	private static double distanceError;
+	private static double driftCorrectionAngle;
+	private static double plannedTravelDistance;
+	
 	
 	private static Timer functionTimer;
 	private static Timer loopTimer;
 	
 	private static boolean debugMode = false;
 	
+	static double loopDistanceTraveled;
+	static double previousEncoder;
+	static double distanceTraveled;
+	
+	static double driftError;
+	
 	public static void PIDDrive(double speed, double distance, double timeout)
 	{
+		
+		CatzRobotMap.wheelEncoderL.reset();
+		
 		functionTimer = new Timer();
 		loopTimer = new Timer();
 		
 		printDebugHeader();
 		
 		CatzRobotMap.navx.reset();
+		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
 		
 		functionTimer.start();
 		loopTimer.start();
 		
-		
+		 distanceTraveled = CatzRobotMap.wheelEncoderL.getDistance();
+		 previousEncoder = 0.0;
+		 
+		 totalDistanceTraveled = 0.0;
+		 
 		while(Math.abs(CatzRobotMap.wheelEncoderL.getDistance()) < Math.abs(distance) && done == false)
 		{
-			loopTimer.stop();
+			
+			encoderLeft = CatzRobotMap.wheelEncoderL.getDistance();
+			encoderRight = CatzRobotMap.wheelEncoderR.getDistance();
+			currentHeading = CatzRobotMap.navx.getAngle();
 			deltaTimeSec = loopTimer.get();
+			
+			distanceTraveled = encoderLeft - previousEncoder;
+			previousEncoder = encoderLeft;
+			
+			actualDistanceTraveled = Math.abs(driftError*Math.tan(currentHeading*CatzConstants.DEG_TO_RAD));
+			
+			loopTimer.stop();
 			loopTimer.reset();
 			loopTimer.start();
 			
-			currentError = CatzRobotMap.navx.getAngle();
-			deltaError = currentError - previousError;  
-	
+			//add code for dead encoder
+			
+			driftError = Math.sin(currentHeading*CatzConstants.DEG_TO_RAD) * distanceTraveled;
+			cumDriftError = cumDriftError + driftError;
+			
+			totalDistanceTraveled = totalDistanceTraveled + actualDistanceTraveled;
+			
+			distanceError = distance - totalDistanceTraveled;
+			
+			
+			if(distanceError <= PID_DRIVE_ERROR_THRESHOLD)
+				done = true;
+			else
+				if (functionTimer.get() > timeout)
+					done = true;
+			
+			if(driftError == 0.0)
+				driftCorrectionAngle = 0;
+			
+			else
+			{
+				plannedTravelDistance = actualDistanceTraveled;
+				driftCorrectionAngle = Math.asin(cumDriftError/plannedTravelDistance)*CatzConstants.RAD_TO_DEG;
+			}
+			
+			deltaError = (currentHeading + driftCorrectionAngle) - previousError;  
+			
 			derivative =    PID_DRIVE_FILTER_CONSTANT*previousDerivative + 
 		               ((1-PID_DRIVE_FILTER_CONSTANT)*(deltaError/deltaTimeSec));
 			
+			previousDerivative = derivative;
+			
 			//derivative = deltaAngleDegrees/deltaTimeSec;
-			correction = -PID_DRIVE_KP*currentError + PID_DRIVE_KD*derivative;
+			correction = -PID_DRIVE_KP*currentHeading + PID_DRIVE_KD*derivative;
 			
 			CatzRobotMap.drive.arcadeDrive(speed, correction);
 	
-			previousError = currentError;
-	
+			previousError = currentHeading;
+			
 			printDebugData();
 			
-			if (functionTimer.get() > timeout)
-				done = true;
+			Timer.delay(0.015);
 			
-			previousDerivative = derivative;
 		}
 		
 		
@@ -93,13 +153,19 @@ public class CatzPIDDrive
 	
 	public static void printDebugInit() {
 		if(debugMode == true) {
-			
+			System.out.printf("PID Drive KP, %.3f\n",PID_DRIVE_KP);
+			System.out.printf("PID Drive KD, %.3f\n",PID_DRIVE_KD);
+			System.out.printf("PID Drive Brake speed, %.3f\n",PID_DRIVE_BRAKE_SPEED);
+			System.out.printf("PID Drive Brake time, %.3f\n",PID_DRIVE_BRAKE_TIME);
+			System.out.printf("PID Drive Filter Constant, %.3f\n",PID_DRIVE_FILTER_CONSTANT);
+			System.out.printf("PID Drive Error Threshold, %.3f\n",PID_DRIVE_ERROR_THRESHOLD);
 		}
 	}
 	public static void printDebugHeader() {
 		if (debugMode == true) {
 			System.out.print("encoderStraightDrive debug data\n");
-			System.out.print("timestamp,deltaTimeSec,currentErrorDegrees,derivative,deltaError,correction\n");
+			System.out.print("timestamp,deltaTimeSec,actualDistanceTraveled,totalDistanceTraveled,distanceError,"
+						   + "cumDriftError,driftCorrectionAngle,currentHeadingDegrees,derivative,deltaError,correction\n");
 		}
 	}
 	
@@ -107,7 +173,15 @@ public class CatzPIDDrive
 		if(debugMode == true) {
 			String data = functionTimer.get() +","+
 						  deltaTimeSec        +","+
-						  currentError        +","+
+						  actualDistanceTraveled +","+ 
+						  totalDistanceTraveled + "," +
+						  distanceError			+ "," +
+						  driftError			+"," +
+						  cumDriftError			+","+
+						  driftCorrectionAngle  +"," +
+						  currentHeading        +","+
+						  encoderLeft		  +"," +
+						  encoderRight		  +"," +	
 						  derivative          +","+
 						  deltaError          +","+
 						  correction          +"\n";
@@ -120,7 +194,7 @@ public class CatzPIDDrive
 	public static void printDatainSmartDashboard() {
 		SmartDashboard.putNumber("timestamp", functionTimer.get());
 		SmartDashboard.putNumber("deltaTimeMillis", deltaTimeSec);
-		SmartDashboard.putNumber("currentAngleDegrees", currentError);
+		SmartDashboard.putNumber("currentAngleDegrees", currentHeading);
 		SmartDashboard.putNumber("currentErrorDegrees", deltaError);
 		SmartDashboard.putNumber("derivative",derivative );
 		

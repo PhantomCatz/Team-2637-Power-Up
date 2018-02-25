@@ -85,7 +85,6 @@ public class CatzConstants
 	final static public double HALF_SPEED = 0.5;
 	final static public double STOP = 0.0;
 	
-	/*need to acquire for final robot*/final static public int STRAIGHTDRIVE_TIMEOUT = 2;
 	
 	final static public double ROBOT_WIDTH = 34.0;
 	final static public double ROBOT_LENGTH = 39.0;
@@ -180,4 +179,7 @@ public class CatzConstants
 
 	final static public double CUBE_OUTTAKE_WAIT_TIME = 0.2;
 	final static public double CUBE_INTAKE_WAIT_TIME = 0.2;
+	
+	final static public double DEG_TO_RAD = Math.PI/180.0;
+	final static public double RAD_TO_DEG = 180.0/Math.PI;
 }

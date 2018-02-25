@@ -26,7 +26,7 @@ public class CatzAutonomousInit
 		//CatzPIDTurn.PIDturn(-45, 5);
 		//CatzPIDTurn.PIDturn(-90, 10);
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
-		CatzAutonomousPaths.middlePathL();
+		//CatzAutonomousPaths.middlePathL();
 	}
 
 	public static void retractMechanisms() 
@@ -78,22 +78,22 @@ public class CatzAutonomousInit
 		System.out.println(gameData);
 		if (gameData.charAt(0) == 'L' && check_boxM == true) {
 			printOutDebugData("middlePathL");
-			CatzAutonomousPaths.middlePathL();
+			CatzAutonomousPaths.middleSingle_LXX();
 			printOutDebugData("Init Done");
 			
 		} else if (gameData.charAt(0) == 'R' && check_boxM == true) {
 			printOutDebugData("middlePathR");
-			CatzAutonomousPaths.middlePathR();
+			CatzAutonomousPaths.middleSingle_RXX();
 			printOutDebugData("Init Done");
 			
 		} else if(gameData.charAt(1) == 'R' && check_boxR == true){
 			printOutDebugData("rightPath");
-			CatzAutonomousPaths.rightPath();	
+			CatzAutonomousPaths.right_XRX();	
 			printOutDebugData("Init Done");
 			
 		} else if(gameData.charAt(1) == 'L' && check_boxL == true){
 			printOutDebugData("LeftPath");
-			CatzAutonomousPaths.leftPath();
+			CatzAutonomousPaths.left_XLX();
 			printOutDebugData("Init Done");
 			
 		} else {
