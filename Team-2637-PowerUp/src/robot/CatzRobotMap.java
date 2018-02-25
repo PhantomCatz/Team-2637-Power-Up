@@ -79,11 +79,6 @@ public class CatzRobotMap
 			rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_L);
 		}
 		
-		/*fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT);
-		rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
-		fLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_FRONT);
-		rLeft = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);*/
-		
 		fRight.setSafetyEnabled(false);
 		rRight.setSafetyEnabled(false);
 		fLeft.setSafetyEnabled(false);
