@@ -168,7 +168,6 @@ public class CatzPIDTurn
 				if (functionTimer.get() > timeoutSeconds)
 					done = true;
 				
-				System.out.println("value of done flag="+String.valueOf(done));
 				printDebugData();
 			}
 			Timer.delay(0.015); //was .005,.008
