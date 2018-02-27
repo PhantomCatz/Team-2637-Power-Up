@@ -6,12 +6,15 @@
  *  Functionality: choose the path for autonomous
 *******************************************************/
 
-package autonomous;
+package robotFunctions;
 
-import constants.CatzConstants;
+import autonomous.CatzAutonomousPaths;
+import autonomous.CatzPIDDrive;
+import autonomous.CatzPIDTurn;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 public class CatzAutonomousInit
@@ -21,17 +24,18 @@ public class CatzAutonomousInit
 	{
 		//setMechanisms();
 		//choosePath();
-		//CatzPIDTurn.setDebugModeEnabled( true );
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
+		CatzPIDDrive.setDebugModeEnabled(true);
+		CatzPIDDrive.PIDDrive(.5, 50, 10);
 //        PIDTurn.PIDturn(90, 3);
 //	Timer.delay(0.5);
 //		CatzPIDTurn.PIDturn(-90, 3);
 //	Timer.delay(0.5);
-		CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
-	Timer.delay(0.5);
-		CatzPIDTurn.PIDturn(-45, CatzConstants.DEF_VALUE);
+		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
+		//Timer.delay(0.5);
+		//CatzPIDTurn.PIDturn(-90, CatzConstants.DEF_VALUE);
 		//retractMechanisms();
-		CatzRobotMap.grabber.retractGrabber();
+		//CatzRobotMap.grabber.retractGrabber();
 		//choosePath();
 		//CatzPIDTurn.setDebugModeEnabled( true );
 		//CatzPIDTurn.PIDturn(-45, 5);

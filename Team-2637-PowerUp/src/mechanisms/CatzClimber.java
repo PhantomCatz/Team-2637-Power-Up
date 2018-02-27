@@ -1,6 +1,6 @@
 package mechanisms;
 
-import constants.CatzConstants;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 /*

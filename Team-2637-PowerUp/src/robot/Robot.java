@@ -7,12 +7,13 @@
 
 package robot;
 
-import autonomous.CatzAutonomousInit;
-import autonomous.CatzAutonomousPeriodic;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import teleop.CatzTeleopInit;
-import teleop.CatzTeleopPeriodic;
+import robotFunctions.CatzAutonomousInit;
+import robotFunctions.CatzAutonomousPeriodic;
+import robotFunctions.CatzRobotInit;
+import robotFunctions.CatzTeleopInit;
+import robotFunctions.CatzTeleopPeriodic;
 
 
 public class Robot extends IterativeRobot 
@@ -20,7 +21,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		//CatzRobotInit.runRobotInit();
+		CatzRobotInit.runRobotInit();
 	}
 	
 	@Override
@@ -52,7 +53,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{			
-		//CatzTeleopPeriodic.runTeleopPeriodic();
+		CatzTeleopPeriodic.runTeleopPeriodic();
 	}
 
 }

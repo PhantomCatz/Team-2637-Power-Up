@@ -6,7 +6,7 @@
  *  Functionality: suppress warnings
 *******************************************************/
 
-package autonomous;
+package robotFunctions;
 
 import robot.CatzRobotMap;
 

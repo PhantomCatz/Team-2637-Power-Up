@@ -5,11 +5,12 @@
  *  Methods :  startPositionSelector, updateSmartDashboard
  *  Functionality : select the start position, show the values
  */
-package robot;
+package robotFunctions;
 
 import autonomous.CatzPIDTurn;
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.CatzConstants;
+import robot.CatzRobotMap;
 
 
 public class CatzRobotPeriodic
@@ -28,8 +29,9 @@ public class CatzRobotPeriodic
 	
 		//runPositionSelector();
 		//updateSmartDashboard();
-		if(CatzPIDTurn.isTuningModeEnabled())
-			updatePIDTurnConstants();
+		//if(CatzPIDTurn.isTuningModeEnabled())
+			//updatePIDTurnConstants();
+
 		
 	} 
 	

@@ -14,8 +14,8 @@
 
 package mechanisms;
 
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 public class CatzGrabber 
@@ -49,6 +49,7 @@ public class CatzGrabber
 		else{
 			this.openForearm();
 		}
+		Timer.delay(.1);
 	}
 
 	public void retractBicep() { 

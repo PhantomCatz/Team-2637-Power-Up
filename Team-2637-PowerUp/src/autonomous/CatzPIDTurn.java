@@ -1,8 +1,8 @@
 package autonomous;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
-import constants.CatzConstants;
 
 
 /*
@@ -382,7 +382,7 @@ public class CatzPIDTurn
 	public static void printDebugData() {
 		if (debugMode == true) {
 
-			System.out.printf("%.3f, %.3f %.3f, %.3f %.3f, %.3f %.3f, %.3f \n",
+			System.out.printf("%.3f, %.3f, %.3f, %.3f, %.3f, %.3f, %.3f, %.3f \n",
 					        functionTimer.get(),
 		                    deltaT, 
 		                    currentAngle, 

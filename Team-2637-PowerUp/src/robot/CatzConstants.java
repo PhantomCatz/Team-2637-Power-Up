@@ -1,4 +1,4 @@
-package constants;
+package robot;
 /*
  *  Author : Derek Duenas
  *  Last Revised : 2-4-2018 DD
@@ -7,50 +7,8 @@ package constants;
  */
 public class CatzConstants
 {
-	final static public int DIO_PORT_0 = 0;
-	final static public int DIO_PORT_1 = 1;
-	final static public int DIO_PORT_2 = 2;
-	final static public int DIO_PORT_3 = 3;
-	final static public int DIO_PORT_4 = 4;
-	final static public int DIO_PORT_5 = 5;
-	final static public int DIO_PORT_6 = 6;
-	final static public int DIO_PORT_7 = 7;
-	final static public int DIO_PORT_8 = 8;
-	final static public int DIO_PORT_9 = 9;
-	
-	final static public int PORT_0 = 0;
-	final static public int PORT_1 = 1;
-	final static public int PORT_2 = 2;
-	final static public int PORT_3 = 3;
-	final static public int PORT_4 = 4;
-	final static public int PORT_5 = 5;
-	final static public int PORT_6 = 6;
-	final static public int PORT_7 = 7;
-	final static public int PORT_8 = 8;
-	final static public int PORT_9 = 9;
-	
-	final static public int PWM_PORT_0 = 0;
-	final static public int PWM_PORT_1 = 1;
-	final static public int PWM_PORT_2 = 2;
-	final static public int PWM_PORT_3 = 3;
-	final static public int PWM_PORT_4 = 4;
-	final static public int PWM_PORT_5 = 5;
-	final static public int PWM_PORT_6 = 6;
-	final static public int PWM_PORT_7 = 7;
-	final static public int PWM_PORT_8 = 8;
-	final static public int PWM_PORT_9 = 9;
-	
-	final static public int PCM_PORT_0 = 0;
-	final static public int PCM_PORT_1 = 1;
-	final static public int PCM_PORT_2 = 2;
-	final static public int PCM_PORT_3 = 3;
-	final static public int PCM_PORT_4 = 4;
-	final static public int PCM_PORT_5 = 5;
-	final static public int PCM_PORT_6 = 6;
-	final static public int PCM_PORT_7 = 7;
-	final static public int PCM_PORT_8 = 8;
-	final static public int PCM_PORT_9 = 9;
-	
+	final static public double ENCODER_PULSES_PER_REVOLUTION = 256.0;     //cirumference times gear ratio divided by pulses per revolution
+	final static public double WHEEL_ENCODER_DISTANCE_PER_PULSE = .0502;
 	final static public int DEF_VALUE = -1;
 	
 	
@@ -74,10 +32,10 @@ public class CatzConstants
 	final static public int RIGHT_LIFTER_PWM = 1;
 	final static public int LEFT_LIFTER_PWM = 0;
 	
-	final static public int RIGHT_INTAKE_PWM = 2;
-	final static public int LEFT_INTAKE_PWM = 3;
-	final static public int INTAKE_FOREARM_PCM = 1;
-	final static public int INTAKE_BICEP_PCM = 0;
+	final static public int RIGHT_INTAKE_PWM = 4; //2 for new robot
+	final static public int LEFT_INTAKE_PWM = 5;  //3 for new robot
+	final static public int INTAKE_FOREARM_PCM = 0; //1 for new robot
+	final static public int INTAKE_BICEP_PCM = 1;  //0 for new robot
 	
 	final static public int WHEEL_ENCODER_R_DIOA = 0;
 	final static public int WHEEL_ENCODER_R_DIOB = 1;
@@ -89,12 +47,6 @@ public class CatzConstants
 	final static public int LIFT_ENCODER_DIOB = 3;
 	//**************************************************************
 	
-	final static public int LOGGER_LEVEL1 = 1;
-	final static public int LOGGER_LEVEL2 = 2;
-	final static public int LOGGER_LEVEL3 = 3;
-	final static public int LOGGER_LEVEL4 = 4;
-	final static public int LOGGER_LEVEL5 = 5;
-
 	
 	/*need to acquire for final robot*/final public static double DRIVE_MAX_POS_POWER =  1.0;
 	/*need to acquire for final robot*/final public static double DRIVE_MAX_NEG_POWER = -1.0;

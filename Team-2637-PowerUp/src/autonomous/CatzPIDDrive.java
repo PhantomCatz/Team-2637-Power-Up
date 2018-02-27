@@ -1,7 +1,7 @@
 package autonomous;
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 /**********************************************************
@@ -20,7 +20,7 @@ public class CatzPIDDrive
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KP = .15;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_KD = .005;  //ORIGINALLY .18
 	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_SPEED = .43;
-	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_TIME = .3;
+	/*need to acquire for final robot*/final static public double PID_DRIVE_BRAKE_TIME = .15;
 	/*need to acquire for final robot*/final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
 	
 	private static boolean done     = false;
@@ -114,7 +114,6 @@ public class CatzPIDDrive
 			
 			if(driftError == 0.0)
 				driftCorrectionAngle = 0;
-			
 			else
 			{
 				plannedTravelDistance = actualDistanceTraveled;
@@ -156,6 +155,9 @@ public class CatzPIDDrive
 		
 	}	
 	
+	public static void setDebugModeEnabled(boolean enabled) {
+		debugMode = enabled;
+	}
 	public static void printDebugInit() {
 		if(debugMode == true) {
 			System.out.printf("PID Drive KP, %.3f\n",PID_DRIVE_KP);
