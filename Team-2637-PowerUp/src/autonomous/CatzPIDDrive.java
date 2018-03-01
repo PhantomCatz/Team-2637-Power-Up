@@ -22,10 +22,10 @@ public class CatzPIDDrive {
 
 	final static public double PID_DRIVE_KP = 0.15;
 	final static public double PID_DRIVE_KD = 0.005; // ORIGINALLY .18
-	final static public double PID_DRIVE_FILTER_CONSTANT = 0.5;
 
 	final static public double PID_DRIVE_BRAKE_POWER = 0.43;
 	final static public double PID_DRIVE_BRAKE_TIME = 0.1;
+	private static final double PID_DRIVE_FILTER_CONSTANT = .5;
 
 	/****************************************************************************
 	 * PID Drive Variables

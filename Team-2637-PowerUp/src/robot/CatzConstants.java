@@ -72,7 +72,7 @@ public class CatzConstants
 
 	final static public double AUTO_TURN_TIMEOUT_90_DEG = 3.0;
 	
-	
+	final static public double FUNCTION_EXECUTION_DELAY = 0.1;
 	
 	/*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;
 	/*need to acquire for final robot*/static public double PID_LIFT_KP = 0.0508;  //0.0508
