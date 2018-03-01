@@ -11,6 +11,7 @@ package robotFunctions;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
+import autonomous.CatzPIDDrive;
 import autonomous.CatzPIDTurn;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -31,12 +32,11 @@ public class CatzRobotInit
 	
 	public static void runRobotInit() 
 	{
-		CatzRobotMap.getInstance();
-
+		CatzRobotMap.usingCubeee = true;
 		//setSmartDashboard();
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
 		CatzRobotMap.setDebugModeEnabled(true);
-
+		//CatzPIDDrive.PIDDrive(0.7, 48, 10);
 		//CameraServer.getInstance().startAutomaticCapture();
 		//cameraSetup();
 	}
