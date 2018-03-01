@@ -67,7 +67,8 @@ public class CatzRobotMap
 	
 	private CatzRobotMap() 
 	{	
-
+		globalTimer = new Timer();
+		
 		if(usingCubeee) {
 			fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT); 
 			rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
@@ -90,6 +91,7 @@ public class CatzRobotMap
 		drive = new CatzDrive(leftMotors, rightMotors);
 		printOutDebugData("Successfully initialized full drive train");
 		
+		
 		climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
 		climberMotor.setSafetyEnabled(false);
 		printOutDebugData("Successfully initialized climber Motor");
@@ -103,9 +105,7 @@ public class CatzRobotMap
 		wheelEncoderR.setReverseDirection(true);
 		wheelEncoderL.setDistancePerPulse(CatzConstants.DRIVE_INCHES_PER_PULSE);
 		liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k2X);
-		printOutDebugData("Successfully Encoders");
-		
-		globalTimer = new Timer();
+		printOutDebugData("Successfully Initialized Encoders");
 		
 		xboxDrive = new CatzXboxController(CatzConstants.DRIVE_XBOX_PORT);
 		xboxAux   = new CatzXboxController(CatzConstants.AUX_XBOX_PORT);
@@ -131,7 +131,7 @@ public class CatzRobotMap
 	{
 		debugMode = enabled;
 	}
-	public static CatzRobotMap getInstance()
+	public static CatzRobotMap instantiateRobot()
 	{
 		if(instance == null)
 			instance = new CatzRobotMap();

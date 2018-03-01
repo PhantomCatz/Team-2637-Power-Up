@@ -32,6 +32,7 @@ public class CatzRobotInit
 	
 	public static void runRobotInit() 
 	{
+		CatzRobotMap.instantiateRobot();
 		CatzRobotMap.usingCubeee = true;
 		//setSmartDashboard();
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);

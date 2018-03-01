@@ -21,7 +21,7 @@ import robot.CatzRobotMap;
 public class CatzGrabber 
 {
 	public CatzGrabber() {
-		printOutDebugData("CatzGrabber successfully initialized");
+		printOutDebugData("Successfully initialized CatzGrabber");
 	}
 	
 	public void setIntakeSpeed(double relativeSpeed) {
