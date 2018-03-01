@@ -282,7 +282,7 @@ public class CatzAutonomousPaths {
 		
 	  }
 	  
-	public void middle_RRX() {
+	public static void middle_RRX() {
 
 		/***************************************************
 		 * The following code:
@@ -348,7 +348,7 @@ public class CatzAutonomousPaths {
 
 	}
 
-	public void middle_LLX() {
+	public static void middle_LLX() {
 		
 		/*******************************************************
 		 * The following code:
@@ -414,7 +414,7 @@ public class CatzAutonomousPaths {
 		
 	}
 
-	public void middleDouble_RXX() {
+	public static void middleDouble_RXX() {
 		
 		/************************************
 		 * The following code:
@@ -478,7 +478,7 @@ public class CatzAutonomousPaths {
 		
 	}
 	
-	public void middleDouble_LXX() {
+	public static void middleDouble_LXX() {
 		
 		/************************************
 		 * The following code:
