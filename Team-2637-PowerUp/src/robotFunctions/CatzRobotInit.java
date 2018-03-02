@@ -6,19 +6,21 @@
  *  Functionality: set the smartDashboard
 *******************************************************/
 
-package robot;
+package robotFunctions;
 
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
+import autonomous.CatzPIDDrive;
 import autonomous.CatzPIDTurn;
-import constants.CatzConstants;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.CatzConstants;
+import robot.CatzRobotMap;
 
 public class CatzRobotInit 
 {
@@ -30,12 +32,11 @@ public class CatzRobotInit
 	
 	public static void runRobotInit() 
 	{
-		CatzRobotMap.getInstance();
-
+		CatzRobotMap.usingCubeee = true;
 		//setSmartDashboard();
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
 		CatzRobotMap.setDebugModeEnabled(true);
-
+		//CatzPIDDrive.PIDDrive(0.7, 48, 10);
 		//CameraServer.getInstance().startAutomaticCapture();
 		//cameraSetup();
 	}

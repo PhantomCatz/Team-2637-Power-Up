@@ -1,18 +1,21 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
+/**
+ * Class Robot (Untested)
+ * 
+ * contains functions that will run during the competition
+ * 
+ * 2/28/18 uncommented all functions to ready for testing purposes
+ */
 
 package robot;
 
-import autonomous.CatzAutonomousInit;
-import autonomous.CatzAutonomousPeriodic;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import teleop.CatzTeleopInit;
-import teleop.CatzTeleopPeriodic;
+import robotFunctions.CatzAutonomousInit;
+import robotFunctions.CatzAutonomousPeriodic;
+import robotFunctions.CatzRobotInit;
+import robotFunctions.CatzRobotPeriodic;
+import robotFunctions.CatzTeleopInit;
+import robotFunctions.CatzTeleopPeriodic;
 
 
 public class Robot extends IterativeRobot 
@@ -20,39 +23,39 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
-		//CatzRobotInit.runRobotInit();
+		CatzRobotInit.runRobotInit();
 	}
 	
 	@Override
 	public void robotPeriodic()
 	{
-		//CatzRobotPeriodic.runRobotPeriodic();
+		CatzRobotPeriodic.runRobotPeriodic();
 
 	}
 	
 	@Override
 	public void autonomousInit() 
 	{
-		//CatzAutonomousInit.runAutonomousInit();
+		CatzAutonomousInit.runAutonomousInit();
 	}
 
 	@Override
 	public void autonomousPeriodic()
 	{
-		//CatzAutonomousPeriodic.runAutonomousPeriodic();
+		CatzAutonomousPeriodic.runAutonomousPeriodic();
 	}
 
 
 	@Override
 	public void teleopInit()
 	{
-		//CatzTeleopInit.runTeleopInit();
+		CatzTeleopInit.runTeleopInit();
 	}
 	
 	@Override
 	public void teleopPeriodic()
 	{			
-		//CatzTeleopPeriodic.runTeleopPeriodic();
+		CatzTeleopPeriodic.runTeleopPeriodic();
 	}
 
 }

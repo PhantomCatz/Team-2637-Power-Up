@@ -1,5 +1,6 @@
-package teleop;
+package robotFunctions;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.CatzRobotMap;
 
 /**********************************************************
@@ -12,40 +13,39 @@ import robot.CatzRobotMap;
 
 public class CatzTeleopPeriodic 
 {
-	private static boolean reversed;
+	private static boolean reversed = false;
 	public static void runTeleopPeriodic()
 	{	
-		if(CatzRobotMap.xboxDrive.getBackButtonPressed())
+		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxAux);
+		/*
+		if(CatzRobotMap.xboxDrive.getBButton())
 			reversed = !reversed;
 		
 		 
-		if(reversed)
-			CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
-		else
+		if(reversed==true)
 			CatzRobotMap.drive.setModeReverseArcadeDriveFlash(CatzRobotMap.xboxDrive);
-		
+		else
+			CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
+		*/
 		runGrabberControls();
-		runLiftControls();
-		runClimberControls();
+		//runLiftControls();
+		//runClimberControls();
 	}
 	
 	
 	private static void runGrabberControls() 
 	{
-		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getLeftStickY());
+		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger()-CatzRobotMap.xboxDrive.getLeftTrigger());
 		
-		if(CatzRobotMap.xboxAux.getRightBumper())
-		{
+		if(CatzRobotMap.xboxAux.getRightBumper()){
 			CatzRobotMap.grabber.deployBicep();
 		}
 		
-		if(CatzRobotMap.xboxAux.getLeftBumper()) 
-		{
+		if(CatzRobotMap.xboxAux.getLeftBumper()) {
 			CatzRobotMap.grabber.retractBicep();
 		}
 		
-		if(CatzRobotMap.xboxDrive.getAButton())
-		{
+		if(CatzRobotMap.xboxDrive.getAButton()){
 			CatzRobotMap.grabber.toggleForearm();
 		}
 		

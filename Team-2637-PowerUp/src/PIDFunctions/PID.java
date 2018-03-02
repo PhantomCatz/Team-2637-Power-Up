@@ -1,8 +1,8 @@
 package PIDFunctions;
 
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
 import mechanisms.CatzLift;
+import robot.CatzConstants;
 
 
 public class PID {

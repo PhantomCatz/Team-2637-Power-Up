@@ -8,7 +8,7 @@
 
 package autonomous;
 
-import constants.CatzConstants;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 public class CatzAutonomousOutsidePaths {

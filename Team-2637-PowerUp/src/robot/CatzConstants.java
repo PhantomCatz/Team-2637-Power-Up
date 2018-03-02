@@ -1,4 +1,4 @@
-package constants;
+package robot;
 /*
  *  Author : Derek Duenas
  *  Last Revised : 2-4-2018 DD
@@ -7,53 +7,33 @@ package constants;
  */
 public class CatzConstants
 {
-	final static public int DIO_PORT_0 = 0;
-	final static public int DIO_PORT_1 = 1;
-	final static public int DIO_PORT_2 = 2;
-	final static public int DIO_PORT_3 = 3;
-	final static public int DIO_PORT_4 = 4;
-	final static public int DIO_PORT_5 = 5;
-	final static public int DIO_PORT_6 = 6;
-	final static public int DIO_PORT_7 = 7;
-	final static public int DIO_PORT_8 = 8;
-	final static public int DIO_PORT_9 = 9;
-	
-	final static public int PORT_0 = 0;
-	final static public int PORT_1 = 1;
-	final static public int PORT_2 = 2;
-	final static public int PORT_3 = 3;
-	final static public int PORT_4 = 4;
-	final static public int PORT_5 = 5;
-	final static public int PORT_6 = 6;
-	final static public int PORT_7 = 7;
-	final static public int PORT_8 = 8;
-	final static public int PORT_9 = 9;
-	
-	final static public int PWM_PORT_0 = 0;
-	final static public int PWM_PORT_1 = 1;
-	final static public int PWM_PORT_2 = 2;
-	final static public int PWM_PORT_3 = 3;
-	final static public int PWM_PORT_4 = 4;
-	final static public int PWM_PORT_5 = 5;
-	final static public int PWM_PORT_6 = 6;
-	final static public int PWM_PORT_7 = 7;
-	final static public int PWM_PORT_8 = 8;
-	final static public int PWM_PORT_9 = 9;
-	
-	final static public int PCM_PORT_0 = 0;
-	final static public int PCM_PORT_1 = 1;
-	final static public int PCM_PORT_2 = 2;
-	final static public int PCM_PORT_3 = 3;
-	final static public int PCM_PORT_4 = 4;
-	final static public int PCM_PORT_5 = 5;
-	final static public int PCM_PORT_6 = 6;
-	final static public int PCM_PORT_7 = 7;
-	final static public int PCM_PORT_8 = 8;
-	final static public int PCM_PORT_9 = 9;
-	
 	final static public int DEF_VALUE = -1;
 	
+	/****************************************************************************
+	 * Drivetrain Encoder - pulses to inches - MOVE TO CONSTANTS FILE Encoder is a
+	 * Grayhill 63R256 which provides 256 pulses per revolution. This is connected
+	 * to the output shaft of the drive gear box. The output shaft of the gearbox
+	 * has a 15 tooth sprocket & is connected by a chain to the drivetrain center
+	 * wheel which has a 22 tooth sprocket. This provides a 15/22 reduction. The
+	 * center wheel is 6" in diameter.
+	 ****************************************************************************/
+	final static public double DRIVE_ENCODER_PULSES_PER_REV = 256.0;
+	final static public double DRIVE_WHEEL_DIAMETER = 6.0;
+	final static public double DRIVE_WHEEL_CIRCUMFRENCE = DRIVE_WHEEL_DIAMETER * Math.PI;
+	final static public double DRIVE_GEAR_MECH_SPROCKET_RATIO = (15.0 / 22.0);
+
+	final static public double DRIVE_INCHES_PER_PULSE = (DRIVE_WHEEL_CIRCUMFRENCE * DRIVE_GEAR_MECH_SPROCKET_RATIO)
+			/ DRIVE_ENCODER_PULSES_PER_REV;
 	
+
+	/*need to acquire for final robot*/final public static double DRIVE_MAX_POS_POWER =  1.0;
+	/*need to acquire for final robot*/final public static double DRIVE_MAX_NEG_POWER = -1.0;
+	
+	final static public int DRIVE_WHEEL_ENCODER_R_DIOA = 0;
+	final static public int DRIVE_WHEEL_ENCODER_R_DIOB = 1;
+	
+	final static public int DRIVE_WHEEL_ENCODER_L_DIOA = 8;
+	final static public int DRIVE_WHEEL_ENCODER_L_DIOB = 9;
 
 	//ROBOT COMPONENTS PORTS
 	final static public int CUBEE_TALON_ID_L_FRONT = 0;
@@ -74,55 +54,25 @@ public class CatzConstants
 	final static public int RIGHT_LIFTER_PWM = 1;
 	final static public int LEFT_LIFTER_PWM = 0;
 	
-	final static public int RIGHT_INTAKE_PWM = 2;
-	final static public int LEFT_INTAKE_PWM = 3;
-	final static public int INTAKE_FOREARM_PCM = 1;
-	final static public int INTAKE_BICEP_PCM = 0;
+	final static public int RIGHT_INTAKE_PWM = 4; //2 for new robot
+	final static public int LEFT_INTAKE_PWM = 5;  //3 for new robot
+	final static public int INTAKE_FOREARM_PCM = 0; //1 for new robot
+	final static public int INTAKE_BICEP_PCM = 1;  //0 for new robot
 	
-	final static public int WHEEL_ENCODER_R_DIOA = 0;
-	final static public int WHEEL_ENCODER_R_DIOB = 1;
 	
-	final static public int WHEEL_ENCODER_L_DIOA = 8;
-	final static public int WHEEL_ENCODER_L_DIOB = 9;
 	
 	final static public int LIFT_ENCODER_DIOA = 2;
 	final static public int LIFT_ENCODER_DIOB = 3;
 	//**************************************************************
 	
-	final static public int LOGGER_LEVEL1 = 1;
-	final static public int LOGGER_LEVEL2 = 2;
-	final static public int LOGGER_LEVEL3 = 3;
-	final static public int LOGGER_LEVEL4 = 4;
-	final static public int LOGGER_LEVEL5 = 5;
-
 	
-	/*need to acquire for final robot*/final public static double DRIVE_MAX_POS_POWER =  1.0;
-	/*need to acquire for final robot*/final public static double DRIVE_MAX_NEG_POWER = -1.0;
 	
 	/*need to acquire for final robot*/final static public double NAVX_RESET_WAIT_TIME = 0.3;
 	
-	
-/***
 
-
-	final static public double PID_TURN_DELTAERROR_FACTOR  = 1.6;
-	final static public double PID_TURN_FILTER_CONSTANT    = 0.7;
-	      static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
-
-	      static public double PID_TURN_KP = 0.0508;  //0.0508
-	      static public double PID_TURN_KI = 0.0;
-	      static public double PID_TURN_KD = 0.008;   //0.0744
-
-	final static public double PID_TURN_INTEGRAL_MAX =  1.0;
-	final static public double PID_TURN_INTEGRAL_MIN = -1.0;
-
-	final public static double PID_TURN_MIN_POS_POWER =  0.1;
-	final public static double PID_TURN_MIN_NEG_POWER = -PID_TURN_MIN_POS_POWER;
-
-***/
 	final static public double AUTO_TURN_TIMEOUT_90_DEG = 3.0;
 	
-	
+	final static public double FUNCTION_EXECUTION_DELAY = 0.1;
 	
 	/*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;
 	/*need to acquire for final robot*/static public double PID_LIFT_KP = 0.0508;  //0.0508

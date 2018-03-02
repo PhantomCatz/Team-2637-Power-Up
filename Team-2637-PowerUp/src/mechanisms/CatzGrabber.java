@@ -14,8 +14,8 @@
 
 package mechanisms;
 
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 public class CatzGrabber 
@@ -34,12 +34,14 @@ public class CatzGrabber
 		CatzConstants.forearmClosed = false;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmClosed);
 		printOutDebugData("Grabber forearm set to Open");
+		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 
 	public void closeForearm() {
 		CatzConstants.forearmClosed = true;
 		CatzRobotMap.intakeForearm.set(CatzConstants.forearmClosed);
 		printOutDebugData("Grabber forearm set to Closed");
+		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 	
 	public void toggleForearm() {
@@ -49,18 +51,21 @@ public class CatzGrabber
 		else{
 			this.openForearm();
 		}
+		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 
 	public void retractBicep() { 
 		CatzConstants.bicepRetracted = true;
 		CatzRobotMap.intakeBicep.set(CatzConstants.bicepRetracted);
 		printOutDebugData("Grabber Bicep set to Retract");
+		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 
 	public void deployBicep() {
 		CatzConstants.bicepRetracted = false;
 		CatzRobotMap.intakeBicep.set(CatzConstants.bicepRetracted);
 		printOutDebugData("Grabber forearm set to Deploy");
+		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 	
 	private static void printOutDebugData(String info) {

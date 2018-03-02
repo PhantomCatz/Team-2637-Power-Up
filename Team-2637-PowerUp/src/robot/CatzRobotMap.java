@@ -4,8 +4,7 @@ import java.text.DecimalFormat;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import autonomous.CatzAutonomousInit;
-import constants.CatzConstants;
+
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -17,6 +16,7 @@ import components.CatzXboxController;
 import mechanisms.CatzClimber;
 import mechanisms.CatzGrabber;
 import mechanisms.CatzLift;
+import robotFunctions.CatzAutonomousInit;
 
 public class CatzRobotMap 
 {
@@ -59,7 +59,7 @@ public class CatzRobotMap
 	
 	public static DecimalFormat secondsFormat;
 
-	public static boolean debugMode = false;
+	public static boolean debugMode = true;
 	public static boolean usingCubeee = false;
 	//public static CatzLogger logger;
 	
@@ -97,8 +97,11 @@ public class CatzRobotMap
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 				
-		wheelEncoderR = new Encoder(CatzConstants.WHEEL_ENCODER_R_DIOA, CatzConstants.WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k2X);
-		wheelEncoderL = new Encoder(CatzConstants.WHEEL_ENCODER_L_DIOA, CatzConstants.WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k2X);
+		wheelEncoderR = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k2X);
+		wheelEncoderL = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k2X);
+		wheelEncoderR.setDistancePerPulse(CatzConstants.DRIVE_INCHES_PER_PULSE);
+		wheelEncoderR.setReverseDirection(true);
+		wheelEncoderL.setDistancePerPulse(CatzConstants.DRIVE_INCHES_PER_PULSE);
 		liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k2X);
 		printOutDebugData("Successfully Encoders");
 		

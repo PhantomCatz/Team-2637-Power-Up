@@ -1,8 +1,8 @@
 package autonomous;
 
-import constants.CatzConstants;
 import edu.wpi.first.wpilibj.Timer;
 import mechanisms.CatzGrabber;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 /**********************************************************
