@@ -541,7 +541,7 @@ public class CatzAutonomousPaths {
 		
 	}
 	
-	public void middle_RLX() { 
+	public static void middle_RLX() { 
 		
 		/************************************
 		 * The following code:

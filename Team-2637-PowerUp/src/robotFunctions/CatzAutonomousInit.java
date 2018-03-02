@@ -29,6 +29,7 @@ public class CatzAutonomousInit {
 	
 	public static void runAutonomousInit()
 	{
+<<<<<<< HEAD
 		
 		System.out.println(check_boxL);
 		System.out.println(check_boxM);
@@ -42,14 +43,31 @@ public class CatzAutonomousInit {
 		//CatzPIDDrive.PIDDrive(.5, 50, 10);
 		// PIDTurn.PIDturn(90, 3);
 		//Timer.delay(0.5);
+=======
+		//CatzPIDTurn.setDebugModeEnabled( true );
+
+		//setMechanisms();
+		//choosePath();
+		//CatzRobotInit.setSmartDashboard();
+		//CatzPIDDrive.setDebugModeEnabled(true);
+		//CatzPIDDrive.PIDDrive(.5, 48, 10);
+		
+//        PIDTurn.PIDturn(90, 3);
+//	Timer.delay(0.5);
+>>>>>>> 927171c8e762a6f33de25490d125ccd60c4d2312
 //		CatzPIDTurn.PIDturn(-90, 3);
 //	Timer.delay(0.5);
-		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
+		CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
 		//Timer.delay(0.5);
 		//CatzPIDTurn.PIDturn(-90, CatzConstants.DEF_VALUE);
 		//retractMechanisms();
 		//CatzRobotMap.grabber.retractGrabber();
+<<<<<<< HEAD
 		//CatzPIDTurn.setDebugModeEnabled( true );
+=======
+		//choosePath();
+
+>>>>>>> 927171c8e762a6f33de25490d125ccd60c4d2312
 		//CatzPIDTurn.PIDturn(-45, 5);
 		//CatzPIDTurn.PIDturn(-90, 10);
 		//CatzPIDDrive.PIDDrive(0.7, 100, 3);

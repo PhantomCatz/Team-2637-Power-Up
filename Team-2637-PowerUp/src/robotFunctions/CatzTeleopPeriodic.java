@@ -16,7 +16,8 @@ public class CatzTeleopPeriodic
 	private static boolean reversed = false;
 	public static void runTeleopPeriodic()
 	{	
-		
+		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxAux);
+		/*
 		if(CatzRobotMap.xboxDrive.getBButton())
 			reversed = !reversed;
 		
@@ -25,7 +26,7 @@ public class CatzTeleopPeriodic
 			CatzRobotMap.drive.setModeReverseArcadeDriveFlash(CatzRobotMap.xboxDrive);
 		else
 			CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
-		
+		*/
 		runGrabberControls();
 		//runLiftControls();
 		//runClimberControls();

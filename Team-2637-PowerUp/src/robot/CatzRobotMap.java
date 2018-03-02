@@ -59,8 +59,8 @@ public class CatzRobotMap
 	
 	public static DecimalFormat secondsFormat;
 
-	public static boolean debugMode = false;
-	public static boolean usingCubeee = true;
+	public static boolean debugMode = true;
+	public static boolean usingCubeee = false;
 	//public static CatzLogger logger;
 	
 	//public  Lidar lidar;
@@ -90,18 +90,18 @@ public class CatzRobotMap
 		drive = new CatzDrive(leftMotors, rightMotors);
 		printOutDebugData("Successfully initialized full drive train");
 		
-		//climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
-		//climberMotor.setSafetyEnabled(false);
+		climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
+		climberMotor.setSafetyEnabled(false);
 		printOutDebugData("Successfully initialized climber Motor");
 		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 				
-		wheelEncoderR = new Encoder(CatzConstants.WHEEL_ENCODER_R_DIOA, CatzConstants.WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k2X);
-		wheelEncoderL = new Encoder(CatzConstants.WHEEL_ENCODER_L_DIOA, CatzConstants.WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k2X);
-		wheelEncoderR.setDistancePerPulse(CatzConstants.WHEEL_ENCODER_DISTANCE_PER_PULSE);
+		wheelEncoderR = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k2X);
+		wheelEncoderL = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k2X);
+		wheelEncoderR.setDistancePerPulse(CatzConstants.DRIVE_INCHES_PER_PULSE);
 		wheelEncoderR.setReverseDirection(true);
-		wheelEncoderL.setDistancePerPulse(CatzConstants.WHEEL_ENCODER_DISTANCE_PER_PULSE);
+		wheelEncoderL.setDistancePerPulse(CatzConstants.DRIVE_INCHES_PER_PULSE);
 		liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k2X);
 		printOutDebugData("Successfully Encoders");
 		

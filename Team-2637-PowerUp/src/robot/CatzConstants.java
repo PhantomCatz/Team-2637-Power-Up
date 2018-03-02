@@ -7,11 +7,33 @@ package robot;
  */
 public class CatzConstants
 {
-	final static public double ENCODER_PULSES_PER_REVOLUTION = 256.0;     //cirumference times gear ratio divided by pulses per revolution
-	final static public double WHEEL_ENCODER_DISTANCE_PER_PULSE = .0502;
 	final static public int DEF_VALUE = -1;
 	
+	/****************************************************************************
+	 * Drivetrain Encoder - pulses to inches - MOVE TO CONSTANTS FILE Encoder is a
+	 * Grayhill 63R256 which provides 256 pulses per revolution. This is connected
+	 * to the output shaft of the drive gear box. The output shaft of the gearbox
+	 * has a 15 tooth sprocket & is connected by a chain to the drivetrain center
+	 * wheel which has a 22 tooth sprocket. This provides a 15/22 reduction. The
+	 * center wheel is 6" in diameter.
+	 ****************************************************************************/
+	final static public double DRIVE_ENCODER_PULSES_PER_REV = 256.0;
+	final static public double DRIVE_WHEEL_DIAMETER = 6.0;
+	final static public double DRIVE_WHEEL_CIRCUMFRENCE = DRIVE_WHEEL_DIAMETER * Math.PI;
+	final static public double DRIVE_GEAR_MECH_SPROCKET_RATIO = (15.0 / 22.0);
+
+	final static public double DRIVE_INCHES_PER_PULSE = (DRIVE_WHEEL_CIRCUMFRENCE * DRIVE_GEAR_MECH_SPROCKET_RATIO)
+			/ DRIVE_ENCODER_PULSES_PER_REV;
 	
+
+	/*need to acquire for final robot*/final public static double DRIVE_MAX_POS_POWER =  1.0;
+	/*need to acquire for final robot*/final public static double DRIVE_MAX_NEG_POWER = -1.0;
+	
+	final static public int DRIVE_WHEEL_ENCODER_R_DIOA = 0;
+	final static public int DRIVE_WHEEL_ENCODER_R_DIOB = 1;
+	
+	final static public int DRIVE_WHEEL_ENCODER_L_DIOA = 8;
+	final static public int DRIVE_WHEEL_ENCODER_L_DIOB = 9;
 
 	//ROBOT COMPONENTS PORTS
 	final static public int CUBEE_TALON_ID_L_FRONT = 0;
@@ -37,44 +59,20 @@ public class CatzConstants
 	final static public int INTAKE_FOREARM_PCM = 0; //1 for new robot
 	final static public int INTAKE_BICEP_PCM = 1;  //0 for new robot
 	
-	final static public int WHEEL_ENCODER_R_DIOA = 0;
-	final static public int WHEEL_ENCODER_R_DIOB = 1;
 	
-	final static public int WHEEL_ENCODER_L_DIOA = 8;
-	final static public int WHEEL_ENCODER_L_DIOB = 9;
 	
 	final static public int LIFT_ENCODER_DIOA = 2;
 	final static public int LIFT_ENCODER_DIOB = 3;
 	//**************************************************************
 	
 	
-	/*need to acquire for final robot*/final public static double DRIVE_MAX_POS_POWER =  1.0;
-	/*need to acquire for final robot*/final public static double DRIVE_MAX_NEG_POWER = -1.0;
 	
 	/*need to acquire for final robot*/final static public double NAVX_RESET_WAIT_TIME = 0.3;
 	
-	
-/***
 
-
-	final static public double PID_TURN_DELTAERROR_FACTOR  = 1.6;
-	final static public double PID_TURN_FILTER_CONSTANT    = 0.7;
-	      static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
-
-	      static public double PID_TURN_KP = 0.0508;  //0.0508
-	      static public double PID_TURN_KI = 0.0;
-	      static public double PID_TURN_KD = 0.008;   //0.0744
-
-	final static public double PID_TURN_INTEGRAL_MAX =  1.0;
-	final static public double PID_TURN_INTEGRAL_MIN = -1.0;
-
-	final public static double PID_TURN_MIN_POS_POWER =  0.1;
-	final public static double PID_TURN_MIN_NEG_POWER = -PID_TURN_MIN_POS_POWER;
-
-***/
 	final static public double AUTO_TURN_TIMEOUT_90_DEG = 3.0;
 	
-	
+	final static public double FUNCTION_EXECUTION_DELAY = 0.1;
 	
 	/*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;
 	/*need to acquire for final robot*/static public double PID_LIFT_KP = 0.0508;  //0.0508
