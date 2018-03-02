@@ -32,7 +32,7 @@ public class CatzRobotInit
 	
 	public static void runRobotInit() 
 	{
-		CatzRobotMap.getInstance();
+		CatzRobotMap.instantiateRobot();
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
 
 		//setSmartDashboard();

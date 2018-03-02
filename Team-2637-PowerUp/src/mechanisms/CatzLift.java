@@ -24,7 +24,7 @@ public class CatzLift
 	public static final double INITIAL_LIFTER_ERROR = 1000;
 	
 	public CatzLift() {
-		printOutDebugData("CatzLift successfully initialized");
+		printOutDebugData("Successfully initialized CatzLift");
 	}
 	
 	public void liftToSwitchHeight(){

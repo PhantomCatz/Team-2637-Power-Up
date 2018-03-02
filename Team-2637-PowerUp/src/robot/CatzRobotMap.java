@@ -82,11 +82,6 @@ public class CatzRobotMap
 			rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_L);
 		}
 		
-		if(using2ndBot) {
-			fRight.setInverted(true);
-			fLeft.setInverted(true);
-		}
-		
 		fRight.setSafetyEnabled(false);
 		rRight.setSafetyEnabled(false);
 		fLeft.setSafetyEnabled(false);
@@ -117,8 +112,8 @@ public class CatzRobotMap
 		xboxAux   = new CatzXboxController(CatzConstants.AUX_XBOX_PORT);
 		
 		lifterR = new Spark(4/*CatzConstants.RIGHT_LIFTER_PWM*/);
-		lifterR.setInverted(true);
 		lifterL = new Spark(5/*CatzConstants.LEFT_LIFTER_PWM*/);
+		
 		
 	//	intakeRight = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
 		//intakeLeft  = new Spark(CatzConstants.LEFT_INTAKE_PWM);
@@ -132,13 +127,19 @@ public class CatzRobotMap
 		lift             = new CatzLift();
 
 		secondsFormat = new DecimalFormat("#.###");
+		
+		if(using2ndBot) {
+			fRight.setInverted(true);
+			fLeft.setInverted(true);
+			lifterL.setInverted(true);
+		}
 		//logger = new CatzLogger();
 	}
 	public static void setDebugModeEnabled(boolean enabled) 
 	{
 		debugMode = enabled;
 	}
-	public static CatzRobotMap getInstance()
+	public static CatzRobotMap instantiateRobot()
 	{
 		if(instance == null)
 			instance = new CatzRobotMap();
