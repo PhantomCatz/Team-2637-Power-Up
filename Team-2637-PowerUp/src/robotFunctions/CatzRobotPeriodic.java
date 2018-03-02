@@ -27,7 +27,7 @@ public class CatzRobotPeriodic
 
 	public static void runRobotPeriodic(){
 	
-		//runPositionSelector();
+		runPositionSelector();
 		//updateSmartDashboard();
 		//if(CatzPIDTurn.isTuningModeEnabled())
 			//updatePIDTurnConstants();
@@ -56,12 +56,7 @@ public class CatzRobotPeriodic
 			prev_boxM = false;
 			prev_boxR = check_boxR;
 			//System.out.println("Position Right");
-		} else {
-			prev_boxL = false;
-			prev_boxM = false;
-			prev_boxR = false;
 		}
-
 		// Update display
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORL, prev_boxL);
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORM, prev_boxM);
