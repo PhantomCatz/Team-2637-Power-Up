@@ -32,10 +32,11 @@ public class CatzRobotInit
 	
 	public static void runRobotInit() 
 	{
-		CatzRobotMap.usingCubeee = true;
-		//setSmartDashboard();
+		CatzRobotMap.getInstance();
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
-		CatzRobotMap.setDebugModeEnabled(true);
+
+		//setSmartDashboard();
+
 		//CatzPIDDrive.PIDDrive(0.7, 48, 10);
 		//CameraServer.getInstance().startAutomaticCapture();
 		//cameraSetup();

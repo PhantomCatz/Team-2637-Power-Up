@@ -61,13 +61,15 @@ public class CatzRobotMap
 
 	public static boolean debugMode = true;
 	public static boolean usingCubeee = false;
+	public static boolean using2ndBot = true;
 	//public static CatzLogger logger;
 	
 	//public  Lidar lidar;
 	
 	private CatzRobotMap() 
 	{	
-
+		globalTimer = new Timer();
+		
 		if(usingCubeee) {
 			fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT); 
 			rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
@@ -78,6 +80,11 @@ public class CatzRobotMap
 			rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_R);
 			fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_L);
 			rLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_L);
+		}
+		
+		if(using2ndBot) {
+			fRight.setInverted(true);
+			fLeft.setInverted(true);
 		}
 		
 		fRight.setSafetyEnabled(false);
@@ -97,24 +104,24 @@ public class CatzRobotMap
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 				
-		wheelEncoderR = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k2X);
-		wheelEncoderL = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k2X);
+		wheelEncoderR = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k4X);
+		wheelEncoderL = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k4X);
 		wheelEncoderR.setDistancePerPulse(CatzConstants.DRIVE_INCHES_PER_PULSE);
 		wheelEncoderR.setReverseDirection(true);
 		wheelEncoderL.setDistancePerPulse(CatzConstants.DRIVE_INCHES_PER_PULSE);
-		liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k2X);
+		liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k1X);
 		printOutDebugData("Successfully Encoders");
-		
-		globalTimer = new Timer();
+	
 		
 		xboxDrive = new CatzXboxController(CatzConstants.DRIVE_XBOX_PORT);
 		xboxAux   = new CatzXboxController(CatzConstants.AUX_XBOX_PORT);
 		
-		lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
-		lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
+		lifterR = new Spark(4/*CatzConstants.RIGHT_LIFTER_PWM*/);
+		lifterR.setInverted(true);
+		lifterL = new Spark(5/*CatzConstants.LEFT_LIFTER_PWM*/);
 		
-		intakeRight = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
-		intakeLeft  = new Spark(CatzConstants.LEFT_INTAKE_PWM);
+	//	intakeRight = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
+		//intakeLeft  = new Spark(CatzConstants.LEFT_INTAKE_PWM);
 		
 		intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
 		intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);

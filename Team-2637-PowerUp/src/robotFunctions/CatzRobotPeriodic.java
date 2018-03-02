@@ -27,6 +27,8 @@ public class CatzRobotPeriodic
 
 	public static void runRobotPeriodic(){
 	
+		//SmartDashboard.putNumber("Value of lifter Encoder",CatzRobotMap.liftEncoder.get());
+		//System.out.println(CatzRobotMap.liftEncoder.get());
 		//runPositionSelector();
 		//updateSmartDashboard();
 		//if(CatzPIDTurn.isTuningModeEnabled())

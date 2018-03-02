@@ -17,6 +17,8 @@ public class CatzTeleopPeriodic
 	public static void runTeleopPeriodic()
 	{	
 		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxAux);
+		SmartDashboard.putNumber("Value of lifter Encoder",CatzRobotMap.liftEncoder.get());
+		System.out.println(CatzRobotMap.liftEncoder.get());
 		/*
 		if(CatzRobotMap.xboxDrive.getBButton())
 			reversed = !reversed;
@@ -27,15 +29,20 @@ public class CatzTeleopPeriodic
 		else
 			CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
 		*/
-		runGrabberControls();
+		//runGrabberControls();
 		//runLiftControls();
+		CatzRobotMap.lifterL.set(CatzRobotMap.xboxAux.getLeftStickY());
+		CatzRobotMap.lifterR.set(CatzRobotMap.xboxAux.getLeftStickY());
+		if(CatzRobotMap.xboxAux.getAButton()== true) {
+			CatzRobotMap.liftEncoder.reset();
+		}
 		//runClimberControls();
 	}
 	
 	
 	private static void runGrabberControls() 
 	{
-		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger()-CatzRobotMap.xboxDrive.getLeftTrigger());
+		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxAux.getRightTrigger()-CatzRobotMap.xboxAux.getLeftTrigger());
 		
 		if(CatzRobotMap.xboxAux.getRightBumper()){
 			CatzRobotMap.grabber.deployBicep();
@@ -45,14 +52,14 @@ public class CatzTeleopPeriodic
 			CatzRobotMap.grabber.retractBicep();
 		}
 		
-		if(CatzRobotMap.xboxDrive.getAButton()){
+		if(CatzRobotMap.xboxAux.getAButton()){
 			CatzRobotMap.grabber.toggleForearm();
 		}
 		
 	}
 	private static void runLiftControls()
 	{
-		CatzRobotMap.lift.setLiftSpeed(CatzRobotMap.xboxAux.getRightTrigger() - CatzRobotMap.xboxAux.getLeftTrigger());
+		CatzRobotMap.lift.setLiftSpeed(CatzRobotMap.xboxAux.getLeftStickY());
 	}
 	private static void runClimberControls()
 	{

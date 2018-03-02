@@ -29,29 +29,8 @@ public class CatzAutonomousInit {
 	
 	public static void runAutonomousInit()
 	{
-		//CatzPIDTurn.setDebugModeEnabled( true );
-
-		//setMechanisms();
-		//choosePath();
-		//CatzRobotInit.setSmartDashboard();
-		//CatzPIDDrive.setDebugModeEnabled(true);
-		//CatzPIDDrive.PIDDrive(.5, 48, 10);
-		
-//        PIDTurn.PIDturn(90, 3);
-//	Timer.delay(0.5);
-//		CatzPIDTurn.PIDturn(-90, 3);
-//	Timer.delay(0.5);
-		CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
-		//Timer.delay(0.5);
-		//CatzPIDTurn.PIDturn(-90, CatzConstants.DEF_VALUE);
-		//retractMechanisms();
-		//CatzRobotMap.grabber.retractGrabber();
-		//choosePath();
-
-		//CatzPIDTurn.PIDturn(-45, 5);
-		//CatzPIDTurn.PIDturn(-90, 10);
-		//CatzPIDDrive.PIDDrive(0.7, 100, 3);
-		//CatzAutonomousPaths.middlePathL();
+		CatzRobotMap.lift.liftToScaleHeight();
+		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
 	}
 
 	public static void choosePath() {	
