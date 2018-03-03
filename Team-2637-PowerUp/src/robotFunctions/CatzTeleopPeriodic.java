@@ -16,29 +16,22 @@ public class CatzTeleopPeriodic
 	private static boolean reversed = false;
 	public static void runTeleopPeriodic()
 	{	
-		CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxAux);
-		SmartDashboard.putNumber("Value of lifter Encoder",CatzRobotMap.liftEncoder.get());
-		System.out.println(CatzRobotMap.liftEncoder.get());
-		/*
+		runDriveTrainControls();
+		runGrabberControls();
+		runLiftControls();
+		runClimberControls();
+	}
+	
+	private static void runDriveTrainControls() 
+	{
 		if(CatzRobotMap.xboxDrive.getBButton())
 			reversed = !reversed;
-		
 		 
 		if(reversed==true)
 			CatzRobotMap.drive.setModeReverseArcadeDriveFlash(CatzRobotMap.xboxDrive);
 		else
 			CatzRobotMap.drive.setModeArcadeDriveFlash(CatzRobotMap.xboxDrive);
-		*/
-		//runGrabberControls();
-		//runLiftControls();
-		CatzRobotMap.lifterL.set(CatzRobotMap.xboxAux.getLeftStickY());
-		CatzRobotMap.lifterR.set(CatzRobotMap.xboxAux.getLeftStickY());
-		if(CatzRobotMap.xboxAux.getAButton()== true) {
-			CatzRobotMap.liftEncoder.reset();
-		}
-		//runClimberControls();
 	}
-	
 	
 	private static void runGrabberControls() 
 	{
@@ -56,13 +49,18 @@ public class CatzTeleopPeriodic
 			CatzRobotMap.grabber.toggleForearm();
 		}
 		
+		if(CatzRobotMap.xboxAux.getAButton()) {
+			CatzRobotMap.liftEncoder.reset();
+		}
+		
 	}
 	private static void runLiftControls()
 	{
-		CatzRobotMap.lift.setLiftSpeed(CatzRobotMap.xboxAux.getLeftStickY());
+		CatzRobotMap.lifterL.set(CatzRobotMap.xboxAux.getLeftStickY());
+		CatzRobotMap.lifterR.set(CatzRobotMap.xboxAux.getLeftStickY());
 	}
 	private static void runClimberControls()
 	{
-		CatzRobotMap.climberMechanism.setClimberSpeed(CatzRobotMap.xboxAux.getRightTrigger() - CatzRobotMap.xboxAux.getLeftTrigger());
+		CatzRobotMap.climberMechanism.setClimberSpeed(CatzRobotMap.xboxAux.getRightStickY());
 	}
 }

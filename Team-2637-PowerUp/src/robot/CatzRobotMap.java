@@ -111,12 +111,17 @@ public class CatzRobotMap
 		xboxDrive = new CatzXboxController(CatzConstants.DRIVE_XBOX_PORT);
 		xboxAux   = new CatzXboxController(CatzConstants.AUX_XBOX_PORT);
 		
-		lifterR = new Spark(4/*CatzConstants.RIGHT_LIFTER_PWM*/);
-		lifterL = new Spark(5/*CatzConstants.LEFT_LIFTER_PWM*/);
+		if(using2ndBot) {
+			lifterR = new Spark(4);  //PWM Ports 0 and 1 do not work on 2nd robot's roboRio
+			lifterL = new Spark(5);
+		} else {
+			lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
+			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
+		}
 		
 		
-	//	intakeRight = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
-		//intakeLeft  = new Spark(CatzConstants.LEFT_INTAKE_PWM);
+		intakeRight = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
+		intakeLeft  = new Spark(CatzConstants.LEFT_INTAKE_PWM);
 		
 		intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
 		intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);

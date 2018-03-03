@@ -38,8 +38,6 @@ public class CatzRobotInit
 		//setSmartDashboard();
 
 		//CatzPIDDrive.PIDDrive(0.7, 48, 10);
-		//CameraServer.getInstance().startAutomaticCapture();
-		//cameraSetup();
 	}
 	
 	public static void setSmartDashboard() {
@@ -61,6 +59,7 @@ public class CatzRobotInit
 	
 	public static void cameraSetup()
 	{
+		CameraServer.getInstance().startAutomaticCapture();
 		 new Thread(() -> {
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
              camera.setResolution(640, 480);

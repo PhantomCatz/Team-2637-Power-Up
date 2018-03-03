@@ -40,7 +40,7 @@ public class CatzPIDDrive {
 
 	private static double deltaTimeSec;
 	private static double currentHeading;
-	private static double newHeading;
+	private static double turnValue;
 	private static double derivative;
 	private static double previousDerivative;
 	private static double deltaAngleError;
@@ -222,9 +222,9 @@ public class CatzPIDDrive {
 					 * is a value between -1.0 (90 deg left) and +1.0 (90 deg right).
 					 * A value of 0.0 means go straight.
 					 **************************************************************/
-					newHeading = ((-PID_DRIVE_KP * deltaAngleError) + (PID_DRIVE_KD * derivative))/90.0;
+					turnValue = ((-PID_DRIVE_KP * deltaAngleError) + (PID_DRIVE_KD * derivative))/90.0;
 
-					CatzRobotMap.drive.arcadeDrive(power, newHeading);
+					CatzRobotMap.drive.arcadeDrive(power, turnValue);
 
 					printDebugData();
 					//Timer.delay(0.015);
@@ -249,20 +249,95 @@ public class CatzPIDDrive {
 		CatzRobotMap.drive.tankDrive(0.0, 0.0);
 	}
 
-	/****************************************************************************
-	 *
-	 * setDebugModeEnabled()
-	 *
-	 ****************************************************************************/
+	
+	public static void PIDDriveNoTrig(double drivePower, double distance, double timeoutSeconds) {
+		boolean firstTime;
+		
+		functionTimer = new Timer();
+		loopTimer     = new Timer();
+
+		functionTimer.stop();
+		functionTimer.reset();
+		functionTimer.start();
+
+		double currentDistance;
+		
+		distanceAbs = Math.abs(distance);
+		power = drivePower;
+
+		CatzRobotMap.wheelEncoderL.reset();
+		CatzRobotMap.wheelEncoderR.reset();
+		
+		CatzRobotMap.navx.reset();
+		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
+
+		previousAngleError = 0.0;
+		previousDerivative = 0.0;
+
+
+		calcTimeout(power, distance, timeoutSeconds);
+		while (done == false) {
+			currentDistance = CatzRobotMap.wheelEncoderL.getDistance();
+			currentHeading     = CatzRobotMap.navx.getAngle();
+			loopTimer.stop();
+			
+			deltaTimeSec = loopTimer.get();
+
+			loopTimer.reset();
+			loopTimer.start();
+
+
+			if (distanceError < PID_DRIVE_ERROR_THRESHOLD) {
+				done = true;
+			} else {
+				if (functionTimer.get() > timeout) {
+					done = true;
+				} else {
+
+					/**************************************************************
+					 * Calculate Heading Derivative Term
+					 **************************************************************/
+					derivative = (PID_DRIVE_FILTER_CONSTANT * previousDerivative)
+							+ ((1 - PID_DRIVE_FILTER_CONSTANT) * (currentHeading / deltaTimeSec));
+					
+					// FILTER OUT INVALID VALUES
+					if(derivative == 0.0) {
+						derivative = previousDerivative;
+					}
+
+					previousDerivative = derivative;
+
+					turnValue = (-PID_DRIVE_KP * currentHeading) + (PID_DRIVE_KD * derivative);
+
+					CatzRobotMap.drive.arcadeDrive(power, turnValue);
+
+					printDebugData();
+				}
+			}
+		}
+
+		/*************************************************************************
+		 *
+		 * Brake using motors DO WE NEED TO ACCOUNT FOR THIS IN CHECKING DISTANCE ERROR?
+		 * AFTER FLAGSTAFF LOOK AT USING PID LOOP FOR DISTANCE TO MANAGE DRIVE POWER
+		 * WANT TO BE ABLE TO START WITH POWER = 1.0
+		 *
+		 *************************************************************************/
+		if (power < 0.0) {
+			CatzRobotMap.drive.tankDrive(PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_POWER);
+		} else {
+			CatzRobotMap.drive.tankDrive(-PID_DRIVE_BRAKE_POWER, -PID_DRIVE_BRAKE_POWER);
+		}
+
+		Timer.delay(PID_DRIVE_BRAKE_TIME);
+		CatzRobotMap.drive.tankDrive(0.0, 0.0);
+
+	}
+
 	public static void setDebugModeEnabled(boolean enabled) {
 		debugMode = enabled;
 	}
 
-	/****************************************************************************
-	 *
-	 * setDebugModeEnabled()
-	 *
-	 ****************************************************************************/
 	public static void calcTimeout(double power, double distance, double timeoutSeconds) {
 		double distanceAbs;
 		
@@ -289,11 +364,7 @@ public class CatzPIDDrive {
 		}
 	}
 
-	/****************************************************************************
-	 *
-	 * printDebugInit()
-	 *
-	 ****************************************************************************/
+
 	public static void printDebugInit() {
 		if (debugMode == true) {
 
@@ -307,11 +378,7 @@ public class CatzPIDDrive {
 		}
 	}
 
-	/****************************************************************************
-	 *
-	 * printDebugHeader()
-	 * 
-	 *****************************************************************************/
+
 	public static void printDebugHeader() {
 		if (debugMode == true) {
 			System.out.print("encoderStraightDrive debug data\n");
@@ -323,11 +390,7 @@ public class CatzPIDDrive {
 		}
 	}
 
-	/****************************************************************************
-	 *
-	 * printDebugData()
-	 *
-	 ****************************************************************************/
+
 	public static void printDebugData() {
 		if (debugMode == true) {
 
@@ -341,17 +404,13 @@ public class CatzPIDDrive {
  					driftError, cumulativeDriftError, driftnewHeadingAngle, deltaAngleError, derivative);
 
  			System.out.printf("%.3f, %.6f, %.6f, %.3f\n", 
- 					plannedTravelDistance, currentHeading, newHeading, power);
+ 					plannedTravelDistance, currentHeading, turnValue, power);
 
 			// printDatainSmartDashboard();
 		}
 	}
 
-	/****************************************************************************
-	 *
-	 * printDatainSmartDashboard()
-	 *
-	 ****************************************************************************/
+
 	public static void printDatainSmartDashboard() {
 		SmartDashboard.putNumber("timestamp", functionTimer.get());
 		SmartDashboard.putNumber("deltaTimeMillis", deltaTimeSec);
