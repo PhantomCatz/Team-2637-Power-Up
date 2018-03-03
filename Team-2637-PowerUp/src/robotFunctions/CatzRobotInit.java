@@ -35,7 +35,7 @@ public class CatzRobotInit
 		CatzRobotMap.instantiateRobot();
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
 
-		//setSmartDashboard();
+		setSmartDashboard();
 
 		//CatzPIDDrive.PIDDrive(0.7, 48, 10);
 	}

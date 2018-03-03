@@ -16,8 +16,6 @@ import robot.CatzRobotMap;
 
 public class CatzRobotPeriodic
 {	
-	static CatzRobotMap instance = CatzRobotMap.instantiateRobot();
-	
 	static boolean check_boxL = false;
 	static boolean check_boxM = false;
 	static boolean check_boxR = false;

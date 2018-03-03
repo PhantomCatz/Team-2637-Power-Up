@@ -123,12 +123,6 @@ public class CatzLift
 	
 	*/
 	
-	public void setLiftSpeed(double relativeSpeed) 
-	{
-		CatzRobotMap.lifterL.set(relativeSpeed);
-		CatzRobotMap.lifterR.set(relativeSpeed);
-	}
-	
 	public void liftUp()
 	{
 		CatzRobotMap.lifterL.set(LIFT_SPEED);
