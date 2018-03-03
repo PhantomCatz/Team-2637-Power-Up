@@ -10,7 +10,7 @@
 package robotFunctions;
 
 import autonomous.CatzAutonomousOutsidePaths;
-import autonomous.CatzAutonomousPaths;
+import autonomous.CatzAutonomousMiddlePaths;
 import autonomous.CatzPIDDrive;
 import autonomous.CatzPIDTurn;
 import edu.wpi.first.wpilibj.DriverStation;

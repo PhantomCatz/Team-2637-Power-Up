@@ -132,10 +132,10 @@ public class CatzPIDDrive {
 			 * Calc Drift Values
 			 **********************************************************************/
 			deltaPulseCount = encoderPulseCountL - prevEncoderPulseCountL;
-			distanceTraveledL = deltaPulseCount * CatzConstants.DRIVE_INCHES_PER_PULSE;
+			distanceTraveledL = deltaPulseCount * CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE;
 
 			deltaPulseCount = encoderPulseCountR - prevEncoderPulseCountR;
-			distanceTraveledR = deltaPulseCount * CatzConstants.DRIVE_INCHES_PER_PULSE;
+			distanceTraveledR = deltaPulseCount * CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE;
 
 			prevEncoderPulseCountL = encoderPulseCountL;
 			prevEncoderPulseCountR = encoderPulseCountR;
@@ -334,7 +334,7 @@ public class CatzPIDDrive {
 	public static void printDebugInit() {
 		if (debugMode == true) {
 
-			System.out.printf("power,         %.3f, INCHES/PULSE, %.4f\n", power, CatzConstants.DRIVE_INCHES_PER_PULSE);
+			System.out.printf("power,         %.3f, INCHES/PULSE, %.4f\n", power, CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE);
 			System.out.printf("distanceAbs,   %.3f, timeout,      %.3f\n", distanceAbs, timeout);
 			System.out.printf("BrakePower,    %.3f, BrakeTime,    %.3f\n", PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_TIME);
 			System.out.printf("distErrThresh, %.3f\n", PID_DRIVE_ERROR_THRESHOLD);

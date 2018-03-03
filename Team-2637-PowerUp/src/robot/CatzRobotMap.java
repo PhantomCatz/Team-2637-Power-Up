@@ -101,9 +101,9 @@ public class CatzRobotMap
 				
 		wheelEncoderR = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k4X);
 		wheelEncoderL = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k4X);
-		wheelEncoderR.setDistancePerPulse(CatzConstants.DRIVE_INCHES_PER_PULSE);
+		wheelEncoderR.setDistancePerPulse(CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE);
 		wheelEncoderR.setReverseDirection(true);
-		wheelEncoderL.setDistancePerPulse(CatzConstants.DRIVE_INCHES_PER_PULSE);
+		wheelEncoderL.setDistancePerPulse(CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE);
 		liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k1X);
 		printOutDebugData("Successfully Encoders");
 	
@@ -119,12 +119,18 @@ public class CatzRobotMap
 			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
 		}
 		
-		
-		intakeRight = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
-		intakeLeft  = new Spark(CatzConstants.LEFT_INTAKE_PWM);
-		
-		intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
-		intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);
+
+		if(using2ndBot) {
+			intakeRight   = new Spark (4);
+			intakeLeft    = new Spark (5);
+			intakeForearm = new Solenoid(0);
+			intakeBicep   = new Solenoid(1);
+		} else {
+			intakeRight   = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
+			intakeLeft    = new Spark(CatzConstants.LEFT_INTAKE_PWM);
+			intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
+			intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);
+		}
 		printOutDebugData("Successfully initialized auxilary actuators");
 		
 		climberMechanism = new CatzClimber();

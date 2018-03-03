@@ -9,6 +9,7 @@ package robotFunctions;
 
 import autonomous.CatzPIDTurn;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import mechanisms.CatzGrabber;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
 
@@ -73,8 +74,8 @@ public class CatzRobotPeriodic
 		SmartDashboard.putNumber("Value of Right Encoder", CatzRobotMap.wheelEncoderR.get());
 		SmartDashboard.putNumber("Value of lifter Encoder",CatzRobotMap.liftEncoder.get());
 		
-		SmartDashboard.putBoolean("Graber Forearms Open", CatzConstants.forearmClosed);
-		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzConstants.bicepRetracted);
+		SmartDashboard.putBoolean("Graber Forearms Open", CatzGrabber.forearmClosed);
+		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzGrabber.bicepRetracted);
 		
 	}
 	
