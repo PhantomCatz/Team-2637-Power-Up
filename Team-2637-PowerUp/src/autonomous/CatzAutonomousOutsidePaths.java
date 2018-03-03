@@ -87,14 +87,11 @@ public class CatzAutonomousOutsidePaths {
 	
 	public static void right_RRR() {// <3>
 		
-	    // Drive to right Scale
-		to_Right_Scale();
+		to_Right_Scale();         // Drive to right Scale
 		
-		// Drive to right switch to pick up the cube
-		pick_Up_Cube_Right();
+		pick_Up_Cube_Right();     // Drive to right switch to pick up the cube
 
-	    // Drive back to right Scale
-		back_To_Right_Scale();
+		back_To_Right_Scale();     // Drive back to right Scale
 		
 		}
 	

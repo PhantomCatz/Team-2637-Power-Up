@@ -4,12 +4,10 @@
  *  Last revision summary: rename the check box
  *  Methods: runAutonomousInit, choosePath, choosePathDouble
  *  Functionality: choose the path for autonomous 
- *  I didn't test the double chooser yet
 *******************************************************/
 
 package robotFunctions;
 
-import autonomous.CatzAutonomousOutsidePaths;
 import autonomous.CatzAutonomousMiddlePaths;
 import autonomous.CatzPIDDrive;
 import autonomous.CatzPIDTurn;
@@ -31,73 +29,111 @@ public class CatzAutonomousInit {
 	{
 		//CatzRobotMap.lift.liftToScaleHeight();
 		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
-		choosePathDouble();
+		//choosePathDouble();
 		//setMechanisms();
-		//choosePath();
+		choosePath();
 		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
 	}
 
+	
 	public static void choosePath() {	
 		
 		check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
 	    check_boxM = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
 		check_boxR = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false); 
-				
-		System.out.println(check_boxL);
-		System.out.println(check_boxM);
-		System.out.println(check_boxR);
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 		
 		boolean initSuccessFlag = true;
 
-		System.out.println(gameData);
+	System.out.println(gameData);
+	
+	if (check_boxL == true) {
+		System.out.println("Starting position left");
 		
-		if(check_boxL == true) {
-			if(gameData.charAt(1) == 'L') {
-				printOutDebugData("LeftPath");
-				//CatzAutonomousPaths.left_XLX();
-
-			} else if (gameData.charAt(1) == 'R'){
-				initSuccessFlag = false;
-			}
+		if (gameData.charAt(0)=='R') {
 			
-		} else if (check_boxM == true) {
-			if(gameData.charAt(0) == 'L') {
-				printOutDebugData("middlePathL");
-				//CatzAutonomousPaths.middleSingle_LXX();
-		
-			} else if (gameData.charAt(0) == 'R') {
-				printOutDebugData("middlePathR");
-				//CatzAutonomousPaths.right_XRX();	
+			if(gameData.charAt(1)=='R') {
+				printOutDebugData("left_RRR");
+			//	CatzAutonomousMiddlePaths.left_XRX();
+			} else if (gameData.charAt(1)=='L') {
+				printOutDebugData("left_RLR");
+			//	CatzAutonomousMiddlePaths.left_XLX();
+			} 
+		  
+		} else if (gameData.charAt(0) == 'L') {
+		    	
+			if (gameData.charAt(1)=='R') {
+		    	printOutDebugData("left_LRL");
+		    //	CatzAutonomousMiddlePaths.left_XRX();
+		    } else if (gameData.charAt(1) == 'L') {
+		    	printOutDebugData("left_LLL");
+		    //	CatzAutonomousMiddlePaths.left_XLX();
+		    }
 			
-			} else {
-				initSuccessFlag = false;
-			}
-			
-		} else if (check_boxR == true) {
-			if(gameData.charAt(1) == 'R') {
-				printOutDebugData("rightPath");
-				//CatzAutonomousPaths.right_XRX();	
-			
-
-			} else {
-				initSuccessFlag = false;
-			}
-			
-		} else  {
-			initSuccessFlag = false;
 		}
-		
-		if (initSuccessFlag == true) {
-			printOutDebugData("Init Done");
+      } else if (check_boxM == true) {
+		System.out.println("Starting position Middle");
+
+			if (gameData.charAt(0) == 'L') {
+				
+				if (gameData.charAt(1) == 'L') {
+					printOutDebugData("middle_LLL");
+			//		CatzAutonomousMiddlePaths.middleSingle_LXX();
+				} else if (gameData.charAt(1) == 'R') {
+					printOutDebugData("middle_LRL");
+				//	CatzAutonomousMiddlePaths.middleSingle_LXX();
+				}
+				
+			} else if (gameData.charAt(0) == 'R') {
+				
+				if (gameData.charAt(1) == 'R') {
+					printOutDebugData("middle_RRR");
+				//	CatzAutonomousMiddlePaths.middleSingle_RXX();
+				} else if (gameData.charAt(1) == 'L') {
+					printOutDebugData("middle_RLR");
+				//	CatzAutonomousMiddlePaths.middleSingle_RXX();
+				} 
+			}
+			
+	} else if (check_boxR == true) {
+		System.out.println("Starting position Right");
+
+			if (gameData.charAt(0) == 'L') {
+				
+				if(gameData.charAt(1) == 'L') {
+					printOutDebugData("right_LLL");
+				//	CatzAutonomousMiddlePaths.right_XLX();
+				} else if(gameData.charAt(1) == 'R') {
+					printOutDebugData("right_LRL");
+				//	CatzAutonomousMiddlePaths.right_XRX();
+				}
+				
+			} else if(gameData.charAt(0) == 'R') {
+				
+				if (gameData.charAt(1) == 'L') {
+					printOutDebugData("right_RLR");
+				//	CatzAutonomousMiddlePaths.right_XLX();
+				} else if (gameData.charAt(1) == 'R') {
+					printOutDebugData("right_RRR");
+				//	CatzAutonomousMiddlePaths.right_XRX();
+				}
+			}
+		} else {
+			initSuccessFlag = false;
+		} 
+	
+	if (initSuccessFlag == true) {
+		printOutDebugData("Init Done");
 		} else {
 			printOutDebugData("Init failed");
-		//	CatzPIDDrive.PIDDrive(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
-		//	              		  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
-		//	                      CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT); //if all else fails, just drive forward
+			//CatzPIDDrive.PIDDrive(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
+			  //            		  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
+			    //                  CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT); //if all else fails, just drive forward
 		}
+	
 	}
+			
 	
 	public static void choosePathDouble() {
 		
@@ -142,20 +178,20 @@ public class CatzAutonomousInit {
 				
 				if (gameData.charAt(1) == 'L') {
 					printOutDebugData("middle_LLL");
-					//CatzAutonomousPaths.middle_LLX();
+					CatzAutonomousMiddlePaths.middle_LLX();
 				} else if (gameData.charAt(1) == 'R') {
 					printOutDebugData("middle_LRL");
-					//CatzAutonomousPaths.middleDouble_LXX();
+					CatzAutonomousMiddlePaths.middle_LRX();
 				}
 				
 			} else if (gameData.charAt(0) == 'R') {
 				
 				if (gameData.charAt(1) == 'R') {
 					printOutDebugData("middle_RRR");
-					//CatzAutonomousPaths.middle_RRX();
+					CatzAutonomousMiddlePaths.middle_RRX();
 				} else if (gameData.charAt(1) == 'L') {
 					printOutDebugData("middle_RLR");
-					//CatzAutonomousPaths.middleDouble_RXX();
+					CatzAutonomousMiddlePaths.middle_RLX();
 				} 
 			}
 			
