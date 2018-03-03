@@ -59,18 +59,13 @@ public class CatzPIDDrive {
 	private static double distanceTraveledL;
 	private static double distanceTraveledR;
 	private static double actualDistanceTraveled;
-	private static double totalDistanceTraveledDrift;
 	private static double totalDistanceTraveled;
 	private static double distanceError;
 	private static double driftnewHeadingAngle;
 
 	private static double timeout = 0.0;
 
-	/****************************************************************************
-	 *
-	 * PIDDrive()
-	 *
-	 ****************************************************************************/
+
 	public static void PIDDrive(double drivePower, double distance, double timeoutSeconds) {
 
 		boolean firstTime;
@@ -102,26 +97,7 @@ public class CatzPIDDrive {
 		totalDistanceTraveled = 0.0;
 
 		calcTimeout(power, distance, timeoutSeconds);
-		
-		/***************************************************************************
-		 * Calculate Timeout timeoutSeconds: <0 : PIDDrive() will calculate timeout
-		 * based on degreesToTurn 0 : Max Timeout >0 : # of seconds before aborting
-		if (timeoutSeconds < 0.0) {
-			if (distanceAbs < PID_DRIVE_SHORT_DIST) {
-				timeout = PID_DRIVE_TIMEOUT_SHORT_DIST;
-			} else if (distanceAbs < PID_DRIVE_MEDIUM_DIST) {
-				timeout = PID_DRIVE_TIMEOUT_MED_DIST;
-			} else {
-				timeout = PID_DRIVE_MAX_TIMEOUT;
-			}
-		} else {
-			if (timeoutSeconds == 0.0) {
-				timeout = PID_DRIVE_MAX_TIMEOUT;
-			} else {
-				timeout = timeoutSeconds;
-			}
-		}
-		 ***************************************************************************/
+
 
 		done = false;
 		firstTime = true;
@@ -156,10 +132,10 @@ public class CatzPIDDrive {
 			 * Calc Drift Values
 			 **********************************************************************/
 			deltaPulseCount = encoderPulseCountL - prevEncoderPulseCountL;
-			distanceTraveledL = deltaPulseCount * CatzConstants.DRIVE_INCHES_PER_PULSE;
+			distanceTraveledL = deltaPulseCount * CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE;
 
 			deltaPulseCount = encoderPulseCountR - prevEncoderPulseCountR;
-			distanceTraveledR = deltaPulseCount * CatzConstants.DRIVE_INCHES_PER_PULSE;
+			distanceTraveledR = deltaPulseCount * CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE;
 
 			prevEncoderPulseCountL = encoderPulseCountL;
 			prevEncoderPulseCountR = encoderPulseCountR;
@@ -233,11 +209,7 @@ public class CatzPIDDrive {
 		}
 
 		/*************************************************************************
-		 *
-		 * Brake using motors DO WE NEED TO ACCOUNT FOR THIS IN CHECKING DISTANCE ERROR?
-		 * AFTER FLAGSTAFF LOOK AT USING PID LOOP FOR DISTANCE TO MANAGE DRIVE POWER
-		 * WANT TO BE ABLE TO START WITH POWER = 1.0
-		 *
+		 * Brake using motors 
 		 *************************************************************************/
 		if (power < 0.0) {
 			CatzRobotMap.drive.tankDrive(PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_POWER);
@@ -251,8 +223,6 @@ public class CatzPIDDrive {
 
 	
 	public static void PIDDriveNoTrig(double drivePower, double distance, double timeoutSeconds) {
-		boolean firstTime;
-		
 		functionTimer = new Timer();
 		loopTimer     = new Timer();
 
@@ -260,8 +230,6 @@ public class CatzPIDDrive {
 		functionTimer.reset();
 		functionTimer.start();
 
-		double currentDistance;
-		
 		distanceAbs = Math.abs(distance);
 		power = drivePower;
 
@@ -277,7 +245,6 @@ public class CatzPIDDrive {
 
 		calcTimeout(power, distance, timeoutSeconds);
 		while (done == false) {
-			currentDistance = CatzRobotMap.wheelEncoderL.getDistance();
 			currentHeading     = CatzRobotMap.navx.getAngle();
 			loopTimer.stop();
 			
@@ -317,11 +284,7 @@ public class CatzPIDDrive {
 		}
 
 		/*************************************************************************
-		 *
-		 * Brake using motors DO WE NEED TO ACCOUNT FOR THIS IN CHECKING DISTANCE ERROR?
-		 * AFTER FLAGSTAFF LOOK AT USING PID LOOP FOR DISTANCE TO MANAGE DRIVE POWER
-		 * WANT TO BE ABLE TO START WITH POWER = 1.0
-		 *
+		 * Brake using motors 
 		 *************************************************************************/
 		if (power < 0.0) {
 			CatzRobotMap.drive.tankDrive(PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_POWER);
@@ -333,6 +296,9 @@ public class CatzPIDDrive {
 		CatzRobotMap.drive.tankDrive(0.0, 0.0);
 
 	}
+	
+	
+	
 
 	public static void setDebugModeEnabled(boolean enabled) {
 		debugMode = enabled;
@@ -368,7 +334,7 @@ public class CatzPIDDrive {
 	public static void printDebugInit() {
 		if (debugMode == true) {
 
-			System.out.printf("power,         %.3f, INCHES/PULSE, %.4f\n", power, CatzConstants.DRIVE_INCHES_PER_PULSE);
+			System.out.printf("power,         %.3f, INCHES/PULSE, %.4f\n", power, CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE);
 			System.out.printf("distanceAbs,   %.3f, timeout,      %.3f\n", distanceAbs, timeout);
 			System.out.printf("BrakePower,    %.3f, BrakeTime,    %.3f\n", PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_TIME);
 			System.out.printf("distErrThresh, %.3f\n", PID_DRIVE_ERROR_THRESHOLD);

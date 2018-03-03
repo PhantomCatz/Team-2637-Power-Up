@@ -11,7 +11,7 @@ import robot.CatzRobotMap;
  * Methods: middlePathL middlePathR leftPath rightPath 
  * Functionality: Paths for the autonomous period
  *********************************************************/
-public class CatzAutonomousPaths {
+public class CatzAutonomousMiddlePaths {
 	/******************************
 	 * All distances in the comments are not factoring in robot length
 	 * 
@@ -27,19 +27,19 @@ public class CatzAutonomousPaths {
 		 * Goes around the switch and grabs a second cube
 		 **************************************************/
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (36 - CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(.5, (36 - CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Leave the wall 
 
 		CatzPIDTurn.PIDturn(45, CatzConstants.PID_DRIVE_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 72,
+		CatzPIDDrive.PIDDrive(.5, 72,
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turn 45deg right and drive towards the scale
 
 		CatzPIDTurn.PIDturn(-45, CatzConstants.PID_DRIVE_TIMEOUT); 
 
 		CatzRobotMap.lift.liftToSwitchHeight();  //Preemptively lift to switch height
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (55.2 - CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(.5, (55.2 - CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_DRIVE_TIMEOUT); // Drive 45deg left and press against the switch
 
 		CatzRobotMap.grabber.shootCube();  //Fire the cube into the switch
@@ -52,24 +52,24 @@ public class CatzAutonomousPaths {
 		 * Picks up a second cube
 		 ****************************************************/
 		
-		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, (20 + CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(-.5, (20 + CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Backs away from the switch
 																													
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 43.2,
+		CatzPIDDrive.PIDDrive(.5, 43.2,
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives to the side of the switch
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 84,
+		CatzPIDDrive.PIDDrive(.5, 84,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to the back of the switch
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
 		
 		CatzRobotMap.lift.dropToGroundHeight();  //Drops the lift down
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (24 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (24 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and presses against the cube
 
 		CatzRobotMap.grabber.intakeCube();  //Intakes the cube
@@ -84,19 +84,19 @@ public class CatzAutonomousPaths {
 		 * Goes around the switch and grabs a cube
 		 *********************************************/
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (36 - CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(.5, (36 - CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Leaves the wall and drives to the switch
 		
 		CatzPIDTurn.PIDturn(-45, CatzConstants.PID_DRIVE_TIMEOUT); 
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 72,
+		CatzPIDDrive.PIDDrive(.5, 72,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 45deg left and approaches the switch
 
 		CatzPIDTurn.PIDturn(45, CatzConstants.PID_DRIVE_TIMEOUT); 
 		
 		CatzRobotMap.lift.liftToSwitchHeight();  //Premptively raises the lift 
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (55.2 - CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(.5, (55.2 - CatzConstants.HALF_ROBOT_LENGTH), 
 				CatzConstants.PID_DRIVE_TIMEOUT); //Turns 45deg right and presses against the switch
 		
 		CatzRobotMap.grabber.shootCube();  //Fires cube into the switch
@@ -108,24 +108,24 @@ public class CatzAutonomousPaths {
 		 * Picks up a second cube
 		 *************************************************/
 
-		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, (20 + CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(-.5, (20 + CatzConstants.HALF_ROBOT_LENGTH), 
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Backs away from the switch 
 		
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (43.2),
+		CatzPIDDrive.PIDDrive(.5, (43.2),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to the side of the switch
 		
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 84,
+		CatzPIDDrive.PIDDrive(.5, 84,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg and drives to the back scale
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT); 
 		
 		CatzRobotMap.lift.dropToGroundHeight();  //Lowers the lift
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (24 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (24 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and presses up against the cube
 
 		CatzRobotMap.grabber.intakeCube();  //Intakes the cube
@@ -142,14 +142,14 @@ public class CatzAutonomousPaths {
 		 * Picks up cube
 		 ***********************************/
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (335.65 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (335.65 - CatzConstants.HALF_ROBOT_LENGTH),
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Drives all the way to the scale
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 
 		 /* CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving? */
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 41.88,
+		CatzPIDDrive.PIDDrive(.5, 41.88,
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives forward to face the scale
 		
 		CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale
@@ -162,12 +162,12 @@ public class CatzAutonomousPaths {
 		
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 112.8,
+		CatzPIDDrive.PIDDrive(.5, 112.8,
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives towards the cubes
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (12 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (12 - CatzConstants.HALF_ROBOT_LENGTH),
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns left and presses against cube
 
 		CatzRobotMap.grabber.intakeCube();  //Intakes the cube
@@ -183,14 +183,14 @@ public class CatzAutonomousPaths {
 		 ***********************************/
 	
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (335.65 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (335.65 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Drives all the way to the scale
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
 
 		 /* CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving? */
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (41.88 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (41.88 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left to face scale
 		
 		CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale
@@ -199,12 +199,12 @@ public class CatzAutonomousPaths {
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (112.8 + CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (112.8 + CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives towards cubes
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT); 
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (12 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (12 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and presses against the cube
 
 		CatzRobotMap.grabber.intakeCube();
@@ -220,24 +220,24 @@ public class CatzAutonomousPaths {
 		   * Places cube in scale
 		   ***************************************************/
 		  
-	  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (251.73 - CatzConstants.HALF_ROBOT_LENGTH),
+	  CatzPIDDrive.PIDDrive(.5, (251.73 - CatzConstants.HALF_ROBOT_LENGTH),
 			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Drives to area between switch and scale
 	  
 	  CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT); 
 	  
-	  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 251.73,
+	  CatzPIDDrive.PIDDrive(.5, 251.73,
 			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg and crosses to right side scale
 	  
 	  CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
 	  
-	  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 84,
+	  CatzPIDDrive.PIDDrive(.5, 84,
 			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to the front of scale
 	  
 	  CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT);
 	  
 	  /* CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving? */
 	  
-	  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (24 - CatzConstants.HALF_ROBOT_LENGTH),
+	  CatzPIDDrive.PIDDrive(.5, (24 - CatzConstants.HALF_ROBOT_LENGTH),
 			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and aligns with scale
 	  
 	  CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale
@@ -256,24 +256,24 @@ public class CatzAutonomousPaths {
 		   * Places cube on scale
 		   ***************************************************/
 		  
-	  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (251.73 - CatzConstants.HALF_ROBOT_LENGTH),
+	  CatzPIDDrive.PIDDrive(.5, (251.73 - CatzConstants.HALF_ROBOT_LENGTH),
 			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Leaves the wall and drives to area between right switch and right scale
 	  
 	  CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT);
 	 
-	  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 251.73,
+	  CatzPIDDrive.PIDDrive(.5, 251.73,
 			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and crosses over to the left side scale
 	  
 	  CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 	  
-	  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 84,
+	  CatzPIDDrive.PIDDrive(.5, 84,
 	  			CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives up to scale
 	  
 	  CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 	  
 		/* CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving? */
 	  
-	  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (24 - CatzConstants.HALF_ROBOT_LENGTH), 
+	  CatzPIDDrive.PIDDrive(.5, (24 - CatzConstants.HALF_ROBOT_LENGTH), 
 	  			CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and aligns to scale
 
 		CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale
@@ -291,17 +291,17 @@ public class CatzAutonomousPaths {
 		 **************************************************/
 		
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (66.3 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (66.3 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Leaves the wall
 
 		CatzPIDTurn.PIDturn(60, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 64,
+		CatzPIDDrive.PIDDrive(.5, 64,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 60deg right and drive towards the switch
 
 		CatzPIDTurn.PIDturn(-30, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (36.5 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (36.5 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 30deg left and presses against the 
 
 		CatzRobotMap.grabber.shootCube();  //Fires the cube into the switch
@@ -315,22 +315,22 @@ public class CatzAutonomousPaths {
 		 * Places the cube on the scale
 		 ****************************************************/
 
-		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, (36.5 + CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(-.5, (36.5 + CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Backs away from the switch
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 65,
+		CatzPIDDrive.PIDDrive(.5, 65,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives to the side of the switch
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 89,
+		CatzPIDDrive.PIDDrive(.5, 89,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to the back of the switch
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (47.5 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (47.5 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and presses against the cube
 
 		CatzRobotMap.grabber.intakeCube();  //Picks up the second cube
@@ -339,7 +339,7 @@ public class CatzAutonomousPaths {
 		
 		/* CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving? */
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 8,
+		CatzPIDDrive.PIDDrive(.5, 8,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives to the switch
 		
 		CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale
@@ -357,18 +357,18 @@ public class CatzAutonomousPaths {
 		 *******************************************************/
 
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (66.3 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (66.3 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Leaves the wall
 
 		CatzPIDTurn.PIDturn(-60, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 64,
+		CatzPIDDrive.PIDDrive(.5, 64,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 60deg right and starts towards the switch
 
 
 		CatzPIDTurn.PIDturn(30, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (36 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (36 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 30deg left and presses up against the switch
 
 		CatzRobotMap.grabber.shootCube();  //Fires cube into the switch
@@ -380,23 +380,23 @@ public class CatzAutonomousPaths {
 		 * Drives to the scale and places cube on scale
 		 *************************************************/
 		
-		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, (36.5 + CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(-.5, (36.5 + CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Backs away from switch 
 
 
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 65,
+		CatzPIDDrive.PIDDrive(.5, 65,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and goes to the side of the switch
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 89,
+		CatzPIDDrive.PIDDrive(.5, 89,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and goes the the back of the switch
 
 
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);
 
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (47.5 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (47.5 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and presses up against the cube
 
 		CatzRobotMap.grabber.intakeCube();  //Intakes the cube
@@ -405,7 +405,7 @@ public class CatzAutonomousPaths {
 
 		/* CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving? */
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 89,
+		CatzPIDDrive.PIDDrive(.5, 89,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to the scale
 
 		CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale
@@ -422,17 +422,17 @@ public class CatzAutonomousPaths {
 		 * Places cube in the switch
 		 ************************************/
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (66.5 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (66.5 - CatzConstants.HALF_ROBOT_LENGTH),
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Leaves the wall
 																														
 		CatzPIDTurn.PIDturn(60, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 64.0,            
+		CatzPIDDrive.PIDDrive(.5, 64.0,            
 					CatzConstants.PID_TURN_TIMEOUT);  //Turns 60deg right and drives towards the switch
 		
 		CatzPIDTurn.PIDturn(-30, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (36.5 - CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(.5, (36.5 - CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 30deg left and presses up against the switch
 		
 		CatzRobotMap.grabber.shootCube();  //Fires cube into the switch
@@ -446,32 +446,32 @@ public class CatzAutonomousPaths {
 		 * Places second cube in switch
 		 *****************************************/
 		
-		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, (36.5 + CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(-.5, (36.5 + CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_TURN_TIMEOUT);  //Backs away from the switch
 	
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);  
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 65, 
+		CatzPIDDrive.PIDDrive(.5, 65, 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg and drives to the side of switch
 		
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 89, 
+		CatzPIDDrive.PIDDrive(.5, 89, 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to back of switch
 		
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT);  
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 47.5,
+		CatzPIDDrive.PIDDrive(.5, 47.5,
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and presses against the cube
 		
 		CatzRobotMap.grabber.intakeCube();  //Intakes a second cube
 		
-		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, 35, 
+		CatzPIDDrive.PIDDrive(-.5, 35, 
 				CatzConstants.PID_TURN_TIMEOUT);  //Backs away from cube
 		
 		CatzPIDTurn.PIDturn(-45, CatzConstants.PID_DRIVE_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 45.5, 
+		CatzPIDDrive.PIDDrive(.5, 45.5, 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 45deg left and presses against the switch  NOT PERPENDICULAR TO THE SWITCH
 		
 		CatzRobotMap.grabber.shootCube();
@@ -486,17 +486,17 @@ public class CatzAutonomousPaths {
 		 * Places cube in the switch
 		 ************************************/
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (66.5 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (66.5 - CatzConstants.HALF_ROBOT_LENGTH),
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Leaves the wall 
 																														
 		CatzPIDTurn.PIDturn(-60, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 64,            
+		CatzPIDDrive.PIDDrive(.5, 64,            
 					CatzConstants.PID_TURN_TIMEOUT);  //Turns 60deg left and approaches the switch
 		
 		CatzPIDTurn.PIDturn(30, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (36.5 - CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(.5, (36.5 - CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 30deg right and presses against the switch
 		
 		CatzRobotMap.grabber.shootCube();  //Fires cube into switch
@@ -509,32 +509,32 @@ public class CatzAutonomousPaths {
 		 * Places second cube in switch
 		 *****************************************/
 		
-		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, (36.5 + CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(-.5, (36.5 + CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_TURN_TIMEOUT);  //Backs away from the switch
 		
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT);  
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 65, 
+		CatzPIDDrive.PIDDrive(.5, 65, 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to the side of switch
 		
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 89, 
+		CatzPIDDrive.PIDDrive(.5, 89, 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right left and drives to back of switch
 		
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);  
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 47.5,
+		CatzPIDDrive.PIDDrive(.5, 47.5,
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and presses against the cube
 		
 		CatzRobotMap.grabber.intakeCube();  //Intakes a second cube
 		
-		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, 35.0, 
+		CatzPIDDrive.PIDDrive(-.5, 35.0, 
 					CatzConstants.PID_TURN_TIMEOUT);  //Backs away from cube
 		
 		CatzPIDTurn.PIDturn(45, CatzConstants.PID_DRIVE_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 45.5, 
+		CatzPIDDrive.PIDDrive(.5, 45.5, 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 45deg right and presses against the switch  NOT PERPENDICULAR TO SWITCH
 		
 		CatzRobotMap.grabber.shootCube();
@@ -549,17 +549,17 @@ public class CatzAutonomousPaths {
 		 * Places cube in the switch
 		 ************************************/
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (66.5 - CatzConstants.HALF_ROBOT_LENGTH),
+		CatzPIDDrive.PIDDrive(.5, (66.5 - CatzConstants.HALF_ROBOT_LENGTH),
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Leaves the wall
 																														
 		CatzPIDTurn.PIDturn(60, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 64.0,            
+		CatzPIDDrive.PIDDrive(.5, 64.0,            
 					CatzConstants.PID_TURN_TIMEOUT);  //Turns 60deg right and drives towards the switch
 		
 		CatzPIDTurn.PIDturn(-30, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (36.5 - CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(.5, (36.5 - CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 30deg left and presses up against the switch
 		
 		CatzRobotMap.grabber.shootCube();  //Fires cube into the switch
@@ -573,41 +573,41 @@ public class CatzAutonomousPaths {
 		 * Places cube in opposite switch
 		 *****************************************/
 		
-		CatzPIDDrive.PIDDrive(-CatzConstants.HALF_SPEED, (36.5 + CatzConstants.HALF_ROBOT_LENGTH), 
+		CatzPIDDrive.PIDDrive(-.5, (36.5 + CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_TURN_TIMEOUT);  //Backs away from the switch
 	
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);  
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 65, 
+		CatzPIDDrive.PIDDrive(.5, 65, 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg and drives to the side of switch
 		
 		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_TURN_TIMEOUT);
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 89, 
+		CatzPIDDrive.PIDDrive(.5, 89, 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to back of switch
 		  
 		
-		 CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 251.73,
+		 CatzPIDDrive.PIDDrive(.5, 251.73,
 				  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and crosses over to the left side scale
 		 
-		 CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 47.5,
+		 CatzPIDDrive.PIDDrive(.5, 47.5,
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and presses against the cube
 		
 		CatzRobotMap.grabber.intakeCube();  //Intakes a second cube
 		
-		CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 251.73,
+		CatzPIDDrive.PIDDrive(.5, 251.73,
 			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Crosses over to the left side scale
 		  
 		  CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 		  
-		  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, 84,
+		  CatzPIDDrive.PIDDrive(.5, 84,
 		  			CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives up to scale
 		  
 		  CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 		  
 			/* CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving? */
 		  
-		  CatzPIDDrive.PIDDrive(CatzConstants.HALF_SPEED, (24 - CatzConstants.HALF_ROBOT_LENGTH), 
+		  CatzPIDDrive.PIDDrive(.5, (24 - CatzConstants.HALF_ROBOT_LENGTH), 
 		  			CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and aligns to scale
 
 		  CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale

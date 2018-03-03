@@ -17,11 +17,8 @@ import robot.CatzRobotMap;
 public class CatzPIDTurn
 {
 
-    /***************************************************************************
-    *
-    *  PID Turn Constants
-    *
-    ***************************************************************************/
+
+    //  PID Turn Constants
 	final static public double PID_TURN_MAX_TIMEOUT = 4.0;
 
 	final static public double PID_TURN_THRESHOLD   = 0.12;
@@ -52,12 +49,9 @@ public class CatzPIDTurn
 	final public static double PID_TURN_MIN_POS_POWER =  0.4;     //0.4 is min power to move robot when it is stopped
 	final public static double PID_TURN_MIN_NEG_POWER = -PID_TURN_MIN_POS_POWER;
 
-	
-    /***************************************************************************
-    *
-    *  PID Turn Variables
-    *
-    ***************************************************************************/	
+
+    //  PID Turn Variables
+
 	static Timer functionTimer;
 	static Timer pdTimer;
 	static Timer debugTimer;
@@ -99,8 +93,7 @@ public class CatzPIDTurn
 		boolean firstTime = true;
 		functionTimer = new Timer();
 		pdTimer       = new Timer();
-		
-		
+
 		CatzRobotMap.navx.reset();
 		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
 		
@@ -233,25 +226,22 @@ public class CatzPIDTurn
 						totalError = PID_TURN_INTEGRAL_MIN;
 					
 					
-		            /**********************************************************************
-		            *
-		            * calculates drivetrain power
-		            *
-		            **********************************************************************/
+
+		            //calculates drivetrain power
 					power = PID_TURN_POWER_SCALE_FACTOR * ((PID_TURN_KP * currentError)
 														  +(PID_TURN_KI * totalError  )
 														  +(PID_TURN_KD * derivative  ));
 
-		            /**********************************************************************
-			        * Verify we have not exceeded max power when turning right or left
-			        **********************************************************************/
+		         
+					//Verify we have not exceeded max power when turning right or left
 					if(power > CatzConstants.DRIVE_MAX_POS_POWER) 
 						power = CatzConstants.DRIVE_MAX_POS_POWER;
 
 					if(power < CatzConstants.DRIVE_MAX_NEG_POWER)
 						power = CatzConstants.DRIVE_MAX_NEG_POWER;
 
-		            /**********************************************************************
+		          
+					/**********************************************************************
 			        *  We need to make sure drivetrain power doesn't get too low but we
 			        *  also need to allow the robot to gradually brake.  The brake 
 			        *  condition is defined as when deltaError is > PID_TURN_DELTAERROR_THRESHOLD_LO
@@ -297,49 +287,17 @@ public class CatzPIDTurn
 		pdTimer.stop();
 	}
 	
-	
-	/****************************************************************************
-	*
-    *  setPIDTurnDebugModeEnabled()
-	*
-	****************************************************************************/
+
+
 	public static void setPIDTurnDebugModeEnabled(boolean enabled) {
 		debugMode = enabled;
 	}
 
-	/****************************************************************************
-	*
-    *  isTuningModeEnabled()
-	*
-	****************************************************************************/
 	public static boolean isTuningModeEnabled() {
 		return tuningMode;
 	}
 
-	
-	/****************************************************************************
-	*
-    *  setTuningModeEnabled()
-	*
-	****************************************************************************/
-	public static void setTuningModeEnabled(boolean enabled) {
-		tuningMode = enabled;
-		
-		if(tuningMode == true) {
-			SmartDashboard.putNumber(CatzConstants.SCALE_FACTOR_LABEL, PID_TURN_POWER_SCALE_FACTOR);
-			SmartDashboard.putNumber(CatzConstants.TURN_KP_LABEL, PID_TURN_KP);
-			SmartDashboard.putNumber(CatzConstants.TURN_KD_LABEL, PID_TURN_KD);
-			SmartDashboard.putNumber(CatzConstants.TURN_KI_LABEL, PID_TURN_KI);
-		}
-	}
-
-	/****************************************************************************
-	*
-    *  printDebugInit()
-	*
-	****************************************************************************/
-	public static void printDebugInit()
-	{
+	public static void printDebugInit(){
 		if(debugMode == true)
 		{
 			debugData =  ( "CurrentAngle,"   + currentAngle        + "\n" +
@@ -362,11 +320,6 @@ public class CatzPIDTurn
 		}
 	}
 
-	/****************************************************************************
-	*
-	*  printDebugHeader()
-	*
-	****************************************************************************/
 	public static void printDebugHeader() {
 		if(debugMode == true) {
 			System.out.print("PIDTurn debug data\n");
@@ -374,11 +327,6 @@ public class CatzPIDTurn
 		}
 	}
 
-	/****************************************************************************
-    *
-	*  printDebugData()
-	*
-	****************************************************************************/
 	public static void printDebugData() {
 		if (debugMode == true) {
 
@@ -391,20 +339,8 @@ public class CatzPIDTurn
 		                    derivative, 
 		                    totalError, 
 		                    power);
-			
-			//printDatainSmartDashboard();
+
 		}
 	}
-	
-	public static void printDatainSmartDashboard() {
-		
-		SmartDashboard.putNumber("PID turn:timestamp", functionTimer.get());
-		SmartDashboard.putNumber("PID turn:deltaT", deltaT);
-		SmartDashboard.putNumber("PID turn:currentAngle", currentAngle);
-		SmartDashboard.putNumber("PID turn:CurrentError", currentError);
-		SmartDashboard.putNumber("PID turn:derivative", derivative);
-		SmartDashboard.putNumber("PID turn:totalError", totalError);
-		SmartDashboard.putNumber("PID turn:power", power);
-		
-	}
+
 }

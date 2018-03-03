@@ -28,7 +28,7 @@ public class CatzClimber
 		//CatzRobotMap.climber2.set(-CatzConstants.CLIMB_SPEED);
 	}
 	public void stopClimb() {
-		CatzRobotMap.climberMotor.set(CatzConstants.ZERO);
+		CatzRobotMap.climberMotor.set(0);
 		//CatzRobotMap.climber2.set(CatzConstants.ZERO);
 	}
 	private static void printOutDebugData(String info) {
