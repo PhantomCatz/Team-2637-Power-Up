@@ -134,9 +134,9 @@ public class CatzRobotMap
 		secondsFormat = new DecimalFormat("#.###");
 		
 		if(using2ndBot) {
-			fRight.setInverted(true);
-			fLeft.setInverted(true);
-			lifterL.setInverted(true);
+			//fRight.setInverted(true);
+			//fLeft.setInverted(true);
+			//lifterL.setInverted(true);
 		}
 		//logger = new CatzLogger();
 	}
