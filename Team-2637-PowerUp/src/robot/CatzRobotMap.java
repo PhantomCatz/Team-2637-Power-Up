@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -113,7 +114,7 @@ public class CatzRobotMap
 		
 		if(using2ndBot) {
 			lifterR = new Spark(4);  //PWM Ports 0 and 1 do not work on 2nd robot's roboRio
-			lifterL = new Spark(5);
+			lifterL = new Spark(9);
 		} else {
 			lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
 			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
@@ -121,8 +122,8 @@ public class CatzRobotMap
 		
 
 		if(using2ndBot) {
-			intakeRight   = new Spark (4);
-			intakeLeft    = new Spark (5);
+			intakeRight   = new Spark (7);
+			intakeLeft    = new Spark (8);
 			intakeForearm = new Solenoid(0);
 			intakeBicep   = new Solenoid(1);
 		} else {

@@ -31,10 +31,12 @@ public class CatzAutonomousInit {
 	{
 		//CatzRobotMap.lift.liftToScaleHeight();
 		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
-		choosePathDouble();
+		//choosePathDouble();
 		//setMechanisms();
 		//choosePath();
 		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
+		CatzPIDDrive.PIDDriveNoTrig(.6, 96, 8);
+		//CatzPIDDrive.PIDDrive(.4, 48, 8);
 	}
 
 	public static void choosePath() {	

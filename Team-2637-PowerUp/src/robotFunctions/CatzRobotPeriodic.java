@@ -29,7 +29,7 @@ public class CatzRobotPeriodic
 		runPositionSelector();
 		updateSmartDashboard();
 
-		System.out.println(CatzRobotMap.fLeft.getOutputCurrent());
+		//System.out.println(CatzRobotMap.climberMotor.getOutputCurrent());
 		
 	} 
 	

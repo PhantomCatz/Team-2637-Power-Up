@@ -11,20 +11,20 @@ public class CatzPIDDrive {
 	/****************************************************************************
 	 * PID Drive Constants
 	 ****************************************************************************/
-	final static public double PID_DRIVE_SHORT_DIST = 48.0; // 4 ft
-	final static public double PID_DRIVE_MEDIUM_DIST = 144.0; // 12 ft
+	final static private double PID_DRIVE_SHORT_DIST = 48.0; // 4 ft
+	final static private double PID_DRIVE_MEDIUM_DIST = 144.0; // 12 ft
 
-	final static public double PID_DRIVE_TIMEOUT_SHORT_DIST = 3.0; // SHOULD CREATE A METHOD BASED ON SPEED & DISTANCE
-	final static public double PID_DRIVE_TIMEOUT_MED_DIST = 10.0;
-	final static public double PID_DRIVE_MAX_TIMEOUT = 20.0;
+	final static private double PID_DRIVE_TIMEOUT_SHORT_DIST = 3.0; // SHOULD CREATE A METHOD BASED ON SPEED & DISTANCE
+	final static private double PID_DRIVE_TIMEOUT_MED_DIST = 10.0;
+	final static private double PID_DRIVE_MAX_TIMEOUT = 20.0;
 
 	final static double PID_DRIVE_ERROR_THRESHOLD = 1.0; // Stop within 1 inch
 
-	final static public double PID_DRIVE_KP = 0.15;
-	final static public double PID_DRIVE_KD = 0.005; // ORIGINALLY .18
+	final static private double PID_DRIVE_KP = 0.15; //originally .15
+	final static private double PID_DRIVE_KD = 0.005; // ORIGINALLY .18
 
-	final static public double PID_DRIVE_BRAKE_POWER = 0.43;
-	final static public double PID_DRIVE_BRAKE_TIME = 0.1;
+	static private double PID_DRIVE_BRAKE_POWER = 0.43;
+	final static private double PID_DRIVE_BRAKE_TIME = 0.25;
 	private static final double PID_DRIVE_FILTER_CONSTANT = .5;
 
 	/****************************************************************************
@@ -150,7 +150,11 @@ public class CatzPIDDrive {
 			 **********************************************************************/
 			actualDistanceTraveled = Math.abs(driftError * (Math.tan(currentHeading * CatzConstants.DEG_TO_RAD) * CatzConstants.RAD_TO_DEG) );
 
-			totalDistanceTraveled += actualDistanceTraveled;
+			if (actualDistanceTraveled < 0.1) {
+				totalDistanceTraveled += distanceTraveledL;
+			} else {
+				totalDistanceTraveled += actualDistanceTraveled;
+			}
 
 			distanceError = distanceAbs - totalDistanceTraveled;
 
@@ -211,6 +215,7 @@ public class CatzPIDDrive {
 		/*************************************************************************
 		 * Brake using motors 
 		 *************************************************************************/
+		
 		if (power < 0.0) {
 			CatzRobotMap.drive.tankDrive(PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_POWER);
 		} else {
@@ -225,6 +230,8 @@ public class CatzPIDDrive {
 	public static void PIDDriveNoTrig(double drivePower, double distance, double timeoutSeconds) {
 		functionTimer = new Timer();
 		loopTimer     = new Timer();
+		
+		done = false;
 
 		functionTimer.stop();
 		functionTimer.reset();
@@ -243,7 +250,6 @@ public class CatzPIDDrive {
 		previousDerivative = 0.0;
 
 
-		calcTimeout(power, distance, timeoutSeconds);
 		while (done == false) {
 			currentHeading     = CatzRobotMap.navx.getAngle();
 			loopTimer.stop();
@@ -252,12 +258,14 @@ public class CatzPIDDrive {
 
 			loopTimer.reset();
 			loopTimer.start();
+			
+			distanceError = distanceAbs - Math.abs(CatzRobotMap.wheelEncoderL.getDistance());
 
 
 			if (distanceError < PID_DRIVE_ERROR_THRESHOLD) {
 				done = true;
 			} else {
-				if (functionTimer.get() > timeout) {
+				if (functionTimer.get() > timeoutSeconds) {
 					done = true;
 				} else {
 
@@ -360,7 +368,7 @@ public class CatzPIDDrive {
 	public static void printDebugData() {
 		if (debugMode == true) {
 
- 			System.out.printf("%.3f, %.3f, %d, %d, ", 
+ 			System.out.printf("%.3f, %.3f, %f, %f, ", 
  					functionTimer.get(), deltaTimeSec, encoderPulseCountL, encoderPulseCountR);
 
  			System.out.printf("%.3f, %.3f, %.3f, %.3f, %.3f, ", 
