@@ -65,168 +65,6 @@ public class CatzPIDDrive {
 
 	private static double timeout = 0.0;
 
-
-	public static void PIDDrive(double drivePower, double distance, double timeoutSeconds) {
-
-		boolean firstTime;
-		double deltaPulseCount;
-		double plannedDistTraveled = 0.0;
-		
-		functionTimer = new Timer();
-		loopTimer     = new Timer();
-
-		functionTimer.stop();
-		functionTimer.reset();
-		functionTimer.start();
-
-
-		distanceAbs = Math.abs(distance);
-		power = drivePower;
-
-		CatzRobotMap.wheelEncoderL.reset();
-		CatzRobotMap.wheelEncoderR.reset();
-		
-		CatzRobotMap.navx.reset();
-		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
-
-		previousAngleError = 0.0;
-		previousDerivative = 0.0;
-		prevEncoderPulseCountL = CatzRobotMap.wheelEncoderL.get();
-		prevEncoderPulseCountR = CatzRobotMap.wheelEncoderR.get();
-		cumulativeDriftError = 0.0;
-		totalDistanceTraveled = 0.0;
-
-		calcTimeout(power, distance, timeoutSeconds);
-
-
-		done = false;
-		firstTime = true;
-
-		printDebugInit();
-		printDebugHeader();
-		Timer.delay(0.015);
-
-		loopTimer.reset();
-		loopTimer.start();
-		
-
-		while (done == false) {
-			/**********************************************************************
-			 * Get Data Samples
-			 **********************************************************************/
-			encoderPulseCountL = CatzRobotMap.wheelEncoderL.get();
-			encoderPulseCountR = CatzRobotMap.wheelEncoderR.getDistance();
-			currentHeading     = CatzRobotMap.navx.getAngle();
-
-			deltaTimeSec = loopTimer.get();
-
-			loopTimer.stop();
-			loopTimer.reset();
-			loopTimer.start();
-
-			/**********************************************************************
-			 * Add code to deal with dead encoder???
-			 **********************************************************************/
-
-			/**********************************************************************
-			 * Calc Drift Values
-			 **********************************************************************/
-			deltaPulseCount = encoderPulseCountL - prevEncoderPulseCountL;
-			distanceTraveledL = deltaPulseCount * CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE;
-
-			deltaPulseCount = encoderPulseCountR - prevEncoderPulseCountR;
-			distanceTraveledR = deltaPulseCount * CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE;
-
-			prevEncoderPulseCountL = encoderPulseCountL;
-			prevEncoderPulseCountR = encoderPulseCountR;
-			
-			driftError = Math.sin(currentHeading * CatzConstants.DEG_TO_RAD) * distanceTraveledL; //calculate error using left encoder only
-			driftError = driftError * CatzConstants.RAD_TO_DEG;
-			
-			cumulativeDriftError = cumulativeDriftError + driftError;
-
-			/**********************************************************************
-			 * Calc Distance Traveled
-			 **********************************************************************/
-			actualDistanceTraveled = Math.abs(driftError * (Math.tan(currentHeading * CatzConstants.DEG_TO_RAD) * CatzConstants.RAD_TO_DEG) );
-
-			if (actualDistanceTraveled < 0.1) {
-				totalDistanceTraveled += distanceTraveledL;
-			} else {
-				totalDistanceTraveled += actualDistanceTraveled;
-			}
-
-			distanceError = distanceAbs - totalDistanceTraveled;
-
-			if (distanceError < PID_DRIVE_ERROR_THRESHOLD) {
-				done = true;
-			} else {
-				if (functionTimer.get() > timeout) {
-					done = true;
-				} else {
-					/**************************************************************
-					 * Add drif newHeading angle to account for drift
-					 **************************************************************/
-					if (driftError == 0.0) {
-						driftnewHeadingAngle = 0.0;
-					} else {
-						plannedTravelDistance = distanceTraveledL; // FIGURE OUT HOW TO CALCULATE LATER
-						// FOR NOW ASSUME IT WILL BE SAME AS LAST TIME SINCE SPEED IS CONSTANT
-
-						driftnewHeadingAngle = Math.asin( (cumulativeDriftError / plannedDistTraveled) * CatzConstants.DEG_TO_RAD);
-						driftnewHeadingAngle = driftnewHeadingAngle * CatzConstants.RAD_TO_DEG;
-					}
-
-					/**************************************************************
-					 * Calculate Heading Proportional Term Add driftnewHeadingAngle 
-					 * to delta Error to compensate for driftError
-					 **************************************************************/
-					deltaAngleError = (currentHeading - previousAngleError) + driftnewHeadingAngle;
-					previousAngleError = deltaAngleError;
-
-					/**************************************************************
-					 * Calculate Heading Derivative Term
-					 **************************************************************/
-					derivative = (PID_DRIVE_FILTER_CONSTANT * previousDerivative)
-							+ ((1 - PID_DRIVE_FILTER_CONSTANT) * (deltaAngleError / deltaTimeSec));
-					
-					// FILTER OUT INVALID VALUES
-					if(derivative == 0.0) {
-						derivative = previousDerivative;
-					}
-
-					previousDerivative = derivative;
-
-					/**************************************************************
-					 * Calculate new heading & Update drive settings.  newHeading
-					 * is a value between -1.0 (90 deg left) and +1.0 (90 deg right).
-					 * A value of 0.0 means go straight.
-					 **************************************************************/
-					turnValue = ((-PID_DRIVE_KP * deltaAngleError) + (PID_DRIVE_KD * derivative))/90.0;
-
-					CatzRobotMap.drive.arcadeDrive(power, turnValue);
-
-					printDebugData();
-					//Timer.delay(0.015);
-				}
-			}
-		}
-
-		/*************************************************************************
-		 * Brake using motors 
-		 *************************************************************************/
-		
-		if (power < 0.0) {
-			CatzRobotMap.drive.tankDrive(PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_POWER);
-		} else {
-			CatzRobotMap.drive.tankDrive(-PID_DRIVE_BRAKE_POWER, -PID_DRIVE_BRAKE_POWER);
-		}
-
-		Timer.delay(PID_DRIVE_BRAKE_TIME);
-		CatzRobotMap.drive.tankDrive(0.0, 0.0);
-	}
-
-	
 	public static void PIDDriveNoTrig(double drivePower, double distance, double timeoutSeconds) {
 		functionTimer = new Timer();
 		loopTimer     = new Timer();
@@ -305,6 +143,166 @@ public class CatzPIDDrive {
 
 	}
 	
+	public static void PIDDrive(double drivePower, double distance, double timeoutSeconds) {
+
+		boolean firstTime;
+		double deltaPulseCount;
+		double plannedDistTraveled = 0.0;
+		
+		functionTimer = new Timer();
+		loopTimer     = new Timer();
+
+		functionTimer.stop();
+		functionTimer.reset();
+		functionTimer.start();
+
+
+		distanceAbs = Math.abs(distance);
+		power = drivePower;
+
+		CatzRobotMap.wheelEncoderL.reset();
+		CatzRobotMap.wheelEncoderR.reset();
+		
+		CatzRobotMap.navx.reset();
+		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
+
+		previousAngleError = 0.0;
+		previousDerivative = 0.0;
+		prevEncoderPulseCountL = CatzRobotMap.wheelEncoderL.get();
+		prevEncoderPulseCountR = CatzRobotMap.wheelEncoderR.get();
+		cumulativeDriftError = 0.0;
+		totalDistanceTraveled = 0.0;
+
+		calcTimeout(power, distance, timeoutSeconds);
+
+
+		done = false;
+		firstTime = true;
+
+		printDebugInit();
+		printDebugHeader();
+		Timer.delay(0.015);
+
+		loopTimer.reset();
+		loopTimer.start();
+		
+
+		while (done == false) {
+			/**********************************************************************
+			 * Get Data Samples
+			 **********************************************************************/
+			encoderPulseCountL = CatzRobotMap.wheelEncoderL.get();
+			encoderPulseCountR = CatzRobotMap.wheelEncoderR.getDistance();
+			currentHeading     = CatzRobotMap.navx.getAngle();
+
+			deltaTimeSec = loopTimer.get();
+
+			loopTimer.stop();
+			loopTimer.reset();
+			loopTimer.start();
+
+			/**********************************************************************
+			 * Add code to deal with dead encoder???
+			 **********************************************************************/
+
+			/**********************************************************************
+			 * Calc Drift Values
+			 **********************************************************************/
+			deltaPulseCount = encoderPulseCountL - prevEncoderPulseCountL;
+			distanceTraveledL = deltaPulseCount * CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE;
+
+			deltaPulseCount = encoderPulseCountR - prevEncoderPulseCountR;
+			distanceTraveledR = deltaPulseCount * CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE;
+
+			prevEncoderPulseCountL = encoderPulseCountL;
+			prevEncoderPulseCountR = encoderPulseCountR;
+			
+			driftError = Math.sin(currentHeading * CatzConstants.DEG_TO_RAD) * CatzConstants.RAD_TO_DEG;
+			driftError = driftError * distanceTraveledL; //calculate error using left encoder only
+			
+			cumulativeDriftError = cumulativeDriftError + driftError;
+
+			/**********************************************************************
+			 * Calc Distance Traveled
+			 **********************************************************************/
+			if (currentHeading == 0.0) {
+				totalDistanceTraveled += distanceTraveledL;
+			} else {
+				actualDistanceTraveled = Math.abs(driftError / (Math.tan(currentHeading * CatzConstants.DEG_TO_RAD) * CatzConstants.RAD_TO_DEG) );
+
+				totalDistanceTraveled += actualDistanceTraveled;
+			}
+
+			distanceError = distanceAbs - totalDistanceTraveled;
+
+			if (distanceError < PID_DRIVE_ERROR_THRESHOLD) {
+				done = true;
+			} else {
+				if (functionTimer.get() > timeout) {
+					done = true;
+				} else {
+					/**************************************************************
+					 * Add drif newHeading angle to account for drift
+					 **************************************************************/
+					if (driftError == 0.0) {
+						driftnewHeadingAngle = 0.0;
+					} else {
+						plannedTravelDistance = distanceTraveledL; // FIGURE OUT HOW TO CALCULATE LATER
+						// FOR NOW ASSUME IT WILL BE SAME AS LAST TIME SINCE SPEED IS CONSTANT
+
+						driftnewHeadingAngle = Math.asin( (cumulativeDriftError / plannedDistTraveled) * CatzConstants.DEG_TO_RAD);
+						driftnewHeadingAngle = driftnewHeadingAngle * CatzConstants.RAD_TO_DEG;
+					}
+
+					/**************************************************************
+					 * Calculate Heading Proportional Term Add driftnewHeadingAngle 
+					 * to delta Error to compensate for driftError
+					 **************************************************************/
+					deltaAngleError = (currentHeading - previousAngleError) + driftnewHeadingAngle;
+					previousAngleError = deltaAngleError;
+
+					/**************************************************************
+					 * Calculate Heading Derivative Term
+					 **************************************************************/
+					derivative = (PID_DRIVE_FILTER_CONSTANT * previousDerivative)
+							+ ((1 - PID_DRIVE_FILTER_CONSTANT) * (deltaAngleError / deltaTimeSec));
+					
+					// FILTER OUT INVALID VALUES
+					if(derivative == 0.0) {
+						derivative = previousDerivative;
+					}
+
+					previousDerivative = derivative;
+
+					/**************************************************************
+					 * Calculate new heading & Update drive settings.  newHeading
+					 * is a value between -1.0 (90 deg left) and +1.0 (90 deg right).
+					 * A value of 0.0 means go straight.
+					 **************************************************************/
+					turnValue = ((-PID_DRIVE_KP * deltaAngleError) + (PID_DRIVE_KD * derivative))/90.0;
+
+					CatzRobotMap.drive.arcadeDrive(power, turnValue);
+
+					printDebugData();
+					//Timer.delay(0.015);
+				}
+			}
+		}
+
+		/*************************************************************************
+		 * Brake using motors 
+		 *************************************************************************/
+		
+		if (power < 0.0) {
+			CatzRobotMap.drive.tankDrive(PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_POWER);
+		} else {
+			CatzRobotMap.drive.tankDrive(-PID_DRIVE_BRAKE_POWER, -PID_DRIVE_BRAKE_POWER);
+		}
+
+		Timer.delay(PID_DRIVE_BRAKE_TIME);
+		CatzRobotMap.drive.tankDrive(0.0, 0.0);
+	}
+	
 	
 	
 
@@ -358,7 +356,7 @@ public class CatzPIDDrive {
 			System.out.print("encoderStraightDrive debug data\n");
 			System.out.print("timestamp,deltaTimeSec,encoderPulseCountL,encoderPulseCountR," +  
 					"distanceTraveledL, distanceTraveledR, actualDistanceTraveled, totalDistanceTraveled, distanceError," +
-					"driftError, cumulativeDriftError," + 
+					"driftError, cumulativeDriftError,driftnewHeadingAngle" + 
 					"deltaAngleError, derivative," +
 					"plannedTravelDistance,currentHeading, newHeading, power\n");
 		}

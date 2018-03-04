@@ -17,13 +17,15 @@ import robot.CatzRobotMap;
 
 public class CatzLift 
 {
-	/*need to acquire for final robot*/final static public double LIFT_SCALE_HEIGHT = 0.0;
-	/*need to acquire for final robot*/final static public double LIFT_SWITCH_HEIGHT = 0.0;
-	/*need to acquire for final robot*/public static final double LIFTER_ERROR_THRESHOLD_PULSES = 10;
-	/*need to acquire for final robot*/final static public double LIFT_SPEED = .7;
+	/*need to acquire for final robot*/final static public double LIFT_SCALE_HEIGHT = 414762.0;
+	/*need to acquire for final robot*/final static public double LIFT_SWITCH_HEIGHT = 120930.0;
+	/*need to acquire for final robot*/public static final double LIFTER_ERROR_THRESHOLD_PULSES = 60;
+	/*need to acquire for final robot*/final static public double LIFT_SPEED = .5;
 	public static final double INITIAL_LIFTER_ERROR = 1000;
+	private boolean readyToLift;
 	
 	public CatzLift() {
+		readyToLift = true;
 		printOutDebugData("Successfully initialized CatzLift");
 	}
 	
@@ -31,17 +33,20 @@ public class CatzLift
 		Thread t = new Thread(() -> {
             double error=INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-				while(error>LIFTER_ERROR_THRESHOLD_PULSES) {
-	            	if(CatzRobotMap.liftEncoder.get() < LIFT_SWITCH_HEIGHT)
-	        			this.liftUp();
-	        		else if(CatzRobotMap.liftEncoder.get() > LIFT_SWITCH_HEIGHT)
-	        			this.liftDown();
-	        		else
-	        			this.stopLift();
-	            	error = Math.abs(CatzRobotMap.liftEncoder.get()-LIFT_SWITCH_HEIGHT);
+				if(CatzRobotMap.liftEncoder.get()>30) {
+					System.out.println("ERROR: Lifter must be set at bottom position to run Thread");
+				} else {
+					while(error>LIFTER_ERROR_THRESHOLD_PULSES) {
+		            	if(CatzRobotMap.liftEncoder.get() < LIFT_SWITCH_HEIGHT)
+		        			this.liftUp();
+		        		else
+		        			this.stopLift();
+		            	error = Math.abs(CatzRobotMap.liftEncoder.get()-LIFT_SWITCH_HEIGHT);
+					}
+					this.stopLift();
+					readyToLift = false;
+					printOutDebugData("Lift to switch height thread complete");
 				}
-				this.stopLift();
-				printOutDebugData("Lift to switch height thread complete");
 				Thread.currentThread().interrupt();
             }
         });
@@ -53,17 +58,20 @@ public class CatzLift
 		Thread t = new Thread(() -> {
             double error=INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-				while(error>LIFTER_ERROR_THRESHOLD_PULSES) {
-	            	if(CatzRobotMap.liftEncoder.get() < LIFT_SCALE_HEIGHT)
-	        			this.liftUp();
-	        		else if(CatzRobotMap.liftEncoder.get() > LIFT_SCALE_HEIGHT)
-	        			this.liftDown();
-	        		else
-	        			this.stopLift();
-	            	error = Math.abs(CatzRobotMap.liftEncoder.get()-LIFT_SCALE_HEIGHT);
+				if(CatzRobotMap.liftEncoder.get()>30 || readyToLift == false) {
+					System.out.println("ERROR: Lifter must be set at bottom position to run Thread");
+				} else {
+					while(error>LIFTER_ERROR_THRESHOLD_PULSES) {
+		            	if(CatzRobotMap.liftEncoder.get() < LIFT_SCALE_HEIGHT)
+		        			this.liftUp();
+		        		else
+		        			this.stopLift();
+		            	error = Math.abs(CatzRobotMap.liftEncoder.get()-LIFT_SCALE_HEIGHT);
+					}
+					this.stopLift();
+					readyToLift = false;
+					printOutDebugData("Lift to scale height thread complete");
 				}
-				this.stopLift();
-				printOutDebugData("Lift to scale height thread complete");
 				Thread.currentThread().interrupt();
             }
         });
@@ -82,6 +90,7 @@ public class CatzLift
 	            	error = Math.abs(CatzRobotMap.liftEncoder.get());
 				}
 				this.stopLift();
+				readyToLift = true;
 				printOutDebugData("Lift to scale height thread complete");
 				Thread.currentThread().interrupt();
             }

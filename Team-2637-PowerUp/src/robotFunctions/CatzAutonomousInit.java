@@ -31,8 +31,9 @@ public class CatzAutonomousInit {
 		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
 		//choosePathDouble();
 		//setMechanisms();
-		choosePath();
+		//choosePath();
 		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
+		CatzRobotMap.lift.liftToSwitchHeight();
 		CatzPIDDrive.PIDDriveNoTrig(.6, 96, 8);
 		//CatzPIDDrive.PIDDrive(.4, 48, 8);
 	}
