@@ -33,10 +33,8 @@ public class CatzRobotInit
 	public static void runRobotInit() 
 	{
 		CatzRobotMap.instantiateRobot();
-		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
-
 		setSmartDashboard();
-
+		//cameraSetup();
 		//CatzPIDDrive.PIDDrive(0.7, 48, 10);
 	}
 	

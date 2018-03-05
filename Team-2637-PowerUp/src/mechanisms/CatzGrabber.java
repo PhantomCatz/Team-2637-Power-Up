@@ -22,8 +22,8 @@ import robot.CatzRobotMap;
 
 public class CatzGrabber 
 {
-	static public boolean bicepRetracted = true;
-	static public boolean forearmClosed = true;
+	static public boolean bicepDeployed = false;
+	static public boolean forearmOpen = false;
 	
 	public CatzGrabber() {
 		printOutDebugData("Successfully initialized CatzGrabber");
@@ -36,21 +36,21 @@ public class CatzGrabber
 	}
 	
 	public void closeForearm() {
-		forearmClosed = false;
-		CatzRobotMap.intakeForearm.set(forearmClosed);
+		forearmOpen = false;
+		CatzRobotMap.intakeForearm.set(forearmOpen);
 		printOutDebugData("Grabber forearm set to Closed");
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 
 	public void openForearm() {
-		forearmClosed = true;
-		CatzRobotMap.intakeForearm.set(forearmClosed);
+		forearmOpen = true;
+		CatzRobotMap.intakeForearm.set(forearmOpen);
 		printOutDebugData("Grabber forearm set to Open");
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 	
 	public void toggleForearm() {
-		if(forearmClosed == true) {
+		if(forearmOpen == true) {
 			this.closeForearm();
 		}
 		else{
@@ -60,15 +60,15 @@ public class CatzGrabber
 	}
 
 	public void deployBicep() { 
-		bicepRetracted = true;
-		CatzRobotMap.intakeBicep.set(bicepRetracted);
+		bicepDeployed = true;
+		CatzRobotMap.intakeBicep.set(bicepDeployed);
 		printOutDebugData("Grabber Bicep set to Deploy");
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 
 	public void retractBicep() {
-		bicepRetracted = false;
-		CatzRobotMap.intakeBicep.set(bicepRetracted);
+		bicepDeployed = false;
+		CatzRobotMap.intakeBicep.set(bicepDeployed);
 		printOutDebugData("Grabber forearm set to Retract");
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
@@ -90,6 +90,12 @@ public class CatzGrabber
 		this.openForearm();
 	}
 	public void shootCube()
+	{
+		this.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
+		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
+		this.setIntakeSpeed(0.0);
+	}
+	public void placeCube()
 	{
 		this.deployBicep();
 		this.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);

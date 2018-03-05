@@ -72,8 +72,10 @@ public class CatzRobotPeriodic
 		SmartDashboard.putNumber("Value of Right Encoder", CatzRobotMap.wheelEncoderR.get());
 		SmartDashboard.putNumber("Value of lifter Encoder",CatzRobotMap.liftEncoder.get());
 		
-		SmartDashboard.putBoolean("Graber Forearms Open", CatzGrabber.forearmClosed);
-		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzGrabber.bicepRetracted);
+		SmartDashboard.putBoolean("Graber Forearms Open", CatzGrabber.forearmOpen);
+		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzGrabber.bicepDeployed);
+		
+		SmartDashboard.putBoolean("Lifter Limited", CatzRobotMap.lifterLimit.get());
 		
 	}
 	

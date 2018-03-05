@@ -58,11 +58,15 @@ public class CatzRobotMap
 	public static Solenoid intakeForearm;
 	public static Solenoid intakeBicep;
 	
+	public static DigitalInput lifterLimit;
+	
 	public static DecimalFormat secondsFormat;
 
 	public static boolean debugMode = true;
 	public static boolean usingCubeee = false;
 	public static boolean using2ndBot = true;
+	
+
 	//public static CatzLogger logger;
 	
 	//public  Lidar lidar;
@@ -119,7 +123,7 @@ public class CatzRobotMap
 			lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
 			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
 		}
-		
+		lifterLimit = new DigitalInput(6);
 
 		if(using2ndBot) {
 			intakeRight   = new Spark (7);

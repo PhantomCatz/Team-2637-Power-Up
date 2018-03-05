@@ -29,6 +29,13 @@ public class CatzLift
 		printOutDebugData("Successfully initialized CatzLift");
 	}
 	
+	
+	/**
+	 * liftingTo____Height:
+	 * The three methods below will move the lifter to the desired height
+	 * in parallel with other code. For example, you can run one of these 
+	 * lift loops and drive/turn at the same time by using threading.
+	 */
 	public void liftToSwitchHeight(){
 		Thread t = new Thread(() -> {
             double error=INITIAL_LIFTER_ERROR;
@@ -80,19 +87,23 @@ public class CatzLift
 	
 	public void dropToGroundHeight(){
 		Thread t = new Thread(() -> {
-            double error=INITIAL_LIFTER_ERROR;
+            
 			while (!Thread.interrupted()) {
+				
+	            double initialReading = CatzRobotMap.liftEncoder.get();
+	            double target = initialReading*2;
+	            double error = target - initialReading;
+	            
 				while(error>LIFTER_ERROR_THRESHOLD_PULSES) {
-	            	if(CatzRobotMap.liftEncoder.get() > 0)
-	        			this.liftDown();
-	        		else
-	        			this.stopLift();
-	            	error = Math.abs(CatzRobotMap.liftEncoder.get());
+	        		this.liftDown();
+	            	error = target - CatzRobotMap.liftEncoder.get();
 				}
+				
 				this.stopLift();
 				readyToLift = true;
-				printOutDebugData("Lift to scale height thread complete");
+				printOutDebugData("Drop to ground thread complete");
 				Thread.currentThread().interrupt();
+				
             }
         });
         t.start();
@@ -103,6 +114,8 @@ public class CatzLift
 	/*need to acquire for final robot*/static public double PID_LIFT_KD = 0.008;  //0.0744
 	/*need to acquire for final robot*/static public double PID_LIFT_KI = 0.0;
 	/*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;    //0.7;
+	
+	
 	/*
 	public void liftToScaleHeight2(){
 		

@@ -58,8 +58,25 @@ public class CatzTeleopPeriodic
 	}
 	private static void runLiftControls()
 	{
-		CatzRobotMap.lifterL.set(CatzRobotMap.xboxAux.getLeftStickY());
-		CatzRobotMap.lifterR.set(CatzRobotMap.xboxAux.getLeftStickY());
+		
+		/**
+		 * if lifter limit is activated, only have the ability to move lifter down
+		 * Aux controller X button overrides the limit switch
+		 */
+		if(CatzRobotMap.xboxAux.getXButton()==true){
+			CatzRobotMap.lifterL.set(CatzRobotMap.xboxAux.getLeftStickY());
+			CatzRobotMap.lifterR.set(CatzRobotMap.xboxAux.getLeftStickY());
+		} else {
+			if(CatzRobotMap.lifterLimit.get()==false) {
+				CatzRobotMap.lifterL.set(CatzRobotMap.xboxAux.getLeftStickY());
+				CatzRobotMap.lifterR.set(CatzRobotMap.xboxAux.getLeftStickY());
+			} else {
+				if(CatzRobotMap.xboxAux.getLeftStickY()<=.01) {
+					CatzRobotMap.lifterL.set(CatzRobotMap.xboxAux.getLeftStickY());
+					CatzRobotMap.lifterR.set(CatzRobotMap.xboxAux.getLeftStickY());
+				}	
+			}
+		}
 	}
 	private static void runClimberControls()
 	{

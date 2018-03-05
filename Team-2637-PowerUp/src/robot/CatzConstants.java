@@ -68,8 +68,8 @@ public class CatzConstants
 	
 	final static public double FUNCTION_EXECUTION_DELAY = 0.1;
 	
-	/*need to acquire for final robot*/final static public double PID_TURN_TIMEOUT = 3.0;
-	/*need to acquire for final robot*/final static public double PID_DRIVE_TIMEOUT = 5.0;
+	/*need to acquire for final robot*/final static public double PID_TURN_TIMEOUT = 1.5;
+	/*need to acquire for final robot*/final static public double PID_DRIVE_TIMEOUT = 2.0;
 	
 	
 	final static public double ROBOT_WIDTH = 34.0;
@@ -78,7 +78,7 @@ public class CatzConstants
 	final static public double HALF_ROBOT_WIDTH = ROBOT_WIDTH/2;
 
 	/*need to acquire for final robot*/final static public double CLIMB_SPEED = 0;
-	/*need to acquire for final robot*/final static public double INTAKE_SPEED = 0.7;	
+	/*need to acquire for final robot*/final static public double INTAKE_SPEED = 1.0;	
 	
 	final static public String POSITION_SELECTORL = "Position Left";
 	final static public String POSITION_SELECTORM = "Position Mid";
@@ -94,7 +94,7 @@ public class CatzConstants
 	final static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
 
 	final static public double CUBE_OUTTAKE_WAIT_TIME = 0.2;
-	final static public double CUBE_INTAKE_WAIT_TIME = 0.2;
+	final static public double CUBE_INTAKE_WAIT_TIME = 0.4;
 	
 	final static public double DEG_TO_RAD = Math.PI/180.0;
 	final static public double RAD_TO_DEG = 180.0/Math.PI;

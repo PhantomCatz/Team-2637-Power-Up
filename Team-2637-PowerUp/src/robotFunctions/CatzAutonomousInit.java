@@ -27,15 +27,14 @@ public class CatzAutonomousInit {
 	
 	public static void runAutonomousInit()
 	{
-		//CatzRobotMap.lift.liftToScaleHeight();
-		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
+
 		//choosePathDouble();
-		//setMechanisms();
-		//choosePath();
-		//CatzPIDTurn.PIDturn(45, CatzConstants.DEF_VALUE);
-		CatzRobotMap.lift.liftToSwitchHeight();
-		CatzPIDDrive.PIDDriveNoTrig(.6, 96, 8);
-		//CatzPIDDrive.PIDDrive(.4, 48, 8);
+		CatzPIDDrive.setDebugModeEnabled(true);
+		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
+		setMechanisms();
+		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
+		choosePath();
+		
 	}
 
 	
@@ -58,20 +57,20 @@ public class CatzAutonomousInit {
 			
 			if(gameData.charAt(1)=='R') {
 				printOutDebugData("left_RRR");
-			//	CatzAutonomousMiddlePaths.left_XRX();
+				CatzAutonomousMiddlePaths.left_XRX();
 			} else if (gameData.charAt(1)=='L') {
 				printOutDebugData("left_RLR");
-			//	CatzAutonomousMiddlePaths.left_XLX();
+				CatzAutonomousMiddlePaths.left_XLX();
 			} 
 		  
 		} else if (gameData.charAt(0) == 'L') {
 		    	
 			if (gameData.charAt(1)=='R') {
 		    	printOutDebugData("left_LRL");
-		    //	CatzAutonomousMiddlePaths.left_XRX();
+		    	CatzAutonomousMiddlePaths.left_XRX();
 		    } else if (gameData.charAt(1) == 'L') {
 		    	printOutDebugData("left_LLL");
-		    //	CatzAutonomousMiddlePaths.left_XLX();
+		    	CatzAutonomousMiddlePaths.left_XLX();
 		    }
 			
 		}
@@ -82,20 +81,20 @@ public class CatzAutonomousInit {
 				
 				if (gameData.charAt(1) == 'L') {
 					printOutDebugData("middle_LLL");
-			//		CatzAutonomousMiddlePaths.middleSingle_LXX();
+					CatzAutonomousMiddlePaths.middleSingle_LXX();
 				} else if (gameData.charAt(1) == 'R') {
 					printOutDebugData("middle_LRL");
-				//	CatzAutonomousMiddlePaths.middleSingle_LXX();
+					CatzAutonomousMiddlePaths.middleSingle_LXX();
 				}
 				
 			} else if (gameData.charAt(0) == 'R') {
 				
 				if (gameData.charAt(1) == 'R') {
 					printOutDebugData("middle_RRR");
-				//	CatzAutonomousMiddlePaths.middleSingle_RXX();
+					CatzAutonomousMiddlePaths.middleSingle_RXX();
 				} else if (gameData.charAt(1) == 'L') {
 					printOutDebugData("middle_RLR");
-				//	CatzAutonomousMiddlePaths.middleSingle_RXX();
+					CatzAutonomousMiddlePaths.middleSingle_RXX();
 				} 
 			}
 			
@@ -241,6 +240,12 @@ public class CatzAutonomousInit {
 			double currentTime = CatzRobotMap.globalTimer.get();
 			System.out.println(currentTime + "  -" + info);
 		}
+	}
+	
+	public static void setMechanisms() {
+
+		CatzRobotMap.grabber.closeForearm();
+		CatzRobotMap.grabber.retractBicep();
 	}
 
 }

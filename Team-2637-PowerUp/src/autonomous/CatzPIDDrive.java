@@ -11,21 +11,21 @@ public class CatzPIDDrive {
 	/****************************************************************************
 	 * PID Drive Constants
 	 ****************************************************************************/
-	final static private double PID_DRIVE_SHORT_DIST = 48.0; // 4 ft
-	final static private double PID_DRIVE_MEDIUM_DIST = 144.0; // 12 ft
+	private final static double PID_DRIVE_SHORT_DIST = 48.0; // 4 ft
+	private final static double PID_DRIVE_MEDIUM_DIST = 144.0; // 12 ft
 
-	final static private double PID_DRIVE_TIMEOUT_SHORT_DIST = 3.0; // SHOULD CREATE A METHOD BASED ON SPEED & DISTANCE
-	final static private double PID_DRIVE_TIMEOUT_MED_DIST = 10.0;
-	final static private double PID_DRIVE_MAX_TIMEOUT = 20.0;
+	private final static double PID_DRIVE_TIMEOUT_SHORT_DIST = 3.0; // SHOULD CREATE A METHOD BASED ON SPEED & DISTANCE
+	private final static double PID_DRIVE_TIMEOUT_MED_DIST = 10.0;
+	private final static double PID_DRIVE_MAX_TIMEOUT = 20.0;
 
 	final static double PID_DRIVE_ERROR_THRESHOLD = 1.0; // Stop within 1 inch
 
-	final static private double PID_DRIVE_KP = 0.15; //originally .15
-	final static private double PID_DRIVE_KD = 0.005; // ORIGINALLY .18
+	private final static double PID_DRIVE_KP = 0.15; //originally .15
+	private final static double PID_DRIVE_KD = 0.005; // ORIGINALLY .18
 
 	static private double PID_DRIVE_BRAKE_POWER = 0.43;
-	final static private double PID_DRIVE_BRAKE_TIME = 0.25;
-	private static final double PID_DRIVE_FILTER_CONSTANT = .5;
+	private final static double PID_DRIVE_BRAKE_TIME = 0.25;
+	private final static double PID_DRIVE_FILTER_CONSTANT = .5;
 
 	/****************************************************************************
 	 * PID Drive Variables
@@ -33,7 +33,7 @@ public class CatzPIDDrive {
 	private static Timer functionTimer;
 	private static Timer loopTimer;
 
-	private static boolean debugMode = true;
+	private static boolean debugMode = false;
 	private static boolean done = false;
 
 	private static double power;
@@ -80,8 +80,8 @@ public class CatzPIDDrive {
 
 		CatzRobotMap.wheelEncoderL.reset();
 		CatzRobotMap.wheelEncoderR.reset();
-		
 		CatzRobotMap.navx.reset();
+		
 		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
 
 		previousAngleError = 0.0;
@@ -114,7 +114,7 @@ public class CatzPIDDrive {
 							+ ((1 - PID_DRIVE_FILTER_CONSTANT) * (currentHeading / deltaTimeSec));
 					
 					// FILTER OUT INVALID VALUES
-					if(derivative == 0.0) {
+					if(derivative == 0.0 || deltaTimeSec == 0.0) {
 						derivative = previousDerivative;
 					}
 
@@ -147,7 +147,6 @@ public class CatzPIDDrive {
 
 		boolean firstTime;
 		double deltaPulseCount;
-		double plannedDistTraveled = 0.0;
 		
 		functionTimer = new Timer();
 		loopTimer     = new Timer();
@@ -250,8 +249,12 @@ public class CatzPIDDrive {
 						plannedTravelDistance = distanceTraveledL; // FIGURE OUT HOW TO CALCULATE LATER
 						// FOR NOW ASSUME IT WILL BE SAME AS LAST TIME SINCE SPEED IS CONSTANT
 
-						driftnewHeadingAngle = Math.asin( (cumulativeDriftError / plannedDistTraveled) * CatzConstants.DEG_TO_RAD);
-						driftnewHeadingAngle = driftnewHeadingAngle * CatzConstants.RAD_TO_DEG;
+						if (plannedTravelDistance == 0.0) {
+							driftnewHeadingAngle = 0.0;
+						} else {
+							driftnewHeadingAngle = Math.asin( (cumulativeDriftError / plannedTravelDistance) * CatzConstants.DEG_TO_RAD);
+							driftnewHeadingAngle = driftnewHeadingAngle * CatzConstants.RAD_TO_DEG;
+						}
 					}
 
 					/**************************************************************
@@ -356,9 +359,9 @@ public class CatzPIDDrive {
 			System.out.print("encoderStraightDrive debug data\n");
 			System.out.print("timestamp,deltaTimeSec,encoderPulseCountL,encoderPulseCountR," +  
 					"distanceTraveledL, distanceTraveledR, actualDistanceTraveled, totalDistanceTraveled, distanceError," +
-					"driftError, cumulativeDriftError,driftnewHeadingAngle" + 
+					"driftError, cumulativeDriftError,driftnewHeadingAngle," + 
 					"deltaAngleError, derivative," +
-					"plannedTravelDistance,currentHeading, newHeading, power\n");
+					"plannedTravelDistance,currentHeading, turnValue, power\n");
 		}
 	}
 
