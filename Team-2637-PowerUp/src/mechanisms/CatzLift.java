@@ -55,6 +55,7 @@ public class CatzLift
 					printOutDebugData("Lift to switch height thread complete");
 				}
 				Thread.currentThread().interrupt();
+
             }
         });
         t.start();

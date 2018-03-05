@@ -46,7 +46,7 @@ public class CatzPIDTurn
 	final static public double PID_TURN_INTEGRAL_MAX =  1.0;
 	final static public double PID_TURN_INTEGRAL_MIN = -1.0;
 
-	final public static double PID_TURN_MIN_POS_POWER =  0.4;     //0.4 is min power to move robot when it is stopped
+	final public static double PID_TURN_MIN_POS_POWER =  0.45;     //0.4 is min power to move robot when it is stopped
 	final public static double PID_TURN_MIN_NEG_POWER = -PID_TURN_MIN_POS_POWER;
 
 

@@ -63,9 +63,9 @@ public class CatzAutonomousMiddlePaths {
 		CatzPIDDrive.PIDDriveNoTrig(.6, (36 - CatzConstants.HALF_ROBOT_LENGTH), 5);  //Leaves the wall and drives to the switch
 		
 		if(side.equalsIgnoreCase("left")) {
-			CatzPIDTurn.PIDturn(-45, 2.5); 
+			CatzPIDTurn.PIDturn(-45, 1.5); 
 		} else {
-			CatzPIDTurn.PIDturn(45, 2.5);
+			CatzPIDTurn.PIDturn(45, 1.5);
 		}
 
 		CatzPIDDrive.PIDDriveNoTrig(.6, 72,5);  //Turns 45deg left and approaches the switch
@@ -77,10 +77,10 @@ public class CatzAutonomousMiddlePaths {
 		}
 		
 		
-		//CatzRobotMap.lift.liftToSwitchHeight();  //not needed to get cube into switch
+		CatzRobotMap.lift.liftToSwitchHeight();  //not needed to get cube into switch
 		System.out.println("I am in the path");
 		
-		CatzPIDDrive.PIDDriveNoTrig(.6, (40 - CatzConstants.HALF_ROBOT_LENGTH), 3); //Turns 45deg right and presses against the switch
+		CatzPIDDrive.PIDDriveNoTrig(.6, (37 - CatzConstants.HALF_ROBOT_LENGTH), 3); //Turns 45deg right and presses against the switch
 		
 		CatzRobotMap.grabber.shootCube();  //Fires cube into the switch
 			

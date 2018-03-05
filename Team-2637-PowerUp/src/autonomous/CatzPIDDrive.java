@@ -21,7 +21,7 @@ public class CatzPIDDrive {
 	final static double PID_DRIVE_ERROR_THRESHOLD = 1.0; // Stop within 1 inch
 
 	private final static double PID_DRIVE_KP = 0.15; //originally .15
-	private final static double PID_DRIVE_KD = 0.005; // ORIGINALLY .18
+	private final static double PID_DRIVE_KD = 0.0; // ORIGINALLY .18
 
 	static private double PID_DRIVE_BRAKE_POWER = 0.43;
 	private final static double PID_DRIVE_BRAKE_TIME = 0.25;
