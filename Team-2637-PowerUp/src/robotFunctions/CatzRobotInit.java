@@ -35,7 +35,6 @@ public class CatzRobotInit
 		CatzRobotMap.instantiateRobot();
 		setSmartDashboard();
 		//cameraSetup();
-		//CatzPIDDrive.PIDDrive(0.7, 48, 10);
 	}
 	
 	public static void setSmartDashboard() {

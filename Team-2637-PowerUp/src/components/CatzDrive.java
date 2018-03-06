@@ -37,7 +37,7 @@ public class CatzDrive
 	}
 	public void setModeReverseArcadeDriveFlash(CatzXboxController control){
 		//logger.add(NAME, "Arcade Drive set to Flash.", CatzConstants.LEVEL5, timer.get());
-		drive.arcadeDrive(-control.getLeftStickY(), -control.getRightStickX());
+		drive.arcadeDrive(-control.getLeftStickY(), control.getRightStickX());
 	}
 	
 	public void tankDrive(double lPower, double rPower){
