@@ -121,13 +121,15 @@ public class CatzAutonomousMiddlePaths {
 		CatzPIDDrive.PIDDriveNoTrig(.5, 41.88,
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives forward to face the scale
 	
-		CatzRobotMap.grabber.placeCube();  //Fires cube into the scale
+		CatzRobotMap.grabber.shootCube();  //Fires cube into the scale
 	
 		Timer.delay(2);
 	
 		CatzRobotMap.lift.dropToGroundHeight();  //waits for 2sec then drops to ground height
+		
+		CatzPIDDrive.PIDDriveNoTrig(-0.5, 45 - CatzConstants.ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT);
 	
-		if(side.equalsIgnoreCase("left")) {
+	/*	if(side.equalsIgnoreCase("left")) {
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 		} else {
 			CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT);
@@ -148,7 +150,7 @@ public class CatzAutonomousMiddlePaths {
 		CatzPIDDrive.PIDDriveNoTrig(.5, (12 - CatzConstants.HALF_ROBOT_LENGTH),
 				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns left and presses against cube
 
-		CatzRobotMap.grabber.intakeCube();  //Intakes the cube
+		CatzRobotMap.grabber.intakeCube();  //Intakes the cube */
 
 	}
 
