@@ -2,6 +2,7 @@ package robotFunctions;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import mechanisms.CatzGrabber;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
 
@@ -41,16 +42,27 @@ public class CatzTeleopPeriodic
 	{
 		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger()-CatzRobotMap.xboxDrive.getLeftTrigger());
 		
-		if(CatzRobotMap.xboxAux.getRightBumper()){
-			CatzRobotMap.grabber.deployBicep();
+		if(CatzGrabber.forearmOpen==false) { //only control the biceps if the forearms are closed
+			if(CatzRobotMap.xboxAux.getRightBumper()){
+				CatzRobotMap.grabber.deployBicep();
+			}								//if forearms are open and biceps are moved, a leak occurs
+			else if(CatzRobotMap.xboxAux.getLeftBumper()) {
+				CatzRobotMap.grabber.retractBicep();
+			}
 		}
 		
-		if(CatzRobotMap.xboxAux.getLeftBumper()) {
+		if(CatzRobotMap.xboxAux.getAButton()==true) {
 			CatzRobotMap.grabber.retractBicep();
+			CatzRobotMap.grabber.openForearm();
 		}
 		
 		if(CatzRobotMap.xboxDrive.getAButton()){
 			CatzRobotMap.grabber.toggleForearm();
+		}
+		
+		if(CatzRobotMap.xboxDrive.getXButton()){
+			CatzRobotMap.grabber.openForearm(0.0);
+			CatzRobotMap.grabber.deployBicep();
 		}
 		
 		if(CatzRobotMap.xboxAux.getBButton()) {

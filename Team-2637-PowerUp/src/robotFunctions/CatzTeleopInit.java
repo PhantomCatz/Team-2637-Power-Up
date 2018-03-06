@@ -8,7 +8,7 @@ public class CatzTeleopInit
 {
 	public static void runTeleopInit()
 	{
-		setMechanisms();
+		//setMechanisms();
 		
 	}
 	public static void setMechanisms() {

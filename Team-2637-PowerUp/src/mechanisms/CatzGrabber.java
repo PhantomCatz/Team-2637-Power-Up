@@ -49,6 +49,13 @@ public class CatzGrabber
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 	
+	public void openForearm(double delaySec) {
+		forearmOpen = true;
+		CatzRobotMap.intakeForearm.set(forearmOpen);
+		printOutDebugData("Grabber forearm set to Open");
+		Timer.delay(delaySec);
+	}
+	
 	public void toggleForearm() {
 		if(forearmOpen == true) {
 			this.closeForearm();
