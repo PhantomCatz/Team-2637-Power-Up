@@ -14,6 +14,7 @@ import autonomous.CatzPIDTurn;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import mechanisms.CatzLift;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
 
@@ -30,10 +31,11 @@ public class CatzAutonomousInit {
 
 		//choosePathDouble();
 		CatzPIDDrive.setDebugModeEnabled(true);
-		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
+		//CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
 		setMechanisms();
 		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
-		choosePath();
+		CatzRobotMap.lift.liftToScaleHeight();
+		//choosePath();
 		
 	}
 
@@ -243,7 +245,7 @@ public class CatzAutonomousInit {
 	}
 	
 	public static void setMechanisms() {
-
+		CatzRobotMap.navx.reset();
 		CatzRobotMap.grabber.closeForearm();
 		CatzRobotMap.grabber.retractBicep();
 	}

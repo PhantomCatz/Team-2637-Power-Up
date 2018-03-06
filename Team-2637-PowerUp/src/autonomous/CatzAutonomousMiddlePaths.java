@@ -1,7 +1,9 @@
 package autonomous;
 
 import edu.wpi.first.wpilibj.Timer;
+import mechanisms.CatzClimber;
 import mechanisms.CatzGrabber;
+import mechanisms.CatzLift;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
 
@@ -81,7 +83,6 @@ public class CatzAutonomousMiddlePaths {
 		
 		
 		CatzRobotMap.lift.liftToSwitchHeight();  //not needed to get cube into switch
-		System.out.println("I am in the path");
 		
 		CatzPIDDrive.PIDDriveNoTrig(.6, (37 - CatzConstants.HALF_ROBOT_LENGTH), 1); //Turns 45deg right and presses against the switch
 		
@@ -97,6 +98,7 @@ public class CatzAutonomousMiddlePaths {
 		scalePath("right");    
 	}
 	
+	static Timer t = new Timer();
 	public static void scalePath (String side) {
 		
 		/************************************
@@ -106,20 +108,24 @@ public class CatzAutonomousMiddlePaths {
 		 * Picks up cube
 		 ***********************************/
 		
-		CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving?
 		
-		CatzPIDDrive.PIDDriveNoTrig(.5, (335.65 - CatzConstants.HALF_ROBOT_LENGTH),
-				CatzConstants.PID_DRIVE_TIMEOUT);  //Drives all the way to the scale
-
+		CatzPIDDrive.PIDDriveNoTrig(.7, (301.65 - CatzConstants.HALF_ROBOT_LENGTH),20);  //Drives all the way to the scale
+		CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving?
 		if (side.equalsIgnoreCase("left")) {
 			CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 		} else {
 			CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT);
 		}
 		
+		t.start();
+		while(CatzLift.readyToLift==true&&t.get()<4) {
+			//do nothing
+		}
+		t.stop();
+		t.reset();
+
 	
-		CatzPIDDrive.PIDDriveNoTrig(.5, 41.88,
-				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives forward to face the scale
+		CatzPIDDrive.PIDDriveNoTrig(.5, 10.88,5);  //Turns 90deg right and drives forward to face the scale
 	
 		CatzRobotMap.grabber.shootCube();  //Fires cube into the scale
 	
@@ -207,6 +213,13 @@ public class CatzAutonomousMiddlePaths {
 			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and aligns with scale
 	  
 	    CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale
+	    
+		t.start();
+		while(CatzLift.readyToLift==true&&t.get()<5) {
+			//do nothing
+		}
+		t.stop();
+		t.reset();
 
 		CatzRobotMap.grabber.shootCube();  //Fires cube onto the scale
 	  }

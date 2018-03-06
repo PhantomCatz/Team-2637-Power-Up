@@ -32,7 +32,9 @@ public class CatzRobotInit
 	
 	public static void runRobotInit() 
 	{
+
 		CatzRobotMap.instantiateRobot();
+		CatzRobotMap.liftEncoder.reset();
 		setSmartDashboard();
 		//cameraSetup();
 	}

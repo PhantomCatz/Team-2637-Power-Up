@@ -1,5 +1,6 @@
 package mechanisms;
 
+import edu.wpi.first.wpilibj.Timer;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
 
@@ -17,12 +18,13 @@ import robot.CatzRobotMap;
 
 public class CatzLift 
 {
-	/*need to acquire for final robot*/final static public double LIFT_SCALE_HEIGHT = 414762.0;
-	/*need to acquire for final robot*/final static public double LIFT_SWITCH_HEIGHT = 120930.0;
-	/*need to acquire for final robot*/public static final double LIFTER_ERROR_THRESHOLD_PULSES = 60;
-	/*need to acquire for final robot*/final static public double LIFT_SPEED = .5;
-	public static final double INITIAL_LIFTER_ERROR = 1000;
-	private boolean readyToLift;
+	/*need to acquire for final robot*/final static private double LIFT_SCALE_HEIGHT = 414762.0;
+	/*need to acquire for final robot*/final static private double LIFT_SWITCH_HEIGHT = 120930.0;
+	/*need to acquire for final robot*/private static final double LIFTER_ERROR_THRESHOLD_PULSES = 60;
+	/*need to acquire for final robot*/final static private double LIFT_SPEED = 1;
+	private static final double INITIAL_LIFTER_ERROR = 1000;
+	public static boolean readyToLift;
+	private static Timer timeout = new Timer();
 	
 	public CatzLift() {
 		readyToLift = true;
@@ -40,10 +42,15 @@ public class CatzLift
 		Thread t = new Thread(() -> {
             double error=INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-				if(CatzRobotMap.liftEncoder.get()>30) {
-					System.out.println("ERROR: Lifter must be set at bottom position to run Thread");
+
+				if(CatzRobotMap.liftEncoder.get()>60 || readyToLift == false) {
+					printOutDebugData(String.valueOf(readyToLift));
+					printOutDebugData(String.valueOf(CatzRobotMap.liftEncoder.get()));
+					printOutDebugData("ERROR: Lifter must be set at bottom position to run Thread");
 				} else {
-					while(error>LIFTER_ERROR_THRESHOLD_PULSES) {
+					timeout.start();
+					printOutDebugData("Lifter thread beginning");
+					while(error>LIFTER_ERROR_THRESHOLD_PULSES && timeout.get()<6) {
 		            	if(CatzRobotMap.liftEncoder.get() < LIFT_SWITCH_HEIGHT)
 		        			this.liftUp();
 		        		else
@@ -51,6 +58,8 @@ public class CatzLift
 		            	error = Math.abs(CatzRobotMap.liftEncoder.get()-LIFT_SWITCH_HEIGHT);
 					}
 					this.stopLift();
+					timeout.stop();
+					timeout.reset();
 					readyToLift = false;
 					printOutDebugData("Lift to switch height thread complete");
 				}
@@ -66,10 +75,14 @@ public class CatzLift
 		Thread t = new Thread(() -> {
             double error=INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-				if(CatzRobotMap.liftEncoder.get()>30 || readyToLift == false) {
-					System.out.println("ERROR: Lifter must be set at bottom position to run Thread");
+				if(CatzRobotMap.liftEncoder.get()>60 || readyToLift == false) {
+					printOutDebugData(String.valueOf(readyToLift));
+					printOutDebugData(String.valueOf(CatzRobotMap.liftEncoder.get()));
+					printOutDebugData("ERROR: Lifter must be set at bottom position to run Thread");
 				} else {
-					while(error>LIFTER_ERROR_THRESHOLD_PULSES) {
+					timeout.start();
+					printOutDebugData("Lifter thread beginning");
+					while(error>LIFTER_ERROR_THRESHOLD_PULSES && timeout.get()<6) {
 		            	if(CatzRobotMap.liftEncoder.get() < LIFT_SCALE_HEIGHT)
 		        			this.liftUp();
 		        		else
@@ -77,6 +90,8 @@ public class CatzLift
 		            	error = Math.abs(CatzRobotMap.liftEncoder.get()-LIFT_SCALE_HEIGHT);
 					}
 					this.stopLift();
+					timeout.stop();
+					timeout.reset();
 					readyToLift = false;
 					printOutDebugData("Lift to scale height thread complete");
 				}
@@ -94,12 +109,13 @@ public class CatzLift
 	            double initialReading = CatzRobotMap.liftEncoder.get();
 	            double target = initialReading*2;
 	            double error = target - initialReading;
-	            
-				while(error>LIFTER_ERROR_THRESHOLD_PULSES) {
+	            timeout.start();
+				while(error>LIFTER_ERROR_THRESHOLD_PULSES && timeout.get()<6) {
 	        		this.liftDown();
 	            	error = target - CatzRobotMap.liftEncoder.get();
 				}
-				
+				timeout.stop();
+				timeout.reset();
 				this.stopLift();
 				readyToLift = true;
 				printOutDebugData("Drop to ground thread complete");
@@ -111,10 +127,10 @@ public class CatzLift
 	}
 
 	
-	/*need to acquire for final robot*/static public double PID_LIFT_KP = 0.0508;  //0.0508
-	/*need to acquire for final robot*/static public double PID_LIFT_KD = 0.008;  //0.0744
-	/*need to acquire for final robot*/static public double PID_LIFT_KI = 0.0;
-	/*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;    //0.7;
+	//*need to acquire for final robot*/static public double PID_LIFT_KP = 0.0508;  //0.0508
+	//*need to acquire for final robot*/static public double PID_LIFT_KD = 0.008;  //0.0744
+	//*need to acquire for final robot*/static public double PID_LIFT_KI = 0.0;
+	//*need to acquire for final robot*/static public double PID_LIFT_POWER_SCALE_FACTOR = 1.0;    //0.7;
 	
 	
 	/*
