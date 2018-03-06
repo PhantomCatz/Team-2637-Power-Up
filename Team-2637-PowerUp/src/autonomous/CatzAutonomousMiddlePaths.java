@@ -22,6 +22,9 @@ public class CatzAutonomousMiddlePaths {
 		middlePath("Right");
 /*		
 		TV 3/4/18 Sequence not working
+		AL 3/5/18 this sequence should take the bot from the switch to the
+		blocks against the wall
+		
 		CatzPIDDrive.PIDDriveNoTrig(-.5, (20 + CatzConstants.HALF_ROBOT_LENGTH), 
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Backs away from the switch
 																													
@@ -60,27 +63,27 @@ public class CatzAutonomousMiddlePaths {
 		 * Goes around the switch and grabs a cube
 		 *********************************************/
 		
-		CatzPIDDrive.PIDDriveNoTrig(.6, (36 - CatzConstants.HALF_ROBOT_LENGTH), 5);  //Leaves the wall and drives to the switch
+		CatzPIDDrive.PIDDriveNoTrig(.6, (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  //Leaves the wall and drives to the switch
 		
 		if(side.equalsIgnoreCase("left")) {
-			CatzPIDTurn.PIDturn(-45, 1.5); 
+			CatzPIDTurn.PIDturn(-45, 1.0); 
 		} else {
-			CatzPIDTurn.PIDturn(45, 1.5);
+			CatzPIDTurn.PIDturn(45, 1.0);
 		}
 
-		CatzPIDDrive.PIDDriveNoTrig(.6, 72,5);  //Turns 45deg left and approaches the switch
+		CatzPIDDrive.PIDDriveNoTrig(.6, 72.0,3.0);  //Turns 45deg left and approaches the switch
 
 		if(side.equalsIgnoreCase("left")) {
-			CatzPIDTurn.PIDturn(45, 2.5); 
+			CatzPIDTurn.PIDturn(45, 1.0); 
 		} else {
-			CatzPIDTurn.PIDturn(-45, 2.5); 
+			CatzPIDTurn.PIDturn(-45, 1.0); 
 		}
 		
 		
 		CatzRobotMap.lift.liftToSwitchHeight();  //not needed to get cube into switch
 		System.out.println("I am in the path");
 		
-		CatzPIDDrive.PIDDriveNoTrig(.6, (37 - CatzConstants.HALF_ROBOT_LENGTH), 3); //Turns 45deg right and presses against the switch
+		CatzPIDDrive.PIDDriveNoTrig(.6, (37 - CatzConstants.HALF_ROBOT_LENGTH), 1); //Turns 45deg right and presses against the switch
 		
 		CatzRobotMap.grabber.shootCube();  //Fires cube into the switch
 			

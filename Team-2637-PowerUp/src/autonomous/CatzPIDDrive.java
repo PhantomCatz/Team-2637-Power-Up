@@ -69,6 +69,9 @@ public class CatzPIDDrive {
 		functionTimer = new Timer();
 		loopTimer     = new Timer();
 		
+		double lastHeading = 0;
+		double deltaError;
+		
 		done = false;
 
 		functionTimer.stop();
@@ -87,6 +90,7 @@ public class CatzPIDDrive {
 		previousAngleError = 0.0;
 		previousDerivative = 0.0;
 
+		printDebugHeader();
 
 		while (done == false) {
 			currentHeading     = CatzRobotMap.navx.getAngle();
@@ -107,11 +111,12 @@ public class CatzPIDDrive {
 					done = true;
 				} else {
 
+					deltaError = currentHeading - lastHeading;
 					/**************************************************************
 					 * Calculate Heading Derivative Term
 					 **************************************************************/
 					derivative = (PID_DRIVE_FILTER_CONSTANT * previousDerivative)
-							+ ((1 - PID_DRIVE_FILTER_CONSTANT) * (currentHeading / deltaTimeSec));
+							+ ((1 - PID_DRIVE_FILTER_CONSTANT) * (deltaError / deltaTimeSec));
 					
 					// FILTER OUT INVALID VALUES
 					if(derivative == 0.0 || deltaTimeSec == 0.0) {
@@ -124,6 +129,8 @@ public class CatzPIDDrive {
 
 					CatzRobotMap.drive.arcadeDrive(power, turnValue);
 
+					lastHeading = currentHeading;
+					
 					printDebugData();
 				}
 			}

@@ -65,26 +65,28 @@ public class CatzRobotPeriodic
 	
 	public static void updateSmartDashboard() {
 		
-		SmartDashboard.putNumber("navX", CatzRobotMap.navx.getAngle());
-		SmartDashboard.putNumber("Distance of Left Encoder", CatzRobotMap.wheelEncoderL.getDistance());
+		SmartDashboard.putNumber("navX",                      CatzRobotMap.navx.getAngle());
+		SmartDashboard.putNumber("Distance of Left Encoder",  CatzRobotMap.wheelEncoderL.getDistance());
 		SmartDashboard.putNumber("Distance of Right Encoder", CatzRobotMap.wheelEncoderR.getDistance());
-		SmartDashboard.putNumber("Value of Left Encoder", CatzRobotMap.wheelEncoderL.get());
-		SmartDashboard.putNumber("Value of Right Encoder", CatzRobotMap.wheelEncoderR.get());
-		SmartDashboard.putNumber("Value of lifter Encoder",CatzRobotMap.liftEncoder.get());
+		SmartDashboard.putNumber("Value of Left Encoder",     CatzRobotMap.wheelEncoderL.get());
+		SmartDashboard.putNumber("Value of Right Encoder",    CatzRobotMap.wheelEncoderR.get());
+		SmartDashboard.putNumber("Value of lifter Encoder",   CatzRobotMap.liftEncoder.get());
 		
-		SmartDashboard.putBoolean("Graber Forearms Open", CatzGrabber.forearmOpen);
+		SmartDashboard.putBoolean("Graber Forearms Open",   CatzGrabber.forearmOpen);
 		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzGrabber.bicepDeployed);
 		
 		SmartDashboard.putBoolean("Lifter Limited", CatzRobotMap.lifterLimit.get());
+		SmartDashboard.putNumber("Intake Speed",    CatzRobotMap.xboxDrive.getRightTrigger()-CatzRobotMap.xboxDrive.getLeftTrigger());
+		SmartDashboard.putBoolean("Drive Controls Are Reversed", CatzTeleopPeriodic.reversed);
 		
 	}
 	
 	public static void updatePIDTurnConstants()   {
 
 		CatzPIDTurn.PID_TURN_POWER_SCALE_FACTOR = SmartDashboard.getNumber(CatzConstants.SCALE_FACTOR_LABEL,0);
-		CatzPIDTurn.PID_TURN_KP = SmartDashboard.getNumber(CatzConstants.TURN_KP_LABEL,0);
-		CatzPIDTurn.PID_TURN_KD = SmartDashboard.getNumber(CatzConstants.TURN_KD_LABEL,0);
-		CatzPIDTurn.PID_TURN_KI = SmartDashboard.getNumber(CatzConstants.TURN_KI_LABEL,0);
+		CatzPIDTurn.PID_TURN_KP =                 SmartDashboard.getNumber(CatzConstants.TURN_KP_LABEL,0);
+		CatzPIDTurn.PID_TURN_KD =                 SmartDashboard.getNumber(CatzConstants.TURN_KD_LABEL,0);
+		CatzPIDTurn.PID_TURN_KI =                 SmartDashboard.getNumber(CatzConstants.TURN_KI_LABEL,0);
 
 	}
 	

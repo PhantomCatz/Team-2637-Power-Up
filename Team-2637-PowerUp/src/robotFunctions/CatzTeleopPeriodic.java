@@ -1,6 +1,8 @@
 package robotFunctions;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 /**********************************************************
@@ -13,7 +15,7 @@ import robot.CatzRobotMap;
 
 public class CatzTeleopPeriodic 
 {
-	private static boolean reversed = false;
+	public static boolean reversed = false;
 	public static void runTeleopPeriodic()
 	{	
 		runDriveTrainControls();
@@ -24,8 +26,10 @@ public class CatzTeleopPeriodic
 	
 	private static void runDriveTrainControls() 
 	{
-		if(CatzRobotMap.xboxDrive.getBButton())
+		if(CatzRobotMap.xboxDrive.getBButton()) {
 			reversed = !reversed;
+			Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
+		}
 		 
 		if(reversed==true)
 			CatzRobotMap.drive.setModeReverseArcadeDriveFlash(CatzRobotMap.xboxDrive);
@@ -58,7 +62,6 @@ public class CatzTeleopPeriodic
 	}
 	private static void runLiftControls()
 	{
-		
 		/**
 		 * if lifter limit is activated, only have the ability to move lifter down
 		 * Aux controller X button overrides the limit switch
@@ -78,6 +81,7 @@ public class CatzTeleopPeriodic
 			}
 		}
 	}
+	
 	private static void runClimberControls()
 	{
 		CatzRobotMap.climberMechanism.setClimberSpeed(Math.abs(CatzRobotMap.xboxAux.getRightStickY()));
