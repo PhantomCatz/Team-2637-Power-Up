@@ -42,16 +42,14 @@ public class CatzTeleopPeriodic
 	{
 		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger()-CatzRobotMap.xboxDrive.getLeftTrigger());
 		
-		if(CatzGrabber.forearmOpen==false) { //only control the biceps if the forearms are closed
-			if(CatzRobotMap.xboxAux.getRightBumper()){
-				CatzRobotMap.grabber.deployBicep();
-			}								//if forearms are open and biceps are moved, a leak occurs
-			else if(CatzRobotMap.xboxAux.getLeftBumper()) {
-				CatzRobotMap.grabber.retractBicep();
-			}
+		if(CatzRobotMap.xboxAux.getRightBumper()){
+			CatzRobotMap.grabber.deployBicep();
+		}								//if forearms are open and biceps are moved, a leak occurs
+		else if(CatzRobotMap.xboxAux.getLeftBumper()) {
+			CatzRobotMap.grabber.retractBicep();
 		}
 		
-		if(CatzRobotMap.xboxAux.getAButton()==true) {
+		if(CatzRobotMap.xboxAux.getAButton()) {
 			CatzRobotMap.grabber.retractBicep();
 			CatzRobotMap.grabber.openForearm();
 		}

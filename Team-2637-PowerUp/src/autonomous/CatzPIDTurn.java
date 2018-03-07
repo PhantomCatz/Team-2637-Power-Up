@@ -39,14 +39,14 @@ public class CatzPIDTurn
 	final static public double PID_TURN_FILTER_CONSTANT    = 0.7;
 	      static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;    //0.7;
 
-	      static public double PID_TURN_KP = 0.060;  //0.0508
+	      static public double PID_TURN_KP = 0.070;  //0.0508
 	      static public double PID_TURN_KI = 0.0;
 	      static public double PID_TURN_KD = 0.008;   //0.0744
 
 	final static public double PID_TURN_INTEGRAL_MAX =  1.0;
 	final static public double PID_TURN_INTEGRAL_MIN = -1.0;
 
-	final public static double PID_TURN_MIN_POS_POWER =  0.45;     //0.4 is min power to move robot when it is stopped
+	final public static double PID_TURN_MIN_POS_POWER =  0.5;     //0.4 is min power to move robot when it is stopped
 	final public static double PID_TURN_MIN_NEG_POWER = -PID_TURN_MIN_POS_POWER;
 
 
@@ -250,12 +250,12 @@ public class CatzPIDTurn
 			        **********************************************************************/
 			        if (power >= 0.0) 
 			           {
-			           if ( (power < PID_TURN_MIN_POS_POWER) && (Math.abs(deltaError) < PID_TURN_DELTAERROR_THRESHOLD_LO) )
+			           if (power < PID_TURN_MIN_POS_POWER)
 			              power = PID_TURN_MIN_POS_POWER;
 			           }
 			        else if (power < 0.0)
 			           {
-			           if ( (power > PID_TURN_MIN_NEG_POWER) && (Math.abs(deltaError) < PID_TURN_DELTAERROR_THRESHOLD_LO) )
+			           if (power > PID_TURN_MIN_NEG_POWER)
 			              power = PID_TURN_MIN_NEG_POWER;
 			           }
 			        

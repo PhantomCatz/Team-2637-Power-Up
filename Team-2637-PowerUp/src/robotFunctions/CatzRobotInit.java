@@ -45,8 +45,6 @@ public class CatzRobotInit
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORM, true);
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORR, true);
 		
-		Timer.delay(0.2); //To update SmartDashboard (to clear the SmartDashboard)
-		
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORL, false);
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORM, false);
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORR, false);

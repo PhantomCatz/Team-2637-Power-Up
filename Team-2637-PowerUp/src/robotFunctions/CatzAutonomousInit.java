@@ -33,9 +33,10 @@ public class CatzAutonomousInit {
 		CatzPIDDrive.setDebugModeEnabled(true);
 		//CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
 		setMechanisms();
+		//CatzPIDDrive.PIDDrive(.5, 48, 4);
 		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
-		CatzRobotMap.lift.liftToScaleHeight();
-		//choosePath();
+		//CatzRobotMap.lift.liftToScaleHeight();
+		choosePath();
 		
 	}
 
@@ -245,9 +246,8 @@ public class CatzAutonomousInit {
 	}
 	
 	public static void setMechanisms() {
-		CatzRobotMap.navx.reset();
-		CatzRobotMap.grabber.closeForearm();
-		CatzRobotMap.grabber.retractBicep();
+		CatzRobotMap.grabber.closeForearm(0.0);
+		CatzRobotMap.grabber.retractBicep(0.0);
 	}
 
 }

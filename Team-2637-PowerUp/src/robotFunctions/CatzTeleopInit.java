@@ -13,7 +13,7 @@ public class CatzTeleopInit
 	}
 	public static void setMechanisms() {
 
-		CatzRobotMap.grabber.closeForearm();
-		CatzRobotMap.grabber.retractBicep();
+		CatzRobotMap.grabber.closeForearm(0.0);
+		CatzRobotMap.grabber.retractBicep(0.0);
 	}
 }

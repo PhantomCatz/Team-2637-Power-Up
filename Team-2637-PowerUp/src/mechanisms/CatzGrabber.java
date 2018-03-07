@@ -41,6 +41,12 @@ public class CatzGrabber
 		printOutDebugData("Grabber forearm set to Closed");
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
+	public void closeForearm(double delay) {
+		forearmOpen = false;
+		CatzRobotMap.intakeForearm.set(forearmOpen);
+		printOutDebugData("Grabber forearm set to Closed");
+		Timer.delay(delay);
+	}
 
 	public void openForearm() {
 		forearmOpen = true;
@@ -78,6 +84,13 @@ public class CatzGrabber
 		CatzRobotMap.intakeBicep.set(bicepDeployed);
 		printOutDebugData("Grabber forearm set to Retract");
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
+	}
+	
+	public void retractBicep(double delay) {
+		bicepDeployed = false;
+		CatzRobotMap.intakeBicep.set(bicepDeployed);
+		printOutDebugData("Grabber forearm set to Retract");
+		Timer.delay(delay);
 	}
 	
 	private static void printOutDebugData(String info) {

@@ -118,6 +118,7 @@ public class CatzLift
 				timeout.reset();
 				this.stopLift();
 				readyToLift = true;
+				CatzRobotMap.liftEncoder.reset();
 				printOutDebugData("Drop to ground thread complete");
 				Thread.currentThread().interrupt();
 				

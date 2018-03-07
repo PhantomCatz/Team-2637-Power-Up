@@ -109,8 +109,8 @@ public class CatzAutonomousMiddlePaths {
 		 ***********************************/
 		
 		
-		CatzPIDDrive.PIDDriveNoTrig(.7, (301.65 - CatzConstants.HALF_ROBOT_LENGTH),20);  //Drives all the way to the scale
-		CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving?
+		CatzPIDDrive.PIDDriveNoTrig(.7, 300 ,20);  //Drives all the way to the scale
+		//CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving?
 		if (side.equalsIgnoreCase("left")) {
 			CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 		} else {
@@ -118,22 +118,22 @@ public class CatzAutonomousMiddlePaths {
 		}
 		
 		t.start();
-		while(CatzLift.readyToLift==true&&t.get()<4) {
+		while(CatzLift.readyToLift==true&&t.get()<8) {
 			//do nothing
 		}
 		t.stop();
 		t.reset();
 
 	
-		CatzPIDDrive.PIDDriveNoTrig(.5, 10.88,5);  //Turns 90deg right and drives forward to face the scale
+		CatzPIDDrive.PIDDriveNoTrig(.5, 18 ,5);  //Turns 90deg right and drives forward to face the scale
 	
 		CatzRobotMap.grabber.shootCube();  //Fires cube into the scale
 	
 		Timer.delay(2);
 	
-		CatzRobotMap.lift.dropToGroundHeight();  //waits for 2sec then drops to ground height
+		//CatzRobotMap.lift.dropToGroundHeight();  //waits for 2sec then drops to ground height
 		
-		CatzPIDDrive.PIDDriveNoTrig(-0.5, 45 - CatzConstants.ROBOT_LENGTH, CatzConstants.PID_DRIVE_TIMEOUT);
+		CatzPIDDrive.PIDDriveNoTrig(-0.6, 30, 4);
 	
 	/*	if(side.equalsIgnoreCase("left")) {
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
@@ -177,28 +177,25 @@ public class CatzAutonomousMiddlePaths {
 		   * Places cube in scale
 		   ***************************************************/
 		  
-	   CatzPIDDrive.PIDDriveNoTrig(.5, (251.73 - CatzConstants.HALF_ROBOT_LENGTH),
-			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Drives to area between switch and scale
+	   CatzPIDDrive.PIDDriveNoTrig(.7, 190,7);  //Drives to area between switch and scale
 	
 	   if (side.equalsIgnoreCase("left")) {
-		   CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT); 
+		   CatzPIDTurn.PIDturn(90, 1.5); 
 	   } else {
-		   CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
+		   CatzPIDTurn.PIDturn(-90, 1.5); 
 
 	   }
 	  
-	   CatzPIDDrive.PIDDriveNoTrig(.5, 251.73,
-			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg and crosses to right side scale
+	   CatzPIDDrive.PIDDriveNoTrig(.7, 222 ,8);  //Turns 90deg and crosses to right side scale
 	  if (side.equalsIgnoreCase("left")) {
-		   CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
+		   CatzPIDTurn.PIDturn(-90, 1.5); 
 
 	  } else {
-		   CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT); 
+		   CatzPIDTurn.PIDturn(90, 1.5); 
 
 	  }
 	  
-	   CatzPIDDrive.PIDDriveNoTrig(.5, 84,
-			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to the front of scale
+	   CatzPIDDrive.PIDDriveNoTrig(.7, 88,4);  //Turns 90deg left and drives to the front of scale
 	  
 	   if (side.equalsIgnoreCase("left")) {
 	   CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT);
@@ -209,10 +206,9 @@ public class CatzAutonomousMiddlePaths {
 	   
 	   /* CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving? */
 	  
-	    CatzPIDDrive.PIDDriveNoTrig(.5, (24 - CatzConstants.HALF_ROBOT_LENGTH),
-			  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and aligns with scale
+	    CatzPIDDrive.PIDDriveNoTrig(.5, 15, CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and aligns with scale
 	  
-	    CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale
+	   // CatzRobotMap.lift.liftToScaleHeight();  //Lifts to the height of the scale
 	    
 		t.start();
 		while(CatzLift.readyToLift==true&&t.get()<5) {
