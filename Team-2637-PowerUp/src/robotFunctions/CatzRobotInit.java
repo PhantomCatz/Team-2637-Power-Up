@@ -60,7 +60,7 @@ public class CatzRobotInit
 	
 	public static void cameraSetup()
 	{
-		CameraServer.getInstance().startAutomaticCapture();
+		CameraServer.getInstance().startAutomaticCapture(0);
 		 new Thread(() -> {
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
              camera.setResolution(640, 480);

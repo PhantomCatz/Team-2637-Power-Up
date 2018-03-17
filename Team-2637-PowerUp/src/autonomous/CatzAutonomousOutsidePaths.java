@@ -13,8 +13,6 @@ import robot.CatzRobotMap;
 
 public class CatzAutonomousOutsidePaths {
 	
-	
-
 	final static public double TO_GET_ACCUE = 7.0; //to get to the cube and Scale accurately
 	final static public double PICK_UP_CUBE_TO_CUBE = 45.0; //go to the scale to pick up the cube
 	final static public double BACK_TO_SCALE = 45.0; //back to the scale to place the 2nd cube
@@ -23,7 +21,7 @@ public class CatzAutonomousOutsidePaths {
                                           34.00 - //Width of robot
                                           6.0;   //Avoid platform ramp
 
-	public static void right_LRL () { //<5>
+	public static void right_XRX () { //<5>
 		
 	   to_Right_Scale();             // Drive to right Scale
 		
@@ -33,7 +31,7 @@ public class CatzAutonomousOutsidePaths {
 
 	}
 	
-	public static void left_RLR() { //<5>
+	public static void left_XLX() { //<5>
 		 
 		to_Left_Scale();	        // Drive to left Scale
 	
@@ -43,7 +41,7 @@ public class CatzAutonomousOutsidePaths {
 
 	}
 
-	public static void right_LLL() { //<4> opposite side
+	public static void right_XLX() { //<4> opposite side
 	 
 		to_Left_Scale_Oppo(); 		//drive to left scale (opposite)
 		
@@ -53,7 +51,7 @@ public class CatzAutonomousOutsidePaths {
 
 	}
 	
-	public static void left_RRR() { //Left RRR <4> opposite side
+	public static void left_XRX() { //Left RRR <4> opposite side
 					
 
 		to_Right_Scale_Oppo(); 		//drive to right scale opposite
@@ -63,48 +61,7 @@ public class CatzAutonomousOutsidePaths {
 		back_To_Right_Scale();      //drive back to right scale
 
 		}
-	
-	public static void right_RLR() { // <6> opposite sides 
-		
-		to_Left_Scale_Oppo();		//drive to left scale
 
-		pick_Up_Cube_Left();		// drive to the left switch to pick up the cube 
-
-		back_To_Left_Scale();		// drive to the left switch to pick up the cube 
-
-	}
-	
-	public static void left_LRL() { //<6>
-
-			
-		to_Right_Scale_Oppo();		//drive to right scale 
-
-		pick_Up_Cube_Right();		//drive to right switch to pick up the cube
-
-		back_To_Right_Scale();		//drive back to right scale
-	
-	}
-	
-	public static void right_RRR() {// <3>
-		
-		to_Right_Scale();         // Drive to right Scale
-		
-		pick_Up_Cube_Right();     // Drive to right switch to pick up the cube
-
-		back_To_Right_Scale();     // Drive back to right Scale
-		
-		}
-	
-	public static void left_LLL() { //<3>
-		
-		to_Left_Scale();	    	  // Drive to right Scale
-		
-		pick_Up_Cube_Left();	     // Drive to left switch to pick up the cube
-		
-		back_To_Left_Scale();	    // Drive back to left Scale
-		
-	}
-	
 	public static void pick_Up_Cube_Right() {
 		
 		/**********************************************************************
