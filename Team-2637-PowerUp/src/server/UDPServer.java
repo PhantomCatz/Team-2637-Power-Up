@@ -9,12 +9,11 @@ import java.net.SocketException;
 
 public class UDPServer {
 	static DatagramSocket socket = null;
-
+	
 	public UDPServer() {
 		
 	}
 	
-
 	public static void createAndListenSocket() {
 		try {
 			socket = new DatagramSocket(2637);
@@ -26,7 +25,7 @@ public class UDPServer {
 				ByteArrayInputStream in = new ByteArrayInputStream(data);
 				ObjectInputStream is = new ObjectInputStream(in);
 				try {
-					//VisionObject visionObj = (VisionObject) is.readObject();
+					VisionObject visionObj = (VisionObject) is.readObject();
 					System.out.println("Received = "+is.readObject());
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();

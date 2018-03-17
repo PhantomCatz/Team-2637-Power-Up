@@ -54,7 +54,6 @@ public class CatzPIDTurn
 
 	static Timer functionTimer;
 	static Timer pdTimer;
-	static Timer debugTimer;
 	
 	static double currentError; 
 	static double deltaError;
