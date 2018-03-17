@@ -10,15 +10,10 @@ package robotFunctions;
 
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
-
-import autonomous.CatzPIDDrive;
-import autonomous.CatzPIDTurn;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
@@ -53,9 +48,6 @@ public class CatzRobotInit
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORM, false);
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORR, false);
 		
-		/*	SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORL, check_box1);
-		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORM, check_box2);
-		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORR, check_box3); */
 	}
 	
 	public static void cameraSetup()
@@ -63,6 +55,7 @@ public class CatzRobotInit
 		CameraServer.getInstance().startAutomaticCapture(0);
 		 new Thread(() -> {
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+             
              camera.setResolution(640, 480);
              
              CvSink cvSink = CameraServer.getInstance().getVideo();
@@ -72,7 +65,7 @@ public class CatzRobotInit
              Mat output = new Mat();
              
              while(!Thread.interrupted()) 
-             {
+             { 
                  cvSink.grabFrame(source);
                  Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
                  outputStream.putFrame(output);

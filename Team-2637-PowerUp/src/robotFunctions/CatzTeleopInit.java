@@ -1,6 +1,5 @@
 package robotFunctions;
 
-import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 

@@ -26,7 +26,7 @@ public class CatzConstants
 	final static public int TALON_ID_FRONT_R = 5;
 	final static public int TALON_ID_REAR_R  = 6;
 	
-	//final static public int CLIMBER_TALON_ID = 1;
+	final static public int CLIMBER_TALON_ID = 1;
 	
 	final static public int DRIVE_XBOX_PORT = 0;
 	final static public int AUX_XBOX_PORT   = 1;
