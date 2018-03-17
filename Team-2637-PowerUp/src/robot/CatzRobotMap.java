@@ -1,10 +1,8 @@
 package robot;
 
 import java.text.DecimalFormat;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -33,7 +31,7 @@ public class CatzRobotMap
 	public static WPI_TalonSRX fLeft;
 	public static WPI_TalonSRX rLeft;
 	
-	//public static WPI_TalonSRX climberMotor;  
+	public static WPI_TalonSRX climberMotor;  
 	//public static CatzCANTalonSRX climber2;  //robot does not yet have a second climber motor
 	
 	public static Encoder wheelEncoderR;
@@ -100,8 +98,8 @@ public class CatzRobotMap
 		drive = new CatzDrive(leftMotors, rightMotors);
 		printOutDebugData("Successfully initialized full drive train");
 		
-		//climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
-		//climberMotor.setSafetyEnabled(false);
+		climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
+		climberMotor.setSafetyEnabled(false);
 		printOutDebugData("Successfully initialized climber Motor");
 		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		

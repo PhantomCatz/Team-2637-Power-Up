@@ -12,9 +12,7 @@ import autonomous.CatzAutonomousMiddlePaths;
 import autonomous.CatzPIDDrive;
 import autonomous.CatzPIDTurn;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import mechanisms.CatzLift;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
 
@@ -28,17 +26,11 @@ public class CatzAutonomousInit {
 	
 	public static void runAutonomousInit()
 	{
-
 		printOutDebugData("autonomousInit");
-		//choosePathDouble();
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
 		setMechanisms();
-		//CatzPIDDrive.PIDDrive(.5, 48, 4);
-		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
-		//CatzRobotMap.lift.liftToScaleHeight();
 		choosePath();
-		//CatzPIDTurn.PIDturn(90, 5);
 	}
 
 	

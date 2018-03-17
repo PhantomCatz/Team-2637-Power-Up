@@ -1,8 +1,6 @@
 package autonomous;
 
 import edu.wpi.first.wpilibj.Timer;
-import mechanisms.CatzClimber;
-import mechanisms.CatzGrabber;
 import mechanisms.CatzLift;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
@@ -47,34 +45,7 @@ public class CatzAutonomousMiddlePaths {
 		
 		//Fires cube into the switch
 		CatzRobotMap.grabber.placeCube();  
-/*		
-		TV 3/4/18 Sequence not working
-		AL 3/5/18 this sequence should take the bot from the switch to the
-		blocks against the wall
-		
-		CatzPIDDrive.PIDDriveNoTrig(-.5, (20 + CatzConstants.HALF_ROBOT_LENGTH), 
-					CatzConstants.PID_DRIVE_TIMEOUT);  //Backs away from the switch
-																													
-		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
 
-		CatzPIDDrive.PIDDriveNoTrig(.5, 43.2,
-					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives to the side of the switch
-
-		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
-
-		CatzPIDDrive.PIDDriveNoTrig(.5, 84,
-				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and drives to the back of the switch
-
-		CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
-		
-		CatzRobotMap.lift.dropToGroundHeight();  //Drops the lift down
-		
-		CatzPIDDrive.PIDDriveNoTrig(.5, (24 - CatzConstants.HALF_ROBOT_LENGTH),
-				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and presses against the cube
-
-		CatzRobotMap.grabber.intakeCube();  //Intakes the cube
-		
-		*/
 	}
 
 	public static void middleSingle_LXX() {
@@ -155,35 +126,6 @@ public class CatzAutonomousMiddlePaths {
 		Timer.delay(.5);
 		CatzRobotMap.lift.dropToHalfHeight();
 		
-		//Timer.delay(.4);
-	
-	//	CatzRobotMap.lift.dropToGroundHeight();   //waits for 2sec then drops to ground height
-		
-
-	
-	/*	if(side.equalsIgnoreCase("left")) {
-		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
-		} else {
-			CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT);
-
-		}
-		
-		CatzPIDDrive.PIDDriveNoTrig(.5, 112.8,
-				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives towards the cubes
-
-		if (side.equalsIgnoreCase("left")) {
-			CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
-
-		} else {
-			CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT); 
-
-		}
-		
-		CatzPIDDrive.PIDDriveNoTrig(.5, (12 - CatzConstants.HALF_ROBOT_LENGTH),
-				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns left and presses against cube
-
-		CatzRobotMap.grabber.intakeCube();  //Intakes the cube */
-
 	}
 
 	  public static void left_XRX() {  
@@ -668,17 +610,17 @@ public static void middle_LRX() {
 		  
 		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);
 		
-		 CatzPIDDrive.PIDDriveNoTrig(.5, 251.73,
+		CatzPIDDrive.PIDDriveNoTrig(.5, 251.73,
 				  	CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg left and crosses over to the right side scale
 		 
-		 CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);
+		CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT);
 		 
-		 CatzPIDDrive.PIDDriveNoTrig(.5, 47.5,
+		CatzPIDDrive.PIDDriveNoTrig(.5, 47.5,
 					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and presses against the cube
 		
 		CatzRobotMap.grabber.intakeCube();  //Intakes a second cube
 		  
-		  CatzPIDTurn.PIDturn(180, CatzConstants.PID_DRIVE_TIMEOUT);
+		 CatzPIDTurn.PIDturn(180, CatzConstants.PID_DRIVE_TIMEOUT);
 		  
 			/* CatzRobotMap.lift.liftToScaleHeight();  //Lifts to height of the scale while driving? */
 		  

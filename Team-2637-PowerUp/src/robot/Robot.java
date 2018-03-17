@@ -9,7 +9,6 @@
 package robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robotFunctions.CatzAutonomousInit;
 import robotFunctions.CatzAutonomousPeriodic;
 import robotFunctions.CatzRobotInit;
@@ -54,7 +53,6 @@ public class Robot extends IterativeRobot
 		CatzAutonomousPeriodic.runAutonomousPeriodic();
 	}
 
-
 	@Override
 	public void teleopInit()
 	{
@@ -64,7 +62,7 @@ public class Robot extends IterativeRobot
 	@Override
 	public void teleopPeriodic()
 	{			
-		CatzTeleopPeriodic.runTeleopPeriodic();
+		//CatzTeleopPeriodic.runTeleopPeriodic();
 	}
 
 }

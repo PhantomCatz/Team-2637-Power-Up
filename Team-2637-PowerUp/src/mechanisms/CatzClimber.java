@@ -13,7 +13,7 @@ import robot.CatzRobotMap;
 
 public class CatzClimber 
 {
-	/*public CatzClimber() {
+	public CatzClimber() {
 		printOutDebugData("Successfully instantiated CatzClimber");
 	}
 	public void setClimberSpeed(double relativeSpeed) {
@@ -36,5 +36,5 @@ public class CatzClimber
 			double currentTime = CatzRobotMap.globalTimer.get();
 			System.out.println(currentTime + "  -" + info);
 		}
-	}*/
+	}
 }
