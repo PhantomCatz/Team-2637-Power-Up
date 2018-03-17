@@ -78,7 +78,7 @@ public class CatzRobotPeriodic
 		SmartDashboard.putBoolean("Graber Forearms Open",   CatzGrabber.forearmOpen);
 		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzGrabber.bicepDeployed);
 		
-		SmartDashboard.putBoolean("Lifter Limited", CatzRobotMap.lifterLimit.get());
+		SmartDashboard.putBoolean("Lifter Limited", CatzRobotMap.lifterLimitTop.get());
 		SmartDashboard.putNumber("Intake Speed",    CatzRobotMap.xboxDrive.getRightTrigger()-CatzRobotMap.xboxDrive.getLeftTrigger());
 		SmartDashboard.putBoolean("Drive Controls Are Reversed", CatzTeleopPeriodic.reversed);
 		

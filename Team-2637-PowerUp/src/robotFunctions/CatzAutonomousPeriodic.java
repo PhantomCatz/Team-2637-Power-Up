@@ -8,11 +8,11 @@
 
 package robotFunctions;
 
-import robot.CatzRobotMap;
 
 public class CatzAutonomousPeriodic
 {
-	public static void runAutonomousPeriodic(){
+	public static void runAutonomousPeriodic()
+	{
 
 	}
 }

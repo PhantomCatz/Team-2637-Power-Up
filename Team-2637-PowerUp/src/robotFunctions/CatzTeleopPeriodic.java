@@ -7,9 +7,14 @@ import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 /**********************************************************
- * Andrew Lai 2/16/2018 AL Revised driver controls to fun with 2 xbox
- * controllers Methods:
- * runGrabbercontrols,runLiftControls,unClimberControls,runTeleopPeriodic
+ * Author : Andrew Lai 
+ * 
+ * Revision History :
+ * 2/16/2018 AL Revised driver controls to fun with 2 xbox
+ * 3-17-18   DD Integrated bottom limit switch into lift controls
+ * 
+ * Controllers Methods: runGrabbercontrols,runLiftControls,unClimberControls,runTeleopPeriodic
+ * 
  * Functionality: activates driver controls in periodic class
  *********************************************************/
 
@@ -111,21 +116,38 @@ public class CatzTeleopPeriodic {
 		 * controller X button overrides the limit switch
 		 */
 
-		if (CatzRobotMap.xboxAux.getXButton() == true) {
+		if (CatzRobotMap.xboxAux.getXButton() == true) 
+		{
 			CatzRobotMap.lifterL.set(power);
 			CatzRobotMap.lifterR.set(power);
-		} else {
-			if (CatzRobotMap.lifterLimit.get() == false) {
+		} 
+		else 
+		{
+			if (CatzRobotMap.lifterLimitTop.get() == false && CatzRobotMap.lifterLimitBottom.get() == false) 
+			{
 				CatzRobotMap.lifterL.set(power);
 				CatzRobotMap.lifterR.set(power);
-			} else {
-				if (power <= .0) {
-					CatzRobotMap.lifterL.set(power);
-					CatzRobotMap.lifterR.set(power);
+			}
+			else 
+			{
+				if (CatzRobotMap.lifterLimitTop.get() == true)//power <= .0) 
+				{
+					if(power <= .0)
+					{
+						CatzRobotMap.lifterL.set(power);
+						CatzRobotMap.lifterR.set(power);
+					}
+				}
+				else
+				{
+					if(power >= .0)
+					{
+						CatzRobotMap.lifterL.set(power);
+						CatzRobotMap.lifterR.set(power);
+					}
 				}
 			}
 		}
-
 	}
 
 	private static void printOutDebugData(String info) {
@@ -151,7 +173,7 @@ public class CatzTeleopPeriodic {
 					lifterDisabler.reset();
 				}
 			} else {
-				if (CatzRobotMap.lifterLimit.get() == false) {
+				if (CatzRobotMap.lifterLimitTop.get() == false) {
 					CatzRobotMap.lifterL.set(power);
 					CatzRobotMap.lifterR.set(power);
 				} else {

@@ -18,6 +18,15 @@ import mechanisms.CatzGrabber;
 import mechanisms.CatzLift;
 import robotFunctions.CatzAutonomousInit;
 
+/*
+ *  Author : Derek Duenas
+ *  Revision History : 
+ *  3-17-18 Added bottom limit switch
+ *  
+ *  Methods : setDebugEnabled, instantiateRobot, printDebugData
+ *  Functionality : instantiate all objects in one place
+ */
+
 public class CatzRobotMap 
 {
 	public static CatzRobotMap instance;
@@ -59,7 +68,8 @@ public class CatzRobotMap
 	
 	//public static Compressor comp;
 	
-	public static DigitalInput lifterLimit;
+	public static DigitalInput lifterLimitTop;
+	public static DigitalInput lifterLimitBottom;
 	
 	public static DecimalFormat secondsFormat;
 
@@ -126,8 +136,9 @@ public class CatzRobotMap
 			lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
 			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
 		}
-		lifterLimit = new DigitalInput(6);
-
+		lifterLimitTop = new DigitalInput(6);
+		lifterLimitBottom = new DigitalInput(0); //need port for bottom limit switch
+		
 		if(using2ndBot) {
 			intakeRight   = new Spark (7);
 			intakeLeft    = new Spark (8);

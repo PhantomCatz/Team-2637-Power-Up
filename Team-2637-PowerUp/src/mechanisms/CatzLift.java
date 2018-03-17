@@ -4,14 +4,13 @@ import edu.wpi.first.wpilibj.Timer;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
 
-//import PIDFunctions.PID;
-//import edu.wpi.first.wpilibj.Timer;
-
 /*
  *  Author : Derek Duenas
+ *  
  *  Revision History : 
  *  2-19-18	Added debug data printouts
  *  3-16-18 Removed lift to scale height 2 method
+ *  3-17-18 Using the bottom limit switch instead of encoder for the lift to go down all the way
  *  
  *  Methods : lift
  *  Functionality : Move the lift up and down
@@ -104,13 +103,13 @@ public class CatzLift {
 
 			while (!Thread.interrupted()) {
 
-				double initialReading = CatzRobotMap.liftEncoder.get();
-				double target = initialReading * 2;
-				double error = target - initialReading;
+				//double initialReading = CatzRobotMap.liftEncoder.get();
+				//double target = initialReading * 2;
+				//double error = target - initialReading;
 				timeout.start();
-				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 3) {
+				while (CatzRobotMap.lifterLimitBottom.get() && timeout.get() < 3) {
 					this.liftDown();
-					error = target - CatzRobotMap.liftEncoder.get();
+					//error = target - CatzRobotMap.liftEncoder.get();
 				}
 				timeout.stop();
 				timeout.reset();
