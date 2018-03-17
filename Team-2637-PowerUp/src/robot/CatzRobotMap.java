@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
@@ -32,7 +33,7 @@ public class CatzRobotMap
 	public static WPI_TalonSRX fLeft;
 	public static WPI_TalonSRX rLeft;
 	
-	public static WPI_TalonSRX climberMotor;  
+	//public static WPI_TalonSRX climberMotor;  
 	//public static CatzCANTalonSRX climber2;  //robot does not yet have a second climber motor
 	
 	public static Encoder wheelEncoderR;
@@ -57,6 +58,8 @@ public class CatzRobotMap
 	
 	public static Solenoid intakeForearm;
 	public static Solenoid intakeBicep;
+	
+	//public static Compressor comp;
 	
 	public static DigitalInput lifterLimit;
 	
@@ -97,12 +100,14 @@ public class CatzRobotMap
 		drive = new CatzDrive(leftMotors, rightMotors);
 		printOutDebugData("Successfully initialized full drive train");
 		
-		climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
-		climberMotor.setSafetyEnabled(false);
+		//climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
+		//climberMotor.setSafetyEnabled(false);
 		printOutDebugData("Successfully initialized climber Motor");
 		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
+		
+		//comp = new Compressor(3);
 				
 		wheelEncoderR = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k4X);
 		wheelEncoderL = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k4X);
@@ -131,6 +136,8 @@ public class CatzRobotMap
 			intakeForearm = new Solenoid(0);
 			intakeBicep   = new Solenoid(1);
 		} else {
+			
+			
 			intakeRight   = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
 			intakeLeft    = new Spark(CatzConstants.LEFT_INTAKE_PWM);
 			intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);

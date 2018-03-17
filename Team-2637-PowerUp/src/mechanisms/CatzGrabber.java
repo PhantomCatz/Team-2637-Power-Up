@@ -78,6 +78,12 @@ public class CatzGrabber
 		printOutDebugData("Grabber Bicep set to Deploy");
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
+	public void deployBicep(double delay) { 
+		bicepDeployed = true;
+		CatzRobotMap.intakeBicep.set(bicepDeployed);
+		printOutDebugData("Grabber Bicep set to Deploy");
+		Timer.delay(delay);
+	}
 
 	public void retractBicep() {
 		bicepDeployed = false;
@@ -92,6 +98,7 @@ public class CatzGrabber
 		printOutDebugData("Grabber forearm set to Retract");
 		Timer.delay(delay);
 	}
+	
 	
 	private static void printOutDebugData(String info) {
 		if(CatzRobotMap.debugMode == true) {

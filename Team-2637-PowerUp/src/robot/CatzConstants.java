@@ -21,12 +21,12 @@ public class CatzConstants
 	final static public int CUBEE_TALON_ID_R_FRONT = 4;
 	final static public int CUBEE_TALON_ID_R_REAR  = 5;
 
-	final static public int TALON_ID_FRONT_L = 4;
+	final static public int TALON_ID_FRONT_L = 2;
 	final static public int TALON_ID_REAR_L  = 3;
 	final static public int TALON_ID_FRONT_R = 5;
 	final static public int TALON_ID_REAR_R  = 6;
 	
-	final static public int CLIMBER_TALON_ID = 1;
+	//final static public int CLIMBER_TALON_ID = 1;
 	
 	final static public int DRIVE_XBOX_PORT = 0;
 	final static public int AUX_XBOX_PORT   = 1;
@@ -72,8 +72,8 @@ public class CatzConstants
 	/*need to acquire for final robot*/final static public double PID_DRIVE_TIMEOUT = 2.0;
 	
 	
-	final static public double ROBOT_WIDTH = 34.0;
-	final static public double ROBOT_LENGTH = 39.0;
+	final static public double ROBOT_WIDTH = 34.0; //includes bumpers
+	final static public double ROBOT_LENGTH = 39.0; //includes bumpers
 	final static public double HALF_ROBOT_LENGTH = ROBOT_LENGTH/2;
 	final static public double HALF_ROBOT_WIDTH = ROBOT_WIDTH/2;
 
@@ -89,9 +89,9 @@ public class CatzConstants
 	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
 	
 	
-	final static public double AUTO_STARTPOS_DEF_SPEED = 0.5;
-	final static public double AUTO_STARTPOS_DEF_DISTANCE = 10.0;
-	final static public double AUTO_STARTPOS_DEF_TIMEOUT = 3.0;
+	final static public double AUTO_STARTPOS_DEF_SPEED = 0.6;
+	final static public double AUTO_STARTPOS_DEF_DISTANCE = 120.0;
+	final static public double AUTO_STARTPOS_DEF_TIMEOUT = 5.0;
 
 	final static public double CUBE_OUTTAKE_WAIT_TIME = 0.5;
 	final static public double CUBE_INTAKE_WAIT_TIME = 0.4;

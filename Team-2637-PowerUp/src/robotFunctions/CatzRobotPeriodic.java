@@ -26,13 +26,15 @@ public class CatzRobotPeriodic
 
 	public static void runRobotPeriodic(){
 	
-		runPositionSelector();
 		updateSmartDashboard();
 
 		//System.out.println(CatzRobotMap.climberMotor.getOutputCurrent());
 		
 	} 
-	
+	public static void runDisabledPeriodic()
+	{
+		runPositionSelector();
+	}
 	public static void runPositionSelector() {
 	
 		check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
@@ -65,6 +67,7 @@ public class CatzRobotPeriodic
 	
 	public static void updateSmartDashboard() {
 		
+		SmartDashboard.putBoolean("Use default autonomous?", false);
 		SmartDashboard.putNumber("navX",                      CatzRobotMap.navx.getAngle());
 		SmartDashboard.putNumber("Distance of Left Encoder",  CatzRobotMap.wheelEncoderL.getDistance());
 		SmartDashboard.putNumber("Distance of Right Encoder", CatzRobotMap.wheelEncoderR.getDistance());

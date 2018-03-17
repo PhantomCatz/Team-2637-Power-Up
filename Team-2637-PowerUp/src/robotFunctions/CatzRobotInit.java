@@ -17,6 +17,7 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.CatzConstants;
@@ -32,11 +33,14 @@ public class CatzRobotInit
 	
 	public static void runRobotInit() 
 	{
-
 		CatzRobotMap.instantiateRobot();
 		CatzRobotMap.liftEncoder.reset();
 		setSmartDashboard();
-		//cameraSetup();
+		cameraSetup();
+	}
+	public static void runDisabledInit() {
+		CatzRobotMap.liftEncoder.reset();
+		setSmartDashboard();
 	}
 	
 	public static void setSmartDashboard() {

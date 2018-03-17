@@ -28,11 +28,20 @@ public class Robot extends IterativeRobot
 	
 	@Override
 	public void robotPeriodic()
-	{
+	{	
 		CatzRobotPeriodic.runRobotPeriodic();
-
 	}
 	
+	@Override
+	public void disabledInit() 
+	{
+		CatzRobotInit.runDisabledInit();
+	}
+	@Override
+	public void disabledPeriodic()
+	{
+		CatzRobotPeriodic.runDisabledPeriodic();
+	}
 	@Override
 	public void autonomousInit() 
 	{
