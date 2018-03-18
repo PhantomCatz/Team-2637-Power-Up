@@ -123,29 +123,26 @@ public class CatzTeleopPeriodic {
 		} 
 		else 
 		{
-			if (CatzRobotMap.lifterLimitTop.get() == false && CatzRobotMap.lifterLimitBottom.get() == false) 
+			if (CatzRobotMap.lifterLimitTop.get() == true) 
 			{
-				CatzRobotMap.lifterL.set(power);
-				CatzRobotMap.lifterR.set(power);
+				if(power <= .0)
+				{
+					CatzRobotMap.lifterL.set(power);
+					CatzRobotMap.lifterR.set(power);
+				}
+			}
+			else if(CatzRobotMap.lifterLimitBottom.get() == true)
+			{
+				if(power >= .0)
+				{
+					CatzRobotMap.lifterL.set(power);
+					CatzRobotMap.lifterR.set(power);
+				}
 			}
 			else 
 			{
-				if (CatzRobotMap.lifterLimitTop.get() == true)//power <= .0) 
-				{
-					if(power <= .0)
-					{
-						CatzRobotMap.lifterL.set(power);
-						CatzRobotMap.lifterR.set(power);
-					}
-				}
-				else
-				{
-					if(power >= .0)
-					{
-						CatzRobotMap.lifterL.set(power);
-						CatzRobotMap.lifterR.set(power);
-					}
-				}
+				CatzRobotMap.lifterL.set(power);
+				CatzRobotMap.lifterR.set(power);
 			}
 		}
 	}
