@@ -137,7 +137,7 @@ public class CatzRobotMap
 			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
 		}
 		lifterLimitTop = new DigitalInput(6);
-		lifterLimitBottom = new DigitalInput(0); //need port for bottom limit switch
+		lifterLimitBottom = new DigitalInput(7);
 		
 		if(using2ndBot) {
 			intakeRight   = new Spark (7);
