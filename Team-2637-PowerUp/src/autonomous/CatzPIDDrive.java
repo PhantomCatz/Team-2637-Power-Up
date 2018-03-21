@@ -27,6 +27,10 @@ public class CatzPIDDrive {
 	private final static double PID_DRIVE_BRAKE_TIME = 0.25;
 	private final static double PID_DRIVE_FILTER_CONSTANT = .5;
 
+	private final static double PID_DRIVE_POWER_KP = 0;
+	private final static double PID_DRIVE_MAX_POS_POWER = 1;
+	private final static double PID_DRIVE_MAX_NEG_POWER = -1;
+	
 	/****************************************************************************
 	 * PID Drive Variables
 	 ****************************************************************************/
@@ -65,7 +69,7 @@ public class CatzPIDDrive {
 
 	private static double timeout = 0.0;
 
-	public static void PIDDriveNoTrig(double drivePower, double distance, double timeoutSeconds) {
+	public static void PIDDriveNoTrig(double distance, double timeoutSeconds) {
 		functionTimer = new Timer();
 		loopTimer     = new Timer();
 		
@@ -79,7 +83,7 @@ public class CatzPIDDrive {
 		functionTimer.start();
 
 		distanceAbs = Math.abs(distance);
-		power = drivePower;
+		power = distanceAbs * PID_DRIVE_POWER_KP;
 
 		CatzRobotMap.wheelEncoderL.reset();
 		CatzRobotMap.wheelEncoderR.reset();
@@ -102,7 +106,8 @@ public class CatzPIDDrive {
 			loopTimer.start();
 			
 			distanceError = distanceAbs - Math.abs(CatzRobotMap.wheelEncoderL.getDistance());
-
+			
+			power = distanceError * PID_DRIVE_POWER_KP;
 
 			if (distanceError < PID_DRIVE_ERROR_THRESHOLD) {
 				done = true;
@@ -126,7 +131,17 @@ public class CatzPIDDrive {
 					previousDerivative = derivative;
 
 					turnValue = (-PID_DRIVE_KP * currentHeading) + (PID_DRIVE_KD * derivative);
-
+					
+					if (power >= 0.0) 
+					{
+						if (power > PID_DRIVE_MAX_POS_POWER)
+							power = PID_DRIVE_MAX_POS_POWER;
+							
+					} else if (power < 0.0) {
+						if (power < PID_DRIVE_MAX_NEG_POWER)
+							power = -PID_DRIVE_MAX_POS_POWER;
+					}
+					
 					CatzRobotMap.drive.arcadeDrive(power, turnValue);
 
 					lastHeading = currentHeading;
@@ -290,7 +305,7 @@ public class CatzPIDDrive {
 					 * A value of 0.0 means go straight.
 					 **************************************************************/
 					turnValue = ((-PID_DRIVE_KP * deltaAngleError) + (PID_DRIVE_KD * derivative))/90.0;
-
+					
 					CatzRobotMap.drive.arcadeDrive(power, turnValue);
 
 					printDebugData();

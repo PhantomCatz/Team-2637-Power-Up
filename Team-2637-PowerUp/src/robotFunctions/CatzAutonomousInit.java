@@ -58,13 +58,13 @@ public class CatzAutonomousInit {
 
 	if(SmartDashboard.getBoolean("Use default autonomous?", false)==true) {
 		if(check_boxL == true || check_boxR == true) {
-			CatzPIDDrive.PIDDriveNoTrig(0.7, 193, 5);
+			CatzPIDDrive.PIDDriveNoTrig(193, 5);
 		} else {
-			CatzPIDDrive.PIDDriveNoTrig(.6, (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  //Leaves the wall and drives to the switch
+			CatzPIDDrive.PIDDriveNoTrig((36 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  //Leaves the wall and drives to the switch
 			CatzPIDTurn.PIDturn(45, 1.0); 
-			CatzPIDDrive.PIDDriveNoTrig(.6, 65.0,3.0);  //Turns 45deg left and approaches the switch
+			CatzPIDDrive.PIDDriveNoTrig(65.0,3.0);  //Turns 45deg left and approaches the switch
 			CatzPIDTurn.PIDturn(-45, 1.0); 
-			CatzPIDDrive.PIDDriveNoTrig(.6, (45 - CatzConstants.HALF_ROBOT_LENGTH), 1); //Turns 45deg right and presses against the switch
+			CatzPIDDrive.PIDDriveNoTrig((45 - CatzConstants.HALF_ROBOT_LENGTH), 1); //Turns 45deg right and presses against the switch
 		}
 		
 	} else {
@@ -132,13 +132,13 @@ public class CatzAutonomousInit {
 	
 	if(SmartDashboard.getBoolean("Use default autonomous?", false)==true) {
 		if(check_boxL == true || check_boxR == true) {
-				CatzPIDDrive.PIDDriveNoTrig(0.7, 193, 5);
+				CatzPIDDrive.PIDDriveNoTrig(193, 5);
 		} else {
-			CatzPIDDrive.PIDDriveNoTrig(.6, (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  //Leaves the wall and drives to the switch
+			CatzPIDDrive.PIDDriveNoTrig((36 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  //Leaves the wall and drives to the switch
 			CatzPIDTurn.PIDturn(45, 1.0); 
-			CatzPIDDrive.PIDDriveNoTrig(.6, 65.0,3.0);  //Turns 45deg left and approaches the switch
+			CatzPIDDrive.PIDDriveNoTrig(65.0,3.0);  //Turns 45deg left and approaches the switch
 			CatzPIDTurn.PIDturn(-45, 1.0); 
-			CatzPIDDrive.PIDDriveNoTrig(.6, (45 - CatzConstants.HALF_ROBOT_LENGTH), 1); //Turns 45deg right and presses against the switch
+			CatzPIDDrive.PIDDriveNoTrig((45 - CatzConstants.HALF_ROBOT_LENGTH), 1); //Turns 45deg right and presses against the switch
 		}
 			
 	} else {

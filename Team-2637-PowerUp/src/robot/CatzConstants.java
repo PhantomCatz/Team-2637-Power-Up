@@ -88,7 +88,6 @@ public class CatzConstants
 	static public String TURN_KD_LABEL = "Turn KD";
 	static public String SCALE_FACTOR_LABEL = "Turn Scale Factor";
 	
-	
 	final static public double AUTO_STARTPOS_DEF_SPEED = 0.6;
 	final static public double AUTO_STARTPOS_DEF_DISTANCE = 120.0;
 	final static public double AUTO_STARTPOS_DEF_TIMEOUT = 5.0;

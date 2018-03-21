@@ -1,5 +1,7 @@
 package robotFunctions;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Timer;
 import mechanisms.CatzGrabber;
@@ -13,7 +15,7 @@ import robot.CatzRobotMap;
  * 2/16/2018 AL Revised driver controls to fun with 2 xbox
  * 3-17-18   DD Integrated bottom limit switch into lift controls
  * 
- * Controllers Methods: runGrabbercontrols,runLiftControls,unClimberControls,runTeleopPeriodic
+ * Controllers Methods: runGrabbercontrols, runLiftControls, runClimberControls, runTeleopPeriodic
  * 
  * Functionality: activates driver controls in periodic class
  *********************************************************/
@@ -29,7 +31,15 @@ public class CatzTeleopPeriodic {
 	private static double deltaLiftValue;
 	private static boolean liftDisabled = false;
 
+	
+	void inputCurrent(double speed)
+	{
+		ControlMode current = ControlMode.Current;
+		CatzRobotMap.fLeft.set(ControlMode.Current, speed);
+	}
+	
 	public static void runTeleopPeriodic() {
+		
 		runDriveTrainControls();
 		runGrabberControls();
 		runLiftControls();
