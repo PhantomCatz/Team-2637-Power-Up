@@ -13,7 +13,8 @@ import robot.CatzRobotMap;
 
 public class CatzAutonomousDoublePaths {
 
-	final static public double TO_GET_ACCUE = 7.0; //to get to the cube and Scale accurately
+	final static public double TO_GET_ACCUE = 7.0; //to get to the cube and Scale accurately 
+											  //AL how did you get this value?
 	final static public double PICK_UP_CUBE_TO_CUBE = 45.0; //go to the scale to pick up the cube
 	final static public double BACK_TO_SCALE = 45.0; //back to the scale to place the 2nd cube
 	final static public double TO_SCALE = 85.25 - //Distance from switch to wall

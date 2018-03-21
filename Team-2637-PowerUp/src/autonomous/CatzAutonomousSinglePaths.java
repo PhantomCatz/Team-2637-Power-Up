@@ -128,34 +128,6 @@ public class CatzAutonomousSinglePaths {
 		
 		Timer.delay(.5);
 		CatzRobotMap.lift.dropToHalfHeight();
-		
-		//Timer.delay(.4);
-	
-	//	CatzRobotMap.lift.dropToGroundHeight();   //waits for 2sec then drops to ground height
-		
-	/*	if(side.equalsIgnoreCase("left")) {
-		CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT);
-		} else {
-			CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT);
-
-		}
-		
-		CatzPIDDrive.PIDDriveNoTrig(.5, 112.8,
-				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 90deg right and drives towards the cubes
-
-		if (side.equalsIgnoreCase("left")) {
-			CatzPIDTurn.PIDturn(-90, CatzConstants.PID_DRIVE_TIMEOUT); 
-
-		} else {
-			CatzPIDTurn.PIDturn(90, CatzConstants.PID_DRIVE_TIMEOUT); 
-
-		}
-		
-		CatzPIDDrive.PIDDriveNoTrig(.5, (12 - CatzConstants.HALF_ROBOT_LENGTH),
-				CatzConstants.PID_DRIVE_TIMEOUT);  //Turns left and presses against cube
-
-		CatzRobotMap.grabber.intakeCube();  //Intakes the cube */
-
 	}
 	
 	public static void oppoScalePath (String side) {

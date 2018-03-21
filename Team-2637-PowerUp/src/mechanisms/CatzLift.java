@@ -107,7 +107,7 @@ public class CatzLift {
 				//double target = initialReading * 2;
 				//double error = target - initialReading;
 				timeout.start();
-				while (CatzRobotMap.lifterLimitBottom.get() && timeout.get() < 3) {
+				while (CatzRobotMap.lifterLimitBottom.get()==false && timeout.get() < 3) {
 					this.liftDown();
 					//error = target - CatzRobotMap.liftEncoder.get();
 				}
