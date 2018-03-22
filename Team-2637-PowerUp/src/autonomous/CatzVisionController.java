@@ -3,6 +3,7 @@ package autonomous;
 import edu.wpi.first.wpilibj.Timer;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
+import server.UDPServer;
 import server.VisionObject;
 
 public class CatzVisionController {
@@ -40,8 +41,11 @@ public class CatzVisionController {
 
 		functionTimer.start();
 		pdTimer.start();
+		
+		VisionObject visionPacket;
 
 		while (done == false) {
+			visionPacket = UDPServer.getDatagramPacket();
 			currentHeadingError = 0; //should be heading of vision object
 			pdTimer.stop();
 			

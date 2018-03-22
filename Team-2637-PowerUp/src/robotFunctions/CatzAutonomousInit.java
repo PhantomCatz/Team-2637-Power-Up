@@ -164,17 +164,17 @@ public class CatzAutonomousInit {
 					CatzAutonomousDoublePaths.middleDoubleCube_LLX();
 				} else if (gameData.charAt(1) == 'R') {
 					printOutDebugData("middle_Left Switch right Scale");
-					CatzAutonomousDoublePaths.middleDoubleCube_LRX();
+					CatzAutonomousDoublePaths.middleDoubleCube_LXX();
 				}
 				
 			} else if (gameData.charAt(0) == 'R') {
 				
 				if (gameData.charAt(1) == 'R') {
 					printOutDebugData("middle_right Switch right Scale");
-					CatzAutonomousDoublePaths.middleDoubleCube_RRX();
+					CatzAutonomousDoublePaths.middleDoubleCube_RXX();
 				} else if (gameData.charAt(1) == 'L') {
 					printOutDebugData("middle_right Switch left Scale");
-					CatzAutonomousDoublePaths.middleDoubleCube_RLX();
+					CatzAutonomousDoublePaths.middleDoubleCube_RXX();
 				} 
 			}
 			
