@@ -69,7 +69,6 @@ public class CatzRobotPeriodic
 	
 	public static void updateSmartDashboard() {
 		
-		SmartDashboard.putBoolean("Use default autonomous?", false);
 		SmartDashboard.putNumber("navX",                      CatzRobotMap.navx.getAngle());
 		SmartDashboard.putNumber("Distance of Left Encoder",  CatzRobotMap.wheelEncoderL.getDistance());
 		SmartDashboard.putNumber("Distance of Right Encoder", CatzRobotMap.wheelEncoderR.getDistance());
