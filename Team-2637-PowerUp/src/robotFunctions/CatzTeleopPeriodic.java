@@ -3,10 +3,13 @@ package robotFunctions;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Timer;
 import mechanisms.CatzGrabber;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
+import server.UDPServer;
+import server.VisionObject;
 
 /**********************************************************
  * Author : Andrew Lai 
@@ -38,8 +41,7 @@ public class CatzTeleopPeriodic {
 		CatzRobotMap.fLeft.set(ControlMode.Current, speed);
 	}
 	
-	public static void runTeleopPeriodic() {
-		
+	public static void runTeleopPeriodic() {	
 		runDriveTrainControls();
 		runGrabberControls();
 		runLiftControls();
@@ -65,9 +67,9 @@ public class CatzTeleopPeriodic {
 	}
 
 	private static void runGrabberControls() {
-		CatzRobotMap.grabber
-				.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger() - CatzRobotMap.xboxDrive.getLeftTrigger());
-		// -CatzRobotMap.xboxAux.getRightTrigger());
+		
+		//intake controls
+		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger() - CatzRobotMap.xboxDrive.getLeftTrigger());
 
 		// bicep controls
 		if (CatzRobotMap.grabber.forearmOpen == false) {
@@ -94,11 +96,6 @@ public class CatzTeleopPeriodic {
 			CatzRobotMap.grabber.openForearm(0.0);
 			CatzRobotMap.grabber.deployBicep();
 		}
-
-		// aux driver can open forearms only
-		// if(CatzRobotMap.xboxAux.getBButton()) {
-		// CatzRobotMap.grabber.openForearm(0.0);
-		// }
 
 		// rumble if biceps are down
 		if (CatzGrabber.bicepDeployed == true) {
@@ -156,7 +153,18 @@ public class CatzTeleopPeriodic {
 			}
 		}
 	}
+	
+	private static void runClimberControls() {
+		CatzRobotMap.climberMechanism.setClimberSpeed(Math.abs(CatzRobotMap.xboxAux.getRightStickY()));
+	}
 
+	static VisionObject vision;
+	private static void runPacketTester() {
+		vision = UDPServer.getDatagramPacket();
+		SmartDashboard.putNumber("Vision blob distance", vision.getDistance());
+		SmartDashboard.putNumber("Vision blob heading", vision.getHeading());
+	}
+	
 	private static void printOutDebugData(String info) {
 		if (CatzRobotMap.debugMode == true) {
 			double currentTime = CatzRobotMap.globalTimer.get();
@@ -164,9 +172,7 @@ public class CatzTeleopPeriodic {
 		}
 	}
 
-	private static void runClimberControls() {
-		CatzRobotMap.climberMechanism.setClimberSpeed(Math.abs(CatzRobotMap.xboxAux.getRightStickY()));
-	}
+
 
 	private void noStallLift() {
 		double power = 0;

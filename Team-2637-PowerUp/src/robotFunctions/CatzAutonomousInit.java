@@ -207,6 +207,7 @@ public class CatzAutonomousInit {
 	public static void setMechanisms() {
 		CatzRobotMap.liftEncoder.reset();
 		CatzRobotMap.globalTimer.reset();
+		CatzRobotMap.globalTimer.start();
 		CatzRobotMap.grabber.closeForearm(0.0);
 		CatzRobotMap.grabber.retractBicep(0.0);
 	}
