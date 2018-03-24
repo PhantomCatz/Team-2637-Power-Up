@@ -27,7 +27,9 @@ public class CatzRobotPeriodic
 	public static void runRobotPeriodic(){
 	
 		updateSmartDashboard();
-
+		if(CatzRobotMap.lifterLimitBottom.get()==true) {
+			CatzRobotMap.liftEncoder.reset();
+		}
 		//System.out.println(CatzRobotMap.climberMotor.getOutputCurrent());
 		
 	} 
