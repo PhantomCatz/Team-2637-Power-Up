@@ -85,6 +85,8 @@ public class CatzRobotPeriodic
 		SmartDashboard.putNumber("Intake Speed",         CatzRobotMap.xboxDrive.getRightTrigger()-CatzRobotMap.xboxDrive.getLeftTrigger());
 		SmartDashboard.putBoolean("Drive Controls Are Reversed", CatzTeleopPeriodic.reversed);
 		
+		SmartDashboard.putNumber("lift motor power", CatzRobotMap.lifterL.get());
+		SmartDashboard.putNumber("lift motor power", CatzRobotMap.lifterR.get());
 	}
 	
 	public static void updatePIDTurnConstants()   {

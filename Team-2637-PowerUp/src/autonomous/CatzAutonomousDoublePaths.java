@@ -94,41 +94,34 @@ public class CatzAutonomousDoublePaths {
 	
 	public static void middleDoubleCube_LXX() { 
 		
-		/************************************
+		/**********************************************
 		 * The following code:
-		 * Drives forward to the switch
-		 * Places cube in the switch
-		 ************************************/
+		 * Drives to the switch
+		 * Places a cube in the switch
+		 * Goes around the switch and grabs a cube
+		 *********************************************/
 		
-		CatzPIDDrive.PIDDriveNoTrig((66.5 - CatzConstants.HALF_ROBOT_LENGTH),
-					CatzConstants.PID_DRIVE_TIMEOUT);  //Leaves the wall
-																														
-		CatzPIDTurn.PIDturn(-60, CatzConstants.PID_TURN_TIMEOUT);
-		
-		CatzPIDDrive.PIDDriveNoTrig(64.0,            
-					CatzConstants.PID_TURN_TIMEOUT);  //Turns 60deg right and drives towards the switch
 		//Leaves the wall and drives to the switch
-		CatzPIDDrive.PIDDriveNoTrig(.75, (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.5);  
+		CatzPIDDrive.PIDDriveNoTrig((31 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  
 		
+		// AL timeout was 1
+		CatzPIDTurn.PIDturn(-45, 1.1);  
+
+		//Turns 45deg left and approaches the switch
+		CatzPIDDrive.PIDDriveNoTrig(69.2,3.5);  
+
 		CatzPIDTurn.PIDturn(45, 1.1);
-
-		 //Turns 45deg left and approaches the switch
-		CatzPIDDrive.PIDDriveNoTrig(.7, 60.0, 3.0); //AL was 65
-
-		CatzPIDTurn.PIDturn(-45, 1.1);
 			
 		//not needed to get cube into switch
-	//	CatzRobotMap.lift.liftToSwitchHeight();  
+		CatzRobotMap.lift.liftToSwitchHeight(); 
 		
-		CatzPIDDrive.PIDDriveNoTrig((36.5 - CatzConstants.HALF_ROBOT_LENGTH), 
-					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 30deg left and presses up against the switch
 		//Turns 45deg right and presses against the switch
-		CatzPIDDrive.PIDDriveNoTrig(.75, (12.5), 1.5);  // AL was 45
-		CatzPIDDrive.PIDDriveNoTrig(.45, (7), .6);     //timeout was 1.5
+		CatzPIDDrive.PIDDriveNoTrig(17, 1); //AL was 22.5in
+		CatzPIDDrive.PIDDriveNoTrig(5.5, .7);
 		
 		//Fires cube into the switch
-		CatzRobotMap.grabber.placeCube();
-		
+		CatzRobotMap.grabber.placeCube();  
+	
 		
 		/*****************************************
 		 * The following code:
@@ -194,45 +187,33 @@ public class CatzAutonomousDoublePaths {
 	
 	public static void middleDoubleCube_RXX() { 
 		
-		/************************************
+		/**********************************************
 		 * The following code:
-		 * Drives forward to the switch
-		 * Places cube in the switch
-		 ************************************/
+		 * Drives to the switch
+		 * Places a cube in the switch
+		 * Goes around the switch and grabs a cube
+		 *********************************************/
 		
-		CatzPIDDrive.PIDDriveNoTrig((66.5 - CatzConstants.HALF_ROBOT_LENGTH),
-					CatzConstants.PID_DRIVE_TIMEOUT);  //Leaves the wall
-																														
-		CatzPIDTurn.PIDturn(60, CatzConstants.PID_TURN_TIMEOUT);
+		//Leaves the wall and drives to the switch
+		CatzPIDDrive.PIDDriveNoTrig( (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.5);  
 		
-		CatzPIDDrive.PIDDriveNoTrig(64.0,            
-					CatzConstants.PID_TURN_TIMEOUT);  //Turns 60deg right and drives towards the switch
-		
-		CatzPIDTurn.PIDturn(-30, CatzConstants.PID_TURN_TIMEOUT);
-		
-		CatzPIDDrive.PIDDriveNoTrig((36.5 - CatzConstants.HALF_ROBOT_LENGTH), 
-					CatzConstants.PID_DRIVE_TIMEOUT);  //Turns 30deg left and presses up against the switch
-		
-		CatzRobotMap.grabber.shootCube();  //Fires cube into the switch
-				//Leaves the wall and drives to the switch
-				CatzPIDDrive.PIDDriveNoTrig(.75, (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.5);  
-				
-				CatzPIDTurn.PIDturn(45, 1.1);
+		CatzPIDTurn.PIDturn(45, 1.1);
 
-				 //Turns 45deg left and approaches the switch
-				CatzPIDDrive.PIDDriveNoTrig(.7, 60.0, 3.0); //AL was 65
+		 //Turns 45deg left and approaches the switch
+		CatzPIDDrive.PIDDriveNoTrig(60.0, 3.0); //AL was 65
 
-				CatzPIDTurn.PIDturn(-45, 1.1);
-					
-				//not needed to get cube into switch
-			//	CatzRobotMap.lift.liftToSwitchHeight();  
-				
-				//Turns 45deg right and presses against the switch
-				CatzPIDDrive.PIDDriveNoTrig(.75, (12.5), 1.5);  // AL was 45
-				CatzPIDDrive.PIDDriveNoTrig(.45, (7), .6);     //timeout was 1.5
-				
-				//Fires cube into the switch
-				CatzRobotMap.grabber.placeCube();
+		CatzPIDTurn.PIDturn(-45, 1.1);
+			
+		//not needed to get cube into switch
+		CatzRobotMap.lift.liftToSwitchHeight();  
+		
+		//Turns 45deg right and presses against the switch
+		CatzPIDDrive.PIDDriveNoTrig((12.5), 1.5);  // AL was 45
+		CatzPIDDrive.PIDDriveNoTrig((7), .6);     //timeout was 1.5
+		
+		//Fires cube into the switch
+		CatzRobotMap.grabber.placeCube();  
+
 		
 		
 		/*****************************************

@@ -89,12 +89,14 @@ public class CatzRobotMap
 	{	
 		globalTimer = new Timer();
 		
-		if(usingCubeee) {
+		if(usingCubeee) 
+		{
 			fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT); 
 			rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
 			fLeft  = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_FRONT);
 			rLeft  = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);
-		} else {
+		} 
+		else {
 			fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_R); 
 			rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_R);
 			fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_L);
