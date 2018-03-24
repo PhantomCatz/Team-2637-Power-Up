@@ -47,7 +47,9 @@ public class CatzRobotInit
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORL, false);
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORM, false);
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORR, false);
-		
+	
+		SmartDashboard.putBoolean("Use default autonomous?", false);
+
 	}
 	
 	public static void cameraSetup()
