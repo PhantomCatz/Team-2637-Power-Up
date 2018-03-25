@@ -54,11 +54,10 @@ public class CatzRobotInit
 	
 	public static void cameraSetup()
 	{
-		CameraServer.getInstance().startAutomaticCapture(0);
+		CameraServer.getInstance().startAutomaticCapture();
 		 new Thread(() -> {
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
              
-             camera.setResolution(640, 480);
              
              CvSink cvSink = CameraServer.getInstance().getVideo();
              CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);

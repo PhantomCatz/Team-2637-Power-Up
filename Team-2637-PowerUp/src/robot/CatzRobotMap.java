@@ -59,6 +59,7 @@ public class CatzRobotMap
 	public static Timer globalTimer;
 	public static CatzXboxController xboxDrive;
 	public static CatzXboxController xboxAux;
+	public static CatzXboxController xboxTest;
 	
 	public static CatzDrive drive;
 	public static SpeedControllerGroup leftMotors;
@@ -133,6 +134,7 @@ public class CatzRobotMap
 		
 		xboxDrive = new CatzXboxController(CatzConstants.DRIVE_XBOX_PORT);
 		xboxAux   = new CatzXboxController(CatzConstants.AUX_XBOX_PORT);
+		xboxTest = new CatzXboxController(2);
 		
 		lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
 		lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);

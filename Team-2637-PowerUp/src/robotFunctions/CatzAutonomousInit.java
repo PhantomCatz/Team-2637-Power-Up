@@ -30,15 +30,17 @@ public class CatzAutonomousInit {
 	public static void runAutonomousInit()
 	{
 		printOutDebugData("autonomousInit");
-		choosePathDouble();
+
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
+		
+		choosePathDouble();
 		//setMechanisms();
 		//CatzPIDDrive.PIDDrive(.5, 48, 4);
 		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
 		//CatzRobotMap.lift.liftToScaleHeight();
 		//choosePath();
-		//CatzPIDTurn.PIDturn(90, 5);
+		//CatzPIDTurn.PIDturn(120, 5);
 	}
 
 	

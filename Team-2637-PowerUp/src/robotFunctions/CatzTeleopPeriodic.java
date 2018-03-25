@@ -1,7 +1,5 @@
 package robotFunctions;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Timer;
 import mechanisms.CatzGrabber;
@@ -30,13 +28,6 @@ public class CatzTeleopPeriodic {
 	private static double lastLiftValue = 0;
 	private static double deltaLiftValue;
 	private static boolean liftDisabled = false;
-
-	
-	void inputCurrent(double speed)
-	{
-		ControlMode current = ControlMode.Current;
-		CatzRobotMap.fLeft.set(ControlMode.Current, speed);
-	}
 	
 	public static void runTeleopPeriodic() {
 		
@@ -44,6 +35,7 @@ public class CatzTeleopPeriodic {
 		runGrabberControls();
 		runLiftControls();
 		runClimberControls();
+		runTestControls();
 	}
 
 	private static void runDriveTrainControls() {
@@ -207,5 +199,14 @@ public class CatzTeleopPeriodic {
 
 		lastLiftValue = currentLiftValue;
 
+	}
+	
+	private static void runTestControls() {
+		if(CatzRobotMap.xboxTest.getAButton()) {
+			CatzRobotMap.lift.liftToScaleHeight();
+		}
+		if(CatzRobotMap.xboxTest.getBButton()) {
+			CatzRobotMap.lift.dropToGroundHeight();
+		}
 	}
 }

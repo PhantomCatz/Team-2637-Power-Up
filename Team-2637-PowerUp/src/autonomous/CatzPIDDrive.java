@@ -20,7 +20,7 @@ public class CatzPIDDrive {
 
 	final static double PID_DRIVE_ERROR_THRESHOLD = 1.0; // Stop within 1 inch
 
-	private final static double PID_DRIVE_KP = 0.12; //originally .15
+	private final static double PID_DRIVE_KP = 0.105; //originally .15
 	private final static double PID_DRIVE_KD = 0.03; // ORIGINALLY .18
 
 	static private double PID_DRIVE_BRAKE_POWER = 0.43;
@@ -153,7 +153,7 @@ public class CatzPIDDrive {
 
 	}
 	
-	public static void PIDDriveNoTrig(double distance, double timeoutSeconds) {
+	public static void PIDDriveNoTrigDistanceBased(double distance, double timeoutSeconds) {
 		functionTimer = new Timer();
 		loopTimer     = new Timer();
 		
