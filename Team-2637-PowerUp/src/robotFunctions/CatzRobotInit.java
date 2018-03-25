@@ -47,16 +47,17 @@ public class CatzRobotInit
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORL, false);
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORM, false);
 		SmartDashboard.putBoolean(CatzConstants.POSITION_SELECTORR, false);
-		
+	
+		SmartDashboard.putBoolean("Use default autonomous?", false);
+
 	}
 	
 	public static void cameraSetup()
 	{
-		CameraServer.getInstance().startAutomaticCapture(0);
+		CameraServer.getInstance().startAutomaticCapture();
 		 new Thread(() -> {
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
              
-             camera.setResolution(640, 480);
              
              CvSink cvSink = CameraServer.getInstance().getVideo();
              CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);

@@ -3,6 +3,7 @@ package autonomous;
 import edu.wpi.first.wpilibj.Timer;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
+import server.UDPServer;
 import server.VisionObject;
 
 public class CatzVisionController {
@@ -16,7 +17,7 @@ public class CatzVisionController {
 	private static final double BRAKE_POWER = 0.43;
 	private static final double BRAKE_TIME = 0.25;
 	
-	private static final double IDEAL_BLOCK_DISTANCE = 0.0; //NEED TO FIND THIS VALUE
+	private static final double IDEAL_BLOCK_DISTANCE = .5; //NEED TO FIND THIS VALUE
 	private static final double DISTANCE_ERROR_THRESHOLD = 5.0; //NEED TO TEST THIS VALUE
 	//************************************************************************************
 	
@@ -40,9 +41,12 @@ public class CatzVisionController {
 
 		functionTimer.start();
 		pdTimer.start();
+		
+		VisionObject visionPacket;
 
 		while (done == false) {
-			currentHeadingError = 0; //should be heading of vision object
+			visionPacket = UDPServer.getDatagramPacket();
+			currentHeadingError = visionPacket.getHeading();
 			pdTimer.stop();
 			
 			deltaTimeSec = pdTimer.get();
@@ -50,7 +54,7 @@ public class CatzVisionController {
 			pdTimer.reset();
 			pdTimer.start();
 			
-			distanceError = 0.0; //should be distance of vision object - IDEAL_BLOCK_DISTANCE
+			distanceError = visionPacket.getDistance() - IDEAL_BLOCK_DISTANCE;
 
 
 			if (distanceError < DISTANCE_ERROR_THRESHOLD) {

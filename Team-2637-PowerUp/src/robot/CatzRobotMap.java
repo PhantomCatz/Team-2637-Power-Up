@@ -17,6 +17,7 @@ import mechanisms.CatzClimber;
 import mechanisms.CatzGrabber;
 import mechanisms.CatzLift;
 import robotFunctions.CatzAutonomousInit;
+import server.UDPServer;
 
 /*
  *  Author : Derek Duenas
@@ -58,6 +59,7 @@ public class CatzRobotMap
 	public static Timer globalTimer;
 	public static CatzXboxController xboxDrive;
 	public static CatzXboxController xboxAux;
+	public static CatzXboxController xboxTest;
 	
 	public static CatzDrive drive;
 	public static SpeedControllerGroup leftMotors;
@@ -72,6 +74,8 @@ public class CatzRobotMap
 	public static DigitalInput lifterLimitBottom;
 	
 	public static DecimalFormat secondsFormat;
+	
+	public static UDPServer server;
 
 	public static boolean debugMode = true;
 	public static boolean usingCubeee = false;
@@ -86,12 +90,14 @@ public class CatzRobotMap
 	{	
 		globalTimer = new Timer();
 		
-		if(usingCubeee) {
+		if(usingCubeee) 
+		{
 			fRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_FRONT); 
 			rRight = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_R_REAR);
 			fLeft  = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_FRONT);
 			rLeft  = new WPI_TalonSRX(CatzConstants.CUBEE_TALON_ID_L_REAR);
-		} else {
+		} 
+		else {
 			fRight = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_R); 
 			rRight = new WPI_TalonSRX(CatzConstants.TALON_ID_REAR_R);
 			fLeft  = new WPI_TalonSRX(CatzConstants.TALON_ID_FRONT_L);
@@ -128,30 +134,19 @@ public class CatzRobotMap
 		
 		xboxDrive = new CatzXboxController(CatzConstants.DRIVE_XBOX_PORT);
 		xboxAux   = new CatzXboxController(CatzConstants.AUX_XBOX_PORT);
+		xboxTest = new CatzXboxController(2);
 		
-		if(using2ndBot) {
-			lifterR = new Spark(4);  //PWM Ports 0 and 1 do not work on 2nd robot's roboRio
-			lifterL = new Spark(9);
-		} else {
-			lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
-			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
-		}
-		lifterLimitTop = new DigitalInput(6);
-		lifterLimitBottom = new DigitalInput(7);
+		lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
+		lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
+
+		lifterLimitTop =    new DigitalInput(CatzConstants.TOP_LIFT_LIMIT_DIO);
+		lifterLimitBottom = new DigitalInput(CatzConstants.BOT_LIFT_LIMIT_DIO);
 		
-		if(using2ndBot) {
-			intakeRight   = new Spark (7);
-			intakeLeft    = new Spark (8);
-			intakeForearm = new Solenoid(0);
-			intakeBicep   = new Solenoid(1);
-		} else {
-			
-			
-			intakeRight   = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
-			intakeLeft    = new Spark(CatzConstants.LEFT_INTAKE_PWM);
-			intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
-			intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);
-		}
+
+		intakeRight   = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
+		intakeLeft    = new Spark(CatzConstants.LEFT_INTAKE_PWM);
+		intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
+		intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);
 		printOutDebugData("Successfully initialized auxilary actuators");
 		
 		climberMechanism = new CatzClimber();
@@ -160,11 +155,7 @@ public class CatzRobotMap
 
 		secondsFormat = new DecimalFormat("#.###");
 		
-		if(using2ndBot) {
-			//fRight.setInverted(true);
-			//fLeft.setInverted(true);
-			//lifterL.setInverted(true);
-		}
+		server  = new UDPServer();
 		//logger = new CatzLogger();
 	}
 	public static void setDebugModeEnabled(boolean enabled) 

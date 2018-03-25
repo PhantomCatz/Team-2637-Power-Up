@@ -14,25 +14,25 @@ public class VisionObject implements Serializable{
 	private double heading;
 	private double distance;
 
-	public double GetHeading() {
+	public double getHeading() {
 		return heading;
 	}
 
-	public void SetHeading(double _heading) {
+	public void getHeading(double _heading) {
 		this.heading = _heading;
 	}
 
-	public double GetDistance() {
+	public double getDistance() {
 		return distance;
 	}
 
-	public void SetDistance(double _distance) {
+	public void getDistance(double _distance) {
 		this.distance = _distance;
 	}
 	
 
 	public String toString() {
-		return "{H:" + GetHeading() + ",D:" + GetDistance() + "}";
+		return "{H:" + getHeading() + ",D:" + getDistance() + "}";
 	}
 	
 }

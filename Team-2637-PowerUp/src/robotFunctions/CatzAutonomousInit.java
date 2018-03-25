@@ -29,17 +29,18 @@ public class CatzAutonomousInit {
 	
 	public static void runAutonomousInit()
 	{
-
 		printOutDebugData("autonomousInit");
-		//choosePathDouble();
+
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
-		setMechanisms();
+		
+		choosePathDouble();
+		//setMechanisms();
 		//CatzPIDDrive.PIDDrive(.5, 48, 4);
 		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
 		//CatzRobotMap.lift.liftToScaleHeight();
-		choosePath();
-		//CatzPIDTurn.PIDturn(90, 5);
+		//choosePath();
+		//CatzPIDTurn.PIDturn(120, 5);
 	}
 
 	
@@ -58,8 +59,10 @@ public class CatzAutonomousInit {
 
 	if(SmartDashboard.getBoolean("Use default autonomous?", false)==true) {
 		if(check_boxL == true || check_boxR == true) {
+			System.out.println("default auto left and right");
 			CatzPIDDrive.PIDDriveNoTrig(0.7, 193, 5);
 		} else {
+			System.out.println("default middle");
 			CatzPIDDrive.PIDDriveNoTrig(.6, (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  //Leaves the wall and drives to the switch
 			CatzPIDTurn.PIDturn(45, 1.0); 
 			CatzPIDDrive.PIDDriveNoTrig(.6, 65.0,3.0);  //Turns 45deg left and approaches the switch
@@ -111,8 +114,8 @@ public class CatzAutonomousInit {
 		} else {
 			printOutDebugData("Init failed");
 			CatzPIDDrive.PIDDrive(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
-				            	  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
-				                  CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT); //if all else fails, just drive forward
+			            	  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
+			                  CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT); //if all else fails, just drive forward
 			}
 		
 		}
@@ -132,8 +135,10 @@ public class CatzAutonomousInit {
 	
 	if(SmartDashboard.getBoolean("Use default autonomous?", false)==true) {
 		if(check_boxL == true || check_boxR == true) {
-				CatzPIDDrive.PIDDriveNoTrig(0.7, 193, 5);
+			System.out.println("default auto - left or right");
+			CatzPIDDrive.PIDDriveNoTrig(0.7, 193, 5);
 		} else {
+			System.out.println("default auto - middle");
 			CatzPIDDrive.PIDDriveNoTrig(.6, (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  //Leaves the wall and drives to the switch
 			CatzPIDTurn.PIDturn(45, 1.0); 
 			CatzPIDDrive.PIDDriveNoTrig(.6, 65.0,3.0);  //Turns 45deg left and approaches the switch
@@ -158,26 +163,13 @@ public class CatzAutonomousInit {
 		System.out.println("Starting position Middle");
 
 			if (gameData.charAt(0) == 'L') {
-				
-				if (gameData.charAt(1) == 'L') {
-					printOutDebugData("middle_left Switch left Scale");
-					CatzAutonomousDoublePaths.middleDoubleCube_LLX();
-				} else if (gameData.charAt(1) == 'R') {
-					printOutDebugData("middle_Left Switch right Scale");
-					CatzAutonomousDoublePaths.middleDoubleCube_LRX();
-				}
-				
+				printOutDebugData("middle left auto");
+				CatzAutonomousDoublePaths.middleDoubleCube_LXX();
 			} else if (gameData.charAt(0) == 'R') {
-				
-				if (gameData.charAt(1) == 'R') {
-					printOutDebugData("middle_right Switch right Scale");
-					CatzAutonomousDoublePaths.middleDoubleCube_RRX();
-				} else if (gameData.charAt(1) == 'L') {
-					printOutDebugData("middle_right Switch left Scale");
-					CatzAutonomousDoublePaths.middleDoubleCube_RLX();
-				} 
-			}
-			
+				printOutDebugData("middle right auto");
+				CatzAutonomousDoublePaths.middleDoubleCube_RXX();
+			} 
+		
 	} else if (check_boxR == true) {
 		System.out.println("Starting position Right");
 
@@ -189,9 +181,9 @@ public class CatzAutonomousInit {
 			CatzAutonomousDoublePaths.rightDoubleCube_XRX();
 		}
 				
-		} else {
-			initSuccessFlag = false;
-		} 
+	} else {
+		initSuccessFlag = false;
+	} 
 	
 	if (initSuccessFlag == true) {
 		printOutDebugData("Init Done");
@@ -205,6 +197,7 @@ public class CatzAutonomousInit {
 		}
 	
 	}
+
 			
 	private static void printOutDebugData(String info) {
 		if(CatzRobotMap.debugMode == true) {

@@ -20,13 +20,16 @@ public class CatzPIDDrive {
 
 	final static double PID_DRIVE_ERROR_THRESHOLD = 1.0; // Stop within 1 inch
 
-	private final static double PID_DRIVE_KP = 0.12; //originally .15
+	private final static double PID_DRIVE_KP = 0.105; //originally .15
 	private final static double PID_DRIVE_KD = 0.03; // ORIGINALLY .18
 
 	static private double PID_DRIVE_BRAKE_POWER = 0.43;
 	private final static double PID_DRIVE_BRAKE_TIME = 0.25;
 	private final static double PID_DRIVE_FILTER_CONSTANT = .5;
 
+	private final static double PID_DRIVE_MAX_POS_POWER = 1;
+	private final static double PID_DRIVE_MAX_NEG_POWER = -1;
+	
 	/****************************************************************************
 	 * PID Drive Variables
 	 ****************************************************************************/
@@ -150,8 +153,102 @@ public class CatzPIDDrive {
 
 	}
 	
-	public static void PIDDrive(double drivePower, double distance, double timeoutSeconds) {
+	public static void PIDDriveNoTrigDistanceBased(double distance, double timeoutSeconds) {
+		functionTimer = new Timer();
+		loopTimer     = new Timer();
+		
+		double lastHeading = 0;
+		double deltaError;
+		
+		done = false;
 
+		functionTimer.stop();
+		functionTimer.reset();
+		functionTimer.start();
+
+		distanceAbs = Math.abs(distance);
+
+		CatzRobotMap.wheelEncoderL.reset();
+		CatzRobotMap.wheelEncoderR.reset();
+		CatzRobotMap.navx.reset();
+		
+		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
+
+		previousAngleError = 0.0;
+		previousDerivative = 0.0;
+
+		printDebugHeader();
+
+		while (done == false) {
+			currentHeading     = CatzRobotMap.navx.getAngle();
+			loopTimer.stop();
+			
+			deltaTimeSec = loopTimer.get();
+
+			loopTimer.reset();
+			loopTimer.start();
+			
+			distanceError = distanceAbs - Math.abs(CatzRobotMap.wheelEncoderL.getDistance());
+			
+			power = distanceError * PID_DRIVE_KP;
+
+			if (distanceError < PID_DRIVE_ERROR_THRESHOLD) {
+				done = true;
+			} else {
+				if (functionTimer.get() > timeoutSeconds) {
+					done = true;
+				} else {
+
+					deltaError = currentHeading - lastHeading;
+					/**************************************************************
+					 * Calculate Heading Derivative Term
+					 **************************************************************/
+					derivative = (PID_DRIVE_FILTER_CONSTANT * previousDerivative)
+							+ ((1 - PID_DRIVE_FILTER_CONSTANT) * (deltaError / deltaTimeSec));
+					
+					// FILTER OUT INVALID VALUES
+					if(derivative == 0.0 || deltaTimeSec == 0.0) {
+						derivative = previousDerivative;
+					}
+
+					previousDerivative = derivative;
+
+					turnValue = (-PID_DRIVE_KP * currentHeading) + (PID_DRIVE_KD * derivative);
+					
+					if (power >= 0.0) 
+					{
+						if (power > PID_DRIVE_MAX_POS_POWER)
+							power = PID_DRIVE_MAX_POS_POWER;
+							
+					} else if (power < 0.0) {
+						if (power < PID_DRIVE_MAX_NEG_POWER)
+							power = -PID_DRIVE_MAX_POS_POWER;
+					}
+					
+					CatzRobotMap.drive.arcadeDrive(power, turnValue);
+
+					lastHeading = currentHeading;
+					
+					printDebugData();
+				}
+			}
+		}
+
+		/*************************************************************************
+		 * Brake using motors 
+		 *************************************************************************/
+		if (power < 0.0) {
+			CatzRobotMap.drive.tankDrive(PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_POWER);
+		} else {
+			CatzRobotMap.drive.tankDrive(-PID_DRIVE_BRAKE_POWER, -PID_DRIVE_BRAKE_POWER);
+		}
+		
+		CatzRobotMap.drive.tankDrive(0.0, 0.0);
+
+	}
+	
+	public static void PIDDrive(double drivePower, double distance, double timeoutSeconds) {
+		
 		boolean firstTime;
 		double deltaPulseCount;
 		
@@ -180,7 +277,6 @@ public class CatzPIDDrive {
 		totalDistanceTraveled = 0.0;
 
 		calcTimeout(power, distance, timeoutSeconds);
-
 
 		done = false;
 		firstTime = true;
@@ -290,7 +386,7 @@ public class CatzPIDDrive {
 					 * A value of 0.0 means go straight.
 					 **************************************************************/
 					turnValue = ((-PID_DRIVE_KP * deltaAngleError) + (PID_DRIVE_KD * derivative))/90.0;
-
+					
 					CatzRobotMap.drive.arcadeDrive(power, turnValue);
 
 					printDebugData();

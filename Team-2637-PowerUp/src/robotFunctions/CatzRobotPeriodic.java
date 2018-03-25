@@ -27,7 +27,9 @@ public class CatzRobotPeriodic
 	public static void runRobotPeriodic(){
 	
 		updateSmartDashboard();
-
+		if(CatzRobotMap.lifterLimitBottom.get()==true) {
+			CatzRobotMap.liftEncoder.reset();
+		}
 		//System.out.println(CatzRobotMap.climberMotor.getOutputCurrent());
 		
 	} 
@@ -67,7 +69,6 @@ public class CatzRobotPeriodic
 	
 	public static void updateSmartDashboard() {
 		
-		SmartDashboard.putBoolean("Use default autonomous?", false);
 		SmartDashboard.putNumber("navX",                      CatzRobotMap.navx.getAngle());
 		SmartDashboard.putNumber("Distance of Left Encoder",  CatzRobotMap.wheelEncoderL.getDistance());
 		SmartDashboard.putNumber("Distance of Right Encoder", CatzRobotMap.wheelEncoderR.getDistance());
@@ -83,6 +84,8 @@ public class CatzRobotPeriodic
 		SmartDashboard.putNumber("Intake Speed",         CatzRobotMap.xboxDrive.getRightTrigger()-CatzRobotMap.xboxDrive.getLeftTrigger());
 		SmartDashboard.putBoolean("Drive Controls Are Reversed", CatzTeleopPeriodic.reversed);
 		
+		SmartDashboard.putNumber("lift motor power", CatzRobotMap.lifterL.get());
+		SmartDashboard.putNumber("lift motor power", CatzRobotMap.lifterR.get());
 	}
 	
 	public static void updatePIDTurnConstants()   {

@@ -164,7 +164,6 @@ public class CatzAutonomousSinglePaths {
 	   CatzPIDTurn.PIDturn(-90, 1.5);
 	   } else {
 		   CatzPIDTurn.PIDturn(90, 1.5);
-
 	   } */
 	   
 	    CatzRobotMap.lift.liftToScaleHeight();   //Lifts to height of the scale while driving? */

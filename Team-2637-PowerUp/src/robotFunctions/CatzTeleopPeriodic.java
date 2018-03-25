@@ -13,7 +13,7 @@ import robot.CatzRobotMap;
  * 2/16/2018 AL Revised driver controls to fun with 2 xbox
  * 3-17-18   DD Integrated bottom limit switch into lift controls
  * 
- * Controllers Methods: runGrabbercontrols,runLiftControls,unClimberControls,runTeleopPeriodic
+ * Controllers Methods: runGrabbercontrols, runLiftControls, runClimberControls, runTeleopPeriodic
  * 
  * Functionality: activates driver controls in periodic class
  *********************************************************/
@@ -28,12 +28,14 @@ public class CatzTeleopPeriodic {
 	private static double lastLiftValue = 0;
 	private static double deltaLiftValue;
 	private static boolean liftDisabled = false;
-
+	
 	public static void runTeleopPeriodic() {
+		
 		runDriveTrainControls();
 		runGrabberControls();
 		runLiftControls();
 		runClimberControls();
+		runTestControls();
 	}
 
 	private static void runDriveTrainControls() {
@@ -197,5 +199,14 @@ public class CatzTeleopPeriodic {
 
 		lastLiftValue = currentLiftValue;
 
+	}
+	
+	private static void runTestControls() {
+		if(CatzRobotMap.xboxTest.getAButton()) {
+			CatzRobotMap.lift.liftToScaleHeight();
+		}
+		if(CatzRobotMap.xboxTest.getBButton()) {
+			CatzRobotMap.lift.dropToGroundHeight();
+		}
 	}
 }
