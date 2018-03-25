@@ -1,5 +1,5 @@
 /*******************************************************
- *  Author : Jean Kwon
+ *  Author : Jean Kwon and Tim Vu
  *   Last Revised : 2-19-2018 JK
  *  Last revision summary: create the class
  *  Methods: rightScaleScale
