@@ -58,7 +58,7 @@ public class CatzLift {
 					this.stopLift();
 					timeout.stop();
 					timeout.reset();
-					readyToLift = false;
+					this.setReadyToLift(false);
 					printOutDebugData("Lift to switch height thread complete");
 				}
 				Thread.currentThread().interrupt();
@@ -79,7 +79,7 @@ public class CatzLift {
 				} else {
 					timeout.start();
 					printOutDebugData("Lifter thread beginning");
-					while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 4.5) {
+					while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 6.5) {
 						if (CatzRobotMap.liftEncoder.get() < LIFT_SCALE_HEIGHT)
 							this.liftUp();
 						else
@@ -89,7 +89,7 @@ public class CatzLift {
 					this.stopLift();
 					timeout.stop();
 					timeout.reset();
-					readyToLift = false;
+					this.setReadyToLift(false);
 					printOutDebugData("Lift to scale height thread complete");
 				}
 				Thread.currentThread().interrupt();
@@ -114,7 +114,7 @@ public class CatzLift {
 				timeout.stop();
 				timeout.reset();
 				this.stopLift();
-				readyToLift = true;
+				this.setReadyToLift(true);
 				CatzRobotMap.liftEncoder.reset();
 				printOutDebugData("Drop to ground thread complete");
 				Thread.currentThread().interrupt();
@@ -161,6 +161,10 @@ public class CatzLift {
 	public void stopLift() {
 		CatzRobotMap.lifterL.set(0);
 		CatzRobotMap.lifterR.set(0);
+	}
+	
+	public void setReadyToLift(boolean ready) {
+		readyToLift = ready;
 	}
 
 	private static void printOutDebugData(String info) {
