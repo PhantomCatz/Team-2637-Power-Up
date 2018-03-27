@@ -197,7 +197,7 @@ public class CatzAutonomousDoublePaths {
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 70, 5); 
 		
 		t.start();
-		while(CatzLift.readyToLift==true&&t.get()<5) {
+		while(CatzLift.readyToLift==true&&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
 			//do nothing
 		}
 		t.stop();
@@ -249,7 +249,7 @@ public class CatzAutonomousDoublePaths {
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 37 - CatzConstants.HALF_ROBOT_LENGTH, 2);
 		
 		t.start();
-		while(CatzLift.readyToLift==true&&t.get()<5) {
+		while(CatzLift.readyToLift==true&&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
 			//do nothing
 		}
 		t.stop();
@@ -352,7 +352,7 @@ public class CatzAutonomousDoublePaths {
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 30 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);
 		
 		t.start();
-		while(CatzLift.readyToLift==true&&t.get()<5) {
+		while(CatzLift.readyToLift==true&&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
 			//do nothing
 		}
 		t.stop();

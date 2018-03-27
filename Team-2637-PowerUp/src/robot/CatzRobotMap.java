@@ -79,7 +79,6 @@ public class CatzRobotMap
 
 	public static boolean debugMode = true;
 	public static boolean usingCubeee = false;
-	public static boolean using2ndBot = true;
 	
 
 	//public static CatzLogger logger;
@@ -114,21 +113,21 @@ public class CatzRobotMap
 		drive = new CatzDrive(leftMotors, rightMotors);
 		printOutDebugData("Successfully initialized full drive train");
 		
-		climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
-		climberMotor.setSafetyEnabled(false);
-		printOutDebugData("Successfully initialized climber Motor");
-		//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
-		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 		
 		//comp = new Compressor(3);
-				
-		wheelEncoderR = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k4X);
-		wheelEncoderL = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k4X);
-		wheelEncoderR.setDistancePerPulse(CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE);
-		wheelEncoderR.setReverseDirection(true);
-		wheelEncoderL.setDistancePerPulse(CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE);
-		liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k1X);
+			
+		if(usingCubeee) {
+			wheelEncoderL = new Encoder(6,7,false,Encoder.EncodingType.k4X);
+			wheelEncoderL.setDistancePerPulse(CatzConstants.CUBEE_ENCODER_INCHES_PER_PULSE);
+		} else {
+			wheelEncoderR = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_R_DIOB, false, Encoder.EncodingType.k4X);
+			wheelEncoderL = new Encoder(CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOA, CatzConstants.DRIVE_WHEEL_ENCODER_L_DIOB, false, Encoder.EncodingType.k4X);
+			wheelEncoderR.setDistancePerPulse(CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE);
+			wheelEncoderR.setReverseDirection(true);
+			wheelEncoderL.setDistancePerPulse(CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE);
+			liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k1X);
+		}
 		printOutDebugData("Successfully Encoders");
 	
 		
@@ -136,27 +135,37 @@ public class CatzRobotMap
 		xboxAux   = new CatzXboxController(CatzConstants.AUX_XBOX_PORT);
 		xboxTest = new CatzXboxController(2);
 		
-		lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
-		lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
-
-		lifterLimitTop =    new DigitalInput(CatzConstants.TOP_LIFT_LIMIT_DIO);
-		lifterLimitBottom = new DigitalInput(CatzConstants.BOT_LIFT_LIMIT_DIO);
-		
-
-		intakeRight   = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
-		intakeLeft    = new Spark(CatzConstants.LEFT_INTAKE_PWM);
-		intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
-		intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);
-		printOutDebugData("Successfully initialized auxilary actuators");
-		
-		climberMechanism = new CatzClimber();
-		grabber          = new CatzGrabber();
-		lift             = new CatzLift();
-
-		secondsFormat = new DecimalFormat("#.###");
-		
-		server  = new UDPServer();
-		//logger = new CatzLogger();
+		if(usingCubeee) {
+			//intakeForearm = new Solenoid(1); //solenoid to control the flaps currently not plugged in
+		}
+		else {
+			climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
+			climberMotor.setSafetyEnabled(false);
+			printOutDebugData("Successfully initialized climber Motor");
+			//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
+			
+			lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
+			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
+	
+			lifterLimitTop =    new DigitalInput(CatzConstants.TOP_LIFT_LIMIT_DIO);
+			lifterLimitBottom = new DigitalInput(CatzConstants.BOT_LIFT_LIMIT_DIO);
+			
+	
+			intakeRight   = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
+			intakeLeft    = new Spark(CatzConstants.LEFT_INTAKE_PWM);
+			intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
+			intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);
+			printOutDebugData("Successfully initialized auxilary actuators");
+			
+			climberMechanism = new CatzClimber();
+			grabber          = new CatzGrabber();
+			lift             = new CatzLift();
+	
+			secondsFormat = new DecimalFormat("#.###");
+			
+			server  = new UDPServer();
+			//logger = new CatzLogger();
+		}
 	}
 	public static void setDebugModeEnabled(boolean enabled) 
 	{

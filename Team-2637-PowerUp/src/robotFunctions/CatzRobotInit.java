@@ -29,9 +29,9 @@ public class CatzRobotInit
 	public static void runRobotInit() 
 	{
 		CatzRobotMap.instantiateRobot();
-		CatzRobotMap.liftEncoder.reset();
-		setSmartDashboard();
-		cameraSetup();
+		//CatzRobotMap.liftEncoder.reset();
+		//setSmartDashboard();
+		//cameraSetup();
 	}
 	public static void runDisabledInit() {
 		CatzRobotMap.liftEncoder.reset();

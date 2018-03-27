@@ -113,7 +113,7 @@ public class CatzAutonomousSinglePaths {
 		}
 		
 		t.start();
-		while(CatzLift.readyToLift==true&&t.get()<3) {
+		while(CatzLift.readyToLift==true&&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
 			//do nothing
 		}
 		t.stop();
