@@ -78,7 +78,7 @@ public class CatzRobotMap
 	public static UDPServer server;
 
 	public static boolean debugMode = true;
-	public static boolean usingCubeee = true;
+	public static boolean usingCubeee = false;
 	
 
 	//public static CatzLogger logger;
