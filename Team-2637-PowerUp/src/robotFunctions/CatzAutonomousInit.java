@@ -33,7 +33,7 @@ public class CatzAutonomousInit {
 
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
-		
+		//CatzRobotMap.lift.dropToGroundHeight();
 		choosePathDouble();
 		//setMechanisms();
 		//CatzPIDDrive.PIDDrive(.5, 48, 4);
