@@ -32,6 +32,9 @@ public class CatzAutonomousInit {
 		printOutDebugData("autonomousInit");
 
 		setMechanisms();
+		
+		CatzPIDDrive.PIDDriveNoTrig(0.0, 120.0, 2.5);
+		
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
 
