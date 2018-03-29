@@ -68,6 +68,11 @@ public class CatzPIDDrive {
 
 	private static double timeout = 0.0;
 	
+	private static double deltaError;
+	private static double totalAngleError;
+	private static double refHeading;
+
+	
 	//Turbo Constants
 	final static public double PID_DRIVE_PWR_FILTER_CONSTANT = 0.3;
 
@@ -93,7 +98,6 @@ public class CatzPIDDrive {
 		boolean firstTimePwr = true;
 
 		double lastHeading = 0;
-		double deltaError;
 		
 		done = false;
 
@@ -105,10 +109,12 @@ public class CatzPIDDrive {
 
 		CatzRobotMap.wheelEncoderL.reset();
 		//CatzRobotMap.wheelEncoderR.reset();
-		CatzRobotMap.navx.reset();
 		
-		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
-
+//		CatzRobotMap.navx.reset();
+//		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
+		refHeading     = CatzRobotMap.navx.getAngle();
+		lastHeading    = refHeading;
+		
 		previousAngleError = 0.0;
 		previousDerivative = 0.0;
 		previousDistanceError = 0.0;
@@ -143,7 +149,8 @@ public class CatzPIDDrive {
 					done = true;
 				} else {
 
-					deltaError = currentHeading - lastHeading;
+					deltaError      = currentHeading - lastHeading;
+					totalAngleError = currentHeading - refHeading;
 					
 					/**************************************************************
 					 * Calculate Heading Derivative Term
@@ -158,7 +165,7 @@ public class CatzPIDDrive {
 
 					previousDerivative = derivative;
 
-					turnValue = (-PID_DRIVE_KP * currentHeading) + (PID_DRIVE_KD * derivative);
+					turnValue = (-PID_DRIVE_KP * totalAngleError) + (PID_DRIVE_KD * derivative);
 
 					/**************************************************************
 					 * Calculate Drive Power
@@ -484,8 +491,8 @@ public class CatzPIDDrive {
 	public static void printPwrDebugHeader() {
 		if (debugMode == true) {
 			System.out.print("timestamp,deltaTimeSec,currentDistance,distanceError,deltaDistanceError," +  
-					"powerDerivative," +
-					"drivePower\n");
+					"currentHeading,deltaAngleError,totalAngleError,derivative,powerDerivative," +
+					"drivePower,turnValue\n");
 		}
 	}
 
@@ -493,10 +500,10 @@ public class CatzPIDDrive {
 		if (debugMode == true) {
  
  			System.out.printf("%.3f, %.3f, %.3f, %.3f, %.3f, ", 
- 					functionTimer.get(), deltaTimeSec, currentDistance,distanceError,deltaDistanceError);
+ 					functionTimer.get(), deltaTimeSec, currentDistance, distanceError, deltaDistanceError);
 
- 			System.out.printf("%.3f, %.3f, %.3f\n", 
- 					powerDerivative, drivePower, turnValue);
+ 			System.out.printf("%.3f, %.3f, %.3f, %.3f,  %.3f, %.3f, %.3f\n", 
+ 					currentHeading, deltaError, totalAngleError, derivative, powerDerivative, drivePower, turnValue);
 		}
 	}
 	

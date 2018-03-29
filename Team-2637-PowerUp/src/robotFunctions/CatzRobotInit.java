@@ -31,7 +31,7 @@ public class CatzRobotInit
 		CatzRobotMap.instantiateRobot();
 		//CatzRobotMap.liftEncoder.reset();
 		//setSmartDashboard();
-		//cameraSetup();
+		cameraSetup();
 	}
 	public static void runDisabledInit() {
 		CatzRobotMap.liftEncoder.reset();
@@ -54,10 +54,11 @@ public class CatzRobotInit
 	
 	public static void cameraSetup()
 	{
-		CameraServer.getInstance().startAutomaticCapture();
+		//CameraServer.getInstance().startAutomaticCapture();
+		CameraServer.getInstance().startAutomaticCapture(1);
+		//CameraServer.getInstance().startAutomaticCapture("camera", "/dev/video1");
 		 new Thread(() -> {
              UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-             
              
              CvSink cvSink = CameraServer.getInstance().getVideo();
              CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);

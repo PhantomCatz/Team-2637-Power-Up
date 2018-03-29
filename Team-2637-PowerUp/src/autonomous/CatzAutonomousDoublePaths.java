@@ -143,19 +143,22 @@ public class CatzAutonomousDoublePaths {
 		
 		CatzPIDTurn.PIDturn(-45, 1.5);
 		
+		CatzRobotMap.grabber.openForearm();
 		
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 46.5 - CatzConstants.HALF_ROBOT_LENGTH, 2);  //Turns left and drive to cube pyramid
-		
 	
 		CatzRobotMap.grabber.intakeCube();  //Intakes the first cube in the pyramid
 		
-
+		CatzRobotMap.grabber.closeForearm();
+		
+		CatzRobotMap.grabber.intakeCube();
+		
 		CatzPIDTurn.PIDturn(-180, 1.5);
 		
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 46.5 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);  //Turns 180 to the left and drives to be in front of the switch
 		
 		
-		CatzPIDTurn.PIDturn(-90, 1.3);
+		CatzPIDTurn.PIDturn(-135, 1.3);
 		
 		CatzPIDDrive.PIDDriveNoTrig(0.7, 39 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);  //Drives up to the switch
 		

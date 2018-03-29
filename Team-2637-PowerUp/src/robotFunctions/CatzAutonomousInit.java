@@ -34,8 +34,11 @@ public class CatzAutonomousInit {
 		setMechanisms();
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
+		
+		CatzAutonomousDoublePaths.middleDoubleCube_RXX();
+		
 		//CatzRobotMap.lift.dropToGroundHeight();
-		choosePathDouble();
+//		choosePathDouble();
 		//setMechanisms();
 		//CatzPIDDrive.PIDDrive(.5, 48, 4);
 		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
@@ -130,7 +133,7 @@ public class CatzAutonomousInit {
 		check_boxR = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false); 
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
+	
 		boolean initSuccessFlag = true;
 
 		System.out.println(gameData);
