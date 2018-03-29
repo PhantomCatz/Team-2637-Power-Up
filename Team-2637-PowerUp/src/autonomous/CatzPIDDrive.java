@@ -119,7 +119,6 @@ public class CatzPIDDrive {
 		previousDerivative = 0.0;
 		previousDistanceError = 0.0;
 
-		printDebugHeader();
 		printPwrDebugHeader();
 
 		while (done == false) {

@@ -34,11 +34,11 @@ public class CatzAutonomousInit {
 		setMechanisms();
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
-		
-		CatzAutonomousDoublePaths.middleDoubleCube_RXX();
-		
+				
+		choosePathDouble();
+
+		//		CatzAutonomousDoublePaths.middleDoubleCube_RXX();
 		//CatzRobotMap.lift.dropToGroundHeight();
-//		choosePathDouble();
 		//setMechanisms();
 		//CatzPIDDrive.PIDDrive(.5, 48, 4);
 		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
