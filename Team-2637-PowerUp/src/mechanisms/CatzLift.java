@@ -99,17 +99,39 @@ public class CatzLift {
 	}
 
 	public void dropToGroundHeight() {
+		
+		
+		
+		
 		Thread t = new Thread(() -> {
 
+			boolean done = false;
+			boolean atBottom = false;
+			double timeoutSec = 0.0;
+			
 			while (!Thread.interrupted()) {
 
-				//double initialReading = CatzRobotMap.liftEncoder.get();
-				//double target = initialReading * 2;
-				//double error = target - initialReading;
 				timeout.start();
-				while (CatzRobotMap.lifterLimitBottom.get()==false && timeout.get() < 6) {
-					this.liftDown();
-					//error = target - CatzRobotMap.liftEncoder.get();
+				this.liftDown();
+
+				while (done==false ) {
+					
+					atBottom = CatzRobotMap.lifterLimitBottom.get();
+					
+					if (atBottom == true) {
+						done = true;
+						
+					} else {
+						
+						timeoutSec = timeout.get();
+
+						if(timeoutSec>6) {
+							done = true ;
+						}
+					}
+					
+					System.out.println(timeoutSec + ", " + atBottom);
+					
 				}
 				timeout.stop();
 				timeout.reset();
@@ -155,8 +177,8 @@ public class CatzLift {
 	}
 
 	public void liftDown() {
-		CatzRobotMap.lifterL.set(-LIFT_SPEED);
-		CatzRobotMap.lifterR.set(-LIFT_SPEED);
+		CatzRobotMap.lifterL.set(-0.9); // It was 1 JK 3/30
+		CatzRobotMap.lifterR.set(-0.9);
 	}
 
 	public void stopLift() {

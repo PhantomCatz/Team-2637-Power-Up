@@ -31,9 +31,9 @@ public class CatzPIDTurn {
 	final public static double PID_TURN_DELTAERROR_THRESHOLD_LO = 0.11;
 
 	final static public double PID_TURN_FILTER_CONSTANT = 0.7;
-	static public double PID_TURN_POWER_SCALE_FACTOR = 1.0; // 0.7;
+	      static public double PID_TURN_POWER_SCALE_FACTOR = 1.0;
 
-	static public double PID_TURN_KP = 0.08; // 0.0508
+	static public double PID_TURN_KP = 0.08;
 	static public double PID_TURN_KI = 0.0;
 	static public double PID_TURN_KD = 0.012; // 0.0744
 

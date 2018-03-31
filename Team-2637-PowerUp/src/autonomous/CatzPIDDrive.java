@@ -9,26 +9,42 @@ public class CatzPIDDrive {
 
 
 	/****************************************************************************
+	 * 
 	 * PID Drive Constants
+	 * 
 	 ****************************************************************************/
-	private final static double PID_DRIVE_SHORT_DIST = 48.0; // 4 ft
-	private final static double PID_DRIVE_MEDIUM_DIST = 144.0; // 12 ft
+	/****************************************************************************
+	 * PID Drive Timeout Values - In work - not ready for use
+	 ****************************************************************************/
+	private final static double PID_DRIVE_SHORT_DIST  =  30.0; // 2.5 ft
+	private final static double PID_DRIVE_MEDIUM_DIST = 60.0;  // 6.0 ft
 
-	private final static double PID_DRIVE_TIMEOUT_SHORT_DIST = 3.0; // SHOULD CREATE A METHOD BASED ON SPEED & DISTANCE
-	private final static double PID_DRIVE_TIMEOUT_MED_DIST = 10.0;
-	private final static double PID_DRIVE_MAX_TIMEOUT = 20.0;
+	private final static double PID_DRIVE_TIMEOUT_SHORT_DIST = 0.8;
+	private final static double PID_DRIVE_TIMEOUT_MED_DIST   = 1.5;
+	private final static double PID_DRIVE_MAX_TIMEOUT        = 3.5;  //We travel 204" (17 ft) in ~2.5 sec
 
+	/****************************************************************************
+	 * 
+	 ****************************************************************************/
 	final static double PID_DRIVE_ERROR_THRESHOLD = 1.0; // Stop within 1 inch
 
-	private final static double PID_DRIVE_KP = 0.105; //originally .15
-	private final static double PID_DRIVE_KD = 0.03; // ORIGINALLY .18
 
-	static private double PID_DRIVE_BRAKE_POWER = 0.43;
-	private final static double PID_DRIVE_BRAKE_TIME = 0.25;
+	/****************************************************************************
+	 *  PID Parameters for Heading Correction
+	 ****************************************************************************/
+	private final static double PID_DRIVE_KP = 0.200; //TRY 0.260 up to 0.300
+	private final static double PID_DRIVE_KD = 0.008; //TRY 0.004 
+
 	private final static double PID_DRIVE_FILTER_CONSTANT = .5;
 
-	private final static double PID_DRIVE_MAX_POS_POWER = 1;
-	private final static double PID_DRIVE_MAX_NEG_POWER = -1;
+
+	/****************************************************************************
+	 *  Braking values are for user specified power - assumes power of 0.5??? 
+	 *  May work at 0.6???
+	 ****************************************************************************/
+	static private double PID_DRIVE_BRAKE_POWER = 0.43;
+	private final static double PID_DRIVE_BRAKE_TIME = 0.25;
+
 	
 	/****************************************************************************
 	 * PID Drive Variables
@@ -89,15 +105,14 @@ public class CatzPIDDrive {
 	private static double previousPowerDerivative;
 	
 	
-	//pass 0 for drive power to use calculated value
-
-
+	//pass 0 for defaultPower to let PID loop set Pwr Values
 	public static void PIDDriveNoTrig(double defaultPower, double distance, double timeoutSeconds) {
+		
 		functionTimer = new Timer();
 		loopTimer     = new Timer();
 		boolean firstTimePwr = true;
 
-		double lastHeading = 0;
+		double lastHeading;
 		
 		done = false;
 
@@ -107,9 +122,11 @@ public class CatzPIDDrive {
 
 		distanceAbs = Math.abs(distance);
 
+		calculatePWRKD(distanceAbs);
+		
 		CatzRobotMap.wheelEncoderL.reset();
 		//CatzRobotMap.wheelEncoderR.reset();
-		
+
 //		CatzRobotMap.navx.reset();
 //		Timer.delay(CatzConstants.NAVX_RESET_WAIT_TIME);
 		refHeading     = CatzRobotMap.navx.getAngle();
@@ -124,19 +141,13 @@ public class CatzPIDDrive {
 		while (done == false) {
 			
 			deltaTimeSec = loopTimer.get();
-			if(deltaTimeSec < 0.02)
-			{
-				Timer.delay(0.02-deltaTimeSec);
-			}
-			deltaTimeSec = loopTimer.get();
 			
-			currentHeading     = CatzRobotMap.navx.getAngle();
-			loopTimer.stop();
-			
+			currentHeading   = CatzRobotMap.navx.getAngle();
 
+			loopTimer.stop();
 			loopTimer.reset();
 			loopTimer.start();
-			
+
 			currentDistance = Math.abs(CatzRobotMap.wheelEncoderL.getDistance());
 			distanceError = distanceAbs - currentDistance;
 			
@@ -158,8 +169,8 @@ public class CatzPIDDrive {
 							   + ((1 - PID_DRIVE_FILTER_CONSTANT) * (deltaError / deltaTimeSec));
 					
 					// FILTER OUT INVALID VALUES
-					if(derivative == 0.0 || deltaTimeSec == 0.0) {
-						derivative = previousDerivative;
+					//if(derivative == 0.0 || deltaTimeSec == 0.0) {
+					//	derivative = previousDerivative;
 					}
 
 					previousDerivative = derivative;
@@ -193,7 +204,7 @@ public class CatzPIDDrive {
 
 						if (drivePower < CatzConstants.DRIVE_MAX_NEG_POWER)
 							drivePower = CatzConstants.DRIVE_MAX_NEG_POWER;
-					} else {
+						else {
 						drivePower = defaultPower;
 					}
 
@@ -225,9 +236,11 @@ public class CatzPIDDrive {
 			CatzRobotMap.drive.tankDrive(0.0, 0.0);
 		}
 
-		
 
-	}
+}
+
+
+	
 	
 
 	
@@ -408,6 +421,80 @@ public class CatzPIDDrive {
 	}
 	
 	
+	private static void calculatePWRKD(double distance)
+	{
+		//Use different KD for different distances Hard coded, tried and tested
+		if(distance <= 12)
+		{
+			distance +=  3.5;
+			PID_DRIVE_PWR_KD = 0.002;
+		}
+		else if(distance <= 24)
+		{
+			distance += 1;
+			PID_DRIVE_PWR_KD = 0.0020;
+		}
+		else if(distance == 36)
+		{
+			PID_DRIVE_PWR_KD = 0.0059;
+		}
+		else if(distance == 48)
+		{
+			PID_DRIVE_PWR_KD = 0.006;
+		}
+		else if(distance == 60)
+		{
+			PID_DRIVE_PWR_KD = 0.0068;
+		}
+		else if(distance == 72)
+		{
+			PID_DRIVE_PWR_KD = 0.00694;
+		}
+		else if(distance == 84)
+		{
+			PID_DRIVE_PWR_KD = 0.0072;
+		}
+		else if(distance == 96)
+		{
+			PID_DRIVE_PWR_KD = 0.0078;
+		}
+		else if(distance == 120)
+		{
+			PID_DRIVE_PWR_KD = 0.008;
+		}
+		else if(distance == 144)
+		{
+			PID_DRIVE_PWR_KD = 0.0082;
+		}
+		else if(distance == 160.5)
+		{
+			PID_DRIVE_PWR_KD = 0.0087;
+		}
+		else if(distance == 180)
+		{
+			PID_DRIVE_PWR_KD = 0.0087;
+		}
+		else if(distance == 192)
+		{
+			PID_DRIVE_PWR_KD = 0.0088;
+		}
+		else if(distance == 204)
+		{
+			PID_DRIVE_PWR_KD = 0.0091;
+		}
+		else if(distance == 210)
+		{
+			PID_DRIVE_PWR_KD = 0.00915;
+		}
+		else 
+		{
+			//calculate KD ------- EXPERAMENTAL ------- Need to tune
+			PID_DRIVE_PWR_KD = -0.000792367+0.001834892*Math.log(distance);
+		}
+			
+	}
+
+
 	
 
 	public static void setDebugModeEnabled(boolean enabled) {

@@ -114,6 +114,7 @@ public class CatzRobotMap
 		printOutDebugData("Successfully initialized full drive train");
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
+		navx.reset();
 		
 		//comp = new Compressor(3);
 			
@@ -127,6 +128,7 @@ public class CatzRobotMap
 			wheelEncoderR.setReverseDirection(true);
 			wheelEncoderL.setDistancePerPulse(CatzConstants.DRIVE_ENCODER_INCHES_PER_PULSE);
 			liftEncoder   = new Encoder(CatzConstants.LIFT_ENCODER_DIOA, CatzConstants.LIFT_ENCODER_DIOB, false, Encoder.EncodingType.k1X);
+			liftEncoder.setDistancePerPulse(CatzConstants.LIFT_ENCODER_INCHES_PER_PULSE);
 		}
 		printOutDebugData("Successfully Encoders");
 	

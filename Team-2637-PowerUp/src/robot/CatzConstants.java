@@ -62,9 +62,12 @@ public class CatzConstants
 
 	final static public double DRIVE_ENCODER_INCHES_PER_PULSE = (DRIVE_WHEEL_CIRCUMFRENCE * DRIVE_GEAR_MECH_SPROCKET_RATIO)
 			/ DRIVE_ENCODER_PULSES_PER_REV;
+	
+	final static public double LIFT_ENCODER_INCHES_PER_PULSE = 117225/13.58;
+	
 	final static public double CUBEE_ENCODER_INCHES_PER_PULSE = -0.052213115961;
 
-	final static public double LIFT_TO_SCALE_TIMEOUT = 7.5;
+	final static public double LIFT_TO_SCALE_TIMEOUT = 6.0; //It was 7.5  
 	
 	final static public double NAVX_RESET_WAIT_TIME = 0.2;
 
