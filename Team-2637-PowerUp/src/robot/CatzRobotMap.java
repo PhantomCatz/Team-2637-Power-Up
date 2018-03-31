@@ -84,9 +84,10 @@ public class CatzRobotMap
 	//public static CatzLogger logger;
 	
 	//public  Lidar lidar;
-	
-	private CatzRobotMap() 
+	public static int encoderSum;
+	CatzRobotMap() 
 	{	
+		encoderSum = 0;
 		globalTimer = new Timer();
 		
 		if(usingCubeee) 
