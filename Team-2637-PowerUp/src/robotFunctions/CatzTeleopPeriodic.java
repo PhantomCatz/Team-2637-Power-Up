@@ -37,9 +37,9 @@ public class CatzTeleopPeriodic {
 		
 		runDriveTrainControls();
 		runGrabberControls();
-		runLiftControls();
+		//runLiftControls();
 		//runClimberControls();
-		//runTestControls();
+		runTestControls();
 		
 	}
 

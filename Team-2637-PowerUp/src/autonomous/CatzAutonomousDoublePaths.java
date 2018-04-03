@@ -49,13 +49,13 @@ public class CatzAutonomousDoublePaths {
 		 *********************************************/
 		
 		//Leaves the wall and drives to the switch
-		CatzPIDDrive.PIDDriveNoTrig(0.0,(31 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  
+		CatzPIDDrive.PIDDriveNoTrig(0.7, (31 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  
 		
 		// AL timeout was 1
 		CatzPIDTurn.PIDturn(-45, 1.1);  
 
 		//Turns 45deg left and approaches the switch
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 69.2,3.5);  
+		CatzPIDDrive.PIDDriveNoTrig(0.7, 69.2,3.5);  
 
 		CatzPIDTurn.PIDturn(45, 1.1);
 			
@@ -63,8 +63,8 @@ public class CatzAutonomousDoublePaths {
 		CatzRobotMap.lift.liftToSwitchHeight(); 
 		
 		//Turns 45deg right and presses against the switch
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 17, 1); //AL was 22.5in
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 5.5, .7);
+		CatzPIDDrive.PIDDriveNoTrig(0.6, 17, 1); //AL was 22.5in
+		CatzPIDDrive.PIDDriveNoTrig(0.5, 5.5, .7);
 		
 		//Fires cube into the switch
 		CatzRobotMap.grabber.placeCube();  
@@ -78,30 +78,26 @@ public class CatzAutonomousDoublePaths {
 		 * Returns and places into switch
 		 *****************************************/
 		
-		CatzPIDDrive.PIDDriveNoTrig(-.65, (CatzConstants.HALF_ROBOT_LENGTH/2), 
+		
+		CatzPIDDrive.PIDDriveNoTrig(-.5, (39.0 + CatzConstants.HALF_ROBOT_LENGTH), 
 				CatzConstants.PID_TURN_TIMEOUT);  //Backs away from the switch
 	
-		CatzPIDTurn.PIDturn(45, 1.5);
+		CatzPIDTurn.PIDturn(90, 1.5);
 	
-		CatzRobotMap.grabber.openForearm();
-	
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 46.5 - CatzConstants.HALF_ROBOT_LENGTH, 2);  //Turns left and drive to cube pyramid
-	
+		CatzPIDDrive.PIDDriveNoTrig(0.7, 46.5 - CatzConstants.HALF_ROBOT_LENGTH, 2);  //Turns right and drive to cube pyramid
+
 		CatzRobotMap.grabber.intakeCube();  //Intakes the first cube in the pyramid
 	
-		CatzRobotMap.grabber.closeForearm();
+		CatzPIDTurn.PIDturn(180, 1.5);
 	
-		CatzRobotMap.grabber.intakeCube();
+		CatzPIDDrive.PIDDriveNoTrig(0.7, 46.5 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);  //Turns 180 to the right and drives to be in front of the switch
 	
-		CatzPIDDrive.PIDDriveNoTrig(-.65, (46.5 + CatzConstants.HALF_ROBOT_LENGTH), 
-			CatzConstants.PID_TURN_TIMEOUT);  //Backs away from the switch
-
-		CatzPIDTurn.PIDturn(-45, 1.5);
+		CatzPIDTurn.PIDturn(90, 1.3);
 	
-		CatzPIDDrive.PIDDriveNoTrig(0.0, CatzConstants.HALF_ROBOT_LENGTH/2, 1.5);  //Drives up to the switch
+		CatzPIDDrive.PIDDriveNoTrig(0.7, 39 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);  //Drives up to the switch
 	
 		CatzRobotMap.grabber.placeCube();  //PLaces cube, apparently liftToSwitchHeight not needed
-	
+		
 		}
 	
 	public static void middleDoubleCube_RXX() { 
@@ -114,21 +110,20 @@ public class CatzAutonomousDoublePaths {
 		 *********************************************/
 		
 		//Leaves the wall and drives to the switch
-		CatzPIDDrive.PIDDriveNoTrig(0.0,  (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.5);  
+		CatzPIDDrive.PIDDriveNoTrig(0.7,  (36 - CatzConstants.HALF_ROBOT_LENGTH), 0.8);  
 		
-		CatzPIDTurn.PIDturn(45, 1.1);
+		CatzPIDTurn.PIDturn(45, 0.7);
 
 		 //Turns 45deg left and approaches the switch
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 60.0, 1.5); //AL was 65
+		CatzPIDDrive.PIDDriveNoTrig(0.0, 60.0, 1.2); //AL was 65
 
-		CatzPIDTurn.PIDturn(-45, 1.0);
+		CatzPIDTurn.PIDturn(-45, 0.7);
 			
 		//not needed to get cube into switch
 		//CatzRobotMap.lift.liftToSwitchHeight();  
 		
 		//Turns 45deg right and presses against the switch
-		CatzPIDDrive.PIDDriveNoTrig(0.0, (12.5), 1.5);  // AL was 45
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 5, .6);     //timeout was 1.5
+		CatzPIDDrive.PIDDriveNoTrig(0.7, 12.0, 0.8);  // AL was 45
 		
 		//Fires cube into the switch
 		CatzRobotMap.grabber.placeCube();  
@@ -142,27 +137,22 @@ public class CatzAutonomousDoublePaths {
 		 * Returns to switch to place cube
 		 *****************************************/
 				
-		CatzPIDDrive.PIDDriveNoTrig(-.65, (CatzConstants.HALF_ROBOT_LENGTH/2), 
-					CatzConstants.PID_TURN_TIMEOUT);  //Backs away from the switch
+		CatzPIDDrive.PIDDriveNoTrig(0.0, -10.0, 0.6);  //Backs away from the switch
 		
-		CatzPIDTurn.PIDturn(-45, 1.5);
+		CatzPIDTurn.PIDturn(-50.0, 0.8);
+
+		CatzRobotMap.grabber.setIntakeSpeed(CatzConstants.INTAKE_SPEED);
 		
-		CatzRobotMap.grabber.openForearm();
-		
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 46.5 - CatzConstants.HALF_ROBOT_LENGTH, 2);  //Turns left and drive to cube pyramid
+		CatzPIDDrive.PIDDriveNoTrig(0.0, 24.0, 1.2);  //Turns left and drive to cube pyramid
 	
-		CatzRobotMap.grabber.intakeCube();  //Intakes the first cube in the pyramid
+		CatzRobotMap.grabber.setIntakeSpeed(0.0);
+
+
+		CatzPIDDrive.PIDDriveNoTrig(0.0, -24.0, 1.2);  //Turns 180 to the left and drives to be in front of the switch
 		
-		CatzRobotMap.grabber.closeForearm();
+		CatzPIDTurn.PIDturn(50, 0.7);
 		
-		CatzRobotMap.grabber.intakeCube();
-		
-		CatzPIDDrive.PIDDriveNoTrig(-.65, (46.5 + CatzConstants.HALF_ROBOT_LENGTH), 
-				CatzConstants.PID_TURN_TIMEOUT);  //Backs away from the switch
-	
-		CatzPIDTurn.PIDturn(45, 1.5);
-		
-		CatzPIDDrive.PIDDriveNoTrig(0.0, CatzConstants.HALF_ROBOT_LENGTH/2, 1.5);  //Drives up to the switch
+		CatzPIDDrive.PIDDriveNoTrig(0.7, 10, 0.8);  //Drives up to the switch
 		
 		CatzRobotMap.grabber.placeCube();  //PLaces cube, apparently liftToSwitchHeight not needed
 		
@@ -186,40 +176,52 @@ public class CatzAutonomousDoublePaths {
 		*  place 2nd cube in to the scale
 		**********************************************************************/
 	
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 204 - CatzConstants.HALF_ROBOT_LENGTH, 2.6); 
+		CatzPIDDrive.PIDDriveNoTrig(0.6, 204 - CatzConstants.HALF_ROBOT_LENGTH, 8); 
+		
 		
 		if (side.equalsIgnoreCase("left")) {
-			CatzPIDTurn.PIDturn(30, 0.8);  //turn 30deg right
+			CatzPIDTurn.PIDturn(30, CatzConstants.PID_TURN_TIMEOUT);  //turn 60deg right
 		} else {
-			CatzPIDTurn.PIDturn(-30, 0.7);  //turn 30deg left
+			CatzPIDTurn.PIDturn(-30, CatzConstants.PID_TURN_TIMEOUT);  //turn 60deg left
 		}
 		
-		//CatzRobotMap.lift.liftToScaleHeight();  
+		CatzRobotMap.lift.liftToScaleHeight();  
 		
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 48, 1.2); //TODO check the distance
+		CatzPIDDrive.PIDDriveNoTrig(0.6, 70, 5); 
 		
-
+		t.start();
+		while(CatzRobotMap.lifterLimitBottom.get()==false &&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
+			//do nothing
+		}
+		t.stop();
+		t.reset();
 		
 		CatzRobotMap.grabber.placeCube(); //place the lst cube into the scale
 		
 		////////////////////////////////////////////////////////////////////////////////////
 		
-		CatzPIDDrive.PIDDriveNoTrig(-0.5, 22 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);
+		CatzPIDDrive.PIDDriveNoTrig(-0.6, 37.44 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);
 		
-	//	CatzRobotMap.lift.dropToGroundHeight();
+		CatzRobotMap.lift.dropToGroundHeight();
 		
-
 
 		if (side.equalsIgnoreCase("left")) {
-			CatzPIDTurn.PIDturn(115, 1.5);  //turn 120deg right
+			CatzPIDTurn.PIDturn(120, 8);  //turn 120deg right
 		} else {
-			CatzPIDTurn.PIDturn(-11, 1.5);  //turn 120deg left
+			CatzPIDTurn.PIDturn(-120, 8);  //turn 120deg left
 		}
+		
+		t.start();
+		while(CatzRobotMap.lifterLimitBottom.get()==false &&t.get()<5) {
+			//do nothing
+		}
+		t.stop();
+		t.reset();
 		
 		
 		//CatzRobotMap.grabber.openForearm(); //TODO test the new intake
 		
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 68 - CatzConstants.HALF_ROBOT_LENGTH, 2.0);
+		CatzPIDDrive.PIDDriveNoTrig(0.6, 63 - CatzConstants.HALF_ROBOT_LENGTH, 3.5);
 		
 	//	CatzRobotMap.grabber.closeForearm(); //TODO test the new intake 
 		
@@ -227,17 +229,24 @@ public class CatzAutonomousDoublePaths {
 		
 		//////////////////////////////////////////////////////////////////
 		
-		CatzPIDDrive.PIDDriveNoTrig(-0.5, 68 - CatzConstants.HALF_ROBOT_LENGTH, 3);
+		CatzPIDDrive.PIDDriveNoTrig(-0.6, 68 - CatzConstants.HALF_ROBOT_LENGTH, 3);
 		
 		if (side.equalsIgnoreCase("left")) {
-			CatzPIDTurn.PIDturn(-120, 1.5);  //turn 120deg left
+			CatzPIDTurn.PIDturn(-120, 8);  //turn 120deg left
 		} else {
-			CatzPIDTurn.PIDturn(120, 1.5);  //turn 120deg right
+			CatzPIDTurn.PIDturn(120, 8);  //turn 120deg right
 		}
 		
-	//	CatzRobotMap.lift.liftToScaleHeight(); 
+		CatzRobotMap.lift.liftToScaleHeight(); 
 		
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 37 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);
+		CatzPIDDrive.PIDDriveNoTrig(0.6, 37 - CatzConstants.HALF_ROBOT_LENGTH, 2);
+		
+		t.start();
+		//while(CatzLift.readyToLift==true&&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
+			//do nothing
+		//}
+		t.stop();
+		t.reset();
 		
 		CatzRobotMap.grabber.placeCube(); //place 2nd cube in to the Scale
 	
@@ -264,7 +273,7 @@ public class CatzAutonomousDoublePaths {
 		*  palce the 2nd cube in to the scale
 		**********************************************************************/
 				
-		CatzPIDDrive.PIDDriveNoTrig(0.0,180-CatzConstants.HALF_ROBOT_LENGTH, 10); //drive forward 180(AZ) it was 222
+		CatzPIDDrive.PIDDriveNoTrig(0.6,180-CatzConstants.HALF_ROBOT_LENGTH, 10); //drive forward 180(AZ) it was 222
 		
 		if (side.equalsIgnoreCase("left")) {
 			CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right
@@ -280,25 +289,25 @@ public class CatzAutonomousDoublePaths {
 			CatzPIDTurn.PIDturn(90, CatzConstants.PID_TURN_TIMEOUT); //turn 90deg right
 		}
 		
-	//	CatzRobotMap.lift.liftToScaleHeight();  
+		CatzRobotMap.lift.liftToScaleHeight();  
 				
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 64-CatzConstants.HALF_ROBOT_LENGTH,
 						CatzConstants.PID_DRIVE_TIMEOUT); //drive 64in forward to get scale (AZ dimension is 15)
 		
 		t.start();
-		while(CatzLift.threadComplete==false&&t.get()<5) {
-			//do nothing until lifter has reached target position
-		}
+		//while(CatzLift.readyToLift==true&&t.get()<5) {
+			//do nothing
+		//}
 		t.stop();
 		t.reset();
 				
-	//	CatzRobotMap.grabber.placeCube(); //place the 1st cube into the Scale
+		CatzRobotMap.grabber.placeCube(); //place the 1st cube into the Scale
 		
 		/////////////////////////////////////////////////////////////////////////////////////////////
 		
-		CatzPIDDrive.PIDDriveNoTrig(-0.5, 30 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);
+		CatzPIDDrive.PIDDriveNoTrig(-0.6, 30 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);
 		
-	//	CatzRobotMap.lift.dropToGroundHeight();
+		CatzRobotMap.lift.dropToGroundHeight();
 	
 		if (side.equalsIgnoreCase("left")) {
 			CatzPIDTurn.PIDturn(-162, CatzConstants.PID_TURN_TIMEOUT); //turn 162deg left
@@ -308,22 +317,22 @@ public class CatzAutonomousDoublePaths {
 		
 	//	CatzRobotMap.grabber.openForearm(); //TODO test the new intake
 		
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 63 - CatzConstants.HALF_ROBOT_LENGTH, 8);
+		CatzPIDDrive.PIDDriveNoTrig(0.6, 63 - CatzConstants.HALF_ROBOT_LENGTH, 8);
 		
 		t.start();
-		while(CatzLift.threadComplete==false&&t.get()<5) {
-			//do nothing until lifter has reached target position
-		}
+		//while(CatzLift.readyToLift==false&&t.get()<5) {
+			//do nothing
+		//}
 		t.stop();
 		t.reset();
 		
 	//	CatzRobotMap.grabber.closeForearm(); //TODO test the new intake
 		
-	//	CatzRobotMap.grabber.intakeCube();
+		CatzRobotMap.grabber.intakeCube();
 		
 		////////////////////////////////////////////////////////////////////////////////////
 		
-		CatzPIDDrive.PIDDriveNoTrig(-0.5, 63 - CatzConstants.HALF_ROBOT_LENGTH, 4);
+		CatzPIDDrive.PIDDriveNoTrig(-0.6, 63 - CatzConstants.HALF_ROBOT_LENGTH, 4);
 		
 		if (side.equalsIgnoreCase("left")) {
 			CatzPIDTurn.PIDturn(-162, CatzConstants.PID_TURN_TIMEOUT); //turn 162deg left
@@ -331,18 +340,18 @@ public class CatzAutonomousDoublePaths {
 			CatzPIDTurn.PIDturn(162, CatzConstants.PID_TURN_TIMEOUT); //turn 162deg right
 		}
 		
-	//	CatzRobotMap.lift.liftToScaleHeight(); 
+		CatzRobotMap.lift.liftToScaleHeight(); 
 		
-		CatzPIDDrive.PIDDriveNoTrig(0.0, 30 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);
+		CatzPIDDrive.PIDDriveNoTrig(0.6, 30 - CatzConstants.HALF_ROBOT_LENGTH, 1.5);
 		
 		t.start();
-		while(CatzLift.threadComplete==false&&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
-			//do nothing until lifter has reached target position
-		}
+		//while(CatzLift.readyToLift==true&&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
+			//do nothing
+		//}
 		t.stop();
 		t.reset();
 		
-	//	CatzRobotMap.grabber.placeCube();
+		CatzRobotMap.grabber.placeCube();
 	
 	}
 }

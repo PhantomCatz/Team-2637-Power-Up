@@ -17,9 +17,9 @@ import robot.CatzRobotMap;
  */
 
 public class CatzLift {
-	/* need to acquire for final robot */final static private double LIFT_SCALE_HEIGHT = 414762.0;
-	/* need to acquire for final robot */final static private double LIFT_SWITCH_HEIGHT = 120930.0;
-	/* need to acquire for final robot */private static final double LIFTER_ERROR_THRESHOLD_PULSES = 60;
+	/* need to acquire for final robot */final static private double LIFT_SCALE_HEIGHT = 674898.0;
+	/* need to acquire for final robot */final static private double LIFT_SWITCH_HEIGHT = 201349.0;
+	/* need to acquire for final robot */private static final double LIFTER_ERROR_THRESHOLD_PULSES = 600;
 	/* need to acquire for final robot */final static private double LIFT_SPEED = 1.0;
 	private static final double INITIAL_LIFTER_ERROR = 1000;
 	public static boolean threadComplete;

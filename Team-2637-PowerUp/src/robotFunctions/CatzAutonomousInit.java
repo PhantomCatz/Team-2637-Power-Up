@@ -34,9 +34,21 @@ public class CatzAutonomousInit {
 		setMechanisms();
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
-				
+
+		
+		CatzPIDDrive.PIDDriveNoTrig(0.7,  (36 - CatzConstants.HALF_ROBOT_LENGTH), 0.8);  
+		
+		//CatzPIDTurn.PIDturn(45, 0.7);
+
+		 //Turns 45deg left and approaches the switch
+		//CatzPIDDrive.PIDDriveNoTrig(0.0, 60.0, 1.2); //AL was 65
+
+		//CatzPIDTurn.PIDturn(-45, 0.7);
+			
+		//Turns 45deg right and presses against the switch
+//		CatzPIDDrive.PIDDriveNoTrig(0.7, 12.0, 0.8);  // AL was 45
 	
-		choosePathDouble();
+//		choosePathDouble();
 		
 		//CatzRobotMap.lift.dropToGroundHeight();
 		//setMechanisms();
@@ -118,7 +130,7 @@ public class CatzAutonomousInit {
 		printOutDebugData("Init Done");
 		} else {
 			printOutDebugData("Init failed");
-			CatzPIDDrive.PIDDrive(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
+			CatzPIDDrive.PIDDriveNoTrig(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
 			            	  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
 			                  CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT); //if all else fails, just drive forward
 			}
@@ -194,7 +206,7 @@ public class CatzAutonomousInit {
 		printOutDebugData("Init Done");
 		} else {
 			printOutDebugData("Init failed");
-			CatzPIDDrive.PIDDrive(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
+			CatzPIDDrive.PIDDriveNoTrig(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
 			              		  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
 			                      CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT); //if all else fails, just drive forward
 			}
