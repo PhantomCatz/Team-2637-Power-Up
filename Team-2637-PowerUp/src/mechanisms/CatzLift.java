@@ -23,10 +23,12 @@ public class CatzLift {
 	/* need to acquire for final robot */final static private double LIFT_SPEED = 1.0;
 	private static final double INITIAL_LIFTER_ERROR = 1000;
 	public static boolean threadComplete;
+	public static boolean liftThreadRunning;
 	private static Timer timeout = new Timer();
 
 	public CatzLift() {
 		threadComplete = false;
+		liftThreadRunning = false;
 		printOutDebugData("Successfully initialized CatzLift");
 	}
 
@@ -39,18 +41,26 @@ public class CatzLift {
 		Thread t = new Thread(() -> {
 			double error = INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-				threadComplete = false;
 				
+				if(liftThreadRunning == true) {
+					while(liftThreadRunning == true) {
+						//wait for previous thread to finish
+					}
+				}
+				liftThreadRunning = true;
+				
+				threadComplete = false;
 				timeout.start();
 				printOutDebugData("Lifter thread beginning");
 				this.liftUp();
-				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 3) {
+				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 3 && CatzRobotMap.lifterLimitTop.get()==false) {
 					error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SWITCH_HEIGHT);
 				}
 				this.stopLift();
 				timeout.stop();
 				timeout.reset();
 
+				liftThreadRunning = false;
 				threadComplete = true;
 				printOutDebugData("Lift to switch height thread complete");
 				Thread.currentThread().interrupt();
@@ -64,18 +74,26 @@ public class CatzLift {
 		Thread t = new Thread(() -> {
 			double error = INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-				threadComplete = false;
 				
+				if(liftThreadRunning == true) {
+					while(liftThreadRunning == true) {
+						//wait for previous thread to finish
+					}
+				}
+				liftThreadRunning = true;
+				
+				threadComplete = false;
 				timeout.start();
 				printOutDebugData("Lifter thread beginning");
 				this.liftUp();
-				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 7.0) {
+				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 7.0 && CatzRobotMap.lifterLimitTop.get()==false) {
 					error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SCALE_HEIGHT);
 				}
 				this.stopLift();
 				timeout.stop();
 				timeout.reset();
 
+				liftThreadRunning = false;
 				threadComplete = true;
 				printOutDebugData("Lift to scale height thread complete");
 				Thread.currentThread().interrupt();
@@ -89,18 +107,26 @@ public class CatzLift {
 		Thread t = new Thread(() -> {
 			double error = INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-				threadComplete = false;
 				
+				if(liftThreadRunning == true) {
+					while(liftThreadRunning == true) {
+						//wait for previous thread to finish
+					}
+				}
+				liftThreadRunning = true;
+				
+				threadComplete = false;
 				timeout.start();
 				printOutDebugData("Lifter thread beginning");
 				this.liftDown();
 				while (CatzRobotMap.lifterLimitBottom.get()==false&&timeout.get()<4.0) {
-					error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SWITCH_HEIGHT);
+					//wait for bottom limit switch to read true
 				}
 				this.stopLift();
 				timeout.stop();
 				timeout.reset();
 
+				liftThreadRunning = false;
 				threadComplete = true;
 				printOutDebugData("Lift to switch height thread complete");
 				Thread.currentThread().interrupt();
