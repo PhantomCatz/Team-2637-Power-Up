@@ -113,7 +113,7 @@ public class CatzAutonomousSinglePaths {
 		}
 		
 		t.start();
-		while(CatzLift.readyToLift==true&&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
+		while(CatzLift.threadComplete==false&&t.get()<CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
 			//do nothing
 		}
 		t.stop();
@@ -125,9 +125,6 @@ public class CatzAutonomousSinglePaths {
 		CatzRobotMap.grabber.placeCube();  //Fires cube into the scale
 	
 		CatzPIDDrive.PIDDriveNoTrig(-0.5, 25, CatzConstants.PID_DRIVE_TIMEOUT);
-		
-		Timer.delay(.5);
-		CatzRobotMap.lift.dropToHalfHeight();
 	}
 	
 	public static void oppoScalePath (String side) {
@@ -172,7 +169,7 @@ public class CatzAutonomousSinglePaths {
 	  
 	    
 		t.start();
-		while(CatzLift.readyToLift==true&&t.get()<5) {
+		while(CatzLift.threadComplete==false&&t.get()<5) {
 			//do nothing
 		}
 		t.stop();
@@ -184,8 +181,6 @@ public class CatzAutonomousSinglePaths {
 		
 		CatzPIDDrive.PIDDriveNoTrig(-0.5, 25, CatzConstants.PID_DRIVE_TIMEOUT);
 		
-		Timer.delay(.5);
-		CatzRobotMap.lift.dropToHalfHeight();
 		
 	  }
 	  

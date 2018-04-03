@@ -85,7 +85,7 @@ public class CatzRobotMap
 	
 	//public  Lidar lidar;
 	public static int encoderSum;
-	CatzRobotMap() 
+	private CatzRobotMap() 
 	{	
 		encoderSum = 0;
 		globalTimer = new Timer();

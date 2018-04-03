@@ -22,11 +22,11 @@ public class CatzLift {
 	/* need to acquire for final robot */private static final double LIFTER_ERROR_THRESHOLD_PULSES = 60;
 	/* need to acquire for final robot */final static private double LIFT_SPEED = 1.0;
 	private static final double INITIAL_LIFTER_ERROR = 1000;
-	public static boolean readyToLift;
+	public static boolean threadComplete;
 	private static Timer timeout = new Timer();
 
 	public CatzLift() {
-		readyToLift = true;
+		threadComplete = false;
 		printOutDebugData("Successfully initialized CatzLift");
 	}
 
@@ -39,28 +39,20 @@ public class CatzLift {
 		Thread t = new Thread(() -> {
 			double error = INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-
-				if (CatzRobotMap.liftEncoder.get() > 60 || readyToLift == false) {
-					// printOutDebugData(String.valueOf(readyToLift));
-					// printOutDebugData(String.valueOf(CatzRobotMap.liftEncoder.get()));
-					// printOutDebugData("ERROR: Lifter must be set at bottom position to run
-					// Thread");
-				} else {
-					timeout.start();
-					printOutDebugData("Lifter thread beginning");
-					while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 1.5) {
-						if (CatzRobotMap.liftEncoder.get() < LIFT_SWITCH_HEIGHT)
-							this.liftUp();
-						else
-							this.stopLift();
-						error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SWITCH_HEIGHT);
-					}
-					this.stopLift();
-					timeout.stop();
-					timeout.reset();
-					this.setReadyToLift(false);
-					printOutDebugData("Lift to switch height thread complete");
+				threadComplete = false;
+				
+				timeout.start();
+				printOutDebugData("Lifter thread beginning");
+				this.liftUp();
+				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 3) {
+					error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SWITCH_HEIGHT);
 				}
+				this.stopLift();
+				timeout.stop();
+				timeout.reset();
+
+				threadComplete = true;
+				printOutDebugData("Lift to switch height thread complete");
 				Thread.currentThread().interrupt();
 			}
 		});
@@ -72,26 +64,20 @@ public class CatzLift {
 		Thread t = new Thread(() -> {
 			double error = INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-				if (CatzRobotMap.liftEncoder.get() > 60 || readyToLift == false) {
-					printOutDebugData(String.valueOf(readyToLift));
-					printOutDebugData(String.valueOf(CatzRobotMap.liftEncoder.get()));
-					printOutDebugData("ERROR: Lifter must be set at bottom position to run Thread");
-				} else {
-					timeout.start();
-					printOutDebugData("Lifter thread beginning");
-					while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < CatzConstants.LIFT_TO_SCALE_TIMEOUT) {
-						if (CatzRobotMap.liftEncoder.get() < LIFT_SCALE_HEIGHT)
-							this.liftUp();
-						else
-							this.stopLift();
-						error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SCALE_HEIGHT);
-					}
-					this.stopLift();
-					timeout.stop();
-					timeout.reset();
-					this.setReadyToLift(false);
-					printOutDebugData("Lift to scale height thread complete");
+				threadComplete = false;
+				
+				timeout.start();
+				printOutDebugData("Lifter thread beginning");
+				this.liftUp();
+				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 7.0) {
+					error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SCALE_HEIGHT);
 				}
+				this.stopLift();
+				timeout.stop();
+				timeout.reset();
+
+				threadComplete = true;
+				printOutDebugData("Lift to scale height thread complete");
 				Thread.currentThread().interrupt();
 			}
 		});
@@ -99,77 +85,30 @@ public class CatzLift {
 	}
 
 	public void dropToGroundHeight() {
-		
-		
-		
-		
+
 		Thread t = new Thread(() -> {
-
-			boolean done = false;
-			boolean atBottom = false;
-			double timeoutSec = 0.0;
-			
+			double error = INITIAL_LIFTER_ERROR;
 			while (!Thread.interrupted()) {
-
+				threadComplete = false;
+				
 				timeout.start();
+				printOutDebugData("Lifter thread beginning");
 				this.liftDown();
-
-				while (done==false ) {
-					
-					atBottom = CatzRobotMap.lifterLimitBottom.get();
-					
-					if (atBottom == true) {
-						done = true;
-						
-					} else {
-						
-						timeoutSec = timeout.get();
-
-						if(timeoutSec>6) {
-							done = true ;
-						}
-					}
-					
-					System.out.println(timeoutSec + ", " + atBottom);
-					
+				while (CatzRobotMap.lifterLimitBottom.get()==false&&timeout.get()<4.0) {
+					error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SWITCH_HEIGHT);
 				}
+				this.stopLift();
 				timeout.stop();
 				timeout.reset();
-				this.stopLift();
-				this.setReadyToLift(true);
-				CatzRobotMap.liftEncoder.reset();
-				printOutDebugData("Drop to ground thread complete");
-				Thread.currentThread().interrupt();
 
+				threadComplete = true;
+				printOutDebugData("Lift to switch height thread complete");
+				Thread.currentThread().interrupt();
 			}
 		});
 		t.start();
 	}
 
-	public void dropToHalfHeight() {
-		Thread t = new Thread(() -> {
-
-			while (!Thread.interrupted()) {
-
-				double initialReading = CatzRobotMap.liftEncoder.get();
-				double target = initialReading -(initialReading*.7);
-				double error = target - initialReading;
-				timeout.start();
-				while (Math.abs(error) > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 3) {
-					this.liftDown();
-					error = target - CatzRobotMap.liftEncoder.get();
-				}
-				timeout.stop();
-				timeout.reset();
-				this.stopLift();
-				this.setReadyToLift(false);
-				printOutDebugData("Drop to half height thread complete");
-				Thread.currentThread().interrupt();
-
-			}
-		});
-		t.start();
-	}
 
 	public void liftUp() {
 		CatzRobotMap.lifterL.set(LIFT_SPEED);
@@ -187,7 +126,7 @@ public class CatzLift {
 	}
 	
 	public void setReadyToLift(boolean ready) {
-		readyToLift = ready;
+		threadComplete = ready;
 	}
 
 	private static void printOutDebugData(String info) {

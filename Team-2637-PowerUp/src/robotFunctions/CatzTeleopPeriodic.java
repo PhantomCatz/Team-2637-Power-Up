@@ -116,7 +116,6 @@ public class CatzTeleopPeriodic {
 	// Lifter controls
 	private static void runLiftControls() {
 		// currentLiftValue = CatzRobotMap.liftEncoder.get();
-		encoderCount();
 		double power = CatzRobotMap.xboxAux.getLeftStickY();
 		/**
 		 * if lifter limit is activated, only have the ability to move lifter down Aux
@@ -204,22 +203,6 @@ public class CatzTeleopPeriodic {
 
 		lastLiftValue = currentLiftValue;
 
-	}
-	public static void encoderCount()
-	{
-		if(CatzRobotMap.xboxAux.getLeftStickY() >=0.01)
-		{
-			CatzRobotMap.encoderSum = CatzRobotMap.liftEncoder.get();
-		}
-		else if(CatzRobotMap.xboxAux.getLeftStickY() <= 0.01)
-		{
-			CatzRobotMap.encoderSum = CatzRobotMap.liftEncoder.get();
-			if(CatzRobotMap.lifterLimitBottom.get())
-			{
-				CatzRobotMap.encoderSum = 0;
-			}
-		}
-		
 	}
 	
 	private static void runTestControls() {
