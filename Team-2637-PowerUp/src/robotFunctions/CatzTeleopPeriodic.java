@@ -37,8 +37,7 @@ public class CatzTeleopPeriodic {
 		
 		runDriveTrainControls();
 		runGrabberControls();
-		//runLiftControls();
-		//runClimberControls();
+		runLiftControls();
 		runTestControls();
 		
 	}
@@ -160,9 +159,6 @@ public class CatzTeleopPeriodic {
 		}
 	}
 
-	private static void runClimberControls() {
-		CatzRobotMap.climberMechanism.setClimberSpeed(Math.abs(CatzRobotMap.xboxAux.getRightStickY()));
-	}
 
 	private void noStallLift() {
 		double power = 0;
@@ -207,7 +203,7 @@ public class CatzTeleopPeriodic {
 	
 	private static void runTestControls() {
 		if(CatzRobotMap.xboxTest.getAButton()) {
-			CatzRobotMap.lift.liftToScaleHeight();
+			CatzRobotMap.lift.liftToHeight(68.0);
 		}
 		if(CatzRobotMap.xboxTest.getBButton()) {
 			CatzRobotMap.lift.dropToGroundHeight();

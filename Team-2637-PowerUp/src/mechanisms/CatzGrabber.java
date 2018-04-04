@@ -122,11 +122,12 @@ public class CatzGrabber
 		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
 		this.setIntakeSpeed(0.0);
 	}
-	public void placeCube()
+	public void placeCube(double speed)
 	{
 		this.deployBicep();
-		this.setIntakeSpeed(-0.9);
+		this.setIntakeSpeed(speed);
 		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
+		this.retractBicep();
 		this.setIntakeSpeed(0.0);
 	}
 	public void intakeCube()

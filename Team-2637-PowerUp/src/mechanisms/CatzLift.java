@@ -17,17 +17,23 @@ import robot.CatzRobotMap;
  */
 
 public class CatzLift {
-	/* need to acquire for final robot */final static private double LIFT_SCALE_HEIGHT = 674898.0;
-	/* need to acquire for final robot */final static private double LIFT_SWITCH_HEIGHT = 201349.0;
-	/* need to acquire for final robot */private static final double LIFTER_ERROR_THRESHOLD_PULSES = 600;
-	/* need to acquire for final robot */final static private double LIFT_SPEED = 1.0;
-	private static final double INITIAL_LIFTER_ERROR = 1000;
+	
+	final private static double LIFT_COUNTS_PER_INCH          = 674898.0 / 60.0;
+
+	final private static double LIFT_SCALE_HEIGHT             = 68.0 * LIFT_COUNTS_PER_INCH;
+	final private static double LIFT_SWITCH_HEIGHT            = 201349.0;
+	final private static double LIFTER_ERROR_THRESHOLD_PULSES = LIFT_COUNTS_PER_INCH / 2.0;
+
+	final private static double LIFT_SPEED = 1.0;
+
+
 	public static boolean threadComplete;
 	public static boolean liftThreadRunning;
+
 	private static Timer timeout = new Timer();
 
 	public CatzLift() {
-		threadComplete = false;
+		threadComplete    = false;
 		liftThreadRunning = false;
 		printOutDebugData("Successfully initialized CatzLift");
 	}
@@ -37,9 +43,13 @@ public class CatzLift {
 	 * desired height in parallel with other code. For example, you can run one of
 	 * these lift loops and drive/turn at the same time by using threading.
 	 */
+	
+	//RENAME listToScaleHeight() to liftToHeight() AND PASS IN HEIGHT IN INCHES
+	//THEN GET RID OF SWITCH HEIGHT AND USE COMMON FUNCTION SO WE DON'T HAVE TO MAINTAIN TWO 
+	//VERSIONS OF THE SAME CODE
 	public void liftToSwitchHeight() {
 		Thread t = new Thread(() -> {
-			double error = INITIAL_LIFTER_ERROR;
+			double error = 1000.0;
 			while (!Thread.interrupted()) {
 				
 				if(liftThreadRunning == true) {
@@ -51,7 +61,7 @@ public class CatzLift {
 				
 				threadComplete = false;
 				timeout.start();
-				printOutDebugData("Lifter thread beginning");
+				printOutDebugData("Lifter switch thread beginning");
 				this.liftUp();
 				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 3 && CatzRobotMap.lifterLimitTop.get()==false) {
 					error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SWITCH_HEIGHT);
@@ -63,6 +73,7 @@ public class CatzLift {
 				liftThreadRunning = false;
 				threadComplete = true;
 				printOutDebugData("Lift to switch height thread complete");
+				System.out.println(CatzRobotMap.liftEncoder.get());
 				Thread.currentThread().interrupt();
 			}
 		});
@@ -70,65 +81,124 @@ public class CatzLift {
 
 	}
 
-	public void liftToScaleHeight() {
+	public void liftToHeight(double height) {
 		Thread t = new Thread(() -> {
-			double error = INITIAL_LIFTER_ERROR;
+			double error = 0;
+			double count = 0;
+			double counts = height * LIFT_COUNTS_PER_INCH;
+			double targetCount = CatzRobotMap.liftEncoder.get() + counts;
+			
+			
+			boolean done             = false;
+			boolean limitSwitchState = false;
+			
 			while (!Thread.interrupted()) {
-				
-				if(liftThreadRunning == true) {
-					while(liftThreadRunning == true) {
-						//wait for previous thread to finish
+
+				printOutDebugData("Lifter scale thread beginning");
+				timeout.reset();
+				timeout.start();
+
+				while(liftThreadRunning == true) {
+					///wait for previous thread to finish
+					Timer.delay(0.005);
+				}
+
+				liftThreadRunning = true;
+				threadComplete    = false;
+
+				this.liftUp();
+				while (done == false && timeout.get() < 4.2) 
+				{
+					count = CatzRobotMap.liftEncoder.get();
+					error = Math.abs(targetCount - count);
+
+					if(error < LIFTER_ERROR_THRESHOLD_PULSES) {
+						done = true;
+					}
+					
+					limitSwitchState = CatzRobotMap.lifterLimitTop.get();
+					if (limitSwitchState == true)
+					{
+						done = true;
+						System.out.println("limitTripped");
 					}
 				}
-				liftThreadRunning = true;
-				
-				threadComplete = false;
-				timeout.start();
-				printOutDebugData("Lifter thread beginning");
-				this.liftUp();
-				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 7.0 && CatzRobotMap.lifterLimitTop.get()==false) {
-					error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SCALE_HEIGHT);
-				}
 				this.stopLift();
+				liftThreadRunning = false;
+				threadComplete    = true;
+
+				printOutDebugData("Lift to scale height thread complete");
+				System.out.println(timeout.get() + ": " + count + ", " + error);
+
 				timeout.stop();
 				timeout.reset();
 
-				liftThreadRunning = false;
-				threadComplete = true;
-				printOutDebugData("Lift to scale height thread complete");
 				Thread.currentThread().interrupt();
 			}
 		});
 		t.start();
 	}
+
+
 
 	public void dropToGroundHeight() {
 
 		Thread t = new Thread(() -> {
-			double error = INITIAL_LIFTER_ERROR;
+			double count = 0;
+
+			boolean done             = false;
+			boolean limitSwitchState = false;
+
+
 			while (!Thread.interrupted()) {
-				
-				if(liftThreadRunning == true) {
-					while(liftThreadRunning == true) {
-						//wait for previous thread to finish
-					}
-				}
-				liftThreadRunning = true;
-				
-				threadComplete = false;
+				int limitSwitchStateCounter = 0;
+				printOutDebugData("dropToGroundHeight thread beginning");
+				timeout.reset();
 				timeout.start();
-				printOutDebugData("Lifter thread beginning");
+				limitSwitchState = false;
+				
+				while(liftThreadRunning == true) {
+					//wait for previous thread to finish
+					Timer.delay(0.005);
+				}
+
+				liftThreadRunning = true;	
+				threadComplete    = false;
+				
 				this.liftDown();
-				while (CatzRobotMap.lifterLimitBottom.get()==false&&timeout.get()<4.0) {
-					//wait for bottom limit switch to read true
+				System.out.println("Limit Switch: " + limitSwitchState);
+				while (done == false && timeout.get() < 4.0) {	//wait for bottom limit switch to read true
+					
+					count            = CatzRobotMap.liftEncoder.get();
+					limitSwitchState = CatzRobotMap.lifterLimitBottom.get();
+					
+					if(limitSwitchState)
+					{
+						limitSwitchStateCounter++;
+					}
+					else
+					{
+						limitSwitchStateCounter = 0;
+					}
+					
+					if(limitSwitchStateCounter > 3)
+					{
+						done = true;
+					}
+					System.out.println("Limit Switch: " + limitSwitchState);
+					Timer.delay(0.005);
 				}
 				this.stopLift();
+
+				liftThreadRunning = false;
+				threadComplete    = true;
+
+				printOutDebugData("Drop to ground height thread complete");
+				System.out.println(timeout.get() + ": " + count + ", " + limitSwitchState);
+
 				timeout.stop();
 				timeout.reset();
 
-				liftThreadRunning = false;
-				threadComplete = true;
-				printOutDebugData("Lift to switch height thread complete");
 				Thread.currentThread().interrupt();
 			}
 		});
@@ -142,8 +212,8 @@ public class CatzLift {
 	}
 
 	public void liftDown() {
-		CatzRobotMap.lifterL.set(-0.9); // It was 1 JK 3/30
-		CatzRobotMap.lifterR.set(-0.9);
+		CatzRobotMap.lifterL.set(-1.0);
+		CatzRobotMap.lifterR.set(-1.0);
 	}
 
 	public void stopLift() {

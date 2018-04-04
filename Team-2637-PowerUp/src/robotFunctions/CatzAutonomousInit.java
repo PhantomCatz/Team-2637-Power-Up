@@ -9,13 +9,11 @@
 package robotFunctions;
 
 import autonomous.CatzAutonomousDoublePaths;
-import autonomous.CatzAutonomousSinglePaths;
 import autonomous.CatzPIDDrive;
 import autonomous.CatzPIDTurn;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import mechanisms.CatzLift;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
 
@@ -35,33 +33,17 @@ public class CatzAutonomousInit {
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
 
+		//CatzAutonomousDoublePaths.toOppoScale("left");
 		
-		CatzPIDDrive.PIDDriveNoTrig(0.7,  (36 - CatzConstants.HALF_ROBOT_LENGTH), 0.8);  
-		
-		//CatzPIDTurn.PIDturn(45, 0.7);
-
-		 //Turns 45deg left and approaches the switch
-		//CatzPIDDrive.PIDDriveNoTrig(0.0, 60.0, 1.2); //AL was 65
-
-		//CatzPIDTurn.PIDturn(-45, 0.7);
-			
-		//Turns 45deg right and presses against the switch
-//		CatzPIDDrive.PIDDriveNoTrig(0.7, 12.0, 0.8);  // AL was 45
-	
-//		choosePathDouble();
-		
-		//CatzRobotMap.lift.dropToGroundHeight();
-		//setMechanisms();
-		//CatzPIDDrive.PIDDrive(.5, 48, 4);
-		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
-		//CatzRobotMap.lift.liftToScaleHeight();
-
 		//choosePathDouble();
-		//choosePath();
+		
+		CatzAutonomousDoublePaths.middleDoubleCube_RXX();		
+
+
 	}
 
 	
-	public static void choosePath() {	
+	/*public static void choosePathSingle() {	
 		
 		check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
 	    check_boxM = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
@@ -136,7 +118,7 @@ public class CatzAutonomousInit {
 			}
 		
 		}
-	}
+	}*/
 	
 	public static void choosePathDouble() {
 		
