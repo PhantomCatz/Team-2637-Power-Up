@@ -1,9 +1,9 @@
 package robot;
 
 import java.text.DecimalFormat;
+
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
@@ -13,11 +13,8 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Timer;
 import components.CatzDrive;
 import components.CatzXboxController;
-import mechanisms.CatzClimber;
 import mechanisms.CatzGrabber;
 import mechanisms.CatzLift;
-import robotFunctions.CatzAutonomousInit;
-import server.UDPServer;
 
 /*
  *  Author : Derek Duenas
@@ -32,7 +29,6 @@ public class CatzRobotMap
 {
 	public static CatzRobotMap instance;
 	
-	public static CatzClimber climberMechanism;
 	public static CatzGrabber grabber;
 	public static CatzLift lift;
 	
@@ -40,9 +36,6 @@ public class CatzRobotMap
 	public static WPI_TalonSRX rRight;
 	public static WPI_TalonSRX fLeft;
 	public static WPI_TalonSRX rLeft;
-	
-	public static WPI_TalonSRX climberMotor;  
-	//public static CatzCANTalonSRX climber2;  //robot does not yet have a second climber motor
 	
 	public static Encoder wheelEncoderR;
 	public static Encoder wheelEncoderL;
@@ -68,26 +61,17 @@ public class CatzRobotMap
 	public static Solenoid intakeForearm;
 	public static Solenoid intakeBicep;
 	
-	//public static Compressor comp;
-	
 	public static DigitalInput lifterLimitTop;
 	public static DigitalInput lifterLimitBottom;
 	
 	public static DecimalFormat secondsFormat;
 	
-	public static UDPServer server;
-
 	public static boolean debugMode = true;
 	public static boolean usingCubeee = false;
 	
 
-	//public static CatzLogger logger;
-	
-	//public  Lidar lidar;
-	public static int encoderSum;
 	private CatzRobotMap() 
 	{	
-		encoderSum = 0;
 		globalTimer = new Timer();
 		
 		if(usingCubeee) 
@@ -116,8 +100,6 @@ public class CatzRobotMap
 		
 		navx = new AHRS(SPI.Port.kMXP,(byte)200);
 		navx.reset();
-		
-		//comp = new Compressor(3);
 			
 		if(usingCubeee) {
 			wheelEncoderL = new Encoder(6,7,false,Encoder.EncodingType.k4X);
@@ -142,10 +124,8 @@ public class CatzRobotMap
 			//intakeForearm = new Solenoid(1); //solenoid to control the flaps currently not plugged in
 		}
 		else {
-			climberMotor = new WPI_TalonSRX(CatzConstants.CLIMBER_TALON_ID);
-			climberMotor.setSafetyEnabled(false);
-			printOutDebugData("Successfully initialized climber Motor");
-			//climber2 = new CatzCANTalonSRX(CatzConstants.PORT_4);
+			
+		
 			
 			lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
 			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
@@ -160,14 +140,11 @@ public class CatzRobotMap
 			intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);
 			printOutDebugData("Successfully initialized auxilary actuators");
 			
-			climberMechanism = new CatzClimber();
 			grabber          = new CatzGrabber();
 			lift             = new CatzLift();
 	
 			secondsFormat = new DecimalFormat("#.###");
 			
-			server  = new UDPServer();
-			//logger = new CatzLogger();
 		}
 	}
 	public static void setDebugModeEnabled(boolean enabled) 

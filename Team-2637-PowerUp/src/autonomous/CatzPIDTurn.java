@@ -281,8 +281,8 @@ public class CatzPIDTurn {
             pidTurnkD = 0.024;
         }
         else if (degreesToTurnAbs <= 45.0) {
-            pidTurnkP = 0.100;
-            pidTurnkD = 0.028;
+            pidTurnkP = 0.090;
+            pidTurnkD = 0.030;
             PID_TURN_THRESHOLD = 0.75;
             loopDelay = 0.007;
         }

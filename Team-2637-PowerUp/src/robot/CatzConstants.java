@@ -45,6 +45,9 @@ public class CatzConstants
 	final static public int TOP_LIFT_LIMIT_DIO = 6;
 	final static public int BOT_LIFT_LIMIT_DIO = 7;
 	
+	final static public double INTAKE_CUBE = 1.0;
+	final static public double SHOOT_CUBE = -1.0;
+	
 	final static public int DEF_VALUE = -1;
 	
 	/****************************************************************************
@@ -84,8 +87,7 @@ public class CatzConstants
 	final static public double HALF_ROBOT_LENGTH = ROBOT_LENGTH/2;
 	final static public double HALF_ROBOT_WIDTH = ROBOT_WIDTH/2;
 
-	/*need to acquire for final robot*/final static public double CLIMB_SPEED = 0;
-	/*need to acquire for final robot*/final static public double INTAKE_SPEED = 1.0;	
+	final static public double INTAKE_SPEED = 1.0;	
 	
 	final static public String POSITION_SELECTORL = "Position Left";
 	final static public String POSITION_SELECTORM = "Position Mid";

@@ -8,12 +8,9 @@
 
 package robotFunctions;
 
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
@@ -25,17 +22,19 @@ public class CatzRobotInit
 	static boolean check_boxM = false;
 	static boolean check_boxR = false;
 
-	
+	static UsbCamera camera;
 	public static void runRobotInit() 
 	{
 		CatzRobotMap.instantiateRobot();
-		//CatzRobotMap.liftEncoder.reset();
-		//setSmartDashboard();
+		CatzRobotMap.liftEncoder.reset();
+		setSmartDashboard();
 		cameraSetup();
 	}
 	public static void runDisabledInit() {
 		CatzRobotMap.liftEncoder.reset();
 		setSmartDashboard();
+		CatzRobotMap.xboxAux.setRumble(RumbleType.kLeftRumble, 0);
+		CatzRobotMap.xboxAux.setRumble(RumbleType.kRightRumble, 0);
 	}
 	
 	public static void setSmartDashboard() {
@@ -54,24 +53,8 @@ public class CatzRobotInit
 	
 	public static void cameraSetup()
 	{
-		//CameraServer.getInstance().startAutomaticCapture();
-		CameraServer.getInstance().startAutomaticCapture(1);
-		//CameraServer.getInstance().startAutomaticCapture("camera", "/dev/video1");
-		 new Thread(() -> {
-             UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
-             
-             CvSink cvSink = CameraServer.getInstance().getVideo();
-             CvSource outputStream = CameraServer.getInstance().putVideo("Blur", 640, 480);
-             
-             Mat source = new Mat();
-             Mat output = new Mat();
-             
-             while(!Thread.interrupted()) 
-             { 
-                 cvSink.grabFrame(source);
-                 Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-                 outputStream.putFrame(output);
-             }
-         }).start();
+		camera = CameraServer.getInstance().startAutomaticCapture();
+		camera.setResolution(80, 60);
+		camera.setFPS(16);
 	}
 }

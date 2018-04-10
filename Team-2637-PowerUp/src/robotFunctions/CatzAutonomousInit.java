@@ -9,13 +9,11 @@
 package robotFunctions;
 
 import autonomous.CatzAutonomousDoublePaths;
-import autonomous.CatzAutonomousSinglePaths;
 import autonomous.CatzPIDDrive;
 import autonomous.CatzPIDTurn;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import mechanisms.CatzLift;
 import robot.CatzConstants;
 import robot.CatzRobotMap;
 
@@ -34,115 +32,27 @@ public class CatzAutonomousInit {
 		setMechanisms();
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
-
 		
-		CatzPIDDrive.PIDDriveNoTrig(0.7,  (36 - CatzConstants.HALF_ROBOT_LENGTH), 0.8);  
+		choosePathDouble();
 		
-		//CatzPIDTurn.PIDturn(45, 0.7);
-
-		 //Turns 45deg left and approaches the switch
-		//CatzPIDDrive.PIDDriveNoTrig(0.0, 60.0, 1.2); //AL was 65
-
-		//CatzPIDTurn.PIDturn(-45, 0.7);
-			
-		//Turns 45deg right and presses against the switch
-//		CatzPIDDrive.PIDDriveNoTrig(0.7, 12.0, 0.8);  // AL was 45
-	
-//		choosePathDouble();
-		
-		//CatzRobotMap.lift.dropToGroundHeight();
-		//setMechanisms();
-		//CatzPIDDrive.PIDDrive(.5, 48, 4);
-		//CatzPIDDrive.PIDDriveNoTrig(.5, 48, 4);
-		//CatzRobotMap.lift.liftToScaleHeight();
-
-		//choosePathDouble();
-		//choosePath();
-	}
-
-	
-	public static void choosePath() {	
-		
-		check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
-	    check_boxM = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
-		check_boxR = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false); 
-		
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		
-		boolean initSuccessFlag = true;
-
-		System.out.println(gameData);
-	
-
-	if(SmartDashboard.getBoolean("Use default autonomous?", false)==true) {
-		if(check_boxL == true || check_boxR == true) {
-			System.out.println("default auto left and right");
-			CatzPIDDrive.PIDDriveNoTrig(0.7, 193, 5);
-		} else {
-			System.out.println("default middle");
-			CatzPIDDrive.PIDDriveNoTrig(.6, (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  //Leaves the wall and drives to the switch
-			CatzPIDTurn.PIDturn(45, 1.0); 
-			CatzPIDDrive.PIDDriveNoTrig(.6, 65.0,3.0);  //Turns 45deg left and approaches the switch
-			CatzPIDTurn.PIDturn(-45, 1.0); 
-			CatzPIDDrive.PIDDriveNoTrig(.6, (45 - CatzConstants.HALF_ROBOT_LENGTH), 1); //Turns 45deg right and presses against the switch
+		/*
+		 * CatzRobotMap.lift.liftToHeight(60);
+		Timer.delay(1.0);
+		while (CatzRobotMap.lift.liftThreadRunning == true)
+		{
+			//Wait for thread to complete
+			Timer.delay(0.005);
+			System.out.println(CatzRobotMap.lift.liftThreadRunning);
 		}
 		
-	} else {
-		if (check_boxL == true) {
-			System.out.println("Starting position left");
-			
-				if (gameData.charAt(1)=='R') {
-					printOutDebugData("left_R");
-					CatzAutonomousSinglePaths.leftSingleCube_XRX();
-				} else if (gameData.charAt(1)=='L') {
-					printOutDebugData("left_L");
-					CatzAutonomousSinglePaths.leftSingleCube_XLX();
-				} 
-			  
-	  } else if (check_boxM == true) {
-			System.out.println("Starting position Middle");
-
-				if (gameData.charAt(0) == 'L') {
-					printOutDebugData("middle_L");
-					CatzAutonomousSinglePaths.middleSingleCube_LXX();
-				} else if (gameData.charAt(0) == 'R') {
-					printOutDebugData("middle_R");
-					CatzAutonomousSinglePaths.middleSingleCube_RXX();
-				} 
-				
-				
-	 } else if (check_boxR == true) {
-			System.out.println("Starting position Right");
-
-				if (gameData.charAt(1) == 'L') {
-					printOutDebugData("right_L");
-					CatzAutonomousSinglePaths.rightSingleCube_XLX();
-				} else if(gameData.charAt(1) == 'R') {
-					printOutDebugData("right_R");
-					CatzAutonomousSinglePaths.rightSingleCube_XRX();
-				}
-	 		
-	 } else {
-		initSuccessFlag = false;
-			} 
-		
-	if (initSuccessFlag == true) {
-		printOutDebugData("Init Done");
-		} else {
-			printOutDebugData("Init failed");
-			CatzPIDDrive.PIDDriveNoTrig(CatzConstants.AUTO_STARTPOS_DEF_SPEED,
-			            	  CatzConstants.AUTO_STARTPOS_DEF_DISTANCE,
-			                  CatzConstants.AUTO_STARTPOS_DEF_TIMEOUT); //if all else fails, just drive forward
-			}
-		
-		}
+		CatzRobotMap.grabber.placeCube(-0.8);*/
 	}
 	
 	public static void choosePathDouble() {
 		
 		check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
 	    check_boxM = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
-		check_boxR = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false); 
+		check_boxR = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false);
 		
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
 	
@@ -150,10 +60,11 @@ public class CatzAutonomousInit {
 
 		System.out.println(gameData);
 	
-	if(SmartDashboard.getBoolean("Use default autonomous?", false)==true) {
+	if(SmartDashboard.getBoolean("Use default autonomous?", false)==true) 
+	{
 		if(check_boxL == true || check_boxR == true) {
 			System.out.println("default auto - left or right");
-			CatzPIDDrive.PIDDriveNoTrig(0.7, 193, 5);
+			CatzPIDDrive.PIDDriveNoTrig(0.7, 193, 5);   // goes straight
 		} else {
 			System.out.println("default auto - middle");
 			CatzPIDDrive.PIDDriveNoTrig(.6, (36 - CatzConstants.HALF_ROBOT_LENGTH), 1.2);  //Leaves the wall and drives to the switch
@@ -163,8 +74,9 @@ public class CatzAutonomousInit {
 			CatzPIDDrive.PIDDriveNoTrig(.6, (45 - CatzConstants.HALF_ROBOT_LENGTH), 1); //Turns 45deg right and presses against the switch
 		}
 			
-	} else {
-	
+	} 
+	else 
+	{
 		if (check_boxL == true) {
 			System.out.println("Starting position left");
 					
@@ -176,7 +88,9 @@ public class CatzAutonomousInit {
 				CatzAutonomousDoublePaths.leftDoubleCube_XLX();
 			} 
 		  
-      } else if (check_boxM == true) {
+      } 
+	else if (check_boxM == true) 
+		{
 		System.out.println("Starting position Middle");
 
 			if (gameData.charAt(0) == 'L') {
@@ -187,7 +101,9 @@ public class CatzAutonomousInit {
 				CatzAutonomousDoublePaths.middleDoubleCube_RXX();
 			} 
 		
-	} else if (check_boxR == true) {
+	} 
+	else if (check_boxR == true) 
+	{
 		System.out.println("Starting position Right");
 
 		if(gameData.charAt(1) == 'L') {
@@ -198,7 +114,9 @@ public class CatzAutonomousInit {
 			CatzAutonomousDoublePaths.rightDoubleCube_XRX();
 		}
 				
-	} else {
+	} 
+	else 
+	{
 		initSuccessFlag = false;
 	} 
 	

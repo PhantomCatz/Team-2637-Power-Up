@@ -8,7 +8,6 @@ public class CatzTeleopInit
 	public static void runTeleopInit()
 	{
 		setMechanisms();
-		//CatzRobotMap.comp.setClosedLoopControl(true);
 	}
 	public static void setMechanisms() {
 

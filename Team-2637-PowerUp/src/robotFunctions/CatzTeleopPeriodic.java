@@ -29,25 +29,18 @@ public class CatzTeleopPeriodic {
 	private static double deltaLiftValue;
 	private static boolean liftDisabled = false;
 	
-	int intialReading = 0;
-	int lastReading;
-	int deltaReading;
-	
 	public static void runTeleopPeriodic() {
 		
 		runDriveTrainControls();
 		runGrabberControls();
-		//runLiftControls();
-		//runClimberControls();
-		runTestControls();
-		
+		runLiftControls();
 	}
 
 	private static void runDriveTrainControls() {
-		if (CatzRobotMap.xboxDrive.getBButton()) {
+		/*if (CatzRobotMap.xboxDrive.getBButton()) {
 			reversed = !reversed;
 			Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
-		}
+		}*/
 
 		if (reversed == true) {
 			CatzRobotMap.xboxDrive.setRumble(RumbleType.kLeftRumble, .5);
@@ -62,8 +55,8 @@ public class CatzTeleopPeriodic {
 
 	private static void runGrabberControls() {
 		CatzRobotMap.grabber
-				.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger() - CatzRobotMap.xboxDrive.getLeftTrigger());
-		// -CatzRobotMap.xboxAux.getRightTrigger());
+				.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger() - CatzRobotMap.xboxDrive.getLeftTrigger() - CatzRobotMap.xboxAux.getLeftTrigger());
+	
 
 		// bicep controls
 		if (CatzRobotMap.grabber.forearmOpen == false) {
@@ -73,28 +66,39 @@ public class CatzTeleopPeriodic {
 				CatzRobotMap.grabber.retractBicep(0.0);
 			}
 		}
-
+		
+		// opens forearm
+		if(CatzRobotMap.xboxAux.getXButton())
+		{
+			CatzRobotMap.grabber.toggleForearm();;
+		}
+		
 		// set forearm and bicep to portal pickup mode
 		if (CatzRobotMap.xboxAux.getAButton()) {
 			CatzRobotMap.grabber.openForearm(0.0);
-			CatzRobotMap.grabber.retractBicep();
+			CatzRobotMap.grabber.retractBicep(0.0);
 		}
 
 		// Driver controls for forearms
 		if (CatzRobotMap.xboxDrive.getAButton()) {
 			CatzRobotMap.grabber.toggleForearm();
 		}
+		
+		if(CatzRobotMap.xboxAux.getBButton())
+		{
+			CatzRobotMap.grabber.placeCube(-0.8);
+		}
+		
+		if(CatzRobotMap.xboxDrive.getBButton())
+		{
+			CatzRobotMap.grabber.placeCube(CatzConstants.SHOOT_CUBE);
+		}
 
 		// sets forearm and bicep to cube pickup mode
 		if (CatzRobotMap.xboxDrive.getXButton()) {
 			CatzRobotMap.grabber.openForearm(0.0);
-			CatzRobotMap.grabber.deployBicep();
+			CatzRobotMap.grabber.deployBicep(0.0);
 		}
-
-		// aux driver can open forearms only
-		// if(CatzRobotMap.xboxAux.getBButton()) {
-		// CatzRobotMap.grabber.openForearm(0.0);
-		// }
 
 		// rumble if biceps are down
 		if (CatzGrabber.bicepDeployed == true) {
@@ -104,13 +108,7 @@ public class CatzTeleopPeriodic {
 			CatzRobotMap.xboxAux.setRumble(RumbleType.kLeftRumble, 0);
 			CatzRobotMap.xboxAux.setRumble(RumbleType.kRightRumble, 0);
 		}
-
-		// for testing purposes
-		if (CatzRobotMap.xboxAux.getYButton()) {
-			CatzRobotMap.liftEncoder.reset();
-			CatzRobotMap.wheelEncoderL.reset();
-			CatzRobotMap.wheelEncoderR.reset();
-		}
+		
 	}
 
 	// Lifter controls
@@ -152,7 +150,7 @@ public class CatzTeleopPeriodic {
 			}
 		}
 	}
-
+	
 	private static void printOutDebugData(String info) {
 		if (CatzRobotMap.debugMode == true) {
 			double currentTime = CatzRobotMap.globalTimer.get();
@@ -160,9 +158,6 @@ public class CatzTeleopPeriodic {
 		}
 	}
 
-	private static void runClimberControls() {
-		CatzRobotMap.climberMechanism.setClimberSpeed(Math.abs(CatzRobotMap.xboxAux.getRightStickY()));
-	}
 
 	private void noStallLift() {
 		double power = 0;
@@ -203,14 +198,5 @@ public class CatzTeleopPeriodic {
 
 		lastLiftValue = currentLiftValue;
 
-	}
-	
-	private static void runTestControls() {
-		if(CatzRobotMap.xboxTest.getAButton()) {
-			CatzRobotMap.lift.liftToScaleHeight();
-		}
-		if(CatzRobotMap.xboxTest.getBButton()) {
-			CatzRobotMap.lift.dropToGroundHeight();
-		}
 	}
 }
