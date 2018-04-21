@@ -21,29 +21,32 @@ public class CatzConstants
 	final static public int CUBEE_TALON_ID_R_FRONT = 4;
 	final static public int CUBEE_TALON_ID_R_REAR  = 5;
 
-	final static public int TALON_ID_FRONT_L = 2;
-	final static public int TALON_ID_REAR_L  = 3;
-	final static public int TALON_ID_FRONT_R = 5;
-	final static public int TALON_ID_REAR_R  = 6;
-	
-	final static public int CLIMBER_TALON_ID = 1;
+	final static public int TALON_ID_FRONT_L = 3;
+	final static public int TALON_ID_REAR_L  = 2;
+	final static public int TALON_ID_FRONT_R = 6;
+	final static public int TALON_ID_REAR_R  = 5;
 	
 	final static public int DRIVE_XBOX_PORT = 0;
 	final static public int AUX_XBOX_PORT   = 1;
 	
-	final static public int RIGHT_LIFTER_PWM = 4;
-	final static public int LEFT_LIFTER_PWM  = 9;
+	final static public int RIGHT_RIGHT_LIFTER_PWM = 4;
+	final static public int RIGHT_LEFT_LIFTER_PWM  = 9;
+	final static public int LEFT_RIGHT_LIFTER_PWM = 7;
+	final static public int LEFT_LEFT_LIFTER_PWM = 8;
 	
-	final static public int RIGHT_INTAKE_PWM   = 7;
-	final static public int LEFT_INTAKE_PWM    = 8;
-	final static public int INTAKE_FOREARM_PCM = 0;
-	final static public int INTAKE_BICEP_PCM   = 1;
+	final static public int RIGHT_INTAKE_PWM   = 4;
+	final static public int LEFT_INTAKE_PWM    = 1;
+	final static public int INTAKE_FOREARM_PCM = 1;
+	final static public int INTAKE_BICEP_PCM   = 0;
 	
 	final static public int LIFT_ENCODER_DIOA = 2;
 	final static public int LIFT_ENCODER_DIOB = 3;
 	
 	final static public int TOP_LIFT_LIMIT_DIO = 6;
 	final static public int BOT_LIFT_LIMIT_DIO = 7;
+	
+	final static public double INTAKE_CUBE = 1.0;
+	final static public double SHOOT_CUBE = -1.0;
 	
 	final static public int DEF_VALUE = -1;
 	
@@ -84,8 +87,7 @@ public class CatzConstants
 	final static public double HALF_ROBOT_LENGTH = ROBOT_LENGTH/2;
 	final static public double HALF_ROBOT_WIDTH = ROBOT_WIDTH/2;
 
-	/*need to acquire for final robot*/final static public double CLIMB_SPEED = 0;
-	/*need to acquire for final robot*/final static public double INTAKE_SPEED = 1.0;	
+	final static public double INTAKE_SPEED = 1.0;	
 	
 	final static public String POSITION_SELECTORL = "Position Left";
 	final static public String POSITION_SELECTORM = "Position Mid";
@@ -105,4 +107,5 @@ public class CatzConstants
 	final static public double DEG_TO_RAD = Math.PI/180.0;
 	final static public double RAD_TO_DEG = 180.0/Math.PI;
 
+	final static public double LIFT_SCALE_HEIGHT = 70.0;
 }

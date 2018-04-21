@@ -13,30 +13,21 @@ import robot.CatzRobotMap;
 
 public class CatzDrive
 {
-	//private final String NAME;
 	private DifferentialDrive drive;
-	//private CatzLogger logger;
-	//private CatzTimerMap timer;
 	public CatzDrive(SpeedControllerGroup leftMotors, SpeedControllerGroup rightMotors){
-		//timer = CatzTimerMap.getInstance();
-		//logger = CatzLogger.getInstance();
-		//NAME = this.getClass().getSimpleName();
 		drive = new DifferentialDrive(leftMotors, rightMotors);
 		drive.setSafetyEnabled(false);
 		printOutDebugData("Successfully instantiated CatzDrive");
 	}
 	
 	public void setModeArcadeDriveRacing(CatzXboxController control){
-		//logger.add(NAME, "Arcade Drive set to Racing.", CatzConstants.LEVEL5, timer.get());
 		drive.arcadeDrive(control.getRightTrigger()-control.getLeftTrigger(), control.getRightStickX());
 	}
 	
 	public void setModeArcadeDriveFlash(CatzXboxController control){
-		//logger.add(NAME, "Arcade Drive set to Flash.", CatzConstants.LEVEL5, timer.get());
-		drive.arcadeDrive(control.getLeftStickY(), control.getRightStickX());
+		drive.arcadeDrive(.9*control.getLeftStickY(), .9*control.getRightStickX());
 	}
 	public void setModeReverseArcadeDriveFlash(CatzXboxController control){
-		//logger.add(NAME, "Arcade Drive set to Flash.", CatzConstants.LEVEL5, timer.get());
 		drive.arcadeDrive(-control.getLeftStickY(), control.getRightStickX());
 	}
 	

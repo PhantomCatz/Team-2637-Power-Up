@@ -62,8 +62,10 @@ public class CatzGrabber
 		Timer.delay(delaySec);
 	}
 	
-	public void toggleForearm() {
-		if(forearmOpen == true) {
+	public void toggleForearm()
+	{
+		if(forearmOpen == true) 
+		{
 			this.closeForearm();
 		}
 		else{
@@ -72,29 +74,30 @@ public class CatzGrabber
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 
-	public void deployBicep() { 
+	public void deployBicep() 
+	{ 
 		bicepDeployed = true;
-		CatzRobotMap.intakeBicep.set(bicepDeployed);
+		CatzRobotMap.intakeBicep.set(true); // (whc) 4/5/18 changed to a direct passing of "true"
 		printOutDebugData("Grabber Bicep set to Deploy");
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 	public void deployBicep(double delay) { 
 		bicepDeployed = true;
-		CatzRobotMap.intakeBicep.set(bicepDeployed);
+		CatzRobotMap.intakeBicep.set(true);  //whc 4/5/18 changed to directly passing "true"
 		printOutDebugData("Grabber Bicep set to Deploy");
 		Timer.delay(delay);
 	}
 
 	public void retractBicep() {
 		bicepDeployed = false;
-		CatzRobotMap.intakeBicep.set(bicepDeployed);
+		CatzRobotMap.intakeBicep.set(false); //whc 4/5/18 changed to directly passing "false"
 		printOutDebugData("Grabber forearm set to Retract");
 		Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
 	}
 	
 	public void retractBicep(double delay) {
 		bicepDeployed = false;
-		CatzRobotMap.intakeBicep.set(bicepDeployed);
+		CatzRobotMap.intakeBicep.set(false); //whc 4/5/18 changed to directly passing "false"
 		printOutDebugData("Grabber forearm set to Retract");
 		Timer.delay(delay);
 	}
@@ -116,11 +119,14 @@ public class CatzGrabber
 		this.deployBicep();
 		this.openForearm();
 	}
-	public void shootCube()
+	public void dropCube()
 	{
-		this.setIntakeSpeed(-CatzConstants.INTAKE_SPEED);
-		Timer.delay(CatzConstants.CUBE_OUTTAKE_WAIT_TIME);
-		this.setIntakeSpeed(0.0);
+		this.deployBicep();
+		this.openForearm(0);
+		Timer.delay(1);
+		this.closeForearm(0);
+		this.retractBicep();
+
 	}
 	public void placeCube(double speed)
 	{

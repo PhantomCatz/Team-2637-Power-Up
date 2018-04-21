@@ -41,11 +41,13 @@ public class CatzRobotMap
 	public static Encoder wheelEncoderL;
 	
 	public static Encoder liftEncoder;
-	public static Spark lifterR;
-	public static Spark lifterL;
+	public static Spark lifterRightRight;
+	public static Spark lifterRightLeft;
+	public static Spark lifterLeftRight;
+	public static Spark lifterLeftLeft;
 	
-	public static Spark intakeRight;
-	public static Spark intakeLeft;
+	public static WPI_TalonSRX intakeRight;
+	public static WPI_TalonSRX intakeLeft;
 	
 	public static AHRS navx;
 	
@@ -118,24 +120,25 @@ public class CatzRobotMap
 		
 		xboxDrive = new CatzXboxController(CatzConstants.DRIVE_XBOX_PORT);
 		xboxAux   = new CatzXboxController(CatzConstants.AUX_XBOX_PORT);
-		xboxTest = new CatzXboxController(2);
+		xboxTest  = new CatzXboxController(2);
 		
 		if(usingCubeee) {
 			//intakeForearm = new Solenoid(1); //solenoid to control the flaps currently not plugged in
 		}
 		else {
 			
-		
-			
-			lifterR = new Spark(CatzConstants.RIGHT_LIFTER_PWM);
-			lifterL = new Spark(CatzConstants.LEFT_LIFTER_PWM);
-	
+			lifterRightRight = new Spark(CatzConstants.RIGHT_RIGHT_LIFTER_PWM);
+			lifterRightLeft  = new Spark(CatzConstants.RIGHT_LEFT_LIFTER_PWM);
+			lifterLeftRight  = new Spark(CatzConstants.LEFT_RIGHT_LIFTER_PWM);
+			lifterLeftLeft   = new Spark(CatzConstants.LEFT_LEFT_LIFTER_PWM);
+			lifterRightRight.setInverted(true);
+			lifterRightLeft.setInverted(true);
 			lifterLimitTop =    new DigitalInput(CatzConstants.TOP_LIFT_LIMIT_DIO);
 			lifterLimitBottom = new DigitalInput(CatzConstants.BOT_LIFT_LIMIT_DIO);
 			
 	
-			intakeRight   = new Spark(CatzConstants.RIGHT_INTAKE_PWM);
-			intakeLeft    = new Spark(CatzConstants.LEFT_INTAKE_PWM);
+			intakeRight   = new WPI_TalonSRX(4);//CatzConstants.RIGHT_INTAKE_PWM);
+			intakeLeft    = new WPI_TalonSRX(1);//CatzConstants.LEFT_INTAKE_PWM);
 			intakeForearm = new Solenoid(CatzConstants.INTAKE_FOREARM_PCM);
 			intakeBicep   = new Solenoid(CatzConstants.INTAKE_BICEP_PCM);
 			printOutDebugData("Successfully initialized auxilary actuators");

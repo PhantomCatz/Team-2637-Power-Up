@@ -29,24 +29,18 @@ public class CatzTeleopPeriodic {
 	private static double deltaLiftValue;
 	private static boolean liftDisabled = false;
 	
-	int intialReading = 0;
-	int lastReading;
-	int deltaReading;
-	
 	public static void runTeleopPeriodic() {
 		
 		runDriveTrainControls();
 		runGrabberControls();
 		runLiftControls();
-		runTestControls();
-		
 	}
 
 	private static void runDriveTrainControls() {
-		if (CatzRobotMap.xboxDrive.getBButton()) {
+		/*if (CatzRobotMap.xboxDrive.getBButton()) {
 			reversed = !reversed;
 			Timer.delay(CatzConstants.FUNCTION_EXECUTION_DELAY);
-		}
+		}*/
 
 		if (reversed == true) {
 			CatzRobotMap.xboxDrive.setRumble(RumbleType.kLeftRumble, .5);
@@ -60,40 +54,54 @@ public class CatzTeleopPeriodic {
 	}
 
 	private static void runGrabberControls() {
-		CatzRobotMap.grabber
-				.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger() - CatzRobotMap.xboxDrive.getLeftTrigger());
-		// -CatzRobotMap.xboxAux.getRightTrigger());
+		CatzRobotMap.grabber.setIntakeSpeed(CatzRobotMap.xboxDrive.getRightTrigger()
+				- CatzRobotMap.xboxDrive.getLeftTrigger() - CatzRobotMap.xboxAux.getLeftTrigger());
+	
 
 		// bicep controls
 		if (CatzRobotMap.grabber.forearmOpen == false) {
-			if (CatzRobotMap.xboxAux.getRightBumper()) {
+			if (CatzRobotMap.xboxAux.getRightBumper()) 
+			{
 				CatzRobotMap.grabber.deployBicep(0.0);
-			} else if (CatzRobotMap.xboxAux.getLeftBumper()) {
+			} 
+			else if (CatzRobotMap.xboxAux.getLeftBumper()) 
+			{
 				CatzRobotMap.grabber.retractBicep(0.0);
 			}
 		}
-
+		
+		// opens forearm
+		if(CatzRobotMap.xboxAux.getXButton())
+		{
+			CatzRobotMap.grabber.toggleForearm();;
+		}
+		
 		// set forearm and bicep to portal pickup mode
 		if (CatzRobotMap.xboxAux.getAButton()) {
 			CatzRobotMap.grabber.openForearm(0.0);
-			CatzRobotMap.grabber.retractBicep();
+			CatzRobotMap.grabber.retractBicep(0.0);
 		}
 
 		// Driver controls for forearms
 		if (CatzRobotMap.xboxDrive.getAButton()) {
 			CatzRobotMap.grabber.toggleForearm();
 		}
+		
+		if(CatzRobotMap.xboxAux.getBButton())
+		{
+			CatzRobotMap.grabber.placeCube(-0.8);
+		}
+		
+		if(CatzRobotMap.xboxDrive.getBButton())
+		{
+			CatzRobotMap.grabber.placeCube(CatzConstants.SHOOT_CUBE);
+		}
 
 		// sets forearm and bicep to cube pickup mode
 		if (CatzRobotMap.xboxDrive.getXButton()) {
 			CatzRobotMap.grabber.openForearm(0.0);
-			CatzRobotMap.grabber.deployBicep();
+			CatzRobotMap.grabber.deployBicep(0.0);
 		}
-
-		// aux driver can open forearms only
-		// if(CatzRobotMap.xboxAux.getBButton()) {
-		// CatzRobotMap.grabber.openForearm(0.0);
-		// }
 
 		// rumble if biceps are down
 		if (CatzGrabber.bicepDeployed == true) {
@@ -103,13 +111,7 @@ public class CatzTeleopPeriodic {
 			CatzRobotMap.xboxAux.setRumble(RumbleType.kLeftRumble, 0);
 			CatzRobotMap.xboxAux.setRumble(RumbleType.kRightRumble, 0);
 		}
-
-		// for testing purposes
-		if (CatzRobotMap.xboxAux.getYButton()) {
-			CatzRobotMap.liftEncoder.reset();
-			CatzRobotMap.wheelEncoderL.reset();
-			CatzRobotMap.wheelEncoderR.reset();
-		}
+		
 	}
 
 	// Lifter controls
@@ -121,10 +123,12 @@ public class CatzTeleopPeriodic {
 		 * controller X button overrides the limit switch
 		 */
 
-		if (CatzRobotMap.xboxAux.getXButton() == true) 
+		if (CatzRobotMap.xboxAux.getYButton() == true) 
 		{
-			CatzRobotMap.lifterL.set(power);
-			CatzRobotMap.lifterR.set(power);
+			CatzRobotMap.lifterRightLeft.set(power);
+			CatzRobotMap.lifterRightRight.set(power);
+			CatzRobotMap.lifterLeftLeft.set(power);
+			CatzRobotMap.lifterLeftRight.set(power);
 		} 
 		else 
 		{
@@ -132,26 +136,36 @@ public class CatzTeleopPeriodic {
 			{
 				if(power <= .0)
 				{
-					CatzRobotMap.lifterL.set(power);
-					CatzRobotMap.lifterR.set(power);
+					CatzRobotMap.lifterRightLeft.set(power);
+					CatzRobotMap.lifterRightRight.set(power);
+					CatzRobotMap.lifterLeftLeft.set(power);
+					CatzRobotMap.lifterLeftRight.set(power);
+				} else {
+					CatzRobotMap.lift.stopLift();
 				}
 			}
 			else if(CatzRobotMap.lifterLimitBottom.get() == true)
 			{
-				if(power >= .0)
+				if(power >= -.0)
 				{
-					CatzRobotMap.lifterL.set(power);
-					CatzRobotMap.lifterR.set(power);
+					CatzRobotMap.lifterRightLeft.set(power);
+					CatzRobotMap.lifterRightRight.set(power);
+					CatzRobotMap.lifterLeftLeft.set(power);
+					CatzRobotMap.lifterLeftRight.set(power);
+				} else {
+					CatzRobotMap.lift.stopLift();
 				}
 			}
 			else 
 			{
-				CatzRobotMap.lifterL.set(power);
-				CatzRobotMap.lifterR.set(power);
+				CatzRobotMap.lifterRightLeft.set(power);
+				CatzRobotMap.lifterRightRight.set(power);
+				CatzRobotMap.lifterLeftLeft.set(power);
+				CatzRobotMap.lifterLeftRight.set(power);
 			}
 		}
 	}
-
+	
 	private static void printOutDebugData(String info) {
 		if (CatzRobotMap.debugMode == true) {
 			double currentTime = CatzRobotMap.globalTimer.get();
@@ -163,8 +177,8 @@ public class CatzTeleopPeriodic {
 	private void noStallLift() {
 		double power = 0;
 		if (CatzRobotMap.xboxAux.getXButton() == true) { // override limit switch (whc)
-			CatzRobotMap.lifterL.set(power);
-			CatzRobotMap.lifterR.set(power);
+			CatzRobotMap.lifterRightLeft.set(power);
+			CatzRobotMap.lifterRightRight.set(power);
 		} else {
 			if (liftDisabled) {
 				if (lifterDisabler.get() > LIFTER_DISABLED_TIME) {
@@ -173,14 +187,14 @@ public class CatzTeleopPeriodic {
 				}
 			} else {
 				if (CatzRobotMap.lifterLimitTop.get() == false) {
-					CatzRobotMap.lifterL.set(power);
-					CatzRobotMap.lifterR.set(power);
+					CatzRobotMap.lifterRightLeft.set(power);
+					CatzRobotMap.lifterRightRight.set(power);
 				} else {
 					if (power <= 0.3) 
 					{ 
 						// limit switch is engaged; lifter can only go down. (whc)
 						// CatzRobotMap.lifterL.set(power);
-						CatzRobotMap.lifterR.set(power);
+						CatzRobotMap.lifterRightRight.set(power);
 					}
 				}
 			}
@@ -191,22 +205,13 @@ public class CatzTeleopPeriodic {
 			liftDisabled = true;
 			lifterDisabler.reset();
 			lifterDisabler.start();
-			CatzRobotMap.lifterL.set(0);
-			CatzRobotMap.lifterR.set(0);
+			CatzRobotMap.lifterRightLeft.set(0);
+			CatzRobotMap.lifterRightRight.set(0);
 			printOutDebugData("Lifter disabled for " + LIFTER_DISABLED_TIME + " seconds:\n    deltaLiftValue: "
 					+ deltaLiftValue + ", joystickPower: " + power);
 		}
 
 		lastLiftValue = currentLiftValue;
 
-	}
-	
-	private static void runTestControls() {
-		if(CatzRobotMap.xboxTest.getAButton()) {
-			CatzRobotMap.lift.liftToHeight(68.0);
-		}
-		if(CatzRobotMap.xboxTest.getBButton()) {
-			CatzRobotMap.lift.dropToGroundHeight();
-		}
 	}
 }

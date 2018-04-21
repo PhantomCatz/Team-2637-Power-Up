@@ -11,6 +11,7 @@ import robot.CatzRobotMap;
  *  2-19-18	Added debug data printouts
  *  3-16-18 Removed lift to scale height 2 method
  *  3-17-18 Using the bottom limit switch instead of encoder for the lift to go down all the way
+ *  4-5-18  Changed lift method to go to different heights
  *  
  *  Methods : lift
  *  Functionality : Move the lift up and down
@@ -18,21 +19,23 @@ import robot.CatzRobotMap;
 
 public class CatzLift {
 	
-	final private static double LIFT_COUNTS_PER_INCH          = 674898.0 / 60.0;
+	//694851.675/80; //
+	
+	final private static double LIFT_COUNTS_PER_INCH          =   505026.0 / 80.0;    //527221.0/80.0;  // 674898.0 / 60.0 - wrong counts per inch value
 
 	final private static double LIFT_SCALE_HEIGHT             = 68.0 * LIFT_COUNTS_PER_INCH;
-	final private static double LIFT_SWITCH_HEIGHT            = 201349.0;
-	final private static double LIFTER_ERROR_THRESHOLD_PULSES = LIFT_COUNTS_PER_INCH / 2.0;
+	final private static double LIFT_SWITCH_HEIGHT            = 17 * LIFT_COUNTS_PER_INCH; //TODO test
+	final private static double LIFTER_ERROR_THRESHOLD_PULSES = LIFT_COUNTS_PER_INCH;
 
 	final private static double LIFT_SPEED = 1.0;
 
-
-	public static boolean threadComplete;
+	static boolean threadComplete;
 	public static boolean liftThreadRunning;
 
 	private static Timer timeout = new Timer();
 
-	public CatzLift() {
+	public CatzLift() 
+	{
 		threadComplete    = false;
 		liftThreadRunning = false;
 		printOutDebugData("Successfully initialized CatzLift");
@@ -47,47 +50,14 @@ public class CatzLift {
 	//RENAME listToScaleHeight() to liftToHeight() AND PASS IN HEIGHT IN INCHES
 	//THEN GET RID OF SWITCH HEIGHT AND USE COMMON FUNCTION SO WE DON'T HAVE TO MAINTAIN TWO 
 	//VERSIONS OF THE SAME CODE
-	public void liftToSwitchHeight() {
-		Thread t = new Thread(() -> {
-			double error = 1000.0;
-			while (!Thread.interrupted()) {
-				
-				if(liftThreadRunning == true) {
-					while(liftThreadRunning == true) {
-						//wait for previous thread to finish
-					}
-				}
-				liftThreadRunning = true;
-				
-				threadComplete = false;
-				timeout.start();
-				printOutDebugData("Lifter switch thread beginning");
-				this.liftUp();
-				while (error > LIFTER_ERROR_THRESHOLD_PULSES && timeout.get() < 3 && CatzRobotMap.lifterLimitTop.get()==false) {
-					error = Math.abs(CatzRobotMap.liftEncoder.get() - LIFT_SWITCH_HEIGHT);
-				}
-				this.stopLift();
-				timeout.stop();
-				timeout.reset();
-
-				liftThreadRunning = false;
-				threadComplete = true;
-				printOutDebugData("Lift to switch height thread complete");
-				System.out.println(CatzRobotMap.liftEncoder.get());
-				Thread.currentThread().interrupt();
-			}
-		});
-		t.start();
-
-	}
 
 	public void liftToHeight(double height) {
 		Thread t = new Thread(() -> {
 			double error = 0;
-			double count = 0;
+			int count = 0;
 			double counts = height * LIFT_COUNTS_PER_INCH;
 			double targetCount = CatzRobotMap.liftEncoder.get() + counts;
-			
+			int limitSwitchCount = 0;
 			
 			boolean done             = false;
 			boolean limitSwitchState = false;
@@ -105,9 +75,11 @@ public class CatzLift {
 
 				liftThreadRunning = true;
 				threadComplete    = false;
-
+				double startingCount = CatzRobotMap.liftEncoder.get();
+				targetCount = startingCount + counts;
+				
 				this.liftUp();
-				while (done == false && timeout.get() < 4.2) 
+				while (done == false && timeout.get() < 3.5) 
 				{
 					count = CatzRobotMap.liftEncoder.get();
 					error = Math.abs(targetCount - count);
@@ -119,16 +91,26 @@ public class CatzLift {
 					limitSwitchState = CatzRobotMap.lifterLimitTop.get();
 					if (limitSwitchState == true)
 					{
-						done = true;
+						limitSwitchCount++;
 						System.out.println("limitTripped");
 					}
+					else
+					{
+						limitSwitchCount = 0;
+					}
+					
+					if(limitSwitchCount > 2)
+					{
+						done = true;
+					}
+					Timer.delay(0.010);
 				}
 				this.stopLift();
 				liftThreadRunning = false;
 				threadComplete    = true;
 
 				printOutDebugData("Lift to scale height thread complete");
-				System.out.println(timeout.get() + ": " + count + ", " + error);
+				System.out.println(timeout.get() + ": " + count + ", " + error + ", " + startingCount + ", " + targetCount);
 
 				timeout.stop();
 				timeout.reset();
@@ -139,12 +121,10 @@ public class CatzLift {
 		t.start();
 	}
 
-
-
 	public void dropToGroundHeight() {
 
 		Thread t = new Thread(() -> {
-			double count = 0;
+			int count = 0;
 
 			boolean done             = false;
 			boolean limitSwitchState = false;
@@ -167,7 +147,7 @@ public class CatzLift {
 				
 				this.liftDown();
 				System.out.println("Limit Switch: " + limitSwitchState);
-				while (done == false && timeout.get() < 4.0) {	//wait for bottom limit switch to read true
+				while (done == false && timeout.get() < 5.0) {	//wait for bottom limit switch to read true
 					
 					count            = CatzRobotMap.liftEncoder.get();
 					limitSwitchState = CatzRobotMap.lifterLimitBottom.get();
@@ -181,12 +161,12 @@ public class CatzLift {
 						limitSwitchStateCounter = 0;
 					}
 					
-					if(limitSwitchStateCounter > 3)
+					if(limitSwitchStateCounter > 5)
 					{
 						done = true;
 					}
 					System.out.println("Limit Switch: " + limitSwitchState);
-					Timer.delay(0.005);
+					Timer.delay(0.010);
 				}
 				this.stopLift();
 
@@ -207,18 +187,24 @@ public class CatzLift {
 
 
 	public void liftUp() {
-		CatzRobotMap.lifterL.set(LIFT_SPEED);
-		CatzRobotMap.lifterR.set(LIFT_SPEED);
+		CatzRobotMap.lifterRightLeft.set(LIFT_SPEED);
+		CatzRobotMap.lifterRightRight.set(LIFT_SPEED);
+		CatzRobotMap.lifterLeftRight.set(LIFT_SPEED);
+		CatzRobotMap.lifterLeftLeft.set(LIFT_SPEED);
 	}
 
 	public void liftDown() {
-		CatzRobotMap.lifterL.set(-1.0);
-		CatzRobotMap.lifterR.set(-1.0);
+		CatzRobotMap.lifterRightLeft.set(-0.8);
+		CatzRobotMap.lifterRightRight.set(-0.8);
+		CatzRobotMap.lifterLeftRight.set(-0.8);
+		CatzRobotMap.lifterLeftLeft.set(-0.8);
 	}
 
 	public void stopLift() {
-		CatzRobotMap.lifterL.set(0);
-		CatzRobotMap.lifterR.set(0);
+		CatzRobotMap.lifterRightLeft.set(0);
+		CatzRobotMap.lifterRightRight.set(0);
+		CatzRobotMap.lifterLeftRight.set(0);
+		CatzRobotMap.lifterLeftLeft.set(0);
 	}
 	
 	public void setReadyToLift(boolean ready) {

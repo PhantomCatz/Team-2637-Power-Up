@@ -75,7 +75,7 @@ public class CatzRobotPeriodic
 		SmartDashboard.putNumber("Value of Left Encoder",     CatzRobotMap.wheelEncoderL.get());
 		SmartDashboard.putNumber("Value of Right Encoder",    CatzRobotMap.wheelEncoderR.get());
 		SmartDashboard.putNumber("Value of lifter Encoder",   CatzRobotMap.liftEncoder.get());
-		SmartDashboard.putNumber("Distacne of Lift Encoder", CatzRobotMap.liftEncoder.getDistance());
+		SmartDashboard.putNumber("Distance of Lift Encoder",  CatzRobotMap.liftEncoder.getDistance());
 		
 		SmartDashboard.putBoolean("Graber Forearms Open",   CatzGrabber.forearmOpen);
 		SmartDashboard.putBoolean("Grabber Bicep Deployed", CatzGrabber.bicepDeployed);
@@ -85,8 +85,11 @@ public class CatzRobotPeriodic
 		SmartDashboard.putNumber("Intake Speed",         CatzRobotMap.xboxDrive.getRightTrigger()-CatzRobotMap.xboxDrive.getLeftTrigger());
 		SmartDashboard.putBoolean("Drive Controls Are Reversed", CatzTeleopPeriodic.reversed);
 		
-		SmartDashboard.putNumber("lift motor power", CatzRobotMap.lifterL.get());
-		SmartDashboard.putNumber("lift motor power", CatzRobotMap.lifterR.get());
+		SmartDashboard.putNumber("lift motor power", CatzRobotMap.lifterRightLeft.get());
+		SmartDashboard.putNumber("lift motor power", CatzRobotMap.lifterRightRight.get());
+		
+		SmartDashboard.putNumber("Drive Controller leftStickY",CatzRobotMap.xboxDrive.getLeftStickY());
+		SmartDashboard.putNumber("Aux Controller leftStickY",CatzRobotMap.xboxAux.getLeftStickY());
 	}
 	
 	public static void updatePIDTurnConstants()   {

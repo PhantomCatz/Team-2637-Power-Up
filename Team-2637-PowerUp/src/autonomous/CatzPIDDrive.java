@@ -106,38 +106,45 @@ public class CatzPIDDrive {
 		double  lastHeading    = 0.0;
 		double  direction      = 1.0;
 		double  defDrivePower  = defaultPower;
+		double  defaultPowerAbs = Math.abs(defaultPower);
 		double  brakePower     = 0.0;
 		double  brakeDirection = 1.0;
 		
 		done = false;
 
-		if (distance < 0.0) {
+		if (distance < 0.0)
+		{
 			direction = -1.0;
-			if (defaultPower > 0.0) {
+			if (defaultPower > 0.0) 
+			{
 				defDrivePower = -defaultPower;
 			}
-		} else {
+		}
+		else 
+		{
 			direction = 1.0;
-			if (defaultPower < 0.0) {
+			if (defaultPower < 0.0) 
+			{
 				defDrivePower = defaultPower;
 			}
 		}
 		
-		if (defaultPower == 0.5) {
+		if (defaultPowerAbs == 0.5) 
+		{
 			distanceAbs = Math.abs(distance-1.0);			
 		}
-		else if (defaultPower == 0.55) {
+		else if (defaultPowerAbs == 0.55) 
+		{
 			distanceAbs = Math.abs(distance-1.2);			
 		}
-		else if (defaultPower == 0.65) {
+		else if (defaultPowerAbs == 0.65) {
 			distanceAbs = Math.abs(distance-3.5);			
 		}
-		else if (defaultPower == 0.7) {
+		else if (defaultPowerAbs == 0.7) {
 			distanceAbs = Math.abs(distance-5.0);			
 			
 		} else {
 			distanceAbs = Math.abs(distance);
-			defDrivePower = 1.0;
 		}
 		
 		calculatePwrPidValues(distanceAbs);
@@ -218,7 +225,7 @@ public class CatzPIDDrive {
 						if (drivePower < CatzConstants.DRIVE_MAX_NEG_POWER)
 							drivePower = CatzConstants.DRIVE_MAX_NEG_POWER;
 					} else {
-						drivePower = defaultPower;
+						drivePower = defDrivePower;
 					}
 
 					/**************************************************************
@@ -239,7 +246,7 @@ public class CatzPIDDrive {
 		 * Brake using motors 
 		 *************************************************************************/
 		if (defDrivePower < 0.0 || direction == -1.0) {
-			brakeDirection = 1.0;
+			brakeDirection = -1.0; // always invert power for braking DD 4-6-18
 //			CatzRobotMap.drive.tankDrive(PID_DRIVE_BRAKE_POWER, PID_DRIVE_BRAKE_POWER);
 //			Timer.delay(PID_DRIVE_BRAKE_TIME);
 		} else if (defDrivePower > 0.0 || direction == 1.0) {
@@ -249,7 +256,8 @@ public class CatzPIDDrive {
 		}
 
 		if (defaultPower != 0.0) {
-			brakePower = (defDrivePower * 0.70) * brakeDirection; 
+			brakePower = (defDrivePower * 0.70) * brakeDirection;
+			System.out.println(brakePower + ", " + defDrivePower + ", " + brakeDirection );  // print debug data DD 4-6-18
 			CatzRobotMap.drive.tankDrive(brakePower, brakePower);
 			Timer.delay(0.070);
 
@@ -272,23 +280,7 @@ public class CatzPIDDrive {
 
 		CatzRobotMap.drive.tankDrive(0.0, 0.0);    //Stop the robot
 
-	}
-	
-
-	
-	
-	
-	
-	
-
-	
-
-	
-	
-	
-
-	
-	
+	}	
 	
 	private static void calculatePwrPidValues(double distance)
 	{
@@ -361,15 +353,11 @@ public class CatzPIDDrive {
 			//calculate KD ------- EXPERAMENTAL ------- Need to tune
 			PID_DRIVE_PWR_KD = -0.000792367+0.001834892*Math.log(distance);
 		}
-		
-	
 	}
 
 	public static void setDebugModeEnabled(boolean enabled) {
 		debugMode = enabled;
 	}
-
-
 
 	public static void printDebugInit() {
 		if (debugMode == true) {
