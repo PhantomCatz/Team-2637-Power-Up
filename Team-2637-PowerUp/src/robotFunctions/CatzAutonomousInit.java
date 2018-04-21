@@ -8,6 +8,7 @@
 
 package robotFunctions;
 
+import autonomous.CatzAutonomousAlternatePaths;
 import autonomous.CatzAutonomousDoublePaths;
 import autonomous.CatzPIDDrive;
 import autonomous.CatzPIDTurn;
@@ -32,23 +33,28 @@ public class CatzAutonomousInit {
 		setMechanisms();
 		CatzPIDDrive.setDebugModeEnabled(true);
 		CatzPIDTurn.setPIDTurnDebugModeEnabled(true);
-		
+
 		choosePathDouble();
-		
-		/*
-		 * CatzRobotMap.lift.liftToHeight(60);
-		Timer.delay(1.0);
+		//CatzAutonomousDoublePaths.toOppoScale("right");
+		//CatzAutonomousDoublePaths.rightDoubleCube_XRX();
+	    //CatzAutonomousDoublePaths.leftDoubleCube_XLX();
+		//choosePathAlternate();
+		//CatzAutonomousAlternatePaths.left_ScaleSingle();
+		//CatzAutonomousAlternatePaths.right_ScaleSingle();
+
+		//CatzRobotMap.lift.liftToHeight(70);
+		/*Timer.delay(1.0);
 		while (CatzRobotMap.lift.liftThreadRunning == true)
 		{
 			//Wait for thread to complete
 			Timer.delay(0.005);
 			System.out.println(CatzRobotMap.lift.liftThreadRunning);
 		}
-		
-		CatzRobotMap.grabber.placeCube(-0.8);*/
+		*/
 	}
 	
-	public static void choosePathDouble() {
+	public static void choosePathDouble() 
+	{
 		
 		check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
 	    check_boxM = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORM, false);
@@ -131,6 +137,20 @@ public class CatzAutonomousInit {
 	
 		}
 	
+	}
+	public void choosePathAlternate()
+	{
+		check_boxL = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORL, false);
+		check_boxR = SmartDashboard.getBoolean(CatzConstants.POSITION_SELECTORR, false);
+		
+		if(check_boxL == true)
+		{
+			CatzAutonomousAlternatePaths.alternatePathChooser("left");
+		}
+		else if (check_boxR == true)
+		{
+			CatzAutonomousAlternatePaths.alternatePathChooser("right");
+		}
 	}
 
 			

@@ -2,40 +2,50 @@ package autonomous;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import robot.CatzConstants;
 import robot.CatzRobotMap;
 
 public class CatzAutonomousAlternatePaths
 {
 	static String gameData = DriverStation.getInstance().getGameSpecificMessage();
 	
-	public void left_SwitchSingle() 
+	public static void left_SwitchSingle() 
 	{
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 150, 1.6);
 		
 		CatzPIDTurn.PIDturn(90, 1);
+		
+		CatzPIDDrive.PIDDriveNoTrig(0.0, 20, 1);
 		
 		CatzRobotMap.grabber.placeCube(-1.0);
 		
 		CatzRobotMap.grabber.retractBicep();
 		
 	}
-	public void right_SwitchSingle()
+
+	public static void right_SwitchSingle()
 	{
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 150, 1.6);
 
 		CatzPIDTurn.PIDturn(-90, 1);
 			
+
+		CatzPIDDrive.PIDDriveNoTrig(0.0, 20, 1);
+		
+
 		CatzRobotMap.grabber.placeCube(-1.0);
 		
 		CatzRobotMap.grabber.retractBicep();
 	}
-	public void right_ScaleSingle()
+
+	public static void right_ScaleSingle()
 	{
 			CatzPIDDrive.PIDDriveNoTrig(0.0, 230, 6);
 		
 			CatzPIDTurn.PIDturn(-90, 1);
 			
-			CatzRobotMap.lift.liftToHeight(65.0);
+
+			CatzRobotMap.lift.liftToHeight(CatzConstants.LIFT_SCALE_HEIGHT);
 			
 			while (CatzRobotMap.lift.liftThreadRunning == true)
 			{
@@ -50,13 +60,16 @@ public class CatzAutonomousAlternatePaths
 			CatzRobotMap.lift.dropToGroundHeight();
 	
 	}
-	public void left_ScaleSingle()
+
+	public static void left_ScaleSingle()
 	{
-			CatzPIDDrive.PIDDriveNoTrig(0.0, 230, 6);
+			CatzPIDDrive.PIDDriveNoTrig(0.0, 250, 6);
 		
+			CatzRobotMap.lift.liftToHeight(CatzConstants.LIFT_SCALE_HEIGHT);
+			
 			CatzPIDTurn.PIDturn(90, 1);
 			
-			CatzRobotMap.lift.liftToHeight(65.0);
+			CatzPIDDrive.PIDDriveNoTrig(5.5, 16, 1 );
 			
 			while (CatzRobotMap.lift.liftThreadRunning == true)
 			{
@@ -70,20 +83,23 @@ public class CatzAutonomousAlternatePaths
 			
 			CatzRobotMap.lift.dropToGroundHeight();
 	}
-	public void defaultPathLeft()
+
+	public static void defaultPathLeft()
 	{
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 210, 5.0);
 		
 		CatzPIDTurn.PIDturn(90, 1);
 	}
-	public void defaultPathRight()
+lancaster
+	public static void defaultPathRight()
 	{
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 210, 5.0);
 		
 		CatzPIDTurn.PIDturn(-90, 1);
 	}
 	
-	public void alternatePathChooser(String side)
+lancaster
+	public static void alternatePathChooser(String side)
 	{
 		if(side.equalsIgnoreCase("right"))
 		{
