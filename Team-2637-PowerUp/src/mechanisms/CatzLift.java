@@ -18,7 +18,7 @@ import robot.CatzRobotMap;
  */
 
 public class CatzLift {
-	
+
 	//694851.675/80; //
 	
 	final private static double LIFT_COUNTS_PER_INCH          =   505026.0 / 80.0;    //527221.0/80.0;  // 674898.0 / 60.0 - wrong counts per inch value
@@ -34,8 +34,7 @@ public class CatzLift {
 
 	private static Timer timeout = new Timer();
 
-	public CatzLift() 
-	{
+	public CatzLift() {
 		threadComplete    = false;
 		liftThreadRunning = false;
 		printOutDebugData("Successfully initialized CatzLift");
@@ -57,7 +56,9 @@ public class CatzLift {
 			int count = 0;
 			double counts = height * LIFT_COUNTS_PER_INCH;
 			double targetCount = CatzRobotMap.liftEncoder.get() + counts;
+      
 			int limitSwitchCount = 0;
+
 			
 			boolean done             = false;
 			boolean limitSwitchState = false;
@@ -80,6 +81,7 @@ public class CatzLift {
 				
 				this.liftUp();
 				while (done == false && timeout.get() < 3.5) 
+
 				{
 					count = CatzRobotMap.liftEncoder.get();
 					error = Math.abs(targetCount - count);
@@ -110,6 +112,7 @@ public class CatzLift {
 				threadComplete    = true;
 
 				printOutDebugData("Lift to scale height thread complete");
+
 				System.out.println(timeout.get() + ": " + count + ", " + error + ", " + startingCount + ", " + targetCount);
 
 				timeout.stop();
@@ -147,6 +150,7 @@ public class CatzLift {
 				
 				this.liftDown();
 				System.out.println("Limit Switch: " + limitSwitchState);
+
 				while (done == false && timeout.get() < 5.0) {	//wait for bottom limit switch to read true
 					
 					count            = CatzRobotMap.liftEncoder.get();

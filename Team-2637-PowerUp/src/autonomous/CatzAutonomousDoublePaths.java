@@ -332,12 +332,12 @@ public class CatzAutonomousDoublePaths {
 			CatzRobotMap.grabber.placeCube(PLACE_CUBE_SCALE_SPEED);
 		}
 		
-		
 		CatzRobotMap.lift.dropToGroundHeight();
 	
 		CatzPIDDrive.PIDDriveNoTrig(-0.55, -20, 1.1);
 		
 		if (side.equalsIgnoreCase("left")) {
+
 			CatzPIDTurn.PIDturn(-115, 1.8); //turn 130 deg left
 		} else {													//subtracting 25deg to adjust for increase of previous turn TV
 			CatzPIDTurn.PIDturn(115, 1.8); //turn 130 deg right
@@ -381,7 +381,9 @@ public class CatzAutonomousDoublePaths {
 			CatzPIDTurn.PIDturn(-130, CatzConstants.PID_TURN_TIMEOUT); //turn 162deg right
 		}
 		
+
 		CatzRobotMap.lift.liftToHeight(CatzConstants.LIFT_SCALE_HEIGHT); 
+
 		
 		CatzPIDDrive.PIDDriveNoTrig(0.55, 29, 1.3);
 		
@@ -392,7 +394,7 @@ public class CatzAutonomousDoublePaths {
 		}
 		
 		CatzRobotMap.grabber.placeCube(PLACE_CUBE_SCALE_SPEED);
-	
+
 		CatzRobotMap.grabber.retractBicep();	*/
 	}
 }

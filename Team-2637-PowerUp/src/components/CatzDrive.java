@@ -25,7 +25,7 @@ public class CatzDrive
 	}
 	
 	public void setModeArcadeDriveFlash(CatzXboxController control){
-		drive.arcadeDrive(.9*control.getLeftStickY(), .9*control.getRightStickX());
+		drive.arcadeDrive(control.getLeftStickY(), control.getRightStickX());
 	}
 	public void setModeReverseArcadeDriveFlash(CatzXboxController control){
 		drive.arcadeDrive(-control.getLeftStickY(), control.getRightStickX());

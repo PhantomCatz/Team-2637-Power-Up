@@ -22,24 +22,29 @@ public class CatzAutonomousAlternatePaths
 		CatzRobotMap.grabber.retractBicep();
 		
 	}
+
 	public static void right_SwitchSingle()
 	{
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 150, 1.6);
 
 		CatzPIDTurn.PIDturn(-90, 1);
 			
+
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 20, 1);
 		
+
 		CatzRobotMap.grabber.placeCube(-1.0);
 		
 		CatzRobotMap.grabber.retractBicep();
 	}
+
 	public static void right_ScaleSingle()
 	{
 			CatzPIDDrive.PIDDriveNoTrig(0.0, 230, 6);
 		
 			CatzPIDTurn.PIDturn(-90, 1);
 			
+
 			CatzRobotMap.lift.liftToHeight(CatzConstants.LIFT_SCALE_HEIGHT);
 			
 			while (CatzRobotMap.lift.liftThreadRunning == true)
@@ -55,12 +60,12 @@ public class CatzAutonomousAlternatePaths
 			CatzRobotMap.lift.dropToGroundHeight();
 	
 	}
+
 	public static void left_ScaleSingle()
 	{
 			CatzPIDDrive.PIDDriveNoTrig(0.0, 250, 6);
 		
 			CatzRobotMap.lift.liftToHeight(CatzConstants.LIFT_SCALE_HEIGHT);
-
 			
 			CatzPIDTurn.PIDturn(90, 1);
 			
@@ -78,12 +83,14 @@ public class CatzAutonomousAlternatePaths
 			
 			CatzRobotMap.lift.dropToGroundHeight();
 	}
+
 	public static void defaultPathLeft()
 	{
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 210, 5.0);
 		
 		CatzPIDTurn.PIDturn(90, 1);
 	}
+lancaster
 	public static void defaultPathRight()
 	{
 		CatzPIDDrive.PIDDriveNoTrig(0.0, 210, 5.0);
@@ -91,6 +98,7 @@ public class CatzAutonomousAlternatePaths
 		CatzPIDTurn.PIDturn(-90, 1);
 	}
 	
+lancaster
 	public static void alternatePathChooser(String side)
 	{
 		if(side.equalsIgnoreCase("right"))
